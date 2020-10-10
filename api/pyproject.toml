@@ -7,6 +7,9 @@ authors = ["ashdaily <ashishsinghbardhan@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.6"
 Django = "^3.1.2"
+django-rest-framework-social-oauth2 = "^1.1.0"
+djangorestframework = "^3.12.1"
+django-environ = "^0.4.5"
 
 [tool.poetry.dev-dependencies]
 
