@@ -1,3 +1,8 @@
+###  How to setup
+```
+docker-compose up
+```
+
 ### Auth
 
 - Gmail access token generate: 
