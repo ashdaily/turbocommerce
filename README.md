@@ -1,9 +1,17 @@
-###  How to setup
+### Setup backend
 ```
 docker-compose up
 ```
 
-### Auth
+### Setup frontend
+```
+cd frontend/dosa
+yarn install
+yarn start
+```
+
+
+### Backend Auth
 
 - Gmail access token generate: 
 ```
