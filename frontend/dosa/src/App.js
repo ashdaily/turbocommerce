@@ -14,8 +14,7 @@ import Shop from "./pages/Shop";
 function App() {
   return (
       <Router>
-        
-
+    
           <Switch>
             <Route exact path="/">
               <Login />
@@ -24,8 +23,7 @@ function App() {
               <Shop />
             </Route>
           </Switch>
-       
-       
+      
       </Router>
   )
 }

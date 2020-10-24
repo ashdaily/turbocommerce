@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Form, Input, Button, Checkbox, Card } from 'antd';
 import { FacebookOutlined, GoogleOutlined } from '@ant-design/icons';
+import { GoogleAuth } from 'react-social-auth'
 
 
 export default ()=>{
@@ -12,6 +13,22 @@ export default ()=>{
         console.log('Failed:', errorInfo);
     };
     
+
+    let GoogleAuthButton = ({ onClick }) => (
+            <Button type="primary" block onClick={onClick}>
+                Login with Gmail
+                <GoogleOutlined />
+            </Button>
+        )
+    
+
+    let onSignIn = authPayload => {
+        // Use the authentication payload to verify
+        // the identity of the request using server
+        // side authentication procedures.
+        console.log(authPayload)
+    }
+
     const form = (
         <>
             <Row>
@@ -24,16 +41,17 @@ export default ()=>{
                             onFinishFailed={onFinishFailed}
                             >
                             <Form.Item>
-                                <Button type="default" block>
-                                    Login with Facebook
-                                    <FacebookOutlined />
-                                </Button>
+                                <GoogleAuth
+                                    appId={process.env.REACT_APP_GOOGLE_APP_ID}
+                                    onSuccess={onSignIn}
+                                    component={GoogleAuthButton}
+                                />
                             </Form.Item>
-                           
+
                             <Form.Item>
                                 <Button type="primary" block>
                                     Login with Gmail
-                                    <GoogleOutlined />
+                                    <FacebookOutlined />
                                 </Button>
                             </Form.Item>
                             <Form.Item

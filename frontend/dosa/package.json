@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.7.0",
+    "axios": "^0.20.0",
     "i18next": "^19.8.2",
     "i18next-browser-languagedetector": "^6.0.1",
     "react": "^16.14.0",
@@ -15,7 +16,7 @@
     "react-i18next": "^11.7.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-social-login": "^3.4.10"
+    "react-social-auth": "^1.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
