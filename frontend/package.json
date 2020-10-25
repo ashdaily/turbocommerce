@@ -13,6 +13,7 @@
     "i18next-browser-languagedetector": "^6.0.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-facebook-login": "^4.1.1",
     "react-i18next": "^11.7.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",

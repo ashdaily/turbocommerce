@@ -1,0 +1,9 @@
+.facebook-btn{
+    width: 100%;
+    letter-spacing: normal;
+    background-color: #4267B2 !important;
+}
+
+.facebook-btn span{
+    margin-right: .5rem;
+}

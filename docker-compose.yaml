@@ -6,7 +6,7 @@ services:
     build:
         context: .
         dockerfile: backend/Dockerfile
-    command: python backend/src/manage.py runserver
+    command: python backend/src/manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
     ports:
@@ -14,6 +14,8 @@ services:
     restart: always
     volumes:
       - .:/backend
+    stdin_open: true
+    tty: true
 
   db:
     image: postgres

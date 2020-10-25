@@ -5,7 +5,6 @@ import {
   CalendarOutlined,
   AppstoreOutlined,
   SettingOutlined,
-  LinkOutlined,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
