@@ -4,9 +4,13 @@ import { FacebookOutlined, GoogleOutlined } from '@ant-design/icons';
 // import { GoogleAuth } from 'react-social-auth';
 import FacebookLogin from 'react-facebook-login';
 
-import axios from "axios";
+import axios from "../util/Axios";
 
-axios.defaults.baseURL = "http://localhost:8000/"
+let backendName;
+let backendToken;
+
+
+
 export default ()=>{
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
@@ -31,7 +35,7 @@ export default ()=>{
     }
 
     function onSocialSignIn(authPayload ){
-        console.log(authPayload);
+        localStorage.clear();
         let backend;
         let token;
         let grant_type = "convert_token";
@@ -40,7 +44,6 @@ export default ()=>{
             token = authPayload.authResponse.token;
         }else{
             backend = "facebook";
-            console.log(authPayload.accessToken)
             token = authPayload.accessToken
         }
         const payload = {
@@ -51,7 +54,11 @@ export default ()=>{
             "token": token
         }
        
-        axios.post("auth/convert-token/", payload);
+        axios.post("auth/convert-token/", payload)
+        .then(response => {
+            localStorage.setItem("accessToken", response.accessToken);
+            localStorage.setItem("backendName", backend)
+        })
     }
 
     const form = (

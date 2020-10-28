@@ -41,14 +41,15 @@ INSTALLED_APPS = [
     # Cross origin
     'corsheaders',
     
-    # Social auth settings below
+    # Social auth settings
     'oauth2_provider',
     'social_django',
-    'rest_framework_social_oauth2'
+    'rest_framework_social_oauth2',
 
-    # apps
+    # Apps
     'core',
-    'products'
+    'products',
+    'shipping'
 ]
 
 MIDDLEWARE = [

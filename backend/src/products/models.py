@@ -1,13 +1,13 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from core.models import Vendor, Timestamp
+from core.models import Timestamp, Vendor
 from utils.constants.countries import COUNTRIES
-from utils.constants.measurement import MEASUREMENT_NAMES, MEASUREMENT_UNITS
+from utils.constants.measurements import MEASUREMENT_NAMES, MEASUREMENT_UNITS
 
 
 class ProductMeasurement(models.Model):
-    measurement_name = models.CharField(null=True, blank=True, choices=MEASUREMENT_NAMES)
+    measurement_name = models.CharField(max_length=50, null=True, blank=True, choices=MEASUREMENT_NAMES)
     measurment_value = models.IntegerField(null=True, blank=True)
     measurement_unit = models.CharField(max_length=50, null=True, blank=True, choices=MEASUREMENT_UNITS, unique=True)
 
