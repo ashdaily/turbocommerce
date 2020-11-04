@@ -2,17 +2,23 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 from core.models import Timestamp, Vendor
-from utils.constants.countries import COUNTRIES
-from utils.constants.measurements import MEASUREMENT_NAMES, MEASUREMENT_UNITS
+from pyhustler.countries import COUNTRIES
+from pyhustler.measurement import MEASUREMENT_NAMES, MEASUREMENT_UNITS
 
 
 class ProductMeasurement(models.Model):
-    measurement_name = models.CharField(max_length=50, null=True, blank=True, choices=MEASUREMENT_NAMES)
+    measurement_name = models.CharField(
+        max_length=50, null=True, blank=True, choices=MEASUREMENT_NAMES
+    )
     measurment_value = models.IntegerField(null=True, blank=True)
-    measurement_unit = models.CharField(max_length=50, null=True, blank=True, choices=MEASUREMENT_UNITS, unique=True)
+    measurement_unit = models.CharField(
+        max_length=50, null=True, blank=True, choices=MEASUREMENT_UNITS, unique=True
+    )
 
     def __str__(self):
-        return f"{self.measurement_name}={self.measurment_value}({self.measurement_unit})"
+        return (
+            f"{self.measurement_name}={self.measurment_value}({self.measurement_unit})"
+        )
 
 
 class ProductSize(Timestamp):
@@ -30,7 +36,6 @@ class ProductSpecification(Timestamp):
     specification_value = models.CharField(max_length=255, null=True, blank=True)
 
 
-
 class ProductGrandParentCategory(Timestamp):
     category_name = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
@@ -44,7 +49,9 @@ class ProductGrandParentCategory(Timestamp):
 
 
 class ProductParentCategory(Timestamp):
-    grand_parent_category = models.ForeignKey(ProductGrandParentCategory, on_delete=models.CASCADE)
+    grand_parent_category = models.ForeignKey(
+        ProductGrandParentCategory, on_delete=models.CASCADE
+    )
     category_name = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
 
@@ -73,11 +80,10 @@ class ProductChildCategory(Timestamp):
 class ProductBrand(Timestamp):
     brand_name = models.CharField(max_length=255, null=True, blank=True, unique=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
-    
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.category_name)
-        super().save(*args, **kwargs)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.brand_name)
+        super().save(*args, **kwargs)
 
 
 class Product(Timestamp):

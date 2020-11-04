@@ -2,7 +2,8 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 import "./App.css";
@@ -14,16 +15,14 @@ import Shop from "./pages/Shop";
 function App() {
   return (
       <Router>
-    
           <Switch>
             <Route exact path="/">
-              <Login />
+              {localStorage.getItem("accessToken") ? <Login /> : <Redirect to="/shop" />}
             </Route>
             <Route exact path="/shop">
               <Shop />
             </Route>
           </Switch>
-      
       </Router>
   )
 }

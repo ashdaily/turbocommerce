@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.http import Http404
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
-# Create your views here.
+from utils.pagination import BaseAPIView
+
+
+class CustomerView(BaseAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        print("user created")
+        print(request.data)
+        return Response(status=status.HTTP_201_CREATED)

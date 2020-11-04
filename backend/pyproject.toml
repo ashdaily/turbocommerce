@@ -2,7 +2,7 @@
 name = "turbocommerce"
 version = "0.1.0"
 description = ""
-authors = ["ashdaily <ashishsinghbardhan@gmail.com>"]
+authors = ["ashdaily <ashtokyo31@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -12,6 +12,7 @@ djangorestframework = "^3.12.1"
 django-environ = "^0.4.5"
 psycopg2 = "^2.8.6"
 django-cors-headers = "^3.5.0"
+pyhustler = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 

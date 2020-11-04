@@ -21,7 +21,7 @@ export default ()=>{
     //             <GoogleOutlined />
     //         </Button>
     //     )
-    
+
     function onBasicSignIn(){
         const payload = {
             "grant_type" : "password",
@@ -35,7 +35,10 @@ export default ()=>{
     }
 
     function onSocialSignIn(authPayload ){
+        // clear localStorage FIXME: this is bad
         localStorage.clear();
+
+        // make payload
         let backend;
         let token;
         let grant_type = "convert_token";
@@ -53,11 +56,16 @@ export default ()=>{
             "client_secret": process.env.REACT_APP_DJANGO_OAUTH_GENERATED_CLIENT_SECRET,
             "token": token
         }
-       
+
+        /*
+            send convert token request to django social auth
+            & then set localStorage
+        */
         axios.post("auth/convert-token/", payload)
         .then(response => {
             localStorage.setItem("accessToken", response.accessToken);
             localStorage.setItem("backendName", backend)
+            console.log()
         })
     }
 
