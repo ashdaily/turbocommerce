@@ -57,3 +57,8 @@ curl -X POST -d "grant_type=convert_token&client_id=<django-oauth-generated-clie
 ```
 curl -X POST -d "client_id=<client_id>&client_secret=<client_secret>&grant_type=password&username=<user_name>&password=<password>" http://localhost:8000/auth/token
 ```
+
+#### run pre-commit on whole project
+```
+pre-commit run --all-files
+```
