@@ -33,15 +33,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Django rest framework
+    # sslserver
+    "sslserver",
+    # django rest framework
     "rest_framework",
-    # Cross origin
+    # cross origin
     "corsheaders",
-    # Social auth settings
+    # social auth settings
     "oauth2_provider",
     "social_django",
     "rest_framework_social_oauth2",
-    # Apps
+    # modules
     "core",
     "products",
     "shipping",
@@ -183,6 +185,4 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 
 
 # Cross origin settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = [env("REACT_APP_URL")]

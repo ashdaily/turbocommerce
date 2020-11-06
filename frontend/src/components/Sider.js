@@ -1,15 +1,44 @@
 import React, { useState } from "react";
 import { Menu, Switch, Divider } from 'antd';
 import {
-  MailOutlined,
+  LogoutOutlined,
   CalendarOutlined,
   AppstoreOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
+import { Redirect } from "react-router-dom";
+import axios from "../util/Axios";
 
 const { SubMenu } = Menu;
 
 export default ()=>{
+  const [logout, setLogout] = useState(false);
+
+  function doLogout(){
+    // make payload
+    const payload = {
+      "client_id": process.env.REACT_APP_DJANGO_OAUTH_GENERATED_CLIENT_ID,
+      "client_secret": process.env.REACT_APP_DJANGO_OAUTH_GENERATED_CLIENT_SECRET,
+      "token": localStorage.getItem("accessToken")
+    }
+
+    /*
+        send convert token request to django social auth
+        & then set localStorage
+    */
+    axios.post("auth/revoke-token/", payload)
+    .then(response => {
+        if(response.status === 204){
+            // clear localStorage FIXME: this is bad
+            localStorage.clear();
+            setLogout(true);
+        }
+
+    })
+  }
+
+  if(logout) return <Redirect to="/" />;
+
   return (
     <>
       <Menu
@@ -18,8 +47,8 @@ export default ()=>{
         mode="vertical"
         theme="light"
       >
-        <Menu.Item key="1" icon={<MailOutlined />}>
-          TOP
+        <Menu.Item key="1" icon={<LogoutOutlined />} onClick={doLogout}>
+          Logout
         </Menu.Item>
         <Menu.Item key="2" icon={<CalendarOutlined />}>
           Summer Dresses

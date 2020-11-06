@@ -13,6 +13,7 @@ django-environ = "^0.4.5"
 psycopg2 = "^2.8.6"
 django-cors-headers = "^3.5.0"
 pyhustler = "^0.4.0"
+django-sslserver = "^0.22"
 
 [tool.poetry.dev-dependencies]
 

@@ -17,7 +17,9 @@ function App() {
       <Router>
           <Switch>
             <Route exact path="/">
-              {localStorage.getItem("accessToken") ? <Login /> : <Redirect to="/shop" />}
+              {/* FIXME */}
+              {/* {localStorage.getItem("accessToken") ? <Login /> : <Redirect to="/shop" />} */}
+              <Login />
             </Route>
             <Route exact path="/shop">
               <Shop />

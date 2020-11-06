@@ -1,3 +1,7 @@
+## Turbocommerce
+Modern e-commerce platform built using python, django, django rest framework, reactjs, react hooks and docker.
+
+
 ### Setup backend
 ```
 # project root dir, setup pre-commit
@@ -62,3 +66,15 @@ curl -X POST -d "client_id=<client_id>&client_secret=<client_secret>&grant_type=
 ```
 pre-commit run --all-files
 ```
+
+#### create docker postgresql db user
+```
+docker ps # copy <container_id>
+docker exec -it <container_id> bash
+psql -U postgres -c "CREATE USER username WITH PASSWORD 'password';"
+```
+
+#### TODO
+- Fix isLogged in feature to reducer
+- Improve react boiler plate
+- Docker entrypoint add sleep time between db up and backend up

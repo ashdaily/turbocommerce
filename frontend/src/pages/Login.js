@@ -3,17 +3,14 @@ import { Row, Col, Form, Input, Button, Checkbox, Card } from 'antd';
 import { FacebookOutlined, GoogleOutlined } from '@ant-design/icons';
 // import { GoogleAuth } from 'react-social-auth';
 import FacebookLogin from 'react-facebook-login';
-
+import { Redirect } from "react-router-dom";
 import axios from "../util/Axios";
-
-let backendName;
-let backendToken;
-
 
 
 export default ()=>{
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    const [redirect, setRedirect] = useState(false);
 
     // let GoogleAuthButton = ({ onClick }) => (
     //         <Button type="primary" block onClick={onClick}>
@@ -64,8 +61,12 @@ export default ()=>{
         axios.post("auth/convert-token/", payload)
         .then(response => {
             localStorage.setItem("accessToken", response.accessToken);
-            localStorage.setItem("backendName", backend)
-            console.log()
+            localStorage.setItem("backendName", backend);
+
+            if(response.status === 200){
+                setRedirect(true);
+            }
+
         })
     }
 
@@ -89,7 +90,7 @@ export default ()=>{
                                 <FacebookLogin
                                     appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                                     autoLoad={false}
-                                    fields="name,email,picture"
+                                    fields="name,email"
                                     callback={onSocialSignIn}
                                     cssClass="ant-btn ant-btn-primary facebook-btn"
                                     icon = {<FacebookOutlined />}
@@ -129,5 +130,8 @@ export default ()=>{
             </Row>
         </>
     )
+
+    if(redirect) return <Redirect to="/shop" />;
+
     return form;
 }
