@@ -16,8 +16,10 @@ class ShippingOrderDetail(Timestamp):
 
 class ShippingOrder(Timestamp):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    shipping_order_details = models.ForeignKey(ShippingOrderDetail, on_delete=models.CASCADE) 
-    shipper = models.ForeignKey(Shipper,  on_delete=models.CASCADE) 
+    shipping_order_details = models.ForeignKey(
+        ShippingOrderDetail, on_delete=models.CASCADE
+    )
+    shipper = models.ForeignKey(Shipper, on_delete=models.CASCADE)
     payment_id = models.CharField(max_length=255, null=True, blank=True)
     order_datetime = models.DateTimeField(auto_now_add=True)
     shipping_datetime = models.DateTimeField(auto_now_add=True)

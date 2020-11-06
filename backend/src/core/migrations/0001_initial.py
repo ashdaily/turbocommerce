@@ -10,83 +10,156 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('user_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='auth.user')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('phone_number', models.CharField(blank=True, max_length=20, null=True)),
-                ('address_pincode', models.IntegerField(null=True)),
+                (
+                    "user_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="auth.user",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "phone_number",
+                    models.CharField(blank=True, max_length=20, null=True),
+                ),
+                ("address_pincode", models.IntegerField(null=True)),
             ],
             options={
-                'verbose_name': 'user',
-                'verbose_name_plural': 'users',
-                'abstract': False,
+                "verbose_name": "user",
+                "verbose_name_plural": "users",
+                "abstract": False,
             },
-            bases=('auth.user', models.Model),
+            bases=("auth.user", models.Model),
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
-            name='Vendor',
+            name="Vendor",
             fields=[
-                ('user_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='auth.user')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('company_name', models.CharField(blank=True, max_length=255, null=True)),
-                ('phone_number', models.CharField(blank=True, max_length=20, null=True)),
+                (
+                    "user_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="auth.user",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "company_name",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "phone_number",
+                    models.CharField(blank=True, max_length=20, null=True),
+                ),
             ],
             options={
-                'verbose_name': 'user',
-                'verbose_name_plural': 'users',
-                'abstract': False,
+                "verbose_name": "user",
+                "verbose_name_plural": "users",
+                "abstract": False,
             },
-            bases=('auth.user', models.Model),
+            bases=("auth.user", models.Model),
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
-            name='CustomerShippingAddress',
+            name="CustomerShippingAddress",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('address_street_line_1', models.CharField(blank=True, max_length=255, null=True)),
-                ('address_street_line_2', models.CharField(blank=True, max_length=255, null=True)),
-                ('city', models.CharField(blank=True, max_length=255, null=True)),
-                ('province', models.CharField(blank=True, max_length=255, null=True)),
-                ('country', models.CharField(blank=True, max_length=255, null=True)),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.customer')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "address_street_line_1",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "address_street_line_2",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                ("city", models.CharField(blank=True, max_length=255, null=True)),
+                ("province", models.CharField(blank=True, max_length=255, null=True)),
+                ("country", models.CharField(blank=True, max_length=255, null=True)),
+                (
+                    "customer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="core.customer"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='CustomerCreditCard',
+            name="CustomerCreditCard",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('credit_card_number', models.CharField(blank=True, max_length=16, null=True)),
-                ('credit_card_valid_from', models.CharField(blank=True, max_length=7, null=True)),
-                ('credit_card_valid_until', models.CharField(blank=True, max_length=7, null=True)),
-                ('credit_card_type', models.CharField(blank=True, max_length=16, null=True)),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.customer')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "credit_card_number",
+                    models.CharField(blank=True, max_length=16, null=True),
+                ),
+                (
+                    "credit_card_valid_from",
+                    models.CharField(blank=True, max_length=7, null=True),
+                ),
+                (
+                    "credit_card_valid_until",
+                    models.CharField(blank=True, max_length=7, null=True),
+                ),
+                (
+                    "credit_card_type",
+                    models.CharField(blank=True, max_length=16, null=True),
+                ),
+                (
+                    "customer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="core.customer"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
     ]

@@ -9,132 +9,331 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('core', '0001_initial'),
+        ("core", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ProductBrand',
+            name="ProductBrand",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('brand_name', models.CharField(blank=True, max_length=255, null=True, unique=True)),
-                ('slug', models.SlugField(blank=True, max_length=520, null=True, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "brand_name",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, unique=True
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, max_length=520, null=True, unique=True
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='ProductGrandParentCategory',
+            name="ProductGrandParentCategory",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('category_name', models.CharField(blank=True, max_length=255, null=True)),
-                ('slug', models.SlugField(blank=True, max_length=520, null=True, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "category_name",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, max_length=520, null=True, unique=True
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Grand Parent Categories',
+                "verbose_name_plural": "Grand Parent Categories",
             },
         ),
         migrations.CreateModel(
-            name='ProductMeasurement',
+            name="ProductMeasurement",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('measurement_name', models.CharField(blank=True, choices=[('LENGTH', 'LENGTH'), ('WIDTH', 'WIDTH'), ('HEIGHT', 'HEIGHT'), ('WEIGHT', 'WEIGHT'), ('WAIST', 'WAIST'), ('BUST', 'BUST'), ('CHEST', 'CHEST'), ('RADIUS', 'RADIUS'), ('DIAMETER', 'DIAMETER'), ('VOLUME', 'VOLUME'), ('SHOULDER', 'SHOULDER'), ('COLLAR', 'COLLAR'), ('SLEEVE', 'SLEEVE'), ('CUFF', 'CUFF'), ('THICKNESS', 'THICKNESS'), ('INSEAM', 'INSEAM')], max_length=50, null=True)),
-                ('measurment_value', models.IntegerField(blank=True, null=True)),
-                ('measurement_unit', models.CharField(blank=True, choices=[('AMPERE', 'AMPERE'), ('CELCIUS', 'CELCIUS'), ('CENTIMETER', 'CENTIMETER'), ('GALLON', 'GALLON'), ('KELVIN', 'KELVIN'), ('METER', 'METER'), ('MILLIMETER', 'MILLIMETER'), ('LITRE', 'LITRE'), ('MILLILITRE', 'MILLILITRE')], max_length=50, null=True, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "measurement_name",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("LENGTH", "LENGTH"),
+                            ("WIDTH", "WIDTH"),
+                            ("HEIGHT", "HEIGHT"),
+                            ("WEIGHT", "WEIGHT"),
+                            ("WAIST", "WAIST"),
+                            ("BUST", "BUST"),
+                            ("CHEST", "CHEST"),
+                            ("RADIUS", "RADIUS"),
+                            ("DIAMETER", "DIAMETER"),
+                            ("VOLUME", "VOLUME"),
+                            ("SHOULDER", "SHOULDER"),
+                            ("COLLAR", "COLLAR"),
+                            ("SLEEVE", "SLEEVE"),
+                            ("CUFF", "CUFF"),
+                            ("THICKNESS", "THICKNESS"),
+                            ("INSEAM", "INSEAM"),
+                        ],
+                        max_length=50,
+                        null=True,
+                    ),
+                ),
+                ("measurment_value", models.IntegerField(blank=True, null=True)),
+                (
+                    "measurement_unit",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("AMPERE", "AMPERE"),
+                            ("CELCIUS", "CELCIUS"),
+                            ("CENTIMETER", "CENTIMETER"),
+                            ("GALLON", "GALLON"),
+                            ("KELVIN", "KELVIN"),
+                            ("METER", "METER"),
+                            ("MILLIMETER", "MILLIMETER"),
+                            ("LITRE", "LITRE"),
+                            ("MILLILITRE", "MILLILITRE"),
+                        ],
+                        max_length=50,
+                        null=True,
+                        unique=True,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ProductSpecification',
+            name="ProductSpecification",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('specification_name', models.CharField(blank=True, max_length=255, null=True)),
-                ('specification_value', models.CharField(blank=True, max_length=255, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "specification_name",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "specification_value",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='ProductSize',
+            name="ProductSize",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(blank=True, max_length=255, null=True)),
-                ('comment', models.CharField(blank=True, max_length=255, null=True)),
-                ('measurement', models.ManyToManyField(to='products.ProductMeasurement')),
-                ('vendor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.vendor')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(blank=True, max_length=255, null=True)),
+                ("comment", models.CharField(blank=True, max_length=255, null=True)),
+                (
+                    "measurement",
+                    models.ManyToManyField(to="products.ProductMeasurement"),
+                ),
+                (
+                    "vendor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="core.vendor"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='ProductParentCategory',
+            name="ProductParentCategory",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('category_name', models.CharField(blank=True, max_length=255, null=True)),
-                ('slug', models.SlugField(blank=True, max_length=520, null=True, unique=True)),
-                ('grand_parent_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.productgrandparentcategory')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "category_name",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, max_length=520, null=True, unique=True
+                    ),
+                ),
+                (
+                    "grand_parent_category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.productgrandparentcategory",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Parent Categories',
+                "verbose_name_plural": "Parent Categories",
             },
         ),
         migrations.CreateModel(
-            name='ProductChildCategory',
+            name="ProductChildCategory",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('category_name', models.CharField(blank=True, max_length=255, null=True)),
-                ('size', models.CharField(blank=True, max_length=255, null=True)),
-                ('slug', models.SlugField(blank=True, max_length=520, null=True, unique=True)),
-                ('parent_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.productparentcategory')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "category_name",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                ("size", models.CharField(blank=True, max_length=255, null=True)),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, max_length=520, null=True, unique=True
+                    ),
+                ),
+                (
+                    "parent_category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.productparentcategory",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Categories',
+                "verbose_name_plural": "Categories",
             },
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('product_name', models.CharField(blank=True, max_length=255, null=True)),
-                ('product_description', models.TextField(blank=True, max_length=3000, null=True)),
-                ('slug', models.SlugField(blank=True, max_length=520, null=True, unique=True)),
-                ('quantity_per_unit', models.IntegerField()),
-                ('discount', models.IntegerField()),
-                ('unit_price', models.IntegerField()),
-                ('unit_weight_in_grams', models.IntegerField()),
-                ('returnable', models.BooleanField(default=False)),
-                ('country_of_origin', models.CharField(blank=True, max_length=255, null=True)),
-                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.productbrand')),
-                ('child_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.productchildcategory')),
-                ('sizes_available', models.ManyToManyField(to='products.ProductSize')),
-                ('vendor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.vendor')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "product_name",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "product_description",
+                    models.TextField(blank=True, max_length=3000, null=True),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, max_length=520, null=True, unique=True
+                    ),
+                ),
+                ("quantity_per_unit", models.IntegerField()),
+                ("discount", models.IntegerField()),
+                ("unit_price", models.IntegerField()),
+                ("unit_weight_in_grams", models.IntegerField()),
+                ("returnable", models.BooleanField(default=False)),
+                (
+                    "country_of_origin",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "brand",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.productbrand",
+                    ),
+                ),
+                (
+                    "child_category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.productchildcategory",
+                    ),
+                ),
+                ("sizes_available", models.ManyToManyField(to="products.ProductSize")),
+                (
+                    "vendor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="core.vendor"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
     ]

@@ -9,58 +9,111 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('core', '0001_initial'),
-        ('products', '0001_initial'),
+        ("core", "0001_initial"),
+        ("products", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Shipper',
+            name="Shipper",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('company_name', models.CharField(blank=True, max_length=255, null=True)),
-                ('phone_number', models.CharField(blank=True, max_length=20, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                (
+                    "company_name",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                (
+                    "phone_number",
+                    models.CharField(blank=True, max_length=20, null=True),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='ShippingOrderDetail',
+            name="ShippingOrderDetail",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('quantity', models.IntegerField(null=True)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                ("quantity", models.IntegerField(null=True)),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.product",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='ShippingOrder',
+            name="ShippingOrder",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('payment_id', models.CharField(blank=True, max_length=255, null=True)),
-                ('order_datetime', models.DateTimeField(auto_now_add=True)),
-                ('shipping_datetime', models.DateTimeField(auto_now_add=True)),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.customer')),
-                ('shipper', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shipping.shipper')),
-                ('shipping_order_details', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shipping.shippingorderdetail')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                ("payment_id", models.CharField(blank=True, max_length=255, null=True)),
+                ("order_datetime", models.DateTimeField(auto_now_add=True)),
+                ("shipping_datetime", models.DateTimeField(auto_now_add=True)),
+                (
+                    "customer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="core.customer"
+                    ),
+                ),
+                (
+                    "shipper",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="shipping.shipper",
+                    ),
+                ),
+                (
+                    "shipping_order_details",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="shipping.shippingorderdetail",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created',),
-                'get_latest_by': 'created',
-                'abstract': False,
+                "ordering": ("-created",),
+                "get_latest_by": "created",
+                "abstract": False,
             },
         ),
     ]

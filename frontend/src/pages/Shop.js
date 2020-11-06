@@ -14,10 +14,10 @@ export default ()=>{
                 </Col>
                 <Col span={19}>
                     <Row>
-                       <ProductCard /> 
-                       <ProductCard /> 
-                       <ProductCard /> 
-                       <ProductCard /> 
+                       <ProductCard />
+                       <ProductCard />
+                       <ProductCard />
+                       <ProductCard />
                     </Row>
                 </Col>
             </Row>

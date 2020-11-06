@@ -8,7 +8,7 @@ COPY backend/poetry.lock $HOME
 COPY backend/.env $HOME
 COPY backend/pyproject.toml $HOME
 
-ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
+ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
