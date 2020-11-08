@@ -13,20 +13,22 @@ class Timestamp(models.Model):
         ordering = ("-created",)
 
 
-class Customer(User, Timestamp):
+class Customer(Timestamp):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     address_pincode = models.IntegerField(null=True)
 
     def __str__(self):
-        return f"{self.first_name}"
+        return f"{self.user.first_name}"
 
 
-class Vendor(User, Timestamp):
+class Vendor(Timestamp):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.first_name}"
+        return f"{self.company_name}"
 
 
 class CustomerShippingAddress(Timestamp):
