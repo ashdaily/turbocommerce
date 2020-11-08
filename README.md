@@ -74,7 +74,13 @@ docker exec -it <container_id> bash
 psql -U postgres -c "CREATE USER username WITH PASSWORD 'password';"
 ```
 
+#### Delete all data from postgres
+```
+docker rm -f -v turbocommerce_db_1
+```
+
 #### TODO
 - Fix isLogged in feature to reducer
 - Improve react boiler plate
 - Docker entrypoint add sleep time between db up and backend up
+- Generate secret token
