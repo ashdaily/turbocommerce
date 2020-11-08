@@ -60,7 +60,8 @@ export default ()=>{
         */
         axios.post("auth/convert-token/", payload)
         .then(response => {
-            localStorage.setItem("accessToken", response.accessToken);
+            console.log(response)
+            localStorage.setItem("accessToken", response.data["access_token"]);
             localStorage.setItem("backendName", backend);
 
             if(response.status === 200){

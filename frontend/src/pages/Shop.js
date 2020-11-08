@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Row, Col} from 'antd';
 import { Card } from 'antd';
 
-import Sider from "../components/Sider";
+import SideBar from "../components/SideBar";
 import ProductCard from "../components/ProductCard";
 
 export default ()=>{
@@ -10,7 +10,7 @@ export default ()=>{
         <>
             <Row>
                 <Col span={5}>
-                    <Sider />
+                    <SideBar />
                 </Col>
                 <Col span={19}>
                     <Row>

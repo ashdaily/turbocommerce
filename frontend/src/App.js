@@ -16,8 +16,8 @@ function App() {
   return (
       <Router>
           <Switch>
-            <Route exact path="/" exact>
-                {localStorage.getItem("accessToken") === null ? <Login /> : <Redirect to="/shop" />}
+            <Route exact path="/">
+              {localStorage.getItem("accessToken") === null ? <Login /> : <Redirect to="/shop" />}
             </Route>
             <Route exact path="/shop">
               <Shop />

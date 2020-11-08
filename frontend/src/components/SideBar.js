@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Switch, Divider } from 'antd';
+import { Menu } from 'antd';
 import {
   LogoutOutlined,
   CalendarOutlined,
@@ -7,35 +7,14 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 import { Redirect } from "react-router-dom";
-import axios from "../util/Axios";
+
+import Logout from "./Logout";
+
 
 const { SubMenu } = Menu;
 
 export default ()=>{
   const [logout, setLogout] = useState(false);
-
-  function doLogout(){
-    // make payload
-    const payload = {
-      "client_id": process.env.REACT_APP_DJANGO_OAUTH_GENERATED_CLIENT_ID,
-      "client_secret": process.env.REACT_APP_DJANGO_OAUTH_GENERATED_CLIENT_SECRET,
-      "token": localStorage.getItem("accessToken")
-    }
-
-    /*
-        send convert token request to django social auth
-        & then set localStorage
-    */
-    axios.post("auth/revoke-token/", payload)
-    .then(response => {
-        if(response.status === 204){
-            // clear localStorage FIXME: this is bad
-            localStorage.clear();
-            setLogout(true);
-        }
-
-    })
-  }
 
   if(logout) return <Redirect to="/" />;
 
@@ -47,8 +26,8 @@ export default ()=>{
         mode="vertical"
         theme="light"
       >
-        <Menu.Item key="1" icon={<LogoutOutlined />} onClick={doLogout}>
-          Logout
+        <Menu.Item key="1" icon={<LogoutOutlined />}>
+          <Logout setLogout={setLogout} />
         </Menu.Item>
         <Menu.Item key="2" icon={<CalendarOutlined />}>
           Summer Dresses
