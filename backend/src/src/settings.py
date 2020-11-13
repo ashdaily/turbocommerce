@@ -186,3 +186,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 
 # Cross origin settings
 CORS_ALLOWED_ORIGINS = [env("REACT_APP_URL")]
+
+
+# Auth custom user
+# (https://docs.djangoproject.com/en/3.1/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project)
+AUTH_USER_MODEL = "core.User"

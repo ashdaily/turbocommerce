@@ -1,7 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from core.models import Timestamp, Vendor
+from core.models import Timestamp, User
 from pyhustler.countries import COUNTRIES
 from pyhustler.measurement import MEASUREMENT_NAMES, MEASUREMENT_UNITS
 
@@ -22,7 +22,7 @@ class ProductMeasurement(models.Model):
 
 
 class ProductSize(Timestamp):
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=True, blank=True)
     measurement = models.ManyToManyField(ProductMeasurement)
     comment = models.CharField(max_length=255, null=True, blank=True)
@@ -87,7 +87,7 @@ class ProductBrand(Timestamp):
 
 
 class Product(Timestamp):
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     child_category = models.ForeignKey(ProductChildCategory, on_delete=models.CASCADE)
     brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=255, null=True, blank=True)

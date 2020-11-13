@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -15,34 +15,16 @@ class Timestamp(models.Model):
         ordering = ("-created",)
 
 
-class Customer(Timestamp):
-    user = models.OneToOneField(
-        User, null=True, on_delete=models.CASCADE, related_name="customer"
-    )
+class User(AbstractUser):
+    USER_TYPES = (("CUSTOMER", "CUSTOMER"), ("VENDOR", "VENDOR"))
+
+    user_type = models.CharField(max_length=20, choices=USER_TYPES)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     address_pincode = models.IntegerField(null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.user.first_name}"
-
-
-@receiver(post_save, sender=User)
-def create_customer(sender, instance, created, **kwargs):
-    if created:
-        Customer.objects.create(user=instance)
-
-
-class Vendor(Timestamp):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    company_name = models.CharField(max_length=255, null=True, blank=True)
-    phone_number = models.CharField(max_length=20, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.company_name}"
-
 
 class CustomerShippingAddress(Timestamp):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     address_street_line_1 = models.CharField(max_length=255, null=True, blank=True)
     address_street_line_2 = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
@@ -51,7 +33,7 @@ class CustomerShippingAddress(Timestamp):
 
 
 class CustomerCreditCard(Timestamp):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     credit_card_number = models.CharField(max_length=16, null=True, blank=True)
     credit_card_valid_from = models.CharField(max_length=7, null=True, blank=True)
     credit_card_valid_until = models.CharField(max_length=7, null=True, blank=True)
