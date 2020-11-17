@@ -5,23 +5,21 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
-import 'antd/dist/antd.css';
+import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
 import Shop from "./pages/Shop";
+import Signup from "./pages/Signup";
 
 
 function App() {
   return (
       <Router>
           <Switch>
-            <Route exact path="/">
-              {localStorage.getItem("accessToken") === null ? <Login /> : <Redirect to="/shop" />}
-            </Route>
-            <Route exact path="/shop">
-              <Shop />
-            </Route>
+            <PrivateRoute exact path="/shop" component={Shop} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
           </Switch>
       </Router>
   )

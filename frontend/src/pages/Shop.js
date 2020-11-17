@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { Row, Col} from 'antd';
-import { Card } from 'antd';
+import React from "react"
+import { Row, Col} from 'react-bootstrap';
 
 import SideBar from "../components/SideBar";
 import ProductCard from "../components/ProductCard";
@@ -9,11 +8,15 @@ export default ()=>{
     return(
         <>
             <Row>
-                <Col span={5}>
+                <Col md={3}>
                     <SideBar />
                 </Col>
-                <Col span={19}>
+                <Col md={9}>
                     <Row>
+                       <ProductCard />
+                       <ProductCard />
+                       <ProductCard />
+                       <ProductCard />
                        <ProductCard />
                        <ProductCard />
                        <ProductCard />

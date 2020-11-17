@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Rate, Card, Col } from 'antd';
-import { HeartOutlined } from '@ant-design/icons';
-
-const { Meta } = Card;
+import { Button, Card, Col } from 'react-bootstrap';
 
 export default ()=>{
-    const [loading, setLoading] = useState(true);
-
-    useEffect(()=>{
-        setInterval(()=>{
-            setLoading(false)
-        }, 1000)
-    }, [])
-
     return(
-        <Col span={6}>
-            <Card
-                loading={loading}
-                hoverable
-                cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-            >
-                <Meta title="Europe Street beat" description="www.instagram.com" />
-                <Rate character={<HeartOutlined />} count={1}/>
+        <Col md={3}>
+            <Card className="mt-3">
+                <Card.Img variant="top" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+                <Card.Body>
+                <Card.Title>Bla bla</Card.Title>
+                <Card.Text>
+                Bla bla
+                </Card.Text>
+                <Button variant="primary">Add to cart</Button>
+                </Card.Body>
             </Card>
         </Col>
     )

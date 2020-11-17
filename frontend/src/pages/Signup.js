@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
-import { saveTokens } from "../util/Auth";
 import axios from "../util/Axios";
 
 
@@ -24,17 +23,16 @@ export default ()=>{
             "username": email,
             "password": password
         }
-        axios.post("api/core/auth/token/",  payload)
+        axios.post("api/core/customer/signup/",  payload)
         .then(response => {
-            const accessToken = response.data.access;
-            const refreshToken = response.data.refresh;
+            console.log(response)
             if(response.status === 200){
-                saveTokens(accessToken, refreshToken);
-                setRedirect(true);
+                setRedirect(true)
             }
         })
         .catch(error => {
             console.error(error)
+
         })
     }
 
@@ -71,7 +69,7 @@ export default ()=>{
         </Row>
     )
 
-    if(redirect) return <Redirect to="/shop" />;
+    if(redirect) return <Redirect to="/" />;
 
     return form;
 }
