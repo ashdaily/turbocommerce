@@ -16,7 +16,9 @@ class Timestamp(models.Model):
 
 
 class User(AbstractUser):
-    USER_TYPES = (("CUSTOMER", "CUSTOMER"), ("VENDOR", "VENDOR"))
+    CUSTOMER = "CUSTOMER"
+    VENDOR = "VENDOR"
+    USER_TYPES = ((CUSTOMER, CUSTOMER), (VENDOR, VENDOR))
 
     user_type = models.CharField(max_length=20, choices=USER_TYPES)
     phone_number = models.CharField(max_length=20, null=True, blank=True)

@@ -7,7 +7,7 @@ from .serializers import ProductSerializer
 
 
 class ProductView(BaseAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)
     queryset = Product.objects.all().order_by("id")
     serializer = ProductSerializer
 
