@@ -25,7 +25,6 @@ export default ()=>{
         }
         axios.post("api/core/customer/signup/",  payload)
         .then(response => {
-            console.log(response)
             if(response.status === 200){
                 setRedirect(true)
             }

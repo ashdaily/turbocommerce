@@ -4,5 +4,10 @@ from . import views
 
 
 urlpatterns = [
-    path("list/", views.ProductView.as_view(), name="product-list"),
+    path("", views.ProductView.as_view(), name="product"),
+    path(
+        "product-grand-parent-category/",
+        views.ProductGrandParentCategoryView.as_view(),
+        name="product-grand-parent-category",
+    ),
 ]

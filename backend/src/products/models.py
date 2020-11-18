@@ -47,6 +47,9 @@ class ProductGrandParentCategory(Timestamp):
     class Meta:
         verbose_name_plural = "Grand Parent Categories"
 
+    def __str__(self):
+        return self.category_name
+
 
 class ProductParentCategory(Timestamp):
     grand_parent_category = models.ForeignKey(
@@ -61,6 +64,9 @@ class ProductParentCategory(Timestamp):
 
     class Meta:
         verbose_name_plural = "Parent Categories"
+
+    def __str__(self):
+        return self.category_name
 
 
 class ProductChildCategory(Timestamp):
