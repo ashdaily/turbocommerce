@@ -3,6 +3,7 @@ import { ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import {logout, isLoggedIn} from "../util/Auth";
 import axios from "../util/Axios";
+import Logo from "../components/Logo";
 
 
 export default () => {
@@ -49,11 +50,12 @@ export default () => {
   }
 
   return (
-    <ListGroup as="ul">
-      {logoutOption}
-
-      {/* list of cateogory names here */}
-      {categoryNames ? categoryNames : null}
-    </ListGroup>
+    <>
+      <Logo />
+      <ListGroup as="ul">
+        {logoutOption}
+        {categoryNames ? categoryNames : null}
+      </ListGroup>
+    </>
   );
 };

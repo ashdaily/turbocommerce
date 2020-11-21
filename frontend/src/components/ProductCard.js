@@ -3,7 +3,7 @@ import { Card, Col } from 'react-bootstrap';
 
 export default (props) => {
     return(
-        <Col md={4}>
+        <Col md={3}>
             <Card className="mt-3" class="product-card">
                 <Card.Img variant="top" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
                 <Card.Body>
