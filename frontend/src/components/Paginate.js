@@ -10,10 +10,14 @@ export default ({
     }) => {
     return (
         <>
-            <p>Page {pageNumber} of {numPages}</p>
+            <p className="my-3">Page {pageNumber} of {numPages}</p>
             <Pagination>
-                <Pagination.Prev onClick={()=>setPageNumber(pageNumber-1)} hidden={!hasPrevious}/>
-                <Pagination.Next  onClick={()=>setPageNumber(pageNumber+1)} hidden={!hasNext}/>
+                <Pagination.Prev onClick={()=>setPageNumber(pageNumber-1)} hidden={!hasPrevious}>
+                    <i className="fa fa-angle-left"></i> Previous
+                </Pagination.Prev>
+                <Pagination.Next  onClick={()=>setPageNumber(pageNumber+1)} hidden={!hasNext}>
+                    Next <i className="fa fa-angle-right"></i>
+                </Pagination.Next>
             </Pagination>
         </>
     )

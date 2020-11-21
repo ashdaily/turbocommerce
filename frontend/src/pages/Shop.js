@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
 
+
 export default ()=>{
     const [data, setData] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
