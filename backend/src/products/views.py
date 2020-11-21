@@ -8,7 +8,7 @@ from .serializers import ProductSerializer, ProductGrandParentCategorySerializer
 
 
 class ProductView(BaseAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Product.objects.all().order_by("id")
     serializer = ProductSerializer
 

@@ -72,7 +72,6 @@ class ProductParentCategory(Timestamp):
 class ProductChildCategory(Timestamp):
     parent_category = models.ForeignKey(ProductParentCategory, on_delete=models.CASCADE)
     category_name = models.CharField(max_length=255, null=True, blank=True)
-    size = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
 
     def save(self, *args, **kwargs):
@@ -82,6 +81,9 @@ class ProductChildCategory(Timestamp):
     class Meta:
         verbose_name_plural = "Categories"
 
+    def __str__(self):
+        return self.category_name
+
 
 class ProductBrand(Timestamp):
     brand_name = models.CharField(max_length=255, null=True, blank=True, unique=True)
@@ -90,6 +92,9 @@ class ProductBrand(Timestamp):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.brand_name)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.brand_name
 
 
 class Product(Timestamp):
@@ -113,3 +118,11 @@ class Product(Timestamp):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.product_name)
         super().save(*args, **kwargs)
+
+
+class ProductImage(Timestamp):
+    product = models.ForeignKey(
+        Product, related_name="productimage", on_delete=models.CASCADE
+    )
+    product_image = models.ImageField(upload_to="products/")
+    is_active = models.BooleanField(default=True)
