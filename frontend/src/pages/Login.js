@@ -26,9 +26,9 @@ export default ()=>{
         }
         axios.post("api/core/auth/token/",  payload)
         .then(response => {
-            const accessToken = response.data.access;
-            const refreshToken = response.data.refresh;
             if(response.status === 200){
+                const accessToken = response.data.access;
+                const refreshToken = response.data.refresh;
                 saveTokens(accessToken, refreshToken);
                 setRedirect(true);
             }
@@ -71,7 +71,7 @@ export default ()=>{
         </Row>
     )
 
-    if(redirect) return <Redirect to="/shop" />;
+    if(redirect) return <Redirect to="/" />;
 
     return form;
 }

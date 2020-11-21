@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import {logout} from "../util/Auth";
+import {logout, isLoggedIn} from "../util/Auth";
 import axios from "../util/Axios";
 
 
@@ -18,10 +18,10 @@ export default () => {
     })
   }, [])
 
-  let products;
+  let categoryNames;
 
   if(productGrandParentCategory){
-    products = productGrandParentCategory.map(category => (
+    categoryNames = productGrandParentCategory.map(category => (
       <ListGroup.Item
         as="li"
         style={{ cursor: "pointer" }}
@@ -31,8 +31,10 @@ export default () => {
     ))
   }
 
-  return (
-    <ListGroup as="ul">
+  let logoutOption;
+
+  if(isLoggedIn()){
+    logoutOption = (
       <ListGroup.Item
         as="li"
         style={{ cursor: "pointer" }}
@@ -43,7 +45,15 @@ export default () => {
       >
         Logout
       </ListGroup.Item>
-      {products ? products : null}
+    )
+  }
+
+  return (
+    <ListGroup as="ul">
+      {logoutOption}
+
+      {/* list of cateogory names here */}
+      {categoryNames ? categoryNames : null}
     </ListGroup>
   );
 };
