@@ -22,10 +22,11 @@ export default () => {
   let categoryNames;
 
   if(productGrandParentCategory){
-    categoryNames = productGrandParentCategory.map(category => (
+    categoryNames = productGrandParentCategory.map((category, index) => (
       <ListGroup.Item
         as="li"
         style={{ cursor: "pointer" }}
+        key={index}
       >
         {category.category_name}
       </ListGroup.Item>
