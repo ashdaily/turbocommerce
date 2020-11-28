@@ -8,6 +8,10 @@ from .serializers import ProductSerializer, ProductGrandParentCategorySerializer
 
 
 class ProductView(BaseAPIView):
+    """
+    PATH: /api/products/
+    """
+
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Product.objects.all().order_by("id")
     serializer = ProductSerializer
@@ -20,7 +24,32 @@ class ProductView(BaseAPIView):
         return Response(serializer.errors)
 
 
+class ProductDetailsView(APIView):
+    """
+    PATH: /api/products/<id>
+    """
+
+    model = Product
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer = ProductSerializer
+
+    def get_object(self, pk):
+        try:
+            return self.model.objects.get(pk=pk)
+        except self.model.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        o = self.get_object(pk)
+        serializer = self.serializer(o)
+        return Response(serializer.data)
+
+
 class ProductGrandParentCategoryView(APIView):
+    """
+    PATH: /api/products/product-grand-parent-category
+    """
+
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get(self, request, format=None):
