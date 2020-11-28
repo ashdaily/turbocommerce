@@ -38,6 +38,7 @@ export default () => {
     logoutOption = (
       <ListGroup.Item
         as="li"
+        activeKey="/"
         style={{ cursor: "pointer" }}
         onClick={()=>{
           logout()
