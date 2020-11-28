@@ -67,10 +67,3 @@ psql -U postgres -c "CREATE USER username WITH PASSWORD 'password';"
 ```
 docker rm -f -v turbocommerce_db_1
 ```
-
-#### TODO
-- Fix isLogged in feature to reducer
-- Improve react boiler plate
-- Docker entrypoint add sleep time between db up and backend up
-- Generate django settings' secret token
-- Use refresh token
