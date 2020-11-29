@@ -12,7 +12,7 @@ class ProductMeasurement(models.Model):
     )
     measurement_value = models.IntegerField(null=True, blank=True)
     measurement_unit = models.CharField(
-        max_length=50, null=True, blank=True, choices=MEASUREMENT_UNITS, unique=True
+        max_length=50, null=True, blank=True, choices=MEASUREMENT_UNITS
     )
 
     def __str__(self):
@@ -29,11 +29,6 @@ class ProductSize(Timestamp):
 
     def __str__(self):
         return self.name
-
-
-class ProductSpecification(Timestamp):
-    specification_name = models.CharField(max_length=255, null=True, blank=True)
-    specification_value = models.CharField(max_length=255, null=True, blank=True)
 
 
 class ProductGrandParentCategory(Timestamp):
@@ -126,3 +121,11 @@ class ProductImage(Timestamp):
     )
     product_image = models.ImageField(upload_to="products/")
     is_active = models.BooleanField(default=True)
+
+
+class ProductSpecification(Timestamp):
+    product = models.ForeignKey(
+        Product, related_name="productspecification", on_delete=models.CASCADE
+    )
+    specification_name = models.CharField(max_length=255, null=True, blank=True)
+    specification_value = models.CharField(max_length=255, null=True, blank=True)

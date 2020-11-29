@@ -7,7 +7,7 @@ export default (props)=> {
         <Row className="product-details-content mt-5">
             <Col>
                 <h5>{props.data.product_name}</h5>
-                <Table hover size="lg">
+                <Table size="lg">
                     <tbody>
                         <tr>
                             <td>Brand</td>
@@ -31,11 +31,16 @@ export default (props)=> {
                             {props.data.returnable ? (<i className="text-success fa fa-check-circle"></i>) : (<i className="text-success fa fa-exclamation-circle"></i>)}
                             </td>
                         </tr>
+                        <tr>
+                            <td colSpan={2}>
+                            {props.data.sizes_available.map(({name}, index)=><Button className="ml-1" variant="outline-info" key={index}>{name}</Button>)}
+                            </td>
+                        </tr>
                     </tbody>
                 </Table>
 
                 <Button variant="light">
-                    Add to cart <i class="fa fa-shopping-cart"></i>
+                    Add to cart <i className="fa fa-shopping-cart"></i>
                 </Button>
             </Col>
         </Row>
