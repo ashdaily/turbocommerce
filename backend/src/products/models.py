@@ -117,7 +117,7 @@ class Product(Timestamp):
 
 class ProductImage(Timestamp):
     product = models.ForeignKey(
-        Product, related_name="productimage", on_delete=models.CASCADE
+        Product, related_name="product_image", on_delete=models.CASCADE
     )
     product_image = models.ImageField(upload_to="products/")
     is_active = models.BooleanField(default=True)
@@ -125,7 +125,10 @@ class ProductImage(Timestamp):
 
 class ProductSpecification(Timestamp):
     product = models.ForeignKey(
-        Product, related_name="productspecification", on_delete=models.CASCADE
+        Product, related_name="product_specification", on_delete=models.CASCADE
     )
     specification_name = models.CharField(max_length=255, null=True, blank=True)
     specification_value = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return {self.specification_name: self.specification_value}

@@ -1,5 +1,12 @@
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from .models import Product, ProductGrandParentCategory, ProductMeasurement, ProductSize
+from .models import (
+    Product,
+    ProductGrandParentCategory,
+    ProductMeasurement,
+    ProductSize,
+    ProductSpecification,
+)
 
 
 class ProductMeasurementSerializer(ModelSerializer):
@@ -16,12 +23,34 @@ class ProductSizeSerializer(ModelSerializer):
         exclude = ("user",)
 
 
+class ProductSpecificationSerializer(ModelSerializer):
+    class Meta:
+        model = ProductSpecification
+        fields = ("specification_name", "specification_value")
+
+
 class ProductSerializer(ModelSerializer):
     sizes_available = ProductSizeSerializer(many=True)
+    product_specification = ProductSpecificationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
-        exclude = ("user",)
+        fields = [
+            "id",
+            "child_category",
+            "brand",
+            "product_name",
+            "product_description",
+            "quantity_per_unit",
+            "slug",
+            "sizes_available",
+            "unit_price",
+            "discount",
+            "unit_weight_in_grams",
+            "returnable",
+            "country_of_origin",
+            "product_specification",
+        ]
 
 
 class ProductGrandParentCategorySerializer(ModelSerializer):
