@@ -13,7 +13,7 @@ export default (props)=> {
 
 
     return (
-        <Row className="product-details-content mt-5">
+        <Row className="product-details-content">
             <Col>
                 <h5>{props.data.product_name}</h5>
                 <div className="table-responsive">

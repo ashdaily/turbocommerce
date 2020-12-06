@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import {logout, isLoggedIn} from "../util/Auth";
 import axios from "../util/Axios";
 import Logo from "../components/Logo";
+import CartListedItems from "./CartListedItem";
 
 
 export default () => {
@@ -57,6 +58,7 @@ export default () => {
       <ListGroup as="ul">
         {logoutOption}
         {categoryNames ? categoryNames : null}
+        <CartListedItems />
       </ListGroup>
     </>
   );
