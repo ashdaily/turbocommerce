@@ -7,7 +7,7 @@ from .models import Product, ProductGrandParentCategory
 from .serializers import ProductSerializer, ProductGrandParentCategorySerializer
 
 
-class ProductView(BaseAPIView):
+class ProductListView(BaseAPIView):
     """
     PATH: /api/products/
     """
@@ -26,7 +26,7 @@ class ProductView(BaseAPIView):
 
 class ProductDetailsView(APIView):
     """
-    PATH: /api/products/<id>
+    PATH: /api/products/<id>/
     """
 
     model = Product
@@ -45,9 +45,9 @@ class ProductDetailsView(APIView):
         return Response(serializer.data)
 
 
-class ProductGrandParentCategoryView(APIView):
+class ProductGrandParentCategoryListView(APIView):
     """
-    PATH: /api/products/product-grand-parent-category
+    PATH: /api/products/product-grand-parent-category/
     """
 
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -55,4 +55,17 @@ class ProductGrandParentCategoryView(APIView):
     def get(self, request, format=None):
         queryset = ProductGrandParentCategory.objects.all().order_by("id")
         serializer = ProductGrandParentCategorySerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class ProductSuggestionListView(BaseAPIView):
+    """
+    PATH: /api/products/product-suggestion/<product_id>/
+    """
+
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get(self, request, product_id, format=None):
+        queryset = Product.objects.product_suggestion(last_seen_product_id=product_id)
+        serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)

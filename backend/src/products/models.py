@@ -92,6 +92,31 @@ class ProductBrand(Timestamp):
         return self.brand_name
 
 
+class ProductModelManager(models.Manager):
+    def product_suggestion(self, last_seen_product_id=None):
+        """
+        This method will find the suggested products
+        for the customer based on the product they are
+        looking at.
+
+        Arguments -
+        last_seen_product_id: This is the id of the product
+        that will be used as reference for generating the
+        other product suggestions that may interest a customer
+        """
+        if last_seen_product_id is None:
+            raise Exception("Needs 'last_seen_product_id' argument")
+
+        try:
+            reference_product = self.get(id=last_seen_product_id)
+        except self.DoesNotExist:
+            return self.none()
+        else:
+            return self.filter(child_category=reference_product.child_category).exclude(
+                id=reference_product.id
+            )
+
+
 class Product(Timestamp):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     child_category = models.ForeignKey(ProductChildCategory, on_delete=models.CASCADE)
@@ -106,6 +131,8 @@ class Product(Timestamp):
     unit_weight_in_grams = models.IntegerField()
     returnable = models.BooleanField(default=False)
     country_of_origin = models.CharField(max_length=255, null=True, blank=True)
+
+    objects = ProductModelManager()
 
     def __str__(self):
         return self.product_name
