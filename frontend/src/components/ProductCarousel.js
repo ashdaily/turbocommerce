@@ -1,19 +1,17 @@
- import React, { useEffect, useState } from "react"
-import { Row, Col} from 'react-bootstrap';
-
-import SideBar from "../components/SideBar";
-import ProductCard from "../components/ProductCard";
-import Paginate from "../components/Paginate";
+import React, { useState, useEffect } from "react";
+import {Row, Col} from "react-bootstrap";
+import ProductCard from "./ProductCard";
+import Paginate from "./Paginate";
 import axios from "../util/Axios";
 
 
-export default ()=>{
+export default (props) => {
     const [data, setData] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
     useEffect(()=> {
         const loadData = () => {
-            axios.get(`/api/products/?page=${pageNumber}`)
+            axios.get(`/api/products/product-suggestion/${props.productId}/?page=${pageNumber}`)
             .then(response => {
                 if(response.status === 200){
                     setData(response.data)
@@ -21,14 +19,14 @@ export default ()=>{
             })
         }
         loadData()
-    }, [pageNumber]);
+    }, [pageNumber, props.productId]);
 
     let paginate;
     if(data){
         paginate = (
             <Paginate
-                size="sm"
                 className="mt-3"
+                size="sm"
                 hasNext={data.next ? true : false}
                 hasPrevious={data.previous ? true : false}
                 numPages={data.count}
@@ -39,24 +37,23 @@ export default ()=>{
     }
 
     let products;
-    if(data){
+    if(data && data.hasOwnProperty("results")){
         products = data.results.map(
-            (product, index) => <Col md={4}><ProductCard key={index} data={product}/></Col>)
+            (product, index) => <Col md={4}><ProductCard key={index} data={product}/></Col>
+        )
     }
 
+    if(data && data.count === 0) return null;
+
     return(
+        <>
+        <h4> More like this product </h4>
         <Row>
-            <Col md={2}>
-                <SideBar />
-            </Col>
-            <Col md={10}>
-                <Row>
-                    {products}
-                </Row>
-                <Row>
-                    <Col>{paginate}</Col>
-                </Row>
-            </Col>
+            {products}
         </Row>
+        <Row>
+            <Col>{paginate}</Col>
+        </Row>
+        </>
     )
 }
