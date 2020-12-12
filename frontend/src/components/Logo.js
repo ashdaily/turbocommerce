@@ -7,7 +7,7 @@ export default () => {
     return(
         <Image
             src={logoImage}
-            rounded
+            roundedCircle
             alt="logo-coco-rose"
             style={{height: "10rem"}}
             className="mx-auto d-block"
