@@ -74,7 +74,7 @@ class ProductChildCategory(Timestamp):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "Categories"
+        verbose_name_plural = "Child Categories"
 
     def __str__(self):
         return self.category_name
