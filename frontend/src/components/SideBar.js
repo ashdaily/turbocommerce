@@ -12,7 +12,7 @@ export default () => {
   const [productGrandParentCategory, setProductGrandParentCategory] = useState(null);
 
   useEffect(()=>{
-    axios.get("/api/products/product-grand-parent-category")
+    axios.get("/api/products/product-grand-parent-category/")
     .then(response => {
       if(response.status === 200){
         setProductGrandParentCategory(response.data)

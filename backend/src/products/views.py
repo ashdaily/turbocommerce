@@ -1,17 +1,19 @@
 from django.http import Http404
+from pyhustler.pagination import PaginationMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from utils.pagination import BaseAPIView
+from utils.pagination import StandardPagination, ProductSuggestionPagination
 from .models import Product, ProductGrandParentCategory
 from .serializers import ProductSerializer, ProductGrandParentCategorySerializer
 
 
-class ProductListView(BaseAPIView):
+class ProductListView(APIView, PaginationMixin):
     """
     PATH: /api/products/
     """
 
+    pagination_class = StandardPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Product.objects.all().order_by("id")
     serializer = ProductSerializer
@@ -58,14 +60,19 @@ class ProductGrandParentCategoryListView(APIView):
         return Response(serializer.data)
 
 
-class ProductSuggestionListView(BaseAPIView):
+class ProductSuggestionListView(APIView, PaginationMixin):
     """
     PATH: /api/products/product-suggestion/<product_id>/
     """
 
+    pagination_class = ProductSuggestionPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer = ProductSerializer
 
     def get(self, request, product_id, format=None):
         queryset = Product.objects.product_suggestion(last_seen_product_id=product_id)
-        serializer = ProductSerializer(queryset, many=True)
-        return Response(serializer.data)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        return Response(serializer.errors)

@@ -1,15 +1,15 @@
 from django.http import Http404
+from pyhustler.pagination import PaginationMixin
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from utils.pagination import BaseAPIView
 from .models import User
 from .serializers import UserSerializer
 
 
-class CustomerView(BaseAPIView):
+class CustomerView(APIView, PaginationMixin):
     permission_classes = [IsAuthenticated]
     serializer = UserSerializer
     model = User
@@ -33,7 +33,6 @@ class SignupView(APIView):
         serializer = self.serializer(data=request.data)
 
         if serializer.is_valid():
-            print(request.data)
             serializer.save()
             return Response(serializer.data)
 
