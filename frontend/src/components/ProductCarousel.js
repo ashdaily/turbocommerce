@@ -47,7 +47,7 @@ export default (props) => {
 
     return(
         <>
-        <h4> More like this product </h4>
+        <h4> You May Also Like </h4>
         <Row>
             {products}
         </Row>

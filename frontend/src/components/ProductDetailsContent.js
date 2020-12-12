@@ -42,8 +42,9 @@ export default (props)=> {
                                 </td>
                             </tr>
                             <tr>
-                                <td colSpan={2}>
-                                {props.data.sizes_available.map(({name}, index)=><Button className="mr-4" variant="outline-primary" key={index}>{name}</Button>)}
+                                <td>Sizes</td>
+                                <td>
+                                {props.data.sizes_available.map(({name}, index)=><Button className="mr-2" variant="outline-primary" key={index} size="sm">{name}</Button>)}
                                 </td>
                             </tr>
                         </tbody>

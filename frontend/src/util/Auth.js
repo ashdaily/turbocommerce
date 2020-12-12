@@ -19,7 +19,7 @@ export const setHeaders = () => (
     accessToken ? {'Authorization': `Bearer ${accessToken}`} : {}
 )
 
-export const isLoggedIn = () => accessToken ? true : false
+export const isLoggedIn = accessToken ? true : false
 
 export const logout = () => {
     destroyTokens();

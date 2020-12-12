@@ -45,18 +45,13 @@ export default ()=>{
     }
 
     return(
+    <>
         <Row>
-            <Col md={2}>
-                <SideBar />
-            </Col>
-            <Col md={10}>
-                <Row>
-                    {products}
-                </Row>
-                <Row>
-                    <Col>{paginate}</Col>
-                </Row>
-            </Col>
+            {products}
         </Row>
+        <Row>
+            <Col>{paginate}</Col>
+        </Row>
+    </>
     )
 }

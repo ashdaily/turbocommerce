@@ -41,42 +41,31 @@ export default (props) => {
   if (!data) return null;
   return (
     <Row>
-      {/* Side Bar Part */}
-      <Col md={2}>
-        <SideBar />
-      </Col>
-
-      {/* Product Details Part */}
       <Col>
+        {/* Breadcrumbs */}
         <Row>
-          <Col>
+          <Col md={7}>
+            <DynamicBreadcrumbs />
+          </Col>
+        </Row>
 
-            {/* Breadcrumbs */}
-            <Row>
-              <Col md={7}>
-                <DynamicBreadcrumbs />
+        {/* Product images & Specs */}
+        <Row>
+          <Col md={{ span: 7 }}>
+            <ImageGallery
+              items={images}
+              lazyLoad={true}
+              thumbnailPosition="left"
+              showPlayButton={false}
+            />
+            <Row className="mt-5">
+              <Col md={12}>
+                <ProductCarousel productId={id} />
               </Col>
             </Row>
-
-            {/* Product images & Specs */}
-            <Row>
-              <Col md={{ span: 7 }}>
-                <ImageGallery
-                  items={images}
-                  lazyLoad={true}
-                  thumbnailPosition="left"
-                  showPlayButton={false}
-                />
-                <Row className="mt-5">
-                  <Col md={12}>
-                    <ProductCarousel productId={id} />
-                  </Col>
-                </Row>
-              </Col>
-              <Col md={4}>
-                <ProductDetailsContent data={data} />
-              </Col>
-            </Row>
+          </Col>
+          <Col md={4}>
+            <ProductDetailsContent data={data} />
           </Col>
         </Row>
       </Col>

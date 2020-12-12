@@ -31,6 +31,8 @@ export default ()=>{
                 const refreshToken = response.data.refresh;
                 saveTokens(accessToken, refreshToken);
                 setRedirect(true);
+                // FIXME: confirm is there is a better way to do this
+                window.location.reload()
             }
         })
         .catch(error => {

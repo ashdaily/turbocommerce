@@ -1,5 +1,5 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
+import { Badge, ListGroup } from "react-bootstrap";
 
 
 export default ()=> {
@@ -10,7 +10,8 @@ export default ()=> {
             activeKey="/"
             style={{ cursor: "pointer" }}
         >
-            <i className="fa fa-shopping-cart"></i> Cart {`(${cartItemsCount})`}
+            <i className="fa fa-shopping-cart"></i> Cart
+            &nbsp;<Badge variant="primary" size="md">{cartItemsCount}</Badge>
         </ListGroup.Item>
     )
 }
