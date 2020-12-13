@@ -1,7 +1,6 @@
  import React, { useEffect, useState } from "react"
 import { Row, Col} from 'react-bootstrap';
 
-import SideBar from "../components/SideBar";
 import ProductCard from "../components/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
