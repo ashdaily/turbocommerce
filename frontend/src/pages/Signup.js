@@ -7,6 +7,7 @@ import axios from "../util/Axios";
 export default ()=>{
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    const [agree, setAgree] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [validated, setValidated] = useState(false);
 
@@ -59,8 +60,12 @@ export default ()=>{
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check type="checkbox" label="I agree with all terms and conditions." onChange={e=>setAgree(e.target.checked)}/>
+                        </Form.Group>
+
+                        <Button variant="primary" type="submit" disabled={!agree}>
+                            Sign up
                         </Button>
                     </Form>
                 </Card>
