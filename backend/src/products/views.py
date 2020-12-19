@@ -1,29 +1,38 @@
 from django.http import Http404
+from django_filters.rest_framework import DjangoFilterBackend
 from pyhustler.pagination import PaginationMixin
 from rest_framework.response import Response
+from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+
 from utils.pagination import StandardPagination, ProductSuggestionPagination
 from .models import Product, ProductGrandParentCategory
 from .serializers import ProductSerializer, ProductGrandParentCategorySerializer
 
 
-class ProductListView(APIView, PaginationMixin):
+class ProductListView(ListAPIView, PaginationMixin):
     """
     PATH: /api/products/
     """
 
     pagination_class = StandardPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Product.objects.all().order_by("id")
-    serializer = ProductSerializer
-
-    def get(self, request, format=None):
-        page = self.paginate_queryset(self.queryset)
-        if page is not None:
-            serializer = self.serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        return Response(serializer.errors)
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [DjangoFilterBackend]
+    search_fields = [
+        "child_category",
+        "brand"
+        "product_name"
+        "product_description"
+        "slug"
+        "sizes_available"
+        "unit_price"
+        "unit_weight_in_grams"
+        "returnable"
+        "country_of_origin",
+    ]
 
 
 class ProductDetailsView(APIView):

@@ -33,12 +33,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # sslserver
+    # dependencies
     "sslserver",
-    # django rest framework
     "rest_framework",
-    # cross origin
     "corsheaders",
+    "django_filters",
     # modules
     "core",
     "products",
@@ -138,6 +137,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 
