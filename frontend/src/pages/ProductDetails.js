@@ -3,7 +3,6 @@ import { Row, Col } from 'react-bootstrap';
 import ImageGallery from 'react-image-gallery';
 import { useParams } from "react-router-dom";
 
-import SideBar from "../components/SideBar";
 import "react-image-gallery/styles/css/image-gallery.css";
 import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
 import axios from "../util/Axios";
