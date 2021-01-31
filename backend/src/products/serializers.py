@@ -2,11 +2,18 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from .models import (
     Product,
+    ProductBrand,
     ProductGrandParentCategory,
     ProductMeasurement,
     ProductSize,
     ProductSpecification,
 )
+
+
+class ProductBrandSerializer(ModelSerializer):
+    class Meta:
+        model = ProductBrand
+        fields = ("id", "brand_name", "slug")
 
 
 class ProductMeasurementSerializer(ModelSerializer):
@@ -30,8 +37,9 @@ class ProductSpecificationSerializer(ModelSerializer):
 
 
 class ProductSerializer(ModelSerializer):
-    sizes_available = ProductSizeSerializer(many=True)
+    brand = ProductBrandSerializer()
     product_specification = ProductSpecificationSerializer(many=True, read_only=True)
+    sizes_available = ProductSizeSerializer(many=True)
 
     class Meta:
         model = Product
