@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     "sslserver",
     "rest_framework",
     "corsheaders",
-    "django_filters",
     # modules
     "core",
     "products",
@@ -136,8 +135,7 @@ REST_FRAMEWORK_MAX_PAGE_SIZE = int(env("REST_FRAMEWORK_MAX_PAGE_SIZE"))
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],
-    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    ]
 }
 
 
