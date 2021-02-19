@@ -64,7 +64,7 @@ export default (props) => {
             </Row>
           </Col>
           <Col md={4}>
-            <ProductDetailsContent data={data} />
+            <ProductDetailsContent addToCart={props.addToCart} data={data} />
           </Col>
         </Row>
       </Col>

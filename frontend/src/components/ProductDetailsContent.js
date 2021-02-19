@@ -3,6 +3,11 @@ import { Row, Col, Button, Table } from 'react-bootstrap';
 
 
 export default (props)=> {
+
+    function addCart(e){
+        props.addToCart(props.data)
+    }
+
     const product_specification = props.data.product_specification.map(({specification_name, specification_value}, index) => {
         return (
             <tr key={index}>
@@ -51,7 +56,7 @@ export default (props)=> {
                     </Table>
                 </div>
 
-                <Button variant="primary" className="w-100 mt-4">
+                <Button variant="primary" className="w-100 mt-4" onClick={addCart}>
                     Add to cart <i className="fa fa-shopping-cart"></i>
                 </Button>
                 <Button variant="danger" className="w-100 mt-3">
