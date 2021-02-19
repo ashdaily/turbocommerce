@@ -8,7 +8,7 @@ import CategoryList from "./CategoryList";
 import LoginSignup from "./LoginSignup";
 
 
-export default () => {
+export default (props) => {
 
 
   return (
@@ -16,7 +16,7 @@ export default () => {
       <Logo />
       <ListGroup as="ul">
         <CategoryList />
-        <Cart />
+        <Cart countItems={props.countItems}/>
 
         {isLoggedIn ? (
           <Logout />
