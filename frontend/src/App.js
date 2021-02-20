@@ -15,7 +15,7 @@ import SideBar from "./components/SideBar";
 import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";
 import "./App.scss";
-import { totalCartItems, cartItems, addToCart } from "./util/Cart";
+import { totalCartItems, cartItems, addToCart, removeToCart } from "./util/Cart";
 
 function App() {
 	const [cartItemsCount, setcartItemsCount] = useState(totalCartItems);
@@ -31,6 +31,7 @@ function App() {
 				id: data.id,
 				name: data.product_name,
 				price: data.unit_price,
+                out_of_stock: 'no',
 				qty: 1,
 			});
 		}
@@ -41,10 +42,17 @@ function App() {
 		setcartData(cart);
 	};
 
-	const removeCartItem = (qty) => {
+	const removeCartItem = (id) => {
 		let count = parseInt(cartItemsCount);
-		count -= qty;
+		let cart = cartData;
+		let found = cart.find((cartItem) => cartItem.id === id);
+		count -= found.qty;
 		setcartItemsCount(count);
+		cart = cart.filter((cartItem) => cartItem.id !== id);
+		setTimeout(function(){
+			removeToCart(id);
+		}, 1000)
+		setcartData(cart);
 	};
 
 	return (
@@ -67,8 +75,8 @@ function App() {
 								render={(props) => (
 									<Cart
 										{...props}
-										removeCart={(qty) =>
-											removeCartItem(qty)
+										removeCart={(id) =>
+											removeCartItem(id)
 										}
 										cartData={cartData}
 									/>
