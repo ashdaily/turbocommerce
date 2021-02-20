@@ -141,6 +141,10 @@ class Product(Timestamp):
         self.slug = slugify(self.product_name)
         super().save(*args, **kwargs)
 
+    @property
+    def is_available_in_stock(self):
+        return self.quantity_per_unit > 0
+
 
 class ProductImage(Timestamp):
     product = models.ForeignKey(
