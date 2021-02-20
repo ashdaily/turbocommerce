@@ -1,53 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Row, Col, Table } from "react-bootstrap";
-import { removeToCart } from "../util/Cart";
 import Item from "../components/Item";
 import axios from "../util/Axios";
 
 export default (props) => {
-	const [cartData, setcartData] = useState(props.cartData);
+	const [cartData, setcartData] = useState(null);
 
-	const removeFromCart = (id) => {
-		let cart = cartData;
-		let found = cart.find((cartItem) => cartItem.id === id);
-		cart = cart.filter((cartItem) => cartItem.id !== id);
-		removeToCart(id);
-		setcartData(cart);
-		props.removeCart(found.qty);
+	const loadData = () => {
+		let cart_id = props.cartData.map((product, index) => product.id);
+		if (cart_id) {
+			axios
+				.get(`/api/products/in-stock/?id=${cart_id}`)
+				.then((response) => {
+					if (response.status === 200) {
+						let new_CartData = props.cartData.map((item, index) => {
+							let found = response.data.results.find(
+								(product) => product.id === item.id
+							);
+							if (found) {
+								if (item.qty > found.quantity_per_unit) {
+									item.out_of_stock = "yes";
+								} else {
+									item.out_of_stock = "no";
+								}
+							} else {
+								item.out_of_stock = "yes";
+							}
+							return item;
+						});
+						setcartData(new_CartData);
+					}
+				});
+		}
 	};
 
-	useEffect(() => {
-		const loadData = () => {
-			let cart_id = cartData.map((product, index) =>
-				(product.id)
-			);
-			console.log(cart_id)
-			if (cart_id) {
-				axios
-					.get(`/api/products/in-stock/?id=${cart_id}`)
-					.then((response) => {
-						if (response.status === 200) {
-							console.log(response.data);
-						}
-					});
-			}
-		};
-		loadData();
-	}, [cartData]);
+	const removeFromCart = (id) => {
+		props.removeCart(id);
+		let cart = props.cartData;
+		let found = cart.find((cartItem) => cartItem.id === id);
+		cart = cart.filter((cartItem) => cartItem.id !== id);
+		setcartData(cart);
+	};
 
-	console.log(props);
-	let products;
 	if (cartData) {
-		products = cartData.map((product, index) => (
-			<Item
-				key={index}
-				product={product}
-				removeCart={(id) => removeFromCart(id)}
-			/>
-		));
-	}
-
-	if (cartData.length > 0) {
 		return (
 			<Row className="product-details-content">
 				<Col>
@@ -61,13 +56,22 @@ export default (props) => {
 									<th>Action</th>
 								</tr>
 							</thead>
-							<tbody>{products}</tbody>
+							<tbody>
+								{cartData.map((product, index) => (
+									<Item
+										key={index}
+										product={product}
+										removeCart={(id) => removeFromCart(id)}
+									/>
+								))}
+							</tbody>
 						</Table>
 					</div>
 				</Col>
 			</Row>
 		);
 	} else {
+		loadData();
 		return (
 			<Row className="product-details-content">
 				<Col>

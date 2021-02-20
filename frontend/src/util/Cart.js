@@ -12,6 +12,7 @@ export const addToCart = (data, qty) => {
                 id: data.id,
                 name: data.product_name,
                 price: data.unit_price,
+                out_of_stock: 'no',
                 qty: qty
             });
         }
@@ -20,6 +21,7 @@ export const addToCart = (data, qty) => {
             id: data.id,
             name: data.product_name,
             price: data.unit_price,
+            out_of_stock: 'no',
             qty: qty
         });
     }
