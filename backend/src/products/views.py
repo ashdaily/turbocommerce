@@ -35,6 +35,20 @@ class ProductsInStockListView(ListAPIView, PaginationMixin):
             return Product.objects.none()
 
 
+class ProductsByIdsListView(ListAPIView, PaginationMixin):
+    pagination_class = StandardPagination
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        id_string = self.request.query_params.get("id", None)
+        if id_string is not None:
+            ids = list(map(int, id_string.split(",")))
+            return Product.objects.filter(id__in=ids)
+        else:
+            return Product.objects.none()
+
+
 class ProductDetailsView(APIView):
     """
     PATH: /api/products/<id>/
