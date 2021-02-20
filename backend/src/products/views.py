@@ -1,5 +1,4 @@
 from django.http import Http404
-from django_filters.rest_framework import DjangoFilterBackend
 from pyhustler.pagination import PaginationMixin
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
@@ -20,19 +19,20 @@ class ProductListView(ListAPIView, PaginationMixin):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [DjangoFilterBackend]
-    search_fields = [
-        "child_category",
-        "brand"
-        "product_name"
-        "product_description"
-        "slug"
-        "sizes_available"
-        "unit_price"
-        "unit_weight_in_grams"
-        "returnable"
-        "country_of_origin",
-    ]
+
+
+class ProductsInStockListView(ListAPIView, PaginationMixin):
+    pagination_class = StandardPagination
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        id_string = self.request.query_params.get("id", None)
+        if id_string is not None:
+            ids = list(map(int, id_string.split(",")))
+            return Product.objects.filter(id__in=ids, quantity_per_unit__gt=0)
+        else:
+            return Product.objects.none()
 
 
 class ProductDetailsView(APIView):
