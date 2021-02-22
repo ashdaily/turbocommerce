@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import (
     ProductMeasurement,
     ProductSize,
-    ProductSpecification,
+    ProductVariantSpecification,
     ProductGrandParentCategory,
     ProductParentCategory,
     ProductChildCategory,
@@ -14,7 +14,7 @@ from .models import (
 
 admin.site.register(ProductMeasurement)
 admin.site.register(ProductSize)
-admin.site.register(ProductSpecification)
+admin.site.register(ProductVariantSpecification)
 admin.site.register(ProductGrandParentCategory)
 admin.site.register(ProductParentCategory)
 admin.site.register(ProductChildCategory)

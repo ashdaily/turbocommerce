@@ -6,7 +6,8 @@ from .models import (
     ProductGrandParentCategory,
     ProductMeasurement,
     ProductSize,
-    ProductSpecification,
+    ProductVariant,
+    ProductVariantSpecification,
 )
 
 
@@ -30,15 +31,22 @@ class ProductSizeSerializer(ModelSerializer):
         exclude = ("user",)
 
 
-class ProductSpecificationSerializer(ModelSerializer):
+class ProductVariantSpecificationSerializer(ModelSerializer):
     class Meta:
-        model = ProductSpecification
+        model = ProductVariantSpecification
         fields = ("specification_name", "specification_value")
+
+
+class ProductVariantSerializer(ModelSerializer):
+    class Meta:
+        model = ProductVariant
 
 
 class ProductSerializer(ModelSerializer):
     brand = ProductBrandSerializer()
-    product_specification = ProductSpecificationSerializer(many=True, read_only=True)
+    product_specification = ProductVariantSpecificationSerializer(
+        many=True, read_only=True
+    )
     sizes_available = ProductSizeSerializer(many=True)
 
     class Meta:
