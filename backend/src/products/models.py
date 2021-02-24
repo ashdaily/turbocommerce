@@ -158,7 +158,7 @@ class ProductVariant(Timestamp):
         related_query_name="product_variant",
         on_delete=models.CASCADE,
     )
-    stock_keeping_unit = models.BigIntegerField()
+    stock_keeping_unit = models.BigIntegerField(unique=True)
     sizes_available = models.ManyToManyField(ProductSize)
     discount = models.IntegerField()
     published = models.BooleanField(default=False)
@@ -167,11 +167,23 @@ class ProductVariant(Timestamp):
     color = ColorField(null=True)
 
     def __str__(self):
-        return f"{self.product.product_name}"
+        return f"{self.product.product_name} {self.id}"
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.product_name)
-        super().save(*args, **kwargs)
+    @property
+    def in_stock(self):
+        for inventory in self.product_variant_inventories.all():
+            if inventory.quantity > 0:
+                return True
+        return False
+
+    @property
+    def images(self):
+        images = []
+        for image in self.product_variant_images.all():
+            if not image.published:
+                continue
+            images.append(image.image.url)
+        return images
 
 
 def generate_upload_path_for_images(instance, filename):
@@ -224,4 +236,13 @@ class ProductVariantInventory(Timestamp):
     )
     trace_quantity = models.BooleanField(default=True)
     quantity = models.IntegerField()
-    assigned_warehouses = models.ManyToManyField(Warehouse)
+    warehouse = models.ForeignKey(
+        Warehouse,
+        related_name="product_variant_warehouses",
+        related_query_name="product_variant_warehouse",
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+
+    def __str__(self):
+        return f"{self.product_variant.product.product_name}"
