@@ -33,11 +33,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # dependencies
-    "sslserver",
-    "rest_framework",
+    # pip packages
+    "colorfield",
     "corsheaders",
-    # modules
+    "rest_framework",
+    "sslserver",
+    # project apps
     "core",
     "products",
     "shipping",

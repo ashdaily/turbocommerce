@@ -3,9 +3,8 @@ import { Badge, ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 
-
 export default (props) => {
-	
+
 	let history = useHistory();
 	return (
 		<ListGroup.Item

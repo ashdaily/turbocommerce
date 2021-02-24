@@ -6,7 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from utils.pagination import StandardPagination, ProductSuggestionPagination
-from .models import Product, ProductGrandParentCategory
+from utils.strings import query_params_to_list
+from .models import Product, ProductGrandParentCategory, ProductVariant
 from .serializers import ProductSerializer, ProductGrandParentCategorySerializer
 
 
@@ -17,22 +18,8 @@ class ProductListView(ListAPIView, PaginationMixin):
 
     pagination_class = StandardPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Product.objects.all()
+    queryset = Product.objects.all()  # T0DO: send only variant that are published
     serializer_class = ProductSerializer
-
-
-class ProductsInStockListView(ListAPIView, PaginationMixin):
-    pagination_class = StandardPagination
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    serializer_class = ProductSerializer
-
-    def get_queryset(self):
-        id_string = self.request.query_params.get("id", None)
-        if id_string is not None:
-            ids = list(map(int, id_string.split(",")))
-            return Product.objects.filter(id__in=ids, quantity_per_unit__gt=0)
-        else:
-            return Product.objects.none()
 
 
 class ProductDetailsView(APIView):
@@ -67,6 +54,21 @@ class ProductGrandParentCategoryListView(APIView):
         queryset = ProductGrandParentCategory.objects.all().order_by("id")
         serializer = ProductGrandParentCategorySerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class ProductsByIdsListView(ListAPIView, PaginationMixin):
+    pagination_class = StandardPagination
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        id_string = self.request.query_params.get("id", None)
+        try:
+            ids = query_params_to_list(id_string)
+        except ValueError:
+            return Product.objects.none()
+        else:
+            return Product.objects.filter(id__in=ids)
 
 
 class ProductSuggestionListView(APIView, PaginationMixin):

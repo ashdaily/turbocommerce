@@ -67,3 +67,8 @@ psql -U postgres -c "CREATE USER username WITH PASSWORD 'password';"
 ```
 docker rm -f -v turbocommerce_db_1
 ```
+
+
+#### TODO LIST
+- [ ] Implement category hierachy in some other efficient manner
+- [ ] Reset migrations before version 1.0.0 release
