@@ -10,7 +10,7 @@ import ProductDetailsContent from "../components/ProductDetailsContent";
 import ProductCarousel from "../components/ProductCarousel";
 
 
-export default (props) => {
+export default () => {
   const { id } = useParams();
 
   const images = [
@@ -30,7 +30,6 @@ export default (props) => {
       axios.get(`/api/products/${id}/`)
         .then(response => {
           if (response.status === 200) {
-            console.log(response.data)
             setData(response.data)
           }
         })
@@ -39,6 +38,7 @@ export default (props) => {
   }, [id])
 
   if (!data) return null;
+  if (data.product_variants.length === 0) return null;
   return (
     <Row>
       <Col>

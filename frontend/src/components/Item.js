@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ShopContext } from "../context/ShopContext"
 
-export default (props) => {
-	const [product, setProducts] = useState(props.product);
+export default ({product}) => {
 	const [outOfStock, setoutOfStock] = useState('');
 
+	const { removeProduct } = useContext(ShopContext);
+
 	function handleRemove (id) {
-		props.removeCart(id);
+		removeProduct(id);
 	};
 
     useEffect(() => {
-        if(props.product.out_of_stock === 'yes') {
+        if(product.out_of_stock === 'yes') {
             setoutOfStock('table-secondary')
         }
-    }, [props])
+    }, [product])
 
 	return (
 		<tr className={outOfStock}>
 			<td>{product.name + (product.out_of_stock === 'yes' ? ' (Out Of Stock)' : '')}</td>
-			<td>{product.qty}</td>
+			<td>{product.quantity}</td>
 			<td>{product.price}</td>
 			<td>
 				<button
