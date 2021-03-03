@@ -30,6 +30,7 @@ export default (props) => {
       axios.get(`/api/products/${id}/`)
         .then(response => {
           if (response.status === 200) {
+            console.log(response.data)
             setData(response.data)
           }
         })
@@ -64,7 +65,7 @@ export default (props) => {
             </Row>
           </Col>
           <Col md={4}>
-            <ProductDetailsContent addToCart={props.addToCart} data={data} />
+            <ProductDetailsContent data={data} />
           </Col>
         </Row>
       </Col>

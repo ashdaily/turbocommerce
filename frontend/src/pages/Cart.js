@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Row, Col, Table } from "react-bootstrap";
 import Item from "../components/Item";
 import axios from "../util/Axios";
+import ShopContext from '../util/ShopContext'
 
 export default (props) => {
-	const [cartData, setcartData] = useState(null);
+
+	const {cartItems} = useContext(ShopContext);
+	const [cartData, setcartData] = useState(cartItems);
+
+	console.log(cartItems)
 
 	const loadData = () => {
-		let cart_id = props.cartData.map((product, index) => product.id);
+		let data = cartItems
+		let cart_id = 0;
 		if (cart_id) {
 			axios
 				.get(`/api/products/in-stock/?id=${cart_id}`)
@@ -36,7 +42,7 @@ export default (props) => {
 
 	const removeFromCart = (id) => {
 		props.removeCart(id);
-		let cart = props.cartData;
+		let cart = cartItems;
 		let found = cart.find((cartItem) => cartItem.id === id);
 		cart = cart.filter((cartItem) => cartItem.id !== id);
 		setcartData(cart);

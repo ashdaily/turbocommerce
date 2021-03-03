@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Badge, ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import ShopContext from '../util/ShopContext'
 
 
 export default (props) => {
+    const { totalCartItems } = useContext(ShopContext);
 
 	let history = useHistory();
 	return (
@@ -18,7 +20,7 @@ export default (props) => {
 		>
 			<i className="fa fa-shopping-cart"></i> Cart &nbsp;
 			<Badge variant="primary" size="md">
-				{props.countItems}
+				{totalCartItems}
 			</Badge>
 		</ListGroup.Item>
 	);

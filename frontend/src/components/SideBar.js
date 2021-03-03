@@ -16,7 +16,7 @@ export default (props) => {
       <Logo />
       <ListGroup as="ul">
         <CategoryList />
-        <Cart countItems={props.countItems}/>
+        <Cart/>
 
         {isLoggedIn ? (
           <Logout />

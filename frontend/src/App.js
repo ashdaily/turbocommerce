@@ -15,11 +15,19 @@ import SideBar from "./components/SideBar";
 import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";
 import "./App.scss";
-import { totalCartItems, cartItems, addToCart, removeToCart } from "./util/Cart";
+import {
+	totalCartItems,
+	cartItems,
+	addToCart,
+	removeToCart,
+} from "./util/Cart";
+import ShopContext from "./util/ShopContext";
 
 function App() {
 	const [cartItemsCount, setcartItemsCount] = useState(totalCartItems);
-	const [cartData, setcartData] = useState(JSON.parse(cartItems));
+	const [cartData, setcartData] = useState(cartItems);
+
+	const value = { addToCart, cartItems, totalCartItems };
 
 	const addCart = (data) => {
 		let cart = cartData;
@@ -31,13 +39,12 @@ function App() {
 				id: data.id,
 				name: data.product_name,
 				price: data.unit_price,
-                out_of_stock: 'no',
+				out_of_stock: "no",
 				qty: 1,
 			});
 		}
 		let count = parseInt(cartItemsCount);
 		count += 1;
-		addToCart(data, 1);
 		setcartItemsCount(count);
 		setcartData(cart);
 	};
@@ -49,54 +56,63 @@ function App() {
 		count -= found.qty;
 		setcartItemsCount(count);
 		cart = cart.filter((cartItem) => cartItem.id !== id);
-		setTimeout(function(){
+		setTimeout(function () {
 			removeToCart(id);
-		}, 1000)
+		}, 1000);
 		setcartData(cart);
 	};
 
 	return (
-		<Router>
-			<Container fluid>
-				<ToastContainer />
-				<Row>
-					<Col md={2}>
-						<SideBar countItems={cartItemsCount} />
-					</Col>
-					<Col md={10}>
-						<Switch>
-							<PrivateRoute exact path="/pay" component={Pay} />
-							<Route exact path="/" component={ProductList} />
-							<Route exact path="/signup" component={Signup} />
-							<Route exact path="/login" component={Login} />
-							<Route
-								exact
-								path="/cart"
-								render={(props) => (
-									<Cart
-										{...props}
-										removeCart={(id) =>
-											removeCartItem(id)
-										}
-										cartData={cartData}
-									/>
-								)}
-							/>
-							<Route
-								exact
-								path="/:id"
-								render={(props) => (
-									<ProductDetails
-										{...props}
-										addToCart={addCart}
-									/>
-								)}
-							/>
-						</Switch>
-					</Col>
-				</Row>
-			</Container>
-		</Router>
+		<ShopContext.Provider value={value}>
+			<Router>
+				<Container fluid>
+					<ToastContainer />
+					<Row>
+						<Col md={2}>
+							<SideBar />
+						</Col>
+						<Col md={10}>
+							<Switch>
+								<PrivateRoute
+									exact
+									path="/pay"
+									component={Pay}
+								/>
+								<Route exact path="/" component={ProductList} />
+								<Route
+									exact
+									path="/signup"
+									component={Signup}
+								/>
+								<Route exact path="/login" component={Login} />
+								<Route
+									exact
+									path="/cart"
+									render={(props) => (
+										<Cart
+											{...props}
+											removeCart={(id) =>
+												removeCartItem(id)
+											}
+											cartData={cartData}
+										/>
+									)}
+								/>
+								<Route
+									exact
+									path="/:id"
+									render={(props) => (
+										<ProductDetails
+											{...props}
+										/>
+									)}
+								/>
+							</Switch>
+						</Col>
+					</Row>
+				</Container>
+			</Router>
+		</ShopContext.Provider>
 	);
 }
 
