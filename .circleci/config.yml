@@ -11,8 +11,11 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
+      - python/install-packages:
+          pkg-manager: poetry
       - run:
-          command: python ./backend/src/manage.py test --keepdb
+          command: |
+            poetry run python ./backend/src/manage.py test --keepdb
           name: TestTurbocommerceBackend
 
 workflows:
