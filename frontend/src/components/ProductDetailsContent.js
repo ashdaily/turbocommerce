@@ -1,13 +1,10 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer } from "react";
 import { Row, Col, Button, Table } from "react-bootstrap";
-import { ShopContext } from "../context/ShopContext";
+import ColorSwatch from './ColorSwatch';
+import Sizes from './Sizes';
+import AddToCartButton from './AddToCartButton'
 
 const ProductDetailsContent = ({ data }) => {
-	const { addProduct, cartItems, increase } = useContext(ShopContext);
-
-	const isInCart = (product) => {
-		return !!cartItems.find((item) => item.id === product.id);
-	};
 
 	const initvariant = 0;
 
@@ -15,16 +12,38 @@ const ProductDetailsContent = ({ data }) => {
 		variant = action.index;
 		return variant;
 	};
+    
+    const initsize = 0;
 
-	const [variant, dispatch] = useReducer(reducer, initvariant);
+	const changeSize = (size, action) => {
+		size = action.index;
+		return size;
+	};
 
-	// const product_specification = props.data.product_specification.map(({specification_name, specification_value}, index) => {
-	//     return (
-	//         <tr key={index}>
-	//             <td>{specification_name}</td>
-	//             <td>{specification_value}</td>
-	//         </tr>
-	// )})
+	const [variant, dispatchSwatch] = useReducer(reducer, initvariant);
+	const [size, dispatchSize] = useReducer(changeSize, initsize);
+
+	const product_specification = data.product_variants[
+		variant
+	].product_variant_specifications.map(
+		({ specification_name, specification_value }, index) => {
+			return (
+				<tr key={index}>
+					<td>{specification_name}</td>
+					<td>{specification_value}</td>
+				</tr>
+			);
+		}
+	);
+
+    const handleSwatch = (index) => {
+        dispatchSwatch({
+            index: index
+        })
+        dispatchSize({
+            index: 0
+        })
+    }
 
 	return (
 		<Row className="product-details-content">
@@ -67,66 +86,14 @@ const ProductDetailsContent = ({ data }) => {
 									)}
 								</td>
 							</tr>
-							<tr>
-								<td>Colors</td>
-								<td>
-									{data.product_variants.map(
-										({ color, id }, index) => (
-											<Button
-												className="mr-2"
-												variant="outline-primary"
-												key={id}
-												size="sm"
-												style={{ background: color }}
-												onClick={() =>
-													dispatch({ index: index })
-												}
-											>
-												{color}
-											</Button>
-										)
-									)}
-								</td>
-							</tr>
-							<tr>
-								<td>Sizes</td>
-								<td>
-									{data.product_variants[
-										variant
-									].sizes_available.map(({ name }, index) => (
-										<Button
-											className="mr-2"
-											variant="outline-primary"
-											key={index}
-											size="sm"
-										>
-											{name}
-										</Button>
-									))}
-								</td>
-							</tr>
+                            <ColorSwatch variants={data.product_variants} onClick={(index) => handleSwatch(index)} active={variant}/>
+                            <Sizes sizes_available={data.product_variants[variant].sizes_available} onClick={(index) => dispatchSize({
+                                index: index
+                            })} size={size} />
 						</tbody>
 					</Table>
 				</div>
-
-				{isInCart(data) && <Button
-					variant="primary"
-					className="w-100 mt-4"
-					onClick={() =>
-						increase(data, data.product_variants[variant])
-					}
-				>
-					Add to cart <i className="fa fa-shopping-cart"></i>
-				</Button>}
-                {!isInCart(data) && <Button
-					variant="primary"
-					className="w-100 mt-4"
-					onClick={() =>
-						addProduct(data, data.product_variants[variant])
-					}
-				>
-					Add to cart <i className="fa fa-shopping-cart"></i>
-				</Button>}
+                <AddToCartButton data={data} variant={data.product_variants[variant]} size={size} />
 				<Button variant="danger" className="w-100 mt-3">
 					Add to wishlist <i className="fa fa-heart"></i>
 				</Button>
@@ -134,7 +101,7 @@ const ProductDetailsContent = ({ data }) => {
 				<h5 className="mt-5">Product Specifications</h5>
 				<div className="table-responsive">
 					<Table size="lg">
-						<tbody>{/* {product_specification} */}</tbody>
+						<tbody>{product_specification}</tbody>
 					</Table>
 				</div>
 			</Col>

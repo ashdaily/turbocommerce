@@ -15,20 +15,20 @@ const initialState = {
 const ShopContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(CartReducer, initialState);
 
-	const increase = (payload, variant) => {
-		dispatch({ type: "INCREASE", payload, variant });
+	const increase = (payload, variant, size) => {
+		dispatch({ type: "INCREASE", payload, variant, size });
 	};
 
-	const decrease = (payload) => {
-		dispatch({ type: "DECREASE", payload });
+	const decrease = (payload, variant, size) => {
+		dispatch({ type: "DECREASE", payload, variant, size });
 	};
 
-	const addProduct = (payload, variant) => {
-		dispatch({ type: "ADD_ITEM", payload, variant });
+	const addProduct = (payload, variant, size) => {
+		dispatch({ type: "ADD_ITEM", payload, variant, size });
 	};
 
-	const removeProduct = (p_id) => {
-		dispatch({ type: "REMOVE_ITEM", p_id });
+	const removeProduct = (p_id, variant_id, size) => {
+		dispatch({ type: "REMOVE_ITEM", p_id, variant_id, size });
 	};
 
 	const clearCart = () => {

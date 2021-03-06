@@ -39,7 +39,7 @@ export const sumItems = (Items) => {
 	Storage(Items);
 	let totalCartItems =
 		Items.length > 0
-			? Items.reduce((total, product) => total + product.quantity, 0)
+			? Items.reduce((total) => total + 1, 0)
 			: 0;
 	let total =
 		Items.length > 0
@@ -59,7 +59,8 @@ export const CartReducer = (state, action) => {
 				!state.cartItems.find(
 					(item) =>
 						item.id === action.payload.id &&
-						item.variant_id === action.variant.id
+						item.variant_id === action.variant.id &&
+						item.size === action.size
 				)
 			) {
 				state.cartItems.push({
@@ -68,6 +69,7 @@ export const CartReducer = (state, action) => {
 					name: action.payload.product_name,
 					price: action.variant.price,
 					out_of_stock: "no",
+					size: action.size,
 					quantity: 1,
 				});
 			}
@@ -81,11 +83,19 @@ export const CartReducer = (state, action) => {
 			return {
 				...state,
 				...sumItems(
-					state.cartItems.filter((item) => item.id !== action.p_id)
+					state.cartItems.filter(
+						(item) =>
+							item.id !== action.p_id &&
+							item.variant_id !== action.variant_id &&
+							item.size !== action.size
+					)
 				),
 				cartItems: [
 					...state.cartItems.filter(
-						(item) => item.id !== action.p_id
+						(item) =>
+							item.id !== action.p_id &&
+							item.variant_id !== action.variant_id &&
+							item.size !== action.size
 					),
 				],
 			};
@@ -94,7 +104,8 @@ export const CartReducer = (state, action) => {
 				state.cartItems.findIndex(
 					(item) =>
 						item.id === action.payload.id &&
-						item.variant_id === action.variant.id
+						item.variant_id === action.variant.id &&
+						item.size === action.size
 				)
 			].quantity++;
 			return {
@@ -105,13 +116,21 @@ export const CartReducer = (state, action) => {
 		case "DECREASE":
 			state.cartItems[
 				state.cartItems.findIndex(
-					(item) => item.id === action.payload.id
+					(item) =>
+						item.id === action.payload.id &&
+						item.variant_id === action.variant.id &&
+						item.size === action.size
 				)
 			].quantity--;
 			return {
 				...state,
 				...sumItems(state.cartItems),
-				cartItems: [...state.cartItems],
+				cartItems: [
+					...state.cartItems.filter(
+						(item) =>
+							item.quantity !== 0
+					),
+				],
 			};
 		case "CHECKOUT":
 			return {
