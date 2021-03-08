@@ -41,7 +41,7 @@ export const sumItems = (items) => {
 	items.length > 0 ? items.reduce((total) => total + 1, 0) : 0;
 	let total =
 	items.length > 0
-			? Items.reduce(
+			? items.reduce(
 					(total, product) =>
 						total + product.price * product.quantity,
 					0
