@@ -39,7 +39,9 @@ export default (props) => {
     let products;
     if(data && data.hasOwnProperty("results")){
         products = data.results.map(
-            (product, index) => <Col md={4}><ProductCard key={index} data={product}/></Col>
+            (product, index) => 
+                product.product_variants.length > 0 && 
+                    (<Col md={4}><ProductCard key={index} data={product}/></Col>)
         )
     }
 

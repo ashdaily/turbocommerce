@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import PrivateRoute from "./components/PrivateRoute";
-import Login from "./pages/Login";
-import Cart from "./pages/Cart";
-import Signup from "./pages/Signup";
-import Pay from "./pages/Pay";
-import SideBar from "./components/SideBar";
-import ProductList from "./pages/ProductList";
-import ProductDetails from "./pages/ProductDetails";
-import "./App.scss";
+import PrivateRoute from "../components/PrivateRoute";
+import Login from "../pages/Login";
+import Cart from "../pages/Cart";
+import Signup from "../pages/Signup";
+import Pay from "../pages/Pay";
+import SideBar from "../components/SideBar";
+import ProductList from "../pages/ProductList";
+import ProductDetails from "../pages/ProductDetails";
+import "../App.scss";
+import {
+	totalCartItems,
+	cartItems,
+	addToCart,
+	removeToCart,
+} from "../util/Cart";
 
-function App() {
+const Routes = () => {
 
 	return (
 		<Router>
@@ -35,12 +41,17 @@ function App() {
 							<Route
 								exact
 								path="/cart"
-								component={Cart}
+								render={(props) => (
+									<Cart
+									/>
+								)}
 							/>
 							<Route
 								exact
 								path="/:id"
-								component={ProductDetails}
+								render={(props) => (
+									<ProductDetails {...props} />
+								)}
 							/>
 						</Switch>
 					</Col>
@@ -48,6 +59,6 @@ function App() {
 			</Container>
 		</Router>
 	);
-}
+};
 
-export default App;
+export default Routes;
