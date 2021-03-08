@@ -1,31 +1,62 @@
-import React, { useState, useEffect, useContext } from "react";
-import { ShopContext } from "../context/ShopContext"
+import React, { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
 
-export default ({product}) => {
-	const [outOfStock, setoutOfStock] = useState('');
+export default ({ product, outOfStock }) => {
+	const [stockText, setoutOfStock] = useState('')
 
-	const { removeProduct } = useContext(ShopContext);
+	const { removeProduct, increase, decrease } = useContext(ShopContext);
 
-	function handleRemove (id) {
-		removeProduct(id);
-	};
+	const handleRemove = (id, variant_id, size) => {
+		removeProduct(id, variant_id, size);
+	}
 
-    useEffect(() => {
-        if(product.out_of_stock === 'yes') {
-            setoutOfStock('table-secondary')
-        }
-    }, [product])
+	useEffect(() => {
+		if (outOfStock === "yes") {
+			setoutOfStock("table-secondary");
+		}
+	}, [outOfStock]);
 
 	return (
-		<tr className={outOfStock}>
-			<td>{product.name + (product.out_of_stock === 'yes' ? ' (Out Of Stock)' : '')}</td>
-			<td>{product.quantity}</td>
+		<tr className={stockText}>
+			<td>
+				{product.name} ({product.size})
+				{outOfStock === "yes" ? " (Out Of Stock)" : ""}
+			</td>
+			<td>
+				<i
+					onClick={() =>
+						decrease(
+							product.id,
+							product.variant_id,
+							product.size
+						)
+					}
+					className="fa fa-minus"
+				></i>{" "}
+				{product.quantity}{" "}
+				<i
+					onClick={() =>
+						increase(
+							product.id,
+							product.variant_id,
+							product.size
+						)
+					}
+					className="fa fa-plus"
+				></i>
+			</td>
 			<td>{product.price}</td>
 			<td>
 				<button
 					type="button"
 					className="w-50 btn btn-danger"
-					onClick={() => handleRemove(product.id)}
+					onClick={() =>
+						handleRemove(
+							product.id,
+							product.variant_id,
+							product.size
+						)
+					}
 				>
 					Remove
 				</button>

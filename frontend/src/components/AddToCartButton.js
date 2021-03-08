@@ -14,13 +14,13 @@ const AddToCartButton = ({ data, variant, size }) => {
         return item ? item.quantity : 0;
     }
 
-	if (isInCart(data, variant, size)) {
+	if (isInCart(data, variant, variant.sizes_available[size].name)) {
 		return (
 			<Button
 				variant="primary"
 				className="w-100 mt-4"
 			>
-				<i onClick={() => decrease(data, variant, size)} className="fa fa-minus"></i> {productQuantity(data, variant, size)} <i onClick={() => increase(data, variant, size)} className="fa fa-plus"></i>
+				<i onClick={() => decrease(data.id, variant.id, variant.sizes_available[size].name)} className="fa fa-minus"></i> {productQuantity(data, variant, variant.sizes_available[size].name)} <i onClick={() => increase(data.id, variant.id, variant.sizes_available[size].name)} className="fa fa-plus"></i>
 			</Button>
 		);
 	} else {
@@ -28,7 +28,7 @@ const AddToCartButton = ({ data, variant, size }) => {
 			<Button
 				variant="primary"
 				className="w-100 mt-4"
-				onClick={() => addProduct(data, variant, size)}
+				onClick={() => addProduct(data, variant, variant.sizes_available[size].name)}
 			>
 				Add to cart <i className="fa fa-shopping-cart"></i>
 			</Button>

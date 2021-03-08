@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 const Sizes = (props) => {
 	return (
 		<tr>
-			<td>Colors</td>
+			<td>Sizes</td>
 			<td>
 				{props.sizes_available.map(({ name }, index) => (
 					<Button

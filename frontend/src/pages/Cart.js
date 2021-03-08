@@ -6,6 +6,8 @@ import { ShopContext } from "../context/ShopContext";
 export default () => {
 	const { cartItems } = useContext(ShopContext);
 
+	console.log(cartItems)
+
 	if (cartItems.length > 0) {
 		return (
 			<Row className="product-details-content">
@@ -22,7 +24,7 @@ export default () => {
 							</thead>
 							<tbody>
 								{cartItems.map((product, index) => (
-									<Item key={index} product={product} />
+									<Item key={index} product={product} outOfStock={product.out_of_stock} />
 								))}
 							</tbody>
 						</Table>

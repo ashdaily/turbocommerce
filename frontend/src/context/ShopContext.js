@@ -15,12 +15,12 @@ const initialState = {
 const ShopContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(CartReducer, initialState);
 
-	const increase = (payload, variant, size) => {
-		dispatch({ type: "INCREASE", payload, variant, size });
+	const increase = (p_id, variant_id, size) => {
+		dispatch({ type: "INCREASE", p_id, variant_id, size });
 	};
 
-	const decrease = (payload, variant, size) => {
-		dispatch({ type: "DECREASE", payload, variant, size });
+	const decrease = (p_id, variant_id, size) => {
+		dispatch({ type: "DECREASE",p_id, variant_id, size });
 	};
 
 	const addProduct = (payload, variant, size) => {

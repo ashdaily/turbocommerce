@@ -1,11 +1,11 @@
 import axios from "../util/Axios";
 
-const Storage = (Items) => {
-	let cart_ids = Items.map((product) => product.id);
-	if (cart_ids) {
-		axios.get(`/api/products/in-ids/?id=${cart_ids}`).then((response) => {
+const Storage = (items) => {
+	let cartIds = items.map((product) => product.id);
+	if (cartIds) {
+		axios.get(`/api/products/in-ids/?id=${cartIds}`).then((response) => {
 			if (response.status === 200) {
-				let new_CartData = Items.map((item) => {
+				let newCartData = items.map((item) => {
 					let found = response.data.results.find(
 						(product) => product.id === item.id
 					);
@@ -28,21 +28,19 @@ const Storage = (Items) => {
 				});
 				localStorage.setItem(
 					"cartItems",
-					JSON.stringify(new_CartData.length > 0 ? new_CartData : [])
+					JSON.stringify(newCartData.length > 0 ? newCartData : [])
 				);
 			}
 		});
 	}
 };
 
-export const sumItems = (Items) => {
-	Storage(Items);
+export const sumItems = (items) => {
+	Storage(items);
 	let totalCartItems =
-		Items.length > 0
-			? Items.reduce((total) => total + 1, 0)
-			: 0;
+	items.length > 0 ? items.reduce((total) => total + 1, 0) : 0;
 	let total =
-		Items.length > 0
+	items.length > 0
 			? Items.reduce(
 					(total, product) =>
 						total + product.price * product.quantity,
@@ -103,8 +101,8 @@ export const CartReducer = (state, action) => {
 			state.cartItems[
 				state.cartItems.findIndex(
 					(item) =>
-						item.id === action.payload.id &&
-						item.variant_id === action.variant.id &&
+						item.id === action.p_id &&
+						item.variant_id === action.variant_id &&
 						item.size === action.size
 				)
 			].quantity++;
@@ -117,8 +115,8 @@ export const CartReducer = (state, action) => {
 			state.cartItems[
 				state.cartItems.findIndex(
 					(item) =>
-						item.id === action.payload.id &&
-						item.variant_id === action.variant.id &&
+						item.id === action.p_id &&
+						item.variant_id === action.variant_id &&
 						item.size === action.size
 				)
 			].quantity--;
@@ -126,10 +124,7 @@ export const CartReducer = (state, action) => {
 				...state,
 				...sumItems(state.cartItems),
 				cartItems: [
-					...state.cartItems.filter(
-						(item) =>
-							item.quantity !== 0
-					),
+					...state.cartItems.filter((item) => item.quantity !== 0),
 				],
 			};
 		case "CHECKOUT":
