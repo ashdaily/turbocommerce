@@ -7,8 +7,17 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 
 from utils.pagination import StandardPagination, ProductSuggestionPagination
 from utils.strings import query_params_to_list
-from .models import Product, ProductGrandParentCategory, ProductVariant
-from .serializers import ProductSerializer, ProductGrandParentCategorySerializer
+from .models import (
+    Product,
+    ProductGrandParentCategory,
+    ProductChildCategory,
+    ProductVariant,
+)
+from .serializers import (
+    ProductSerializer,
+    ProductGrandParentCategorySerializer,
+    ProductChildCategorySerializer,
+)
 
 
 class ProductListView(ListAPIView, PaginationMixin):
@@ -43,20 +52,11 @@ class ProductDetailsView(APIView):
         return Response(serializer.data)
 
 
-class ProductGrandParentCategoryListView(APIView):
-    """
-    PATH: /api/products/product-grand-parent-category/
-    """
-
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-
-    def get(self, request, format=None):
-        queryset = ProductGrandParentCategory.objects.all().order_by("id")
-        serializer = ProductGrandParentCategorySerializer(queryset, many=True)
-        return Response(serializer.data)
-
-
 class ProductsByIdsListView(ListAPIView, PaginationMixin):
+    """
+    PATH: /api/products/in-ids/?id=
+    """
+
     pagination_class = StandardPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = ProductSerializer
@@ -87,3 +87,16 @@ class ProductSuggestionListView(APIView, PaginationMixin):
             serializer = self.serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
         return Response(serializer.errors)
+
+
+class ProductCategoriesListView(APIView):
+    """
+    PATH: /api/products/categories/
+    """
+
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get(self, request, format=None):
+        queryset = ProductGrandParentCategory.objects.all().order_by("id")
+        serializer = ProductGrandParentCategorySerializer(queryset, many=True)
+        return Response(serializer.data)

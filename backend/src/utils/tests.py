@@ -14,5 +14,5 @@ class TestCaseBase(TestCase):
 
         model.objects.bulk_create(objects)
 
-    def deserialize(self, payload: str) -> list or dict:
-        return json.loads(payload)
+    def deserialize(self, response) -> list or dict:
+        return json.loads(response.content)

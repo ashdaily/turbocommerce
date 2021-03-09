@@ -29,5 +29,5 @@ class TestAuthentication(TestCaseBase):
         }
         r = self.client.post("/api/core/customer/signup/", payload)
         self.assertEqual(r.status_code, 400)
-        r = self.deserialize(r.content)
+        r = self.deserialize(r)
         self.assertEqual(r["username"], ["Username should only be email"])
