@@ -23,8 +23,8 @@
         "pk": 1,
         "fields": {
             "grand_parent_category": 1,
-            "category_name": "Women",
-            "slug": "women",
+            "category_name": "Formal",
+            "slug": "formal",
             "created": "2021-01-01T00:00:00.000Z",
             "last_updated": "2021-01-01T00:00:00.000Z"
         }
@@ -34,8 +34,8 @@
         "pk": 1,
         "fields": {
             "parent_category": 1,
-            "category_name": "Women",
-            "slug": "women",
+            "category_name": "Pants",
+            "slug": "pants",
             "created": "2021-01-01T00:00:00.000Z",
             "last_updated": "2021-01-01T00:00:00.000Z"
         }

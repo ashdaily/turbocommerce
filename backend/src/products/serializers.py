@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from .models import (
-    ProductChildCategory,
     Product,
     ProductBrand,
     ProductGrandParentCategory,
+    ProductParentCategory,
+    ProductChildCategory,
     ProductMeasurement,
     ProductSize,
     ProductVariant,
@@ -17,7 +18,23 @@ from .models import (
 class ProductChildCategorySerializer(ModelSerializer):
     class Meta:
         model = ProductChildCategory
-        fields = ["parent_category", "category_name", "slug"]
+        fields = ["id", "category_name", "slug"]
+
+
+class ProductParentCategorySerializer(ModelSerializer):
+    product_child_categories = ProductChildCategorySerializer(many=True)
+
+    class Meta:
+        model = ProductParentCategory
+        fields = ["id", "category_name", "slug", "product_child_categories"]
+
+
+class ProductGrandParentCategorySerializer(ModelSerializer):
+    product_parent_categories = ProductParentCategorySerializer(many=True)
+
+    class Meta:
+        model = ProductGrandParentCategory
+        fields = ["id", "category_name", "slug", "product_parent_categories"]
 
 
 class ProductBrandSerializer(ModelSerializer):
@@ -94,10 +111,3 @@ class ProductSerializer(ModelSerializer):
             "returnable",
             "country_of_origin",
         ]
-
-
-class ProductGrandParentCategorySerializer(ModelSerializer):
-    class Meta:
-        model = ProductGrandParentCategory
-        fields = "__all__"
-        depth = 1
