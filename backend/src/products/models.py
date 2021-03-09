@@ -62,7 +62,10 @@ class ProductGrandParentCategory(Timestamp):
 
 class ProductParentCategory(Timestamp):
     grand_parent_category = models.ForeignKey(
-        ProductGrandParentCategory, on_delete=models.CASCADE
+        ProductGrandParentCategory,
+        on_delete=models.CASCADE,
+        related_name="product_parent_categories",
+        related_query_name="product_parent_category",
     )
     category_name = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
@@ -79,7 +82,12 @@ class ProductParentCategory(Timestamp):
 
 
 class ProductChildCategory(Timestamp):
-    parent_category = models.ForeignKey(ProductParentCategory, on_delete=models.CASCADE)
+    parent_category = models.ForeignKey(
+        ProductParentCategory,
+        on_delete=models.CASCADE,
+        related_name="product_child_categories",
+        related_query_name="product_child_category",
+    )
     category_name = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
 
