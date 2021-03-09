@@ -1,17 +1,16 @@
 from pprint import pprint
 
-from django.test import Client, TestCase
 from django.urls import reverse
-from rest_framework import status
 
 from core.models import User
 from utils.tests import TestCaseBase
 
 
-class TestAuthentication(TestCaseBase):
+class TestCustomerSignup(TestCaseBase):
     fixtures = [
         "core/tests/fixtures/users.json",
     ]
+    url = reverse("customer-signup")
 
     def test_signup_for_customer(self):
         payload = {

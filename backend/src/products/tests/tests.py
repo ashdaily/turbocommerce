@@ -1,17 +1,13 @@
-import json
 from pprint import pprint
 
 from django.conf import settings
 from django.urls import reverse
-from django.test import Client
 
-from core.models import User
-from products.models import Product, ProductGrandParentCategory
+from products.models import Product
 from products.views import ProductListView
 from utils.tests import TestCaseBase
 
 
-client = Client()
 page_size = settings.REST_FRAMEWORK_PAGE_SIZE
 
 
@@ -19,10 +15,10 @@ class TestProductListView(TestCaseBase):
     fixtures = [
         "products/tests/fixtures/products.json",
     ]
+    url = reverse("products")
 
     def test_should_get_products_list(self):
-        url = reverse("products")
-        r = client.get(url)
+        r = self.client.get(self.url)
 
         self.assertEqual(r.status_code, 200)
         self.assertEqual(
@@ -173,8 +169,7 @@ class TestProductListView(TestCaseBase):
         self.make_random_model_data(Product, PRODUCT_COUNT, *["slug"])
 
         # page_size default
-        url = reverse("products")
-        r = client.get(url)
+        r = self.client.get(self.url)
 
         payload = self.deserialize(r)
 
@@ -186,10 +181,9 @@ class TestProductListView(TestCaseBase):
     def test_product_pagination_should_work_with_page_size_query_param(self):
         PRODUCT_COUNT = 99
         self.make_random_model_data(Product, PRODUCT_COUNT, *["slug"])
-        url = reverse("products")
 
         # page_size = 40
-        r = client.get(f"{url}?page_size=40")
+        r = self.client.get(f"{self.url}?page_size=40")
 
         payload = self.deserialize(r)
 
@@ -201,10 +195,9 @@ class TestProductListView(TestCaseBase):
     def test_product_pagination_should_work_with_page_number_query_param(self):
         PRODUCT_COUNT = 99
         self.make_random_model_data(Product, PRODUCT_COUNT, *["slug"])
-        url = reverse("products")
 
         # page=2
-        r = client.get(f"{url}?page=2")
+        r = self.client.get(f"{self.url}?page=2")
 
         payload = self.deserialize(r)
 
@@ -214,7 +207,7 @@ class TestProductListView(TestCaseBase):
         self.assertEqual(payload["previous"].endswith("products/"), True)
 
         # page=5
-        r = client.get(f"{url}?page=5")
+        r = self.client.get(f"{self.url}?page=5")
 
         payload = self.deserialize(r)
 
@@ -224,7 +217,7 @@ class TestProductListView(TestCaseBase):
         self.assertEqual("page=4" in payload["previous"], True)
 
         # page=10 (last page)
-        r = client.get(f"{url}?page=10")
+        r = self.client.get(f"{self.url}?page=10")
 
         payload = self.deserialize(r)
         self.assertEqual(payload["count"], PRODUCT_COUNT + 1)
@@ -240,7 +233,7 @@ class TestProductCategoriesListView(TestCaseBase):
     url = reverse("product-categories")
 
     def test_should_get_categories_list(self):
-        r = client.get(self.url)
+        r = self.client.get(self.url)
         payload = self.deserialize(r)
         self.assertEqual(
             payload,
