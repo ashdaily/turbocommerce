@@ -225,6 +225,153 @@ class TestProductListView(TestCaseBase):
         self.assertEqual(payload["next"], None)
         self.assertEqual("page=9" in payload["previous"], True)
 
+    def test_should_get_products_list_with_query_param(self):
+        r = self.client.get(f"{self.url}?slug=bizarre-shirt")
+
+        payload = self.deserialize(r)
+        self.assertEqual(
+            payload,
+            {
+                "count": 1,
+                "next": None,
+                "previous": None,
+                "results": [
+                    {
+                        "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
+                        "child_category": {
+                            "category_name": "Pants",
+                            "id": 1,
+                            "slug": "pants",
+                        },
+                        "country_of_origin": "Japan",
+                        "id": 1,
+                        "product_description": "Torn clothes are the new cool",
+                        "product_name": "Bizarre shirt",
+                        "product_variants": [
+                            {
+                                "color": "#FFFFFF",
+                                "discount": 10,
+                                "id": 1,
+                                "images": ["/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 500,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made " "with",
+                                        "specification_value": "Hand",
+                                    }
+                                ],
+                                "published": True,
+                                "sizes_available": [
+                                    {
+                                        "comment": "Fits a 6 " "feet tall " "woman",
+                                        "measurement": [
+                                            {
+                                                "id": 1,
+                                                "measurement_name": "LENGTH",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                            {
+                                                "id": 2,
+                                                "measurement_name": "WAIST",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                        ],
+                                        "name": "XL",
+                                    },
+                                    {
+                                        "comment": "Fits a "
+                                        "5'8 feet "
+                                        "tall "
+                                        "woman",
+                                        "measurement": [
+                                            {
+                                                "id": 1,
+                                                "measurement_name": "LENGTH",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                            {
+                                                "id": 2,
+                                                "measurement_name": "WAIST",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                        ],
+                                        "name": "M",
+                                    },
+                                ],
+                                "stock_keeping_unit": 87987,
+                                "weight_in_grams": 344,
+                            },
+                            {
+                                "color": "#000000",
+                                "discount": 1,
+                                "id": 2,
+                                "images": ["/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 5000,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made " "with",
+                                        "specification_value": "Machine",
+                                    }
+                                ],
+                                "published": True,
+                                "sizes_available": [
+                                    {
+                                        "comment": "Fits a 6 " "feet tall " "woman",
+                                        "measurement": [
+                                            {
+                                                "id": 1,
+                                                "measurement_name": "LENGTH",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                            {
+                                                "id": 2,
+                                                "measurement_name": "WAIST",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                        ],
+                                        "name": "XL",
+                                    },
+                                    {
+                                        "comment": "Fits a "
+                                        "5'8 feet "
+                                        "tall "
+                                        "woman",
+                                        "measurement": [
+                                            {
+                                                "id": 1,
+                                                "measurement_name": "LENGTH",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                            {
+                                                "id": 2,
+                                                "measurement_name": "WAIST",
+                                                "measurement_unit": "CENTIMETER",
+                                                "measurement_value": 45,
+                                            },
+                                        ],
+                                        "name": "M",
+                                    },
+                                ],
+                                "stock_keeping_unit": 87988,
+                                "weight_in_grams": 344,
+                            },
+                        ],
+                        "returnable": True,
+                        "slug": "bizarre-shirt",
+                    }
+                ],
+            },
+        )
+
 
 class TestProductCategoriesListView(TestCaseBase):
     fixtures = [
