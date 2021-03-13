@@ -49,8 +49,14 @@ class ProductGrandParentCategory(Timestamp):
     category_name = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
 
-    def save(self, *args, **kwargs):
+    def _make_unique_slug(self):
         self.slug = slugify(self.category_name)
+        qs = ProductGrandParentCategory.objects.filter(slug=self.slug)
+        if qs.exists():
+            self.slug = f"{self.slug}-{qs.count()}"
+
+    def save(self, *args, **kwargs):
+        self._make_unique_slug()
         super().save(*args, **kwargs)
 
     class Meta:
@@ -70,8 +76,14 @@ class ProductParentCategory(Timestamp):
     category_name = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
 
-    def save(self, *args, **kwargs):
+    def _make_unique_slug(self):
         self.slug = slugify(self.category_name)
+        qs = ProductParentCategory.objects.filter(slug=self.slug)
+        if qs.exists():
+            self.slug = f"{self.slug}-{qs.count()}"
+
+    def save(self, *args, **kwargs):
+        self._make_unique_slug()
         super().save(*args, **kwargs)
 
     class Meta:
@@ -91,8 +103,14 @@ class ProductChildCategory(Timestamp):
     category_name = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
 
-    def save(self, *args, **kwargs):
+    def _make_unique_slug(self):
         self.slug = slugify(self.category_name)
+        qs = ProductChildCategory.objects.filter(slug=self.slug)
+        if qs.exists():
+            self.slug = f"{self.slug}-{qs.count()}"
+
+    def save(self, *args, **kwargs):
+        self._make_unique_slug()
         super().save(*args, **kwargs)
 
     class Meta:
@@ -106,8 +124,14 @@ class ProductBrand(Timestamp):
     brand_name = models.CharField(max_length=255, null=True, blank=True, unique=True)
     slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
 
-    def save(self, *args, **kwargs):
+    def _make_unique_slug(self):
         self.slug = slugify(self.brand_name)
+        qs = ProductBrand.objects.filter(slug=self.slug)
+        if qs.exists():
+            self.slug = f"{self.slug}-{qs.count()}"
+
+    def save(self, *args, **kwargs):
+        self._make_unique_slug()
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -154,8 +178,14 @@ class Product(Timestamp):
     def __str__(self):
         return self.product_name
 
-    def save(self, *args, **kwargs):
+    def _make_unique_slug(self):
         self.slug = slugify(self.product_name)
+        qs = Product.objects.filter(slug=self.slug)
+        if qs.exists():
+            self.slug = f"{self.slug}-{qs.count()}"
+
+    def save(self, *args, **kwargs):
+        self._make_unique_slug()
         super().save(*args, **kwargs)
 
 
