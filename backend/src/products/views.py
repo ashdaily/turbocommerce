@@ -23,12 +23,19 @@ from .serializers import (
 class ProductListView(ListAPIView, PaginationMixin):
     """
     PATH: /api/products/
+    PATH: /api/products/?slug=
     """
 
     pagination_class = StandardPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Product.objects.all()  # T0DO: send only variant that are published
     serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        slug = self.request.query_params.get("slug", None)
+        if slug is None:
+            # T0DO: send only variant that are published
+            return Product.objects.all()
+        return Product.objects.filter(slug=slug)
 
 
 class ProductDetailsView(APIView):
