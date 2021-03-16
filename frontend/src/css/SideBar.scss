@@ -1,0 +1,13 @@
+.custom-list .dropdown-menu {
+    display: none;
+    top: 0;
+    left: 100%;
+    right: 0;
+    padding: 0;
+    margin: 0;
+}
+.custom-list:hover {
+    .dropdown-menu {
+        display: block;
+    }
+}

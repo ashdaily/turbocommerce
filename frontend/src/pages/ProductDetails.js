@@ -11,7 +11,7 @@ import ProductCarousel from "../components/ProductCarousel";
 
 
 export default () => {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const images = [
     {
@@ -27,15 +27,15 @@ export default () => {
 
   useEffect(() => {
     const loadData = () => {
-      axios.get(`/api/products/${id}/`)
+      axios.get(`/api/products/?slug=${slug}`)
         .then(response => {
           if (response.status === 200) {
-            setData(response.data)
+            setData(response.data.results[0])
           }
         })
     }
     loadData()
-  }, [id])
+  }, [slug])
 
   if (!data) return null;
   if (data.product_variants.length === 0) return null;
@@ -60,7 +60,7 @@ export default () => {
             />
             <Row className="mt-5">
               <Col md={12}>
-                <ProductCarousel productId={id} />
+                <ProductCarousel productId={data.id} />
               </Col>
             </Row>
           </Col>

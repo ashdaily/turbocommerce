@@ -122,10 +122,10 @@ export const CartReducer = (state, action) => {
 			].quantity--;
 			return {
 				...state,
-				...sumItems(state.cartItems),
 				cartItems: [
 					...state.cartItems.filter((item) => item.quantity !== 0),
 				],
+				...sumItems(state.cartItems.filter((item) => item.quantity !== 0)),
 			};
 		case "CHECKOUT":
 			return {
