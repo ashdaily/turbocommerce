@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "sslserver",
+    "drf_yasg",
     # project apps
     "core",
     "products",
