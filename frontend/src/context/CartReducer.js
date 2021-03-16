@@ -83,16 +83,16 @@ export const CartReducer = (state, action) => {
 				...sumItems(
 					state.cartItems.filter(
 						(item) =>
-							item.id !== action.p_id &&
-							item.variant_id !== action.variant_id &&
+							item.id !== action.p_id ||
+							item.variant_id !== action.variant_id ||
 							item.size !== action.size
 					)
 				),
 				cartItems: [
 					...state.cartItems.filter(
 						(item) =>
-							item.id !== action.p_id &&
-							item.variant_id !== action.variant_id &&
+							item.id !== action.p_id ||
+							item.variant_id !== action.variant_id ||
 							item.size !== action.size
 					),
 				],
