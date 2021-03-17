@@ -80,9 +80,9 @@ const ProductDetailsContent = ({ data }) => {
 								<td>Returnable</td>
 								<td>
 									{data.returnable ? (
-										<i className="text-success fa fa-check-circle"></i>
+										'Yes'
 									) : (
-										<i className="text-success fa fa-exclamation-circle"></i>
+										'No'
 									)}
 								</td>
 							</tr>

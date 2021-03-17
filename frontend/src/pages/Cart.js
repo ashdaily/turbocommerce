@@ -4,7 +4,7 @@ import Item from "../components/Item";
 import { ShopContext } from "../context/ShopContext";
 
 export default () => {
-	const { cartItems } = useContext(ShopContext);
+	const { cartItems, total } = useContext(ShopContext);
 
 	console.log(cartItems)
 
@@ -27,6 +27,12 @@ export default () => {
 									<Item key={index} product={product} outOfStock={product.out_of_stock} />
 								))}
 							</tbody>
+							<tfoot>
+								<tr>
+									<th colSpan="2">Total</th>
+									<th>{total}</th>
+								</tr>
+							</tfoot>
 						</Table>
 					</div>
 				</Col>

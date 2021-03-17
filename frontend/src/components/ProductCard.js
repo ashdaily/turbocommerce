@@ -1,11 +1,12 @@
 import React from "react";
 import { Card } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 export default (props) => {
+	const { grandParentCategory, parentCategory, childCategory } = useParams();
     return(
-        <Link to={`/${props.data.id}`} className="anchor-silent">
+        <Link to={`/${grandParentCategory}/${parentCategory}/${childCategory}/${props.data.slug}`} className="anchor-silent">
             <Card className="mt-3 product-card">
                 <Card.Img variant="top" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
                 <Card.Body>
