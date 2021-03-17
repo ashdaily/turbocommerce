@@ -4,9 +4,9 @@ import { Link, useParams } from "react-router-dom";
 
 
 export default (props) => {
-	const { grandParentCat, parentCat, cat } = useParams();
+	const { grandParentCategory, parentCategory, category } = useParams();
     return(
-        <Link to={`/${grandParentCat}/${parentCat}/${cat}/${props.data.slug}`} className="anchor-silent">
+        <Link to={`/${grandParentCategory}/${parentCategory}/${category}/${props.data.slug}`} className="anchor-silent">
             <Card className="mt-3 product-card">
                 <Card.Img variant="top" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
                 <Card.Body>

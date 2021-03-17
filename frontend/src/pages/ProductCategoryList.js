@@ -8,8 +8,8 @@ import { useParams } from "react-router-dom";
 
 
 export default ()=>{
-	const { cat } = useParams();
-    const [data, setData] = useState(null);
+	const { category } = useParams();
+    const [productData, setProductData] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
     useEffect(()=> {
@@ -18,23 +18,23 @@ export default ()=>{
             .then(response => {
                 if(response.status === 200){
                     let productData = response.data
-                    productData.results = productData.results.filter((product) => product.child_category.slug === cat)
-                    setData(productData)
+                    productData.results = productData.results.filter((product) => product.child_category.slug === category)
+                    setProductData(productData)
                 }
             })
         }
         loadData()
-    }, [cat, pageNumber]);
+    }, [category, pageNumber]);
 
     let paginate;
-    if(data){
+    if(productData){
         paginate = (
             <Paginate
                 size="sm"
                 className="mt-3"
-                hasNext={data.next ? true : false}
-                hasPrevious={data.previous ? true : false}
-                numPages={data.count}
+                hasNext={productData.next ? true : false}
+                hasPrevious={productData.previous ? true : false}
+                numPages={productData.count}
                 pageNumber={pageNumber}
                 setPageNumber={(value) => setPageNumber(value)}
             />
@@ -42,8 +42,8 @@ export default ()=>{
     }
 
     let products;
-    if(data){
-        products = data.results.map(
+    if(productData){
+        products = productData.results.map(
             (product, index) => 
                 product.product_variants.length > 0 && 
                     (<Col md={4}><ProductCard key={index} data={product}/></Col>)

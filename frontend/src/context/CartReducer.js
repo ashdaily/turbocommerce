@@ -83,16 +83,16 @@ export const CartReducer = (state, action) => {
 				...sumItems(
 					state.cartItems.filter(
 						(item) =>
-							item.id !== action.p_id ||
-							item.variant_id !== action.variant_id ||
+							item.id !== action.productId ||
+							item.variant_id !== action.variantId ||
 							item.size !== action.size
 					)
 				),
 				cartItems: [
 					...state.cartItems.filter(
 						(item) =>
-							item.id !== action.p_id ||
-							item.variant_id !== action.variant_id ||
+							item.id !== action.productId ||
+							item.variant_id !== action.variantId ||
 							item.size !== action.size
 					),
 				],
@@ -101,8 +101,8 @@ export const CartReducer = (state, action) => {
 			state.cartItems[
 				state.cartItems.findIndex(
 					(item) =>
-						item.id === action.p_id &&
-						item.variant_id === action.variant_id &&
+						item.id === action.productId &&
+						item.variant_id === action.variantId &&
 						item.size === action.size
 				)
 			].quantity++;
@@ -115,8 +115,8 @@ export const CartReducer = (state, action) => {
 			state.cartItems[
 				state.cartItems.findIndex(
 					(item) =>
-						item.id === action.p_id &&
-						item.variant_id === action.variant_id &&
+						item.id === action.productId &&
+						item.variant_id === action.variantId &&
 						item.size === action.size
 				)
 			].quantity--;

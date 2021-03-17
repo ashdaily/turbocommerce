@@ -13,8 +13,6 @@ import Signup from "./pages/Signup";
 import Pay from "./pages/Pay";
 import SideBar from "./components/SideBar";
 import ProductList from "./pages/ProductList";
-// import CategoryList from "./pages/CategoryList";
-// import ChildCategoryList from "./pages/ChildCategoryList";
 import ProductCategoryList from "./pages/ProductCategoryList";
 import ProductDetails from "./pages/ProductDetails";
 import "./App.scss";
@@ -40,12 +38,10 @@ function App() {
 								path="/cart"
 								component={Cart}
 							/>
-							{/* <Route exact path="/:grandParentCat" component={CategoryList} />
-							<Route exact path="/:grandParentCat/:parentCat" component={ChildCategoryList} /> */}
-							<Route exact path="/:grandParentCat/:parentCat/:cat" component={ProductCategoryList} />
+							<Route exact path="/:grandParentCategory/:parentCategory/:category" component={ProductCategoryList} />
 							<Route
 								exact
-								path="/:grandParentCat/:parentCat/:cat/:slug"
+								path="/:grandParentCategory/:parentCategory/:category/:slug"
 								component={ProductDetails}
 							/>
 						</Switch>

@@ -29,20 +29,20 @@ export default () => {
 				className="dropdown custom-list"
 			>
 				{category.category_name}
-				{category.product_parent_categories.map((parentCat, i) => (
+				{category.product_parent_categories.map((parentCategory, i) => (
 					<ListGroup as="ul" key={i} className="dropdown-menu">
 						<ListGroup.Item as="li">
-							{parentCat.category_name}
+							{parentCategory.category_name}
 						</ListGroup.Item>
-						{parentCat.product_child_categories.map(
-							(childCategoey, cKey) => (
+						{parentCategory.product_child_categories.map(
+							(childCategoey, index) => (
 								<ListGroup.Item
 									action
 									as="li"
                   style={{ cursor: "pointer" }}
-									key={cKey}
+									key={index}
 									onClick={() => {
-										history.push(`/${category.slug}/${parentCat.slug}/${childCategoey.slug}`);
+										history.push(`/${category.slug}/${parentCategory.slug}/${childCategoey.slug}`);
 									}}
 								>
 									{childCategoey.category_name}
