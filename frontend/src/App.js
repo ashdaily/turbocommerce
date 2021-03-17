@@ -38,10 +38,10 @@ function App() {
 								path="/cart"
 								component={Cart}
 							/>
-							<Route exact path="/:grandParentCategory/:parentCategory/:category" component={ProductCategoryList} />
+							<Route exact path="/:grandParentCategory/:parentCategory/:childCategory" component={ProductCategoryList} />
 							<Route
 								exact
-								path="/:grandParentCategory/:parentCategory/:category/:slug"
+								path="/:grandParentCategory/:parentCategory/:childCategory/:slug"
 								component={ProductDetails}
 							/>
 						</Switch>

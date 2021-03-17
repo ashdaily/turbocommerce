@@ -35,17 +35,17 @@ export default () => {
 							{parentCategory.category_name}
 						</ListGroup.Item>
 						{parentCategory.product_child_categories.map(
-							(childCategoey, index) => (
+							(childCategory, index) => (
 								<ListGroup.Item
 									action
 									as="li"
                   style={{ cursor: "pointer" }}
 									key={index}
 									onClick={() => {
-										history.push(`/${category.slug}/${parentCategory.slug}/${childCategoey.slug}`);
+										history.push(`/${category.slug}/${parentCategory.slug}/${childCategory.slug}`);
 									}}
 								>
-									{childCategoey.category_name}
+									{childCategory.category_name}
 								</ListGroup.Item>
 							)
 						)}

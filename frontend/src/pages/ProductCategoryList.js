@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 
 export default ()=>{
-	const { category } = useParams();
+	const { childCategory } = useParams();
     const [productData, setProductData] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -18,13 +18,13 @@ export default ()=>{
             .then(response => {
                 if(response.status === 200){
                     let productData = response.data
-                    productData.results = productData.results.filter((product) => product.child_category.slug === category)
+                    productData.results = productData.results.filter((product) => product.child_category.slug === childCategory)
                     setProductData(productData)
                 }
             })
         }
         loadData()
-    }, [category, pageNumber]);
+    }, [childCategory, pageNumber]);
 
     let paginate;
     if(productData){
