@@ -14,7 +14,7 @@ export default (props) => {
                         {props.data.product_name}
                     </Card.Text>
                     <Card.Text className="product-price">
-                        <span>Rs.</span> {props.data.unit_price}
+                        <span>Rs.</span> {props.data.product_variants[0].price}
                     </Card.Text>
                 </Card.Body>
             </Card>
