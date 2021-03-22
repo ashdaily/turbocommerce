@@ -6,8 +6,6 @@ import { ShopContext } from "../context/ShopContext";
 export default () => {
 	const { cartItems, total } = useContext(ShopContext);
 
-	console.log(cartItems)
-
 	if (cartItems.length > 0) {
 		return (
 			<Row className="product-details-content">
