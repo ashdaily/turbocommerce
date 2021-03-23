@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "core",
     "products",
     "shipping",
+    "store",
 ]
 
 MIDDLEWARE = [
