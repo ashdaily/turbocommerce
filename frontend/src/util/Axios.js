@@ -7,10 +7,10 @@ axios.defaults.headers = setHeaders()
 
 axios.interceptors.response.use(response => {
     if(response.status !== 401) return response;
-    axios.post('/auth/token/refresh/', {
-        "refresh_token": refreshToken,
+    axios.post('/api/core/auth/token/refresh/', {
+        "refresh": refreshToken,
     }).then(response => {
-        saveTokens(response.data["access_token"], response.data["refresh_token"]);
+        saveTokens(response.data.access, refreshToken);
         axios.defaults.headers = setHeaders()
         window.location.reload()
     }).catch(error => {
@@ -23,7 +23,6 @@ axios.interceptors.response.use(response => {
         axios.post('/api/core/auth/token/refresh/', {
             "refresh": refreshToken,
         }).then(response => {
-            console.log(response)
             saveTokens(response.data.access, refreshToken);
             axios.defaults.headers = setHeaders()
             window.location.reload()
