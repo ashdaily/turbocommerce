@@ -15,7 +15,7 @@ class Store(models.Model):
         related_query_name="store_owner",
     )
     store_name = models.CharField(max_length=50, unique=True)
-    store_logo = models.ImageField(upload_to=path_for_store_logo)
+    store_logo = models.ImageField(upload_to=path_for_store_logo, null=True, blank=True)
     store_host_url = models.URLField(max_length=255, unique=True)
 
     def __str__(self):
