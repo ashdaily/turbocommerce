@@ -24,6 +24,7 @@ class UserSerializer(ModelSerializer):
         return user
 
     def validate_username(self, username):
+        username = username.strip().lower()
         try:
             validate_email(username)
         except ValidationError:
