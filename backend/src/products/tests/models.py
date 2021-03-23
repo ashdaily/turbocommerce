@@ -8,6 +8,7 @@ from products.models import (
     ProductBrand,
     Product,
 )
+from store.models import Store
 from utils.tests import TestCaseBase
 
 
@@ -78,12 +79,17 @@ class TestProduct(TestCaseBase):
 
         brand = ProductBrand.objects.create(brand_name="brand")
 
-        user = User.objects.create(
+        store_owner = User.objects.create(
             username="ash", password="ash", user_type=User.CUSTOMER
+        )
+        store = Store.objects.create(
+            store_owner=store_owner,
+            store_name="mystore",
+            store_host_url="http://mystore.turbocommerce.com",
         )
 
         product_1 = Product.objects.create(
-            user=user,
+            store=store,
             child_category=child_category,
             brand=brand,
             product_name="abc",
@@ -92,7 +98,7 @@ class TestProduct(TestCaseBase):
             country_of_origin="Morrocco",
         )
         product_2 = Product.objects.create(
-            user=user,
+            store=store,
             child_category=child_category,
             brand=brand,
             product_name="abc",
