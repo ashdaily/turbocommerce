@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-social-login": "^3.4.13"
+  }
+}
