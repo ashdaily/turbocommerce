@@ -19,5 +19,7 @@ before_install:
   - echo "docker-compose ready..."
 
 script:
+  - echo "building backend..."
   - docker-compose build backend
+  - echo "build ready !!"
   - docker-compose run backend python backend/src/manage.py test
