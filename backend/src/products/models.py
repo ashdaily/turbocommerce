@@ -194,6 +194,10 @@ class Product(Timestamp):
         self._make_unique_slug()
         super().save(*args, **kwargs)
 
+    @property
+    def grand_parent_category(self):
+        return self.child_category.parent_category.grand_parent_category
+
 
 class ProductVariant(Timestamp):
     product = models.ForeignKey(
