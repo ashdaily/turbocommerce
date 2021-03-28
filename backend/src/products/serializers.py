@@ -87,6 +87,7 @@ class ProductVariantSerializer(ModelSerializer):
             "weight_in_grams",
             "color",
             "images",
+            "quantity",
             "product_variant_specifications",
             "in_stock",
         ]
