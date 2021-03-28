@@ -57,6 +57,7 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#FFFFFF",
                                 "discount": 10,
+                                "quantity": 5000,
                                 "id": 1,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
@@ -92,6 +93,7 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#000000",
                                 "discount": 1,
+                                "quantity": 5000,
                                 "id": 2,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
@@ -233,6 +235,7 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#FFFFFF",
                                 "discount": 10,
+                                "quantity": 5000,
                                 "id": 1,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
@@ -268,6 +271,7 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#000000",
                                 "discount": 1,
+                                "quantity": 5000,
                                 "id": 2,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
