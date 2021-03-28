@@ -157,7 +157,7 @@
         "fields": {
             "product": 1,
             "stock_keeping_unit" : 87987,
-            "sizes_available" : [1,2],
+            "size" : 1,
             "discount" : 10,
             "published" : true,
             "price": 500,
@@ -173,7 +173,7 @@
         "fields": {
             "product": 1,
             "stock_keeping_unit" : 87988,
-            "sizes_available" : [1,2],
+            "size" : 2,
             "discount" : 1,
             "published" : true,
             "price": 5000,

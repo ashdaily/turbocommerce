@@ -19,7 +19,7 @@ environ.Env.read_env(os.path.join(BASE_DIR_PARENT, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
@@ -149,3 +149,19 @@ CORS_ALLOWED_ORIGINS = [env("REACT_APP_URL")]
 # Auth custom user
 # (https://docs.djangoproject.com/en/3.1/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project)
 AUTH_USER_MODEL = "core.User"
+
+
+# Media files storage settings
+if DEBUG:
+    MEDIA_FOLDER_PATH = "/media"
+    MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_FOLDER_PATH)
+    MEDIA_URL = "/media/"
+    pass
+else:
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_STORAGE_BUCKET_NAME = env("PROJECT_NAME")
+    AWS_S3_REGION_NAME = env("AWS_S3_REGION_NAME")
+
+# AWS Keys and config
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")

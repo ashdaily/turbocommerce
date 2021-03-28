@@ -1,3 +1,4 @@
+import environ
 from django.contrib import admin
 from django.urls import path, include, re_path
 from drf_yasg import openapi
@@ -5,9 +6,10 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
 
+env = environ.Env()
 swagger_view = get_schema_view(
     openapi.Info(
-        title="Turbocommerce API",
+        title=env("PROJECT_NAME"),
         default_version="v1",
         description="Test description",
         terms_of_service="https://www.google.com/policies/terms/",

@@ -73,14 +73,14 @@ class ProductVariantSerializer(ModelSerializer):
     images = serializers.ListField()
     product_variant_specifications = ProductVariantSpecificationSerializer(many=True)
     in_stock = serializers.BooleanField()
-    sizes_available = ProductSizeSerializer(many=True)
+    size = ProductSizeSerializer()
 
     class Meta:
         model = ProductVariant
         fields = [
             "id",
             "stock_keeping_unit",
-            "sizes_available",
+            "size",
             "discount",
             "published",
             "price",
