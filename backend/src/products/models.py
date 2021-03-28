@@ -218,6 +218,13 @@ class ProductVariant(Timestamp):
         return f"{self.product.product_name} {self.id}"
 
     @property
+    def quantity(self):
+        total_quantity = 0
+        for inventory in self.product_variant_inventories.all():
+            total_quantity += inventory.quantity
+        return total_quantity
+
+    @property
     def in_stock(self):
         for inventory in self.product_variant_inventories.all():
             if inventory.quantity > 0:
