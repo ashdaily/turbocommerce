@@ -1,0 +1,23 @@
+os: linux
+dist: xenial
+
+python:
+  - 3.9
+
+git:
+  depth: 50
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.4.2
+
+before_install:
+  - echo "setting up docker-compose..."
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - echo "docker-compose ready..."
+
+script:
+  - docker-compose build backend
+  - docker-compose run backend python backend/src/manage.py test
