@@ -1,11 +1,10 @@
-from pprint import pprint
-
 from django.conf import settings
 from django.urls import reverse
 
 from products.models import Product
 from products.views import ProductListView
 from utils.tests import TestCaseBase
+from utils.print import pprint
 
 
 page_size = settings.REST_FRAMEWORK_PAGE_SIZE
@@ -19,10 +18,11 @@ class TestProductListView(TestCaseBase):
 
     def test_should_get_products_list(self):
         r = self.client.get(self.url)
-
         self.assertEqual(r.status_code, 200)
+
+        payload = self.deserialize(r)
         self.assertEqual(
-            self.deserialize(r),
+            payload,
             {
                 "count": 1,
                 "next": None,
@@ -30,10 +30,24 @@ class TestProductListView(TestCaseBase):
                 "results": [
                     {
                         "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
-                        "child_category": {
-                            "category_name": "Pants",
+                        "grand_parent_category": {
+                            "category_name": "Women",
                             "id": 1,
-                            "slug": "pants",
+                            "product_parent_categories": [
+                                {
+                                    "category_name": "Formal",
+                                    "id": 1,
+                                    "product_child_categories": [
+                                        {
+                                            "category_name": "Pants",
+                                            "id": 1,
+                                            "slug": "pants",
+                                        }
+                                    ],
+                                    "slug": "formal",
+                                }
+                            ],
+                            "slug": "women",
                         },
                         "country_of_origin": "Japan",
                         "id": 1,
@@ -192,10 +206,24 @@ class TestProductListView(TestCaseBase):
                 "results": [
                     {
                         "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
-                        "child_category": {
-                            "category_name": "Pants",
+                        "grand_parent_category": {
+                            "category_name": "Women",
                             "id": 1,
-                            "slug": "pants",
+                            "product_parent_categories": [
+                                {
+                                    "category_name": "Formal",
+                                    "id": 1,
+                                    "product_child_categories": [
+                                        {
+                                            "category_name": "Pants",
+                                            "id": 1,
+                                            "slug": "pants",
+                                        }
+                                    ],
+                                    "slug": "formal",
+                                }
+                            ],
+                            "slug": "women",
                         },
                         "country_of_origin": "Japan",
                         "id": 1,

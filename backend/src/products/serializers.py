@@ -95,14 +95,14 @@ class ProductVariantSerializer(ModelSerializer):
 
 class ProductSerializer(ModelSerializer):
     brand = ProductBrandSerializer()
-    child_category = ProductChildCategorySerializer()
+    grand_parent_category = ProductGrandParentCategorySerializer()
     product_variants = ProductVariantSerializer(many=True)
 
     class Meta:
         model = Product
         fields = [
             "id",
-            "child_category",
+            "grand_parent_category",
             "brand",
             "product_name",
             "product_description",
