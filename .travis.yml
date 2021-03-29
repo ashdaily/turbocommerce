@@ -17,5 +17,6 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
+  - docker-compose run -d db
   - docker-compose build backend
   - docker-compose run backend python backend/src/manage.py test
