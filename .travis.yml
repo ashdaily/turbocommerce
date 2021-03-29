@@ -1,8 +1,8 @@
 os: linux
 dist: xenial
-language: python
-python:
-  - "3.9"
+# language: python
+# python:
+#   - "3.9"
 
 git:
   depth: 50
