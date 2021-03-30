@@ -1,0 +1,19 @@
+.gmail-btn {
+    &:hover {
+        background: #eee;
+        color: #000;
+        border: 1px solid #eee;
+    }
+    img {
+        width: 13pt;
+    }
+    color: #000;
+    border: 1px solid #eee;
+    background: #fff;
+}
+
+.facebook-btn {
+    .fa {
+        font-size: 14pt;
+    }
+}
