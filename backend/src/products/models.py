@@ -169,17 +169,17 @@ class ProductModelManager(models.Manager):
         queryset = Product.objects.all()
 
         if grand_parent_category_slug:
-            queryset = self.filter(
+            queryset = queryset.filter(
                 child_category__parent_category__grand_parent_category__slug=grand_parent_category_slug
             )
 
         if parent_category_slug:
-            queryset = self.filter(
+            queryset = queryset.filter(
                 child_category__parent_category__slug=parent_category_slug
             )
 
         if child_category_slug:
-            queryset = self.filter(child_category__id=child_category_slug)
+            queryset = queryset.filter(child_category__id=child_category_slug)
 
         return queryset
 
