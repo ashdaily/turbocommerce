@@ -7,6 +7,11 @@ urlpatterns = [
     # products
     path("", views.ProductListView.as_view(), name="products"),
     path("in-ids/", views.ProductsByIdsListView.as_view(), name="products-in-ids"),
+    path(
+        "by-category/",
+        views.ProductByCategoryListView.as_view(),
+        name="products-by-category",
+    ),
     path("<int:pk>/", views.ProductDetailsView.as_view(), name="product-details"),
     path(
         "product-suggestion/<int:product_id>/",

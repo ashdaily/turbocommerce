@@ -163,6 +163,26 @@ class ProductModelManager(models.Manager):
                 id=reference_product.id
             )
 
+    def get_product_by_category(
+        self, grand_parent_category_id, parent_category_id, child_category_id
+    ):
+        queryset = Product.objects.all()
+
+        if grand_parent_category_id:
+            queryset = self.filter(
+                child_category__parent_category__grand_parent_category__id=grand_parent_category_id
+            )
+
+        if parent_category_id:
+            queryset = self.filter(
+                child_category__parent_category__id=parent_category_id
+            )
+
+        if child_category_id:
+            queryset = self.filter(child_category__id=child_category_id)
+
+        return queryset
+
 
 class Product(Timestamp):
     store = models.ForeignKey(
