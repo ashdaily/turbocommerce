@@ -13,11 +13,11 @@ from .models import (
     ProductChildCategory,
     ProductVariant,
 )
-from .serializers import (
+from products.serializers.product import (
     ProductSerializer,
-    ProductGrandParentCategorySerializer,
     ProductChildCategorySerializer,
 )
+from products.serializers.category import ProductGrandParentCategorySerializer
 
 
 class ProductListView(ListAPIView, PaginationMixin):

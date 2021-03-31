@@ -30,24 +30,20 @@ class TestProductListView(TestCaseBase):
                 "results": [
                     {
                         "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
-                        "grand_parent_category": {
-                            "category_name": "Women",
+                        "child_category": {
+                            "category_name": "Pants",
                             "id": 1,
-                            "product_parent_categories": [
-                                {
-                                    "category_name": "Formal",
+                            "parent_category": {
+                                "category_name": "Formal",
+                                "grand_parent_category": {
+                                    "category_name": "Women",
                                     "id": 1,
-                                    "product_child_categories": [
-                                        {
-                                            "category_name": "Pants",
-                                            "id": 1,
-                                            "slug": "pants",
-                                        }
-                                    ],
-                                    "slug": "formal",
-                                }
-                            ],
-                            "slug": "women",
+                                    "slug": "women",
+                                },
+                                "id": 1,
+                                "slug": "formal",
+                            },
+                            "slug": "pants",
                         },
                         "country_of_origin": "Japan",
                         "id": 1,
@@ -57,7 +53,6 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#FFFFFF",
                                 "discount": 10,
-                                "quantity": 5000,
                                 "id": 1,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
@@ -69,6 +64,7 @@ class TestProductListView(TestCaseBase):
                                     }
                                 ],
                                 "published": True,
+                                "quantity": 5000,
                                 "size": {
                                     "comment": "Fits a 6 feet tall woman",
                                     "measurement": [
@@ -93,7 +89,6 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#000000",
                                 "discount": 1,
-                                "quantity": 5000,
                                 "id": 2,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
@@ -105,6 +100,7 @@ class TestProductListView(TestCaseBase):
                                     }
                                 ],
                                 "published": True,
+                                "quantity": 5000,
                                 "size": {
                                     "comment": "Fits a 5'8 feet tall woman",
                                     "measurement": [
@@ -208,24 +204,20 @@ class TestProductListView(TestCaseBase):
                 "results": [
                     {
                         "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
-                        "grand_parent_category": {
-                            "category_name": "Women",
+                        "child_category": {
+                            "category_name": "Pants",
                             "id": 1,
-                            "product_parent_categories": [
-                                {
-                                    "category_name": "Formal",
+                            "parent_category": {
+                                "category_name": "Formal",
+                                "grand_parent_category": {
+                                    "category_name": "Women",
                                     "id": 1,
-                                    "product_child_categories": [
-                                        {
-                                            "category_name": "Pants",
-                                            "id": 1,
-                                            "slug": "pants",
-                                        }
-                                    ],
-                                    "slug": "formal",
-                                }
-                            ],
-                            "slug": "women",
+                                    "slug": "women",
+                                },
+                                "id": 1,
+                                "slug": "formal",
+                            },
+                            "slug": "pants",
                         },
                         "country_of_origin": "Japan",
                         "id": 1,
@@ -235,7 +227,6 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#FFFFFF",
                                 "discount": 10,
-                                "quantity": 5000,
                                 "id": 1,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
@@ -247,6 +238,7 @@ class TestProductListView(TestCaseBase):
                                     }
                                 ],
                                 "published": True,
+                                "quantity": 5000,
                                 "size": {
                                     "comment": "Fits a 6 feet tall woman",
                                     "measurement": [
@@ -271,7 +263,6 @@ class TestProductListView(TestCaseBase):
                             {
                                 "color": "#000000",
                                 "discount": 1,
-                                "quantity": 5000,
                                 "id": 2,
                                 "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
@@ -283,6 +274,7 @@ class TestProductListView(TestCaseBase):
                                     }
                                 ],
                                 "published": True,
+                                "quantity": 5000,
                                 "size": {
                                     "comment": "Fits a 5'8 feet tall woman",
                                     "measurement": [
