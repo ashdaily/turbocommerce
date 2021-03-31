@@ -111,7 +111,7 @@ class ProductCategoriesListView(APIView):
 
 class ProductByCategoryListView(ListAPIView, PaginationMixin):
     """
-    PATH: /api/products/by-category/?grand_parent_category_id=&parent_category_id=&child_category_id=/
+    PATH: /api/products/by-category/?grand_parent_category_slug=&parent_category_slug=&child_category_slug=/
     """
 
     pagination_class = StandardPagination
@@ -119,14 +119,16 @@ class ProductByCategoryListView(ListAPIView, PaginationMixin):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        grand_parent_category_id = self.request.query_params.get(
-            "grand_parent_category_id", None
+        grand_parent_category_slug = self.request.query_params.get(
+            "grand_parent_category_slug", None
         )
-        parent_category_id = self.request.query_params.get("parent_category_id", None)
-        child_category_id = self.request.query_params.get("child_category_id", None)
+        parent_category_slug = self.request.query_params.get(
+            "parent_category_slug", None
+        )
+        child_category_slug = self.request.query_params.get("child_category_slug", None)
 
         queryset = Product.objects.get_product_by_category(
-            grand_parent_category_id, parent_category_id, child_category_id
+            grand_parent_category_slug, parent_category_slug, child_category_slug
         )
 
         return queryset

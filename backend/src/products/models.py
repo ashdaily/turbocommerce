@@ -164,22 +164,22 @@ class ProductModelManager(models.Manager):
             )
 
     def get_product_by_category(
-        self, grand_parent_category_id, parent_category_id, child_category_id
+        self, grand_parent_category_slug, parent_category_slug, child_category_slug
     ):
         queryset = Product.objects.all()
 
-        if grand_parent_category_id:
+        if grand_parent_category_slug:
             queryset = self.filter(
-                child_category__parent_category__grand_parent_category__id=grand_parent_category_id
+                child_category__parent_category__grand_parent_category__slug=grand_parent_category_slug
             )
 
-        if parent_category_id:
+        if parent_category_slug:
             queryset = self.filter(
-                child_category__parent_category__id=parent_category_id
+                child_category__parent_category__slug=parent_category_slug
             )
 
-        if child_category_id:
-            queryset = self.filter(child_category__id=child_category_id)
+        if child_category_slug:
+            queryset = self.filter(child_category__id=child_category_slug)
 
         return queryset
 
