@@ -179,7 +179,7 @@ class ProductModelManager(models.Manager):
             )
 
         if child_category_slug:
-            queryset = queryset.filter(child_category__id=child_category_slug)
+            queryset = queryset.filter(child_category__slug=child_category_slug)
 
         return queryset
 
