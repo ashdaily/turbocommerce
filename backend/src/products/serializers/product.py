@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
-from .models import (
+from rest_framework.serializers import ModelSerializer
+
+from products.models import (
     Product,
     ProductBrand,
     ProductGrandParentCategory,
@@ -15,26 +16,26 @@ from .models import (
 )
 
 
-class ProductChildCategorySerializer(ModelSerializer):
+class ProductGrandParentCategorySerializer(ModelSerializer):
     class Meta:
-        model = ProductChildCategory
+        model = ProductGrandParentCategory
         fields = ["id", "category_name", "slug"]
 
 
 class ProductParentCategorySerializer(ModelSerializer):
-    product_child_categories = ProductChildCategorySerializer(many=True)
+    grand_parent_category = ProductGrandParentCategorySerializer()
 
     class Meta:
         model = ProductParentCategory
-        fields = ["id", "category_name", "slug", "product_child_categories"]
+        fields = ["id", "category_name", "slug", "grand_parent_category"]
 
 
-class ProductGrandParentCategorySerializer(ModelSerializer):
-    product_parent_categories = ProductParentCategorySerializer(many=True)
+class ProductChildCategorySerializer(ModelSerializer):
+    parent_category = ProductParentCategorySerializer()
 
     class Meta:
-        model = ProductGrandParentCategory
-        fields = ["id", "category_name", "slug", "product_parent_categories"]
+        model = ProductChildCategory
+        fields = ["id", "category_name", "slug", "parent_category"]
 
 
 class ProductBrandSerializer(ModelSerializer):
@@ -96,14 +97,14 @@ class ProductVariantSerializer(ModelSerializer):
 
 class ProductSerializer(ModelSerializer):
     brand = ProductBrandSerializer()
-    grand_parent_category = ProductGrandParentCategorySerializer()
+    child_category = ProductChildCategorySerializer()
     product_variants = ProductVariantSerializer(many=True)
 
     class Meta:
         model = Product
         fields = [
             "id",
-            "grand_parent_category",
+            "child_category",
             "brand",
             "product_name",
             "product_description",
