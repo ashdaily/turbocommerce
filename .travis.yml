@@ -29,7 +29,7 @@ env:
 before_install:
   - chmod +x $HOME
   - chown -R travis $HOME
-  - ./travis/make_env_file.sh
+  - bash ./travis/make_env_file.sh
   - docker-compose run -d db
   - docker-compose build backend
 
