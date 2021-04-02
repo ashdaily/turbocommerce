@@ -27,8 +27,8 @@ env:
     - POSTGRES_PORT: 5432
 
 before_install:
-  - pwd
-  - ls
+  - printenv HOME
+  - chmod +x travis
   - ./travis/make_env_file.sh
   - docker-compose run -d db
   - docker-compose build backend
