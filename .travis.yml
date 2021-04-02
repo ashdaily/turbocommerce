@@ -1,8 +1,10 @@
 os: linux
 dist: xenial
-# language: python
-# python:
-#   - "3.9"
+language: python
+python:
+  - "3.9"
+services:
+  - docker
 
 git:
   depth: 50
@@ -10,13 +12,13 @@ git:
 env:
   - DOCKER_COMPOSE_VERSION=1.4.2
 
-# before_install:
-#   - sudo rm /usr/local/bin/docker-compose
-#   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-#   - chmod +x docker-compose
-#   - sudo mv docker-compose /usr/local/bin
-
-script:
+before_install:
+  # - sudo rm /usr/local/bin/docker-compose
+  # - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  # - chmod +x docker-compose
+  # - sudo mv docker-compose /usr/local/bin
   - docker-compose run -d db
   - docker-compose build backend
+
+script:
   - docker-compose run backend python backend/src/manage.py test
