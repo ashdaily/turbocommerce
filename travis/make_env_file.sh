@@ -17,3 +17,5 @@ echo "POSTGRES_USER=${POSTGRES_USER}\n" >> .env
 echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}\n" >> .env
 echo "POSTGRES_HOST=${POSTGRES_HOST}\n" >> .env
 echo "POSTGRES_PORT=${POSTGRES_PORT}\n" >> .env
+
+cd ..
