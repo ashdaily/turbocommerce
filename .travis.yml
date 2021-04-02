@@ -26,11 +26,11 @@ env:
     - POSTGRES_HOST: "db"
     - POSTGRES_PORT: 5432
 
+install: ./travis/make_env_file.sh
+
 before_install:
   - docker-compose run -d db
   - docker-compose build backend
-
-install: ./travis/make_env.sh
 
 script:
   - docker-compose run backend python backend/src/manage.py test
