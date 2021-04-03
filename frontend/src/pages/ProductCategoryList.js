@@ -8,23 +8,22 @@ import { useParams } from "react-router-dom";
 
 
 export default ()=>{
-	const { childCategory } = useParams();
+	const { grandParentCategory, parentCategory, childCategory } = useParams();
     const [productData, setProductData] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
     useEffect(()=> {
         const loadData = () => {
-            axios.get(`/api/products/?page=${pageNumber}`)
+            axios.get(`/api/products/by-category/?grand_parent_category_slug=${grandParentCategory}&parent_category_slug=${parentCategory}&child_category_slug=${childCategory}&page=${pageNumber}`)
             .then(response => {
                 if(response.status === 200){
                     let productData = response.data
-                    productData.results = productData.results.filter((product) => product.child_category.slug === childCategory)
                     setProductData(productData)
                 }
             })
         }
         loadData()
-    }, [childCategory, pageNumber]);
+    }, [childCategory, grandParentCategory, parentCategory, pageNumber]);
 
     let paginate;
     if(productData){

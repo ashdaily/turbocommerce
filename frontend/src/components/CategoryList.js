@@ -29,10 +29,11 @@ export default () => {
 				className="dropdown custom-list"
 			>
 				{category.category_name}
+					<ListGroup as="ul" className="dropdown-menu">
 				{category.product_parent_categories.map((parentCategory, i) => (
-					<ListGroup as="ul" key={i} className="dropdown-menu">
+					<>
 						<ListGroup.Item as="li">
-							{parentCategory.category_name}
+							<h6>{parentCategory.category_name}</h6>
 						</ListGroup.Item>
 						{parentCategory.product_child_categories.map(
 							(childCategory, index) => (
@@ -49,8 +50,9 @@ export default () => {
 								</ListGroup.Item>
 							)
 						)}
-					</ListGroup>
+					</>
 				))}
+				</ListGroup>
 			</ListGroup.Item>
 		));
 	}

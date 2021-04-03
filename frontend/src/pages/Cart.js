@@ -10,7 +10,7 @@ export default () => {
 		return (
 			<Row className="product-details-content">
 				<Col>
-					<div className="table-responsive">
+					<div className="table-responsive cart-table">
 						<Table size="lg">
 							<thead>
 								<tr>

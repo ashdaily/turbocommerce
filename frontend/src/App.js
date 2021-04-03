@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import Wishlist from "./pages/Wishlist";
 import Signup from "./pages/Signup";
 import Pay from "./pages/Pay";
 import SideBar from "./components/SideBar";
@@ -37,6 +38,11 @@ function App() {
 								exact
 								path="/cart"
 								component={Cart}
+							/>
+							<Route
+								exact
+								path="/wishlist"
+								component={Wishlist}
 							/>
 							<Route exact path="/:grandParentCategory/:parentCategory/:childCategory" component={ProductCategoryList} />
 							<Route

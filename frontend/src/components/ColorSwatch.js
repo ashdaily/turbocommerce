@@ -2,8 +2,8 @@ import React from "react";
 
 const ColorSwatch = (props) => {
 
-    const SwatchProduct = (index) => {
-        props.onClick(index)
+    const SwatchColor = (color) => {
+        props.onClick(color)
     }
 
 	return (
@@ -17,11 +17,11 @@ const ColorSwatch = (props) => {
 						marginBottom: "10px",
 					}}
 				>
-					{props.variants.map(({ color, id }, index) => (
+					{props.colors.map(({ color, id }, index) => (
 						<li
-							className={props.active === index ? 'active mr-2' : 'mr-2'}
+							className={props.active === color ? 'active mr-2' : 'mr-2'}
 							variant="outline-primary"
-							key={id}
+							key={index}
 							size="sm"
 							style={{
 								background: color,
@@ -36,7 +36,7 @@ const ColorSwatch = (props) => {
 								verticalAlign: "middle",
 							}}
 							onClick={() =>
-								SwatchProduct(index)
+								SwatchColor(color)
 							}
 						></li>
 					))}

@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import { CartReducer, sumItems } from "./CartReducer";
+import { WishlistReducer, sumWishlistItems } from "./WishListReducer";
 
 export const ShopContext = createContext();
 
@@ -12,23 +13,33 @@ const initialState = {
 	checkout: false,
 };
 
+const wishlistStorage = localStorage.getItem("wishlistItems")
+	? JSON.parse(localStorage.getItem("wishlistItems"))
+	: [];
+
+const inittialWishlistState = {
+	wishlistItems: wishlistStorage,
+	...sumWishlistItems(wishlistStorage),
+}
+
 const ShopContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(CartReducer, initialState);
+	const [wishlistState, wishlistDispatch] = useReducer(WishlistReducer, inittialWishlistState);
 
-	const increase = (productId, variantId, size) => {
-		dispatch({ type: "INCREASE", productId, variantId, size });
+	const increase = (productId, variantId) => {
+		dispatch({ type: "INCREASE", productId, variantId });
 	};
 
-	const decrease = (productId, variantId, size) => {
-		dispatch({ type: "DECREASE",productId, variantId, size });
+	const decrease = (productId, variantId) => {
+		dispatch({ type: "DECREASE",productId, variantId });
 	};
 
-	const addProduct = (payload, variant, size) => {
-		dispatch({ type: "ADD_ITEM", payload, variant, size });
+	const addProduct = (payload, variant) => {
+		dispatch({ type: "ADD_ITEM", payload, variant });
 	};
 
-	const removeProduct = (productId, variantId, size) => {
-		dispatch({ type: "REMOVE_ITEM", productId, variantId, size });
+	const removeProduct = (productId, variantId) => {
+		dispatch({ type: "REMOVE_ITEM", productId, variantId });
 	};
 
 	const clearCart = () => {
@@ -40,6 +51,14 @@ const ShopContextProvider = ({ children }) => {
 		dispatch({ type: "CHECKOUT" });
 	};
 
+	const addProductToWishlist = (payload, variant) => {
+		wishlistDispatch({ type: "ADD_ITEM_TO_WISHLIST", payload, variant });
+	};
+
+	const removeProductFromWishlist = (productId, variantId) => {
+		wishlistDispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", productId, variantId });
+	};
+
 	const contextValues = {
 		removeProduct,
 		addProduct,
@@ -47,7 +66,10 @@ const ShopContextProvider = ({ children }) => {
 		decrease,
 		clearCart,
 		handleCheckout,
+		addProductToWishlist,
+		removeProductFromWishlist,
 		...state,
+		...wishlistState,
 	};
 
 	return (
