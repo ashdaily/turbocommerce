@@ -26,6 +26,9 @@ env:
     - POSTGRES_HOST: "db"
     - POSTGRES_PORT: 5432
 
+cache:
+  - pip
+
 before_install:
   - chmod +x $HOME
   - chown -R travis $HOME
@@ -34,4 +37,4 @@ before_install:
   - docker-compose build backend
 
 script:
-  - docker-compose run backend python backend/src/manage.py test
+  -  docker-compose run --rm backend python src/manage.py test --noinput --keepdb
