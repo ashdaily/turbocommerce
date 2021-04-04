@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import { Row, Col, Table } from "react-bootstrap";
+
 import ColorSwatch from "./ColorSwatch";
 import Sizes from "./Sizes";
 import AddToCartButton from "./AddToCartButton";
@@ -130,7 +131,7 @@ const ProductDetailsContent = ({ data }) => {
 									{
 										data.product_variants[variant]
 											.weight_in_grams
-									}{" "}
+									}&nbsp;
 									g
 								</td>
 							</tr>

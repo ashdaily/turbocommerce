@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { ShopContext } from "../context/ShopContext";
 
 export default ({ product }) => {
@@ -16,8 +17,9 @@ export default ({ product }) => {
 				<i
 					onClick={() => decrease(product.id, product.variant_id)}
 					className="fa fa-minus"
-				></i>{" "}
-				{product.quantity}{" "}
+				></i>
+				&nbsp;
+				{product.quantity}&nbsp;
 				<i
 					onClick={() => increase(product.id, product.variant_id)}
 					className="fa fa-plus"
@@ -25,7 +27,7 @@ export default ({ product }) => {
 			</>
 		);
 	} else {
-		quantity = product.quantity
+		quantity = product.quantity;
 	}
 
 	return (
@@ -34,9 +36,7 @@ export default ({ product }) => {
 				{product.name} ({product.size})
 				{product.in_stock ? "" : " (Out Of Stock)"}
 			</td>
-			<td>
-				{quantity}
-			</td>
+			<td>{quantity}</td>
 			<td>{product.price}</td>
 			<td>
 				<button

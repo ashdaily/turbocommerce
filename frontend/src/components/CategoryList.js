@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
-import axios from "../util/Axios";
 import { useHistory } from "react-router-dom";
+
+import axios from "../util/Axios";
 import "../css/SideBar.scss";
 
 export default () => {

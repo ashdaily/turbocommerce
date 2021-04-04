@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Badge, ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+
 import { ShopContext } from "../context/ShopContext";
 
 export default (props) => {

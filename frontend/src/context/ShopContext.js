@@ -7,6 +7,7 @@ export const ShopContext = createContext();
 const storage = localStorage.getItem("cartItems")
 	? JSON.parse(localStorage.getItem("cartItems"))
 	: [];
+
 const initialState = {
 	cartItems: storage,
 	...sumItems(storage),

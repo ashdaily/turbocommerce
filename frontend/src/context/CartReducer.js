@@ -27,25 +27,31 @@ const Storage = (items) => {
 					"cartItems",
 					JSON.stringify(newCartData.length > 0 ? newCartData : [])
 				);
+			} else {
+				localStorage.setItem(
+					"cartItems",
+					JSON.stringify([])
+				);
 			}
+		}).catch(() => {
+			localStorage.setItem(
+				"cartItems",
+				JSON.stringify([])
+			);
 		});
 	}
 };
 
 export const sumItems = (items) => {
 	Storage(items);
-	let totalCartItems =
-		items.length > 0 ? items.reduce((total) => total + 1, 0) : 0;
-	let total =
-		items.length > 0
-			? items
-				.reduce(
-					(total, product) =>
-						total + product.price * product.quantity,
-					0
-				)
-				.toFixed(2)
-			: 0;
+	let totalCartItems = 0;
+	let total = 0;
+	if (items.length > 0) {
+		totalCartItems = items.reduce((total) => total + 1, 0);
+		total = items.reduce((total, product) =>
+			total + product.price * product.quantity, 0
+		).toFixed(2);
+	}
 	return { totalCartItems, total };
 };
 

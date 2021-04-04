@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { Button } from "react-bootstrap";
+
 import { ShopContext } from "../context/ShopContext";
 
 const WishlistButton = ({ data }) => {
 	const { addProductToWishlist, removeProductFromWishlist, wishlistItems } = useContext(ShopContext);
 
     const isInWishlist = (product) => {
-		return !!wishlistItems.find((item) => item.id === product.id);
+		return wishlistItems.find((item) => item.id === product.id);
 	};
     if (isInWishlist(data)) {
 		return (

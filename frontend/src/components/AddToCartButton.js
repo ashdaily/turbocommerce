@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
+
 import { ShopContext } from "../context/ShopContext";
 
 const AddToCartButton = ({ data, variant }) => {
 	const { addProduct, cartItems, increase, decrease } = useContext(ShopContext);
 
 	const isInCart = (product, variant) => {
-		return !!cartItems.find((item) => item.id === product.id && item.variant_id === variant.id);
+		return cartItems.find((item) => item.id === product.id && item.variant_id === variant.id);
 	};
     
     const productQuantity = (product, variant) => {
