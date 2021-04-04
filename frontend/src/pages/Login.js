@@ -4,8 +4,7 @@ import { Redirect } from "react-router-dom";
 import { saveTokens } from "../util/Auth";
 import axios from "../util/Axios";
 import SocialButton from "../components/SocialButton";
-import google from '../google.svg'
-import '../css/login.scss'
+import "../css/login.scss";
 
 export default () => {
 	const [email, setEmail] = useState(null);
@@ -90,14 +89,8 @@ export default () => {
 							Login
 						</Button>
 					</Form>
-					<center
-						style={{
-							borderBottom: "1px solid #ced4da",
-							lineHeight: "0.1em",
-                            margin: '15px 0'
-						}}
-					>
-						<span style={{ background: "#fff", padding: '0 5px' }}>OR</span>
+					<center className="center-line">
+						<span>OR</span>
 					</center>
 					<SocialButton
 						className="gmail-btn mt-2"
@@ -106,12 +99,11 @@ export default () => {
 						onLoginSuccess={handleSocialLogin}
 						onLoginFailure={handleSocialLoginFailure}
 					>
-						<img src={google} /> Login with Google
+						<img src="/google.svg" alt="Google Icon"/> Login with Google
 					</SocialButton>
 					<SocialButton
 						variant="primary"
-                        className="facebook-btn mt-2"
-						style={{ "background-color": "#3c5898" }}
+						className="facebook-btn mt-2"
 						provider="facebook"
 						appId="1762595890586028"
 						onLoginSuccess={handleSocialLogin}

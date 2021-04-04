@@ -1,19 +1,30 @@
 .gmail-btn {
-    &:hover {
-        background: #eee;
-        color: #000;
-        border: 1px solid #eee;
-    }
-    img {
-        width: 13pt;
-    }
-    color: #000;
-    border: 1px solid #eee;
-    background: #fff;
+	&:hover {
+		background: #eee;
+		color: #000;
+		border: 1px solid #eee;
+	}
+	img {
+		width: 13pt;
+	}
+	color: #000;
+	border: 1px solid #eee;
+	background: #fff;
 }
 
 .facebook-btn {
-    .fa {
-        font-size: 14pt;
-    }
+	.fa {
+		font-size: 14pt;
+	}
+	background-color: "#3c5898";
+}
+
+.center-line {
+	span {
+		background: "#fff";
+		padding: "0 5px";
+	}
+	border-bottom: "1px solid #ced4da";
+	line-height: "0.1em";
+	margin: "15px 0";
 }
