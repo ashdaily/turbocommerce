@@ -9,7 +9,7 @@ from .models import User
 from .serializers import UserSerializer
 
 
-class CustomerView(APIView, PaginationMixin):
+class CustomerDetailView(APIView, PaginationMixin):
     permission_classes = [IsAuthenticated]
     serializer = UserSerializer
     model = User
@@ -25,7 +25,7 @@ class CustomerView(APIView, PaginationMixin):
         return Response(serializer.errors)
 
 
-class SignupView(APIView):
+class CustomerSignupView(APIView):
     serializer = UserSerializer
 
     def post(self, request, *args, **kwargs):

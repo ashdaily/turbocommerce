@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
-from .models import (
+from rest_framework.serializers import ModelSerializer
+
+from products.models import (
     Product,
     ProductBrand,
     ProductGrandParentCategory,
@@ -15,26 +16,26 @@ from .models import (
 )
 
 
-class ProductChildCategorySerializer(ModelSerializer):
+class ProductGrandParentCategorySerializer(ModelSerializer):
     class Meta:
-        model = ProductChildCategory
+        model = ProductGrandParentCategory
         fields = ["id", "category_name", "slug"]
 
 
 class ProductParentCategorySerializer(ModelSerializer):
-    product_child_categories = ProductChildCategorySerializer(many=True)
+    grand_parent_category = ProductGrandParentCategorySerializer()
 
     class Meta:
         model = ProductParentCategory
-        fields = ["id", "category_name", "slug", "product_child_categories"]
+        fields = ["id", "category_name", "slug", "grand_parent_category"]
 
 
-class ProductGrandParentCategorySerializer(ModelSerializer):
-    product_parent_categories = ProductParentCategorySerializer(many=True)
+class ProductChildCategorySerializer(ModelSerializer):
+    parent_category = ProductParentCategorySerializer()
 
     class Meta:
-        model = ProductGrandParentCategory
-        fields = ["id", "category_name", "slug", "product_parent_categories"]
+        model = ProductChildCategory
+        fields = ["id", "category_name", "slug", "parent_category"]
 
 
 class ProductBrandSerializer(ModelSerializer):
@@ -73,20 +74,21 @@ class ProductVariantSerializer(ModelSerializer):
     images = serializers.ListField()
     product_variant_specifications = ProductVariantSpecificationSerializer(many=True)
     in_stock = serializers.BooleanField()
-    sizes_available = ProductSizeSerializer(many=True)
+    size = ProductSizeSerializer()
 
     class Meta:
         model = ProductVariant
         fields = [
             "id",
             "stock_keeping_unit",
-            "sizes_available",
+            "size",
             "discount",
             "published",
             "price",
             "weight_in_grams",
             "color",
             "images",
+            "quantity",
             "product_variant_specifications",
             "in_stock",
         ]

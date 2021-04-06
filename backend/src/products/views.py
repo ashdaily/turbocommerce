@@ -13,11 +13,11 @@ from .models import (
     ProductChildCategory,
     ProductVariant,
 )
-from .serializers import (
+from products.serializers.product import (
     ProductSerializer,
-    ProductGrandParentCategorySerializer,
     ProductChildCategorySerializer,
 )
+from products.serializers.category import ProductGrandParentCategorySerializer
 
 
 class ProductListView(ListAPIView, PaginationMixin):
@@ -107,3 +107,28 @@ class ProductCategoriesListView(APIView):
         queryset = ProductGrandParentCategory.objects.all().order_by("id")
         serializer = ProductGrandParentCategorySerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class ProductByCategoryListView(ListAPIView, PaginationMixin):
+    """
+    PATH: /api/products/by-category/?grand_parent_category_slug=&parent_category_slug=&child_category_slug=/
+    """
+
+    pagination_class = StandardPagination
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        grand_parent_category_slug = self.request.query_params.get(
+            "grand_parent_category_slug", None
+        )
+        parent_category_slug = self.request.query_params.get(
+            "parent_category_slug", None
+        )
+        child_category_slug = self.request.query_params.get("child_category_slug", None)
+
+        queryset = Product.objects.get_product_by_category(
+            grand_parent_category_slug, parent_category_slug, child_category_slug
+        )
+
+        return queryset

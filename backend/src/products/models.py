@@ -4,7 +4,8 @@ from django.template.defaultfilters import slugify
 from pyhustler.countries import COUNTRIES
 from pyhustler.measurement import MEASUREMENT_NAMES, MEASUREMENT_UNITS
 
-from core.models import Timestamp, User
+from core.models import Timestamp
+from store.models import Store
 
 
 class ProductMeasurement(models.Model):
@@ -23,7 +24,7 @@ class ProductMeasurement(models.Model):
 
 
 class ProductSize(Timestamp):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=True, blank=True)
     measurement = models.ManyToManyField(ProductMeasurement)
     comment = models.CharField(max_length=255, null=True, blank=True)
@@ -33,7 +34,7 @@ class ProductSize(Timestamp):
 
 
 class Warehouse(Timestamp):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     warehouse_name = models.CharField(max_length=255)
     address_street_line_1 = models.CharField(max_length=255, null=True, blank=True)
     address_street_line_2 = models.CharField(max_length=255, null=True, blank=True)
@@ -162,9 +163,34 @@ class ProductModelManager(models.Manager):
                 id=reference_product.id
             )
 
+    def get_product_by_category(
+        self, grand_parent_category_slug, parent_category_slug, child_category_slug
+    ):
+        queryset = Product.objects.all()
+
+        if grand_parent_category_slug:
+            queryset = queryset.filter(
+                child_category__parent_category__grand_parent_category__slug=grand_parent_category_slug
+            )
+
+        if parent_category_slug:
+            queryset = queryset.filter(
+                child_category__parent_category__slug=parent_category_slug
+            )
+
+        if child_category_slug:
+            queryset = queryset.filter(child_category__slug=child_category_slug)
+
+        return queryset
+
 
 class Product(Timestamp):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    store = models.ForeignKey(
+        Store,
+        on_delete=models.CASCADE,
+        related_name="store_products",
+        related_query_name="store_product",
+    )
     child_category = models.ForeignKey(ProductChildCategory, on_delete=models.CASCADE)
     brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=255, null=True, blank=True)
@@ -188,6 +214,10 @@ class Product(Timestamp):
         self._make_unique_slug()
         super().save(*args, **kwargs)
 
+    @property
+    def grand_parent_category(self):
+        return self.child_category.parent_category.grand_parent_category
+
 
 class ProductVariant(Timestamp):
     product = models.ForeignKey(
@@ -197,7 +227,7 @@ class ProductVariant(Timestamp):
         on_delete=models.CASCADE,
     )
     stock_keeping_unit = models.BigIntegerField(unique=True)
-    sizes_available = models.ManyToManyField(ProductSize)
+    size = models.ForeignKey(ProductSize, on_delete=models.SET_NULL, null=True)
     discount = models.IntegerField()
     published = models.BooleanField(default=False)
     price = models.IntegerField()
@@ -206,6 +236,13 @@ class ProductVariant(Timestamp):
 
     def __str__(self):
         return f"{self.product.product_name} {self.id}"
+
+    @property
+    def quantity(self):
+        total_quantity = 0
+        for inventory in self.product_variant_inventories.all():
+            total_quantity += inventory.quantity
+        return total_quantity
 
     @property
     def in_stock(self):
@@ -225,7 +262,8 @@ class ProductVariant(Timestamp):
 
 
 def generate_upload_path_for_images(instance, filename):
-    return f"{instance.product_variant.product.user}/%Y/%m/%d/{filename}"
+    variant = instance.product_variant
+    return f"{variant.product.store.store_name}/{variant.id}/{filename}"
 
 
 class ProductVariantImage(Timestamp):

@@ -13,16 +13,13 @@ const Storage = (items) => {
 						let variant = found.product_variants.find(
 							(variant) => variant.id === item.variant_id
 						);
-						if (
-							variant &&
-							item.quantity > variant.stock_keeping_unit
-						) {
-							item.out_of_stock = "yes";
+						if (variant && variant.in_stock) {
+							item.in_stock = variant.in_stock;
 						} else {
-							item.out_of_stock = "no";
+							item.in_stock = false;
 						}
 					} else {
-						item.out_of_stock = "yes";
+						item.in_stock = false;
 					}
 					return item;
 				});
@@ -30,23 +27,31 @@ const Storage = (items) => {
 					"cartItems",
 					JSON.stringify(newCartData.length > 0 ? newCartData : [])
 				);
+			} else {
+				localStorage.setItem(
+					"cartItems",
+					JSON.stringify([])
+				);
 			}
+		}).catch(() => {
+			localStorage.setItem(
+				"cartItems",
+				JSON.stringify([])
+			);
 		});
 	}
 };
 
 export const sumItems = (items) => {
 	Storage(items);
-	let totalCartItems =
-	items.length > 0 ? items.reduce((total) => total + 1, 0) : 0;
-	let total =
-	items.length > 0
-			? items.reduce(
-					(total, product) =>
-						total + product.price * product.quantity,
-					0
-			  ).toFixed(2)
-			: 0;
+	let totalCartItems = 0;
+	let total = 0;
+	if (items.length > 0) {
+		totalCartItems = items.reduce((total) => total + 1, 0);
+		total = items.reduce((total, product) =>
+			total + product.price * product.quantity, 0
+		).toFixed(2);
+	}
 	return { totalCartItems, total };
 };
 
@@ -57,8 +62,7 @@ export const CartReducer = (state, action) => {
 				!state.cartItems.find(
 					(item) =>
 						item.id === action.payload.id &&
-						item.variant_id === action.variant.id &&
-						item.size === action.size
+						item.variant_id === action.variant.id
 				)
 			) {
 				state.cartItems.push({
@@ -66,8 +70,9 @@ export const CartReducer = (state, action) => {
 					variant_id: action.variant.id,
 					name: action.payload.product_name,
 					price: action.variant.price,
-					out_of_stock: "no",
-					size: action.size,
+					in_stock: true,
+					size: action.variant.size.name,
+					color: action.variant.color,
 					quantity: 1,
 				});
 			}
@@ -84,28 +89,33 @@ export const CartReducer = (state, action) => {
 					state.cartItems.filter(
 						(item) =>
 							item.id !== action.productId ||
-							item.variant_id !== action.variantId ||
-							item.size !== action.size
+							item.variant_id !== action.variantId
 					)
 				),
 				cartItems: [
 					...state.cartItems.filter(
 						(item) =>
 							item.id !== action.productId ||
-							item.variant_id !== action.variantId ||
-							item.size !== action.size
+							item.variant_id !== action.variantId
 					),
 				],
 			};
 		case "INCREASE":
-			state.cartItems[
+			if (state.cartItems[
 				state.cartItems.findIndex(
 					(item) =>
 						item.id === action.productId &&
-						item.variant_id === action.variantId &&
-						item.size === action.size
+						item.variant_id === action.variantId
 				)
-			].quantity++;
+			].quantity < 10) {
+				state.cartItems[
+					state.cartItems.findIndex(
+						(item) =>
+							item.id === action.productId &&
+							item.variant_id === action.variantId
+					)
+				].quantity++;
+			}
 			return {
 				...state,
 				...sumItems(state.cartItems),
@@ -116,8 +126,7 @@ export const CartReducer = (state, action) => {
 				state.cartItems.findIndex(
 					(item) =>
 						item.id === action.productId &&
-						item.variant_id === action.variantId &&
-						item.size === action.size
+						item.variant_id === action.variantId
 				)
 			].quantity--;
 			return {
@@ -125,7 +134,9 @@ export const CartReducer = (state, action) => {
 				cartItems: [
 					...state.cartItems.filter((item) => item.quantity !== 0),
 				],
-				...sumItems(state.cartItems.filter((item) => item.quantity !== 0)),
+				...sumItems(
+					state.cartItems.filter((item) => item.quantity !== 0)
+				),
 			};
 		case "CHECKOUT":
 			return {

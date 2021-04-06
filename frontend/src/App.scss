@@ -15,7 +15,37 @@ common
     text-decoration: none !important;
     outline: 0;
 }
+
 .color-variant li.active {
     border: 1px solid #000;
     box-shadow: 0px 0px 0px 1px;
+}
+
+.cart-table td:not(:nth-child(1)), .product-details-content table th:not(:nth-child(1)) {
+    text-align: center;
+}
+
+.wishlistLogin {
+    max-width: 25rem;
+    margin: 6rem auto 0rem;
+    text-align: center;
+}
+
+.wishlistLogin-heading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #282c3f;
+}
+
+.wishlistLogin-info {
+    font-size: 1.15rem;
+    color: #94989f;
+    margin: 1.25rem auto 0;
+}
+
+.wishlistLogin-icon {
+    i {
+        font-size: 9.5rem;
+    }
+    margin: 2.8rem 0 3.1rem;
 }

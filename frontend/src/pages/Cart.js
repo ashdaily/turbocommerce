@@ -1,18 +1,17 @@
 import React, {  useContext } from "react";
 import { Row, Col, Table } from "react-bootstrap";
+
 import Item from "../components/Item";
 import { ShopContext } from "../context/ShopContext";
 
 export default () => {
 	const { cartItems, total } = useContext(ShopContext);
 
-	console.log(cartItems)
-
 	if (cartItems.length > 0) {
 		return (
 			<Row className="product-details-content">
 				<Col>
-					<div className="table-responsive">
+					<div className="table-responsive cart-table">
 						<Table size="lg">
 							<thead>
 								<tr>

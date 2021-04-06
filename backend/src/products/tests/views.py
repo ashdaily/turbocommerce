@@ -1,11 +1,10 @@
-from pprint import pprint
-
 from django.conf import settings
 from django.urls import reverse
 
 from products.models import Product
 from products.views import ProductListView
 from utils.tests import TestCaseBase
+from utils.print import pprint
 
 
 page_size = settings.REST_FRAMEWORK_PAGE_SIZE
@@ -19,10 +18,11 @@ class TestProductListView(TestCaseBase):
 
     def test_should_get_products_list(self):
         r = self.client.get(self.url)
-
         self.assertEqual(r.status_code, 200)
+
+        payload = self.deserialize(r)
         self.assertEqual(
-            self.deserialize(r),
+            payload,
             {
                 "count": 1,
                 "next": None,
@@ -33,6 +33,16 @@ class TestProductListView(TestCaseBase):
                         "child_category": {
                             "category_name": "Pants",
                             "id": 1,
+                            "parent_category": {
+                                "category_name": "Formal",
+                                "grand_parent_category": {
+                                    "category_name": "Women",
+                                    "id": 1,
+                                    "slug": "women",
+                                },
+                                "id": 1,
+                                "slug": "formal",
+                            },
                             "slug": "pants",
                         },
                         "country_of_origin": "Japan",
@@ -44,57 +54,35 @@ class TestProductListView(TestCaseBase):
                                 "color": "#FFFFFF",
                                 "discount": 10,
                                 "id": 1,
-                                "images": ["/https%3A/lorempixel/500/500"],
+                                "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
                                 "price": 500,
                                 "product_variant_specifications": [
                                     {
-                                        "specification_name": "Made " "with",
+                                        "specification_name": "Made with",
                                         "specification_value": "Hand",
                                     }
                                 ],
                                 "published": True,
-                                "sizes_available": [
-                                    {
-                                        "comment": "Fits a 6 " "feet tall " "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "XL",
-                                    },
-                                    {
-                                        "comment": "Fits a "
-                                        "5'8 feet "
-                                        "tall "
-                                        "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "M",
-                                    },
-                                ],
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 6 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "XL",
+                                },
                                 "stock_keeping_unit": 87987,
                                 "weight_in_grams": 344,
                             },
@@ -102,57 +90,35 @@ class TestProductListView(TestCaseBase):
                                 "color": "#000000",
                                 "discount": 1,
                                 "id": 2,
-                                "images": ["/https%3A/lorempixel/500/500"],
+                                "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
                                 "price": 5000,
                                 "product_variant_specifications": [
                                     {
-                                        "specification_name": "Made " "with",
+                                        "specification_name": "Made with",
                                         "specification_value": "Machine",
                                     }
                                 ],
                                 "published": True,
-                                "sizes_available": [
-                                    {
-                                        "comment": "Fits a 6 " "feet tall " "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "XL",
-                                    },
-                                    {
-                                        "comment": "Fits a "
-                                        "5'8 feet "
-                                        "tall "
-                                        "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "M",
-                                    },
-                                ],
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 5'8 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "M",
+                                },
                                 "stock_keeping_unit": 87988,
                                 "weight_in_grams": 344,
                             },
@@ -241,6 +207,16 @@ class TestProductListView(TestCaseBase):
                         "child_category": {
                             "category_name": "Pants",
                             "id": 1,
+                            "parent_category": {
+                                "category_name": "Formal",
+                                "grand_parent_category": {
+                                    "category_name": "Women",
+                                    "id": 1,
+                                    "slug": "women",
+                                },
+                                "id": 1,
+                                "slug": "formal",
+                            },
                             "slug": "pants",
                         },
                         "country_of_origin": "Japan",
@@ -252,57 +228,35 @@ class TestProductListView(TestCaseBase):
                                 "color": "#FFFFFF",
                                 "discount": 10,
                                 "id": 1,
-                                "images": ["/https%3A/lorempixel/500/500"],
+                                "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
                                 "price": 500,
                                 "product_variant_specifications": [
                                     {
-                                        "specification_name": "Made " "with",
+                                        "specification_name": "Made with",
                                         "specification_value": "Hand",
                                     }
                                 ],
                                 "published": True,
-                                "sizes_available": [
-                                    {
-                                        "comment": "Fits a 6 " "feet tall " "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "XL",
-                                    },
-                                    {
-                                        "comment": "Fits a "
-                                        "5'8 feet "
-                                        "tall "
-                                        "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "M",
-                                    },
-                                ],
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 6 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "XL",
+                                },
                                 "stock_keeping_unit": 87987,
                                 "weight_in_grams": 344,
                             },
@@ -310,57 +264,35 @@ class TestProductListView(TestCaseBase):
                                 "color": "#000000",
                                 "discount": 1,
                                 "id": 2,
-                                "images": ["/https%3A/lorempixel/500/500"],
+                                "images": ["/media/https%3A/lorempixel/500/500"],
                                 "in_stock": True,
                                 "price": 5000,
                                 "product_variant_specifications": [
                                     {
-                                        "specification_name": "Made " "with",
+                                        "specification_name": "Made with",
                                         "specification_value": "Machine",
                                     }
                                 ],
                                 "published": True,
-                                "sizes_available": [
-                                    {
-                                        "comment": "Fits a 6 " "feet tall " "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "XL",
-                                    },
-                                    {
-                                        "comment": "Fits a "
-                                        "5'8 feet "
-                                        "tall "
-                                        "woman",
-                                        "measurement": [
-                                            {
-                                                "id": 1,
-                                                "measurement_name": "LENGTH",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                            {
-                                                "id": 2,
-                                                "measurement_name": "WAIST",
-                                                "measurement_unit": "CENTIMETER",
-                                                "measurement_value": 45,
-                                            },
-                                        ],
-                                        "name": "M",
-                                    },
-                                ],
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 5'8 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "M",
+                                },
                                 "stock_keeping_unit": 87988,
                                 "weight_in_grams": 344,
                             },

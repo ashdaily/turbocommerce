@@ -68,6 +68,11 @@ psql -U postgres -c "CREATE USER username WITH PASSWORD 'password';"
 docker rm -f -v turbocommerce_db_1
 ```
 
+#### Travis add secret environment variables
+- make sure to install travis, `brew install travis`
+- To login, `travis login --pro --github-token <your_github_token`, generate the github_token from [here](https://github.com/settings/tokens)
+- To add a new secret env, `travis encrypt --com SOMEVAR="secretvalue"`
+
 
 #### TODO LIST
 - [ ] Implement category hierachy in some other efficient manner

@@ -1,50 +1,41 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
+
 import { ShopContext } from "../context/ShopContext";
 
-export default ({ product, outOfStock }) => {
-	const [stockText, setoutOfStock] = useState("");
 
+export default ({ product }) => {
 	const { removeProduct, increase, decrease } = useContext(ShopContext);
 
-	const handleRemove = (id, variant_id, size) => {
-		removeProduct(id, variant_id, size);
+	const handleRemove = (id, variant_id) => {
+		removeProduct(id, variant_id);
 	};
-
-	useEffect(() => {
-		if (outOfStock === "yes") {
-			setoutOfStock("table-secondary");
-		}
-	}, [outOfStock]);
 
 	let quantity;
 
-	if (outOfStock === "yes") {
-		quantity = product.quantity;
-	} else {
+	if (product.in_stock) {
 		quantity = (
 			<>
 				<i
-					onClick={() =>
-						decrease(product.id, product.variant_id, product.size)
-					}
+					onClick={() => decrease(product.id, product.variant_id)}
 					className="fa fa-minus"
-				></i>{" "}
-				{product.quantity}{" "}
+				></i>
+				&nbsp;
+				{product.quantity}&nbsp;
 				<i
-					onClick={() =>
-						increase(product.id, product.variant_id, product.size)
-					}
+					onClick={() => increase(product.id, product.variant_id)}
 					className="fa fa-plus"
 				></i>
 			</>
 		);
+	} else {
+		quantity = product.quantity;
 	}
 
 	return (
-		<tr className={stockText}>
+		<tr className={product.in_stock ? "" : "table-secondary"}>
 			<td>
 				{product.name} ({product.size})
-				{outOfStock === "yes" ? " (Out Of Stock)" : ""}
+				{product.in_stock ? "" : " (Out Of Stock)"}
 			</td>
 			<td>{quantity}</td>
 			<td>{product.price}</td>
@@ -52,13 +43,7 @@ export default ({ product, outOfStock }) => {
 				<button
 					type="button"
 					className="w-50 btn btn-danger"
-					onClick={() =>
-						handleRemove(
-							product.id,
-							product.variant_id,
-							product.size
-						)
-					}
+					onClick={() => handleRemove(product.id, product.variant_id)}
 				>
 					Remove
 				</button>

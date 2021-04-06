@@ -9,6 +9,16 @@
         }
     },
     {
+        "model": "store.store",
+        "pk": 1,
+        "fields": {
+            "store_owner": 1,
+            "store_name": "ashstore",
+            "store_logo": "https://lorempixel.com/50/50",
+            "store_host_url": "https://ashstore.turbocommerce.com"
+        }
+    },
+    {
         "model": "products.productgrandparentcategory",
         "pk": 1,
         "fields": {
@@ -90,7 +100,7 @@
         "model": "products.productsize",
         "pk": 1,
         "fields": {
-            "user": 1,
+            "store": 1,
             "name" : "XL",
             "measurement" : [1,2],
             "comment" : "Fits a 6 feet tall woman",
@@ -102,7 +112,7 @@
         "model": "products.productsize",
         "pk": 2,
         "fields": {
-            "user": 1,
+            "store": 1,
             "name" : "M",
             "measurement" : [1,2],
             "comment" : "Fits a 5'8 feet tall woman",
@@ -114,7 +124,7 @@
         "model": "products.warehouse",
         "pk": 1,
         "fields": {
-            "user": 1,
+            "store": 1,
             "warehouse_name" : "Shinjuku warehouse",
             "address_street_line_1" : "1-59-45",
             "address_street_line_2" : "Mary mansion",
@@ -129,7 +139,7 @@
         "model": "products.product",
         "pk": 1,
         "fields": {
-            "user": 1,
+            "store": 1,
             "child_category" : 1,
             "brand" : 1,
             "product_name" : "Bizarre shirt",
@@ -147,7 +157,7 @@
         "fields": {
             "product": 1,
             "stock_keeping_unit" : 87987,
-            "sizes_available" : [1,2],
+            "size" : 1,
             "discount" : 10,
             "published" : true,
             "price": 500,
@@ -163,7 +173,7 @@
         "fields": {
             "product": 1,
             "stock_keeping_unit" : 87988,
-            "sizes_available" : [1,2],
+            "size" : 2,
             "discount" : 1,
             "published" : true,
             "price": 5000,

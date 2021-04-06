@@ -6,19 +6,18 @@ const Sizes = (props) => {
 		<tr>
 			<td>Sizes</td>
 			<td>
-				{props.sizes_available.map(({ name }, index) => (
+				{props.sizes.map((item) => (
 					<Button
-						className={props.size === index ? "active mr-2" : "mr-2"}
+						className={props.size === item.size.name ? "active mr-2" : "mr-2"}
 						variant="outline-primary"
-						key={index}
 						size="sm"
 						onClick={() =>
-							props.onClick(index)
+							props.onClick(item.size.name)
 						}
 					>
-						{name}
-					</Button>
-				))}
+						{item.size.name}
+					</Button>)
+				)}
 			</td>
 		</tr>
 	);
