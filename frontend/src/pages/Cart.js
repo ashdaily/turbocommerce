@@ -1,5 +1,6 @@
 import React, {  useContext } from "react";
 import { Row, Col, Table } from "react-bootstrap";
+
 import Item from "../components/Item";
 import { ShopContext } from "../context/ShopContext";
 
@@ -10,7 +11,7 @@ export default () => {
 		return (
 			<Row className="product-details-content">
 				<Col>
-					<div className="table-responsive">
+					<div className="table-responsive cart-table">
 						<Table size="lg">
 							<thead>
 								<tr>

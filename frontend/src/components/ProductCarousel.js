@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Row, Col} from "react-bootstrap";
+
 import ProductCard from "./ProductCard";
 import Paginate from "./Paginate";
 import axios from "../util/Axios";

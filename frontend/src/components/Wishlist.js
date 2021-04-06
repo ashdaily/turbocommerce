@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Badge, ListGroup } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 
+import { useHistory } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 
-export default (props) => {
-	const { totalCartItems } = useContext(ShopContext);
+const Wishlist = () => {
+	const { totalWishlistItems } = useContext(ShopContext);
 
 	let history = useHistory();
 	return (
@@ -14,14 +14,15 @@ export default (props) => {
 			activeKey="/"
 			style={{ cursor: "pointer" }}
 			onClick={() => {
-				history.push("/cart");
+				history.push("/wishlist");
 			}}
 			key={100}
 		>
-			<i className="fa fa-shopping-cart"></i> Cart &nbsp;
+			<i className="fa fa-heart"></i> Wishlist &nbsp;
 			<Badge variant="primary" size="md">
-				{totalCartItems}
+				{totalWishlistItems}
 			</Badge>
 		</ListGroup.Item>
 	);
 };
+export default Wishlist;
