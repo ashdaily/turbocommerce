@@ -38,7 +38,6 @@ export default () => {
 		axios
 			.post("api/core/auth/token/", payload)
 			.then((response) => {
-				console.error(response);
 				if (response.status === 200) {
 					const accessToken = response.data.access;
 					const refreshToken = response.data.refresh;
