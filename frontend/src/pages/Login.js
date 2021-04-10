@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Button, Card } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { saveTokens } from "../util/Auth";
 import axios from "../util/Axios";
@@ -47,7 +48,9 @@ export default () => {
 				}
 			})
 			.catch((error) => {
-				console.error(error);
+				if (error.response.data.detail) {
+                    toast.error(error.response.data.detail);
+				}
 			});
 	}
 
@@ -100,7 +103,8 @@ export default () => {
 						onLoginSuccess={handleSocialLogin}
 						onLoginFailure={handleSocialLoginFailure}
 					>
-						<img src="/google.svg" alt="Google Icon"/> Login with Google
+						<img src="/google.svg" alt="Google Icon" /> Login with
+						Google
 					</SocialButton>
 					<SocialButton
 						variant="primary"
