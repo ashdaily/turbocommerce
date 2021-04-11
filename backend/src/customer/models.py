@@ -5,8 +5,8 @@ from core.models import Timestamp, User
 
 
 class CustomerWishlist(Timestamp):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    customer = models.OneToOneField(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
 
 
 class CustomerShippingAddress(Timestamp):
