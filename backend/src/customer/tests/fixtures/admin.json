@@ -1,0 +1,11 @@
+[
+    {
+        "model": "core.user",
+        "pk": 2,
+        "fields": {
+            "username": "ash_admin",
+            "password": "ash_admin123",
+            "user_type": "ADMIN"
+        }
+    }
+]

@@ -12,8 +12,8 @@ swagger_view = get_schema_view(
         title=env("PROJECT_NAME"),
         default_version="v1",
         description="Test description",
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
+        terms_of_service="",
+        contact=openapi.Contact(email="ashtokyo31@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
@@ -27,6 +27,7 @@ urlpatterns = [
     # project apps
     path("api/core/", include("core.urls")),
     path("api/products/", include("products.urls")),
+    path("api/customer/", include("customer.urls")),
     # swagger
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
