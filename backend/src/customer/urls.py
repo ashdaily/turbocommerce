@@ -1,13 +1,13 @@
 from django.urls import path
 
-from customer.views import CustomerWishlistView
+from customer.views import CustomerWishlistView, CustomerWishlistDetailView
 
 
 urlpatterns = [
     path("wishlist/", CustomerWishlistView.as_view(), name="customer-wishlist"),
     path(
         "wishlist/<int:pk>/",
-        CustomerWishlistView.as_view(),
+        CustomerWishlistDetailView.as_view(),
         name="customer-wishlist-delete",
     ),
 ]
