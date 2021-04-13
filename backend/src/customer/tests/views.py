@@ -14,40 +14,52 @@ class TestCustomerWishlistView(TestCaseBase):
     url = reverse("customer-wishlist")
 
     def test_post_wishlist(self):
-        products = [1]
-        payload = {"products": products}
+        product_1 = 1
+        payload = {"product": product_1}
 
         r = self.client.post(self.url, data=payload, **self.customer_bearer_token)
-        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.status_code, 201)
 
-        wishlist = CustomerWishlist.objects.get(customer__id=1)
-
-        products_in_wishlist = list(
-            map(lambda product: product.id, wishlist.products.all())
+        wishlist = CustomerWishlist.objects.filter(customer__id=1).values_list(
+            "product", flat=True
         )
-        self.assertEqual(products, products_in_wishlist)
+
+        self.assertEqual(wishlist[0], product_1)
+        self.assertEqual(len(wishlist), 1)
+
+        product_2 = 2
+        payload = {"product": product_2}
+        r = self.client.post(self.url, data=payload, **self.customer_bearer_token)
+        self.assertEqual(r.status_code, 201)
+
+        wishlist = CustomerWishlist.objects.filter(customer__id=1).values_list(
+            "product", flat=True
+        )
+
+        self.assertEqual(wishlist[1], product_2)
+        self.assertEqual(len(wishlist), 2)
 
     def test_admin_user_cannot_post_wishlist_and_raises_validation_error(self):
-        products = [1]
-        payload = {"products": products}
+        product_1 = 1
+        payload = {"product": product_1}
 
         r = self.client.post(self.url, data=payload, **self.admin_bearer_token)
         self.assertEqual(r.status_code, 400)
 
     def test_get_empty_customer_wishlist(self):
-        r2 = self.client.get(self.url, **self.customer_bearer_token)
-        self.assertEqual(r2.status_code, 200)
+        r = self.client.get(self.url, **self.customer_bearer_token)
+        self.assertEqual(r.status_code, 200)
 
         self.assertEqual(
-            r2.json(), {"count": 0, "next": None, "previous": None, "results": []}
+            r.json(), {"count": 0, "next": None, "previous": None, "results": []}
         )
 
     def test_get_non_empty_customer_wishlist(self):
-        products = [1]
-        payload = {"products": products}
+        product_1 = 1
+        payload = {"product": product_1}
 
         r1 = self.client.post(self.url, data=payload, **self.customer_bearer_token)
-        self.assertEqual(r1.status_code, 200)
+        self.assertEqual(r1.status_code, 201)
 
         r2 = self.client.get(self.url, **self.customer_bearer_token)
         self.assertEqual(r2.status_code, 200)
@@ -158,4 +170,20 @@ class TestCustomerWishlistView(TestCaseBase):
                     }
                 ],
             },
+        )
+
+    def test_delete_wishlist(self):
+        payload = {"product": 1}
+        r1 = self.client.post(self.url, data=payload, **self.customer_bearer_token)
+        self.assertEqual(r1.status_code, 201)
+        wishlist_id = r1.json()["id"]
+
+        r2 = self.client.delete(
+            f"/api/customer/wishlist/{wishlist_id}/",
+            data=payload,
+            **self.customer_bearer_token,
+        )
+        self.assertEqual(r2.status_code, 204)
+        self.assertEqual(
+            CustomerWishlist.objects.filter(id=wishlist_id).exists(), False
         )

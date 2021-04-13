@@ -143,6 +143,22 @@
         }
     },
     {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "store": 1,
+            "child_category" : 1,
+            "brand" : 1,
+            "product_name" : "Lala shirt",
+            "product_description" : "Torn clothes are the new cool",
+            "slug": "lala-shirt",
+            "returnable": true,
+            "country_of_origin": "India",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
         "model": "products.productvariant",
         "pk": 1,
         "fields": {
