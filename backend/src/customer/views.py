@@ -14,7 +14,6 @@ from utils.pagination import StandardPagination
 class CustomerWishlistView(
     generics.CreateAPIView,
     generics.ListAPIView,
-    generics.DestroyAPIView,
     PaginationMixin,
 ):
     """
@@ -52,3 +51,9 @@ class CustomerWishlistView(
             return Product.objects.filter(id__in=wishlist)
         else:
             return Product.objects.none()
+
+
+class CustomerWishlistDetailView(generics.DestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CustomerWishlistSerializer
+    queryset = CustomerWishlist.objects.all()
