@@ -18,7 +18,6 @@ class CustomerWishlistView(
 ):
     """
     PATH: /api/wishlist/
-    PATH: /api/wishlist/<pk>/
     """
 
     permission_classes = (IsAuthenticated,)
@@ -54,6 +53,10 @@ class CustomerWishlistView(
 
 
 class CustomerWishlistDetailView(generics.DestroyAPIView):
+    """
+    PATH: /api/wishlist/<pk>/
+    """
+
     permission_classes = (IsAuthenticated,)
     serializer_class = CustomerWishlistSerializer
     queryset = CustomerWishlist.objects.all()
