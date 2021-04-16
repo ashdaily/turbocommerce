@@ -1,3 +1,4 @@
 .env
 __pycache__
 src/db.sqlite3
+src/media/*
