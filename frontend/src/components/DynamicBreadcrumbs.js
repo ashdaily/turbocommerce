@@ -1,15 +1,11 @@
 import React from "react";
-import Breadcrumbs from 'react-router-dynamic-breadcrumbs';
-
+import Breadcrumbs from "react-router-dynamic-breadcrumbs";
 
 const routes = {
-   '/': 'Home',
-   '/:id': ':id',
-}
+  "/": "Home",
+  "/:id": ":id",
+};
 
-
-export default ()=> {
-    return (
-        <Breadcrumbs mappedRoutes={routes} />
-    );
-}
+export default () => {
+  return <Breadcrumbs mappedRoutes={routes} />;
+};

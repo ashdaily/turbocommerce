@@ -7,10 +7,10 @@ import "./i18n";
 import ShopContextProvider from "./context/ShopContext";
 
 ReactDOM.render(
-	<ShopContextProvider>
-		<App />
-	</ShopContextProvider>,
-	document.getElementById("root")
+  <ShopContextProvider>
+    <App />
+  </ShopContextProvider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
