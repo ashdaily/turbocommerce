@@ -155,8 +155,8 @@ AUTH_USER_MODEL = "core.User"
 # Media files storage settings
 if DEBUG:
     # Media files
-    MEDIA_FOLDER_PATH = "media"
-    MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_FOLDER_PATH)
+    MEDIA_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    MEDIA_ROOT = os.path.join(MEDIA_BASE, "media")
     MEDIA_URL = "/media/"
 else:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"

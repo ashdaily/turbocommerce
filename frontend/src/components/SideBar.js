@@ -9,22 +9,15 @@ import Wishlist from "./Wishlist";
 import CategoryList from "./CategoryList";
 import LoginSignup from "./LoginSignup";
 
-
 export default (props) => {
-
-
   return (
     <>
       <Logo />
       <ListGroup as="ul">
         <CategoryList />
-        <Cart/>
-        <Wishlist/>
-        {isLoggedIn ? (
-          <Logout />
-        ) : (
-          <LoginSignup />
-        )}
+        <Cart />
+        <Wishlist />
+        {isLoggedIn ? <Logout /> : <LoginSignup />}
       </ListGroup>
     </>
   );
