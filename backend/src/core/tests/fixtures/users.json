@@ -3,7 +3,7 @@
         "model": "core.user",
         "pk": 1,
         "fields": {
-            "username": "ash@gmail.com",
+            "email": "ash@gmail.com",
             "password": "ash123",
             "user_type": "CUSTOMER"
         }

@@ -80,7 +80,7 @@ class TestProduct(TestCaseBase):
         brand = ProductBrand.objects.create(brand_name="brand")
 
         store_owner = User.objects.create(
-            username="ash", password="ash", user_type=User.CUSTOMER
+            email="ash@gmail.com", password="ash", user_type=User.CUSTOMER
         )
         store = Store.objects.create(
             store_owner=store_owner,

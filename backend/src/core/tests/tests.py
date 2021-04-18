@@ -14,19 +14,19 @@ class TestCustomerSignup(TestCaseBase):
 
     def test_signup_for_customer(self):
         payload = {
-            "username": "ashish@gmail.com",
+            "email": "ashish@gmail.com",
             "password": "ashish123",
         }
 
         r = self.client.post("/api/core/customer/signup/", payload)
         self.assertEqual(r.status_code, 200)
 
-    def test_raise_validation_error_when_username_not_email(self):
+    def test_raise_validation_error_when_email_not_valid(self):
         payload = {
-            "username": "ash",
+            "email": "ash",
             "password": "ashish123",
         }
         r = self.client.post("/api/core/customer/signup/", payload)
         self.assertEqual(r.status_code, 400)
         r = self.deserialize(r)
-        self.assertEqual(r["username"], ["Username should only be email"])
+        self.assertEqual(r["email"], ["Enter a valid email address."])
