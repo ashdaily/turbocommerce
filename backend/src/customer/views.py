@@ -36,6 +36,10 @@ class CustomerWishlistView(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
 
+    def get_object(self):
+        product_id = kwargs.get("product_id")
+        return Customer.objects.get(product__id=product_id, customer=request.user)
+
     def get_serializer_class(self):
         if self.request.method == "GET":
             return ProductSerializer

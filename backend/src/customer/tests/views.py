@@ -176,10 +176,11 @@ class TestCustomerWishlistView(TestCaseBase):
         payload = {"product": 1}
         r1 = self.client.post(self.url, data=payload, **self.customer_bearer_token)
         self.assertEqual(r1.status_code, 201)
+        product_id = r1.json()["product"]
         wishlist_id = r1.json()["id"]
 
         r2 = self.client.delete(
-            f"/api/customer/wishlist/{wishlist_id}/",
+            f"/api/customer/wishlist/{product_id}/",
             data=payload,
             **self.customer_bearer_token,
         )
