@@ -64,3 +64,4 @@ class CustomerWishlistDetailView(generics.DestroyAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = CustomerWishlistSerializer
     queryset = CustomerWishlist.objects.all()
+    lookup_field = "product_id"
