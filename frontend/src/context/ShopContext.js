@@ -18,7 +18,7 @@ const wishlistStorage = localStorage.getItem("wishlistItems")
   ? JSON.parse(localStorage.getItem("wishlistItems"))
   : [];
 
-const inittialWishlistState = {
+const initialWishlistState = {
   wishlistItems: wishlistStorage,
   ...sumWishlistItems(wishlistStorage),
 };
@@ -27,7 +27,7 @@ const ShopContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CartReducer, initialState);
   const [wishlistState, wishlistDispatch] = useReducer(
     WishlistReducer,
-    inittialWishlistState
+    initialWishlistState
   );
 
   const increase = (productId, variantId) => {
@@ -55,16 +55,12 @@ const ShopContextProvider = ({ children }) => {
     dispatch({ type: "CHECKOUT" });
   };
 
-  const addProductToWishlist = (payload, variant) => {
-    wishlistDispatch({ type: "ADD_ITEM_TO_WISHLIST", payload, variant });
+  const addProductToWishlist = (payload) => {
+    wishlistDispatch({ type: "ADD_ITEM_TO_WISHLIST", payload });
   };
 
-  const removeProductFromWishlist = (productId, variantId) => {
-    wishlistDispatch({
-      type: "REMOVE_ITEM_FROM_WISHLIST",
-      productId,
-      variantId,
-    });
+  const removeProductFromWishlist = (payload) => {
+    wishlistDispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", payload });
   };
 
   const contextValues = {
