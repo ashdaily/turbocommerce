@@ -26,16 +26,24 @@ const WishlistButton = ({ data }) => {
       .post("api/customer/wishlist/", {
         product: data.id,
       })
-      .then(() => {
-        addProductToWishlist(data);
-        toast.success("Product added to wishlist!");
+      .then((response) => {
+        if (response.status === 201) {
+          addProductToWishlist(data);
+          toast.success("Product added to wishlist!");
+        } else {
+          toast.error("Something went wrong Please try again!");
+        }
       });
   };
 
   const removeFromWishlisht = () => {
-    axios.delete(`api/customer/wishlist/${data.id}/`).then(() => {
-      removeProductFromWishlist(data);
-      toast.success("Product removed to wishlist!");
+    axios.delete(`api/customer/wishlist/${data.id}/`).then((response) => {
+      if (response.status === 204) {
+        removeProductFromWishlist(data);
+        toast.success("Product removed to wishlist!");
+      } else {
+        toast.error("Something went wrong Please try again!");
+      }
     });
   };
 

@@ -6,11 +6,7 @@ const Sizes = (props) => {
       <td>Sizes</td>
       <td>
         <ul
-          className="sizes-variant"
-          style={{
-            padding: "0px",
-            marginBottom: "10px",
-          }}
+          className="sizes-variant p-0 mb-1"
         >
         {props.sizes.map((item) => (
           <li
