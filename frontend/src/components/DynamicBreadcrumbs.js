@@ -1,12 +1,14 @@
 import React from "react";
 import Breadcrumbs from "react-router-dynamic-breadcrumbs";
 
+import { removeHyphenAndCapitalize } from '../util/Helpers'
+
 const routes = {
   "/": "Home",
-  "/:grandParentCategory": (url, match) => `${match[':grandParentCategory'].replace('-', ' ')[0].toUpperCase()}${match[':grandParentCategory'].replace('-', ' ').slice(1)}`,
-  "/:grandParentCategory/:parentCategory": (url, match) => `${match[':parentCategory'].replace('-', ' ')[0].toUpperCase()}${match[':parentCategory'].replace('-', ' ').slice(1)}`,
-  "/:grandParentCategory/:parentCategory/:childCategory": (url, match) => `${match[':childCategory'].replace('-', ' ')[0].toUpperCase()}${match[':childCategory'].replace('-', ' ').slice(1)}`,
-  "/:grandParentCategory/:parentCategory/:childCategory/:slug": (url, match) => `${match[':slug'].replace('-', ' ')[0].toUpperCase()}${match[':slug'].replace('-', ' ').slice(1)}`,
+  "/:grandParentCategory": (url, match) => removeHyphenAndCapitalize(match[':grandParentCategory']),
+  "/:grandParentCategory/:parentCategory": (url, match) => removeHyphenAndCapitalize(match[':parentCategory']),
+  "/:grandParentCategory/:parentCategory/:childCategory": (url, match) => removeHyphenAndCapitalize(match[':childCategory']),
+  "/:grandParentCategory/:parentCategory/:childCategory/:slug": (url, match) => removeHyphenAndCapitalize(match[':slug']),
   "/:id": ":id",
 };
 
