@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "products",
     "shipping",
     "store",
+    "customer",
 ]
 
 MIDDLEWARE = [
@@ -153,10 +154,10 @@ AUTH_USER_MODEL = "core.User"
 
 # Media files storage settings
 if DEBUG:
-    MEDIA_FOLDER_PATH = "/media"
-    MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_FOLDER_PATH)
+    # Media files
+    MEDIA_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    MEDIA_ROOT = os.path.join(MEDIA_BASE, "media")
     MEDIA_URL = "/media/"
-    pass
 else:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     AWS_STORAGE_BUCKET_NAME = env("PROJECT_NAME")

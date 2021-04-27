@@ -17,26 +17,21 @@ class Timestamp(models.Model):
 
 class User(AbstractUser):
     CUSTOMER = "CUSTOMER"
-    OWNER = "OWNER"
-    USER_TYPES = ((CUSTOMER, CUSTOMER), (OWNER, OWNER))
+    ADMIN = "ADMIN"
+    USER_TYPES = ((CUSTOMER, CUSTOMER), (ADMIN, ADMIN))
 
     user_type = models.CharField(max_length=20, choices=USER_TYPES)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     address_pincode = models.IntegerField(null=True, blank=True)
 
+    @property
+    def is_customer(self):
+        if self.user_type == self.CUSTOMER:
+            return True
+        return False
 
-class CustomerShippingAddress(Timestamp):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    address_street_line_1 = models.CharField(max_length=255, null=True, blank=True)
-    address_street_line_2 = models.CharField(max_length=255, null=True, blank=True)
-    city = models.CharField(max_length=255, null=True, blank=True)
-    province = models.CharField(max_length=255, null=True, blank=True)
-    country = models.CharField(max_length=255, null=True, blank=True)
-
-
-class CustomerCreditCard(Timestamp):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    credit_card_number = models.CharField(max_length=16, null=True, blank=True)
-    credit_card_valid_from = models.CharField(max_length=7, null=True, blank=True)
-    credit_card_valid_until = models.CharField(max_length=7, null=True, blank=True)
-    credit_card_type = models.CharField(max_length=16, null=True, blank=True)
+    @property
+    def is_admin(self):
+        if self.user_type == self.ADMIN:
+            return True
+        return False
