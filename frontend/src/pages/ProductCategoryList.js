@@ -27,7 +27,24 @@ export default () => {
     loadData();
   }, [childCategory, grandParentCategory, parentCategory, pageNumber]);
 
+  if (productData && !productData.count) {
+    return (
+      <Row className="p-3 wishlistLogin">
+        <Col md={{ span: 12 }}>
+          <div className="wishlistLogin-heading">Sorry No Products Found</div>
+          <div className="wishlistLogin-info">
+            Stay tuned for the new products coming soon
+          </div>
+          <div className="wishlistLogin-icon">
+            <i className="fas fa-shopping-basket"></i>
+          </div>
+        </Col>
+      </Row>
+    );
+  }
+
   let paginate;
+  let products;
   if (productData) {
     paginate = (
       <Paginate
@@ -40,10 +57,6 @@ export default () => {
         setPageNumber={(value) => setPageNumber(value)}
       />
     );
-  }
-
-  let products;
-  if (productData) {
     products = productData.results.map(
       (product, index) =>
         product.product_variants.length > 0 && (
