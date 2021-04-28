@@ -1,12 +1,32 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { isLoggedIn } from "../util/Auth";
 import { Link } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
-import { ShopContext } from "../context/ShopContext";
+
 import ProductCard from "../components/ProductCard";
+import Paginate from "../components/Paginate";
+import axios from "../util/Axios";
 
 const Wishlist = () => {
-  const { totalWishlistItems, wishlistItems } = useContext(ShopContext);
+  const [productData, setProductData] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const loadData = () => {
+    axios.get(`api/customer/wishlist/`).then((response) => {
+      if (response.status === 200) {
+        if (response.data.count > 0) {
+          let productData = response.data;
+          setProductData(productData);
+        } else {
+          setProductData(null);
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, [pageNumber]);
 
   if (!isLoggedIn) {
     return (
@@ -29,7 +49,38 @@ const Wishlist = () => {
     );
   }
 
-  if (!totalWishlistItems) {
+  let paginate;
+  let products;
+  if (productData) {
+    paginate = (
+      <Paginate
+        size="sm"
+        className="mt-3"
+        hasNext={productData.next ? true : false}
+        hasPrevious={productData.previous ? true : false}
+        numPages={productData.count}
+        pageNumber={pageNumber}
+        setPageNumber={(value) => setPageNumber(value)}
+      />
+    );
+    products = productData.results.map(
+      (product, index) =>
+        product.product_variants.length > 0 && (
+          <Col md={4}>
+            <ProductCard key={index} data={product} />
+          </Col>
+        )
+    );
+
+    return (
+      <>
+        <Row>{products}</Row>
+        <Row>
+          <Col>{paginate}</Col>
+        </Row>
+      </>
+    );
+  } else {
     return (
       <Row className="p-3 wishlistLogin">
         <Col md={{ span: 12 }}>
@@ -50,24 +101,6 @@ const Wishlist = () => {
       </Row>
     );
   }
-
-  let products;
-  if (wishlistItems) {
-    products = wishlistItems.map(
-      (product, index) =>
-        product.product_variants.length > 0 && (
-          <Col md={4}>
-            <ProductCard key={index} data={product} />
-          </Col>
-        )
-    );
-  }
-
-  return (
-    <>
-      <Row>{products}</Row>
-    </>
-  );
 };
 
 export default Wishlist;

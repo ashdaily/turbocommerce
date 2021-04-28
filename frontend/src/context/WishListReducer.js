@@ -1,19 +1,23 @@
 import axios from "../util/Axios";
+import { isLoggedIn } from "../util/Auth";
 
-const Storage = (items) => {
-  let Ids = items.map((product) => product.id);
-  if (Ids) {
+const Storage = () => {
+  if (isLoggedIn) {
     axios
-      .get(`/api/products/in-ids/?id=${Ids}`)
+      .get(`api/customer/wishlist/`)
       .then((response) => {
         if (response.status === 200) {
-          let newWishlistData = response.data.results;
-          localStorage.setItem(
-            "wishlistItems",
-            JSON.stringify(newWishlistData.length > 0 ? newWishlistData : [])
-          );
-        } else {
-          localStorage.setItem("wishlistItems", JSON.stringify([]));
+          let wishlistData = [];
+          if (response.data.count > 0) {
+            response.data.results.map((item) =>
+              wishlistData.push({
+                id: item.id,
+              })
+            );
+            localStorage.setItem("wishlistItems", JSON.stringify(wishlistData));
+          } else {
+            localStorage.setItem("wishlistItems", JSON.stringify([]));
+          }
         }
       })
       .catch(() => {
@@ -23,7 +27,7 @@ const Storage = (items) => {
 };
 
 export const sumWishlistItems = (items) => {
-  Storage(items);
+  Storage();
   let totalWishlistItems =
     items.length > 0 ? items.reduce((total) => total + 1, 0) : 0;
   return { totalWishlistItems };
@@ -47,10 +51,12 @@ export const WishlistReducer = (state, action) => {
       return {
         ...state,
         ...sumWishlistItems(
-          state.wishlistItems.filter((item) => item.id !== action.productId)
+          state.wishlistItems.filter((item) => item.id !== action.payload.id)
         ),
         wishlistItems: [
-          ...state.wishlistItems.filter((item) => item.id !== action.productId),
+          ...state.wishlistItems.filter(
+            (item) => item.id !== action.payload.id
+          ),
         ],
       };
     default:
