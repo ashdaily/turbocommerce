@@ -10,8 +10,10 @@ export default () => {
   const [agree, setAgree] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [error, setError] = useState(null);
 
   function handleForm(e) {
+    setError(null);
     const form = e.currentTarget;
     e.preventDefault();
     if (form.checkValidity() === false) {
@@ -32,7 +34,7 @@ export default () => {
         }
       })
       .catch((error) => {
-        console.error(error);
+        setError(error.response.data);
       });
   }
 
@@ -55,6 +57,13 @@ export default () => {
               <Form.Control.Feedback type="invalid">
                 Please choose a email.
               </Form.Control.Feedback>
+              {error ? (
+                <Form.Text className="text-danger">
+                  {error.username[0]}
+                </Form.Text>
+              ) : (
+                ""
+              )}
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">

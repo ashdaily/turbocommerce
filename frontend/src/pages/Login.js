@@ -84,7 +84,6 @@ export default () => {
                 Please choose a password.
               </Form.Control.Feedback>
             </Form.Group>
-
             <Button variant="primary" type="submit" block>
               Login
             </Button>

@@ -1,11 +1,5 @@
-import axios from "axios";
-import {
-  setHeaders,
-  refreshToken,
-  saveTokens,
-  destroyTokens,
-  isLoggedIn,
-} from "./Auth";
+import axios from 'axios'
+import { setHeaders, refreshToken, saveTokens, destroyTokens, isLoggedIn } from "./Auth";
 
 axios.defaults.baseURL = process.env.REACT_APP_AXIOS_ENDPOINT;
 axios.defaults.headers = setHeaders();
