@@ -20,7 +20,24 @@ export default () => {
     loadData();
   }, [pageNumber]);
 
+  if (!data) {
+    return (
+      <Row className="p-3 wishlistLogin">
+        <Col md={{ span: 12 }}>
+          <div className="wishlistLogin-heading">Sorry No Products Found</div>
+          <div className="wishlistLogin-info">
+            Stay tuned for the new products coming soon
+          </div>
+          <div className="wishlistLogin-icon">
+            <i className="fas fa-shopping-basket"></i>
+          </div>
+        </Col>
+      </Row>
+    );
+  }
+
   let paginate;
+  let products;
   if (data) {
     paginate = (
       <Paginate
@@ -33,10 +50,6 @@ export default () => {
         setPageNumber={(value) => setPageNumber(value)}
       />
     );
-  }
-
-  let products;
-  if (data) {
     products = data.results.map(
       (product, index) =>
         product.product_variants.length > 0 && (
