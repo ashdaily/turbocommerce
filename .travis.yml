@@ -38,4 +38,4 @@ before_install:
   - docker-compose build backend
 
 script:
-  - docker container run -it --rm --name turbocommerce --volume /home/travis/build/backend/src:/home/backend/src turbocommerce_backend bash ./run_django_tests.sh --noinput --keepdb
+  - docker-compose run backend bash ./run_django_tests.sh
