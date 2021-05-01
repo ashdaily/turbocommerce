@@ -34,7 +34,7 @@ before_install:
   - chown -R travis $HOME
   - bash ./travis/make_env_file.sh
   - docker-compose run -d db
-  - docker-compose build backend
+  - docker-compose build --no-cache backend
 
 script:
   - docker container run -it --rm --name turbocommerce --volume /home/travis/build/backend/src:/home/backend/src turbocommerce_backend bash ./run_django_tests.sh --noinput --keepdb
