@@ -6,7 +6,7 @@ WORKDIR $HOME
 COPY backend/src $HOME/src
 COPY backend/poetry.lock $HOME
 COPY backend/.env $HOME
-COPY backend/run_django_tests.sh ${HOME}
+COPY run_backend_tests.sh ${HOME}
 COPY backend/pyproject.toml $HOME
 
 ENV PYTHONPATH=${PYTHONPATH}:${PWD}
