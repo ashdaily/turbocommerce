@@ -21,7 +21,7 @@ class User(AbstractUser):
     ADMIN = "ADMIN"
     USER_TYPES = ((CUSTOMER, CUSTOMER), (ADMIN, ADMIN))
 
-    # Get rid of username, and point it to email instead
+    # Getting rid of django inbuilt username, and pointing it to email instead
     username = None
     email = models.EmailField(_("email address"), unique=True)
     EMAIL_FIELD = "email"

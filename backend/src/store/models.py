@@ -16,22 +16,6 @@ class Store(Timestamp):
     )
     store_name = models.CharField(max_length=50, unique=True)
     store_logo = models.ImageField(upload_to=path_for_store_logo, null=True, blank=True)
-    store_host_url = models.URLField(max_length=255, unique=True)
 
     def __str__(self):
         return self.store_name
-
-
-class StoreCustomer(Timestamp):
-    store = models.ForeignKey(
-        Store,
-        on_delete=models.CASCADE,
-        related_name="customer_stores",
-        related_query_name="customer_store",
-    )
-    customer = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="store_customers",
-        related_query_name="store_customer",
-    )
