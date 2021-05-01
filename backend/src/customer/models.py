@@ -9,7 +9,7 @@ class CustomerWishlist(Timestamp):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.customer.username}"
+        return f"{self.customer.email}"
 
     class Meta:
         unique_together = [["customer", "product"]]
