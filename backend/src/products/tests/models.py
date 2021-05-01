@@ -85,7 +85,6 @@ class TestProduct(TestCaseBase):
         store = Store.objects.create(
             store_owner=store_owner,
             store_name="mystore",
-            store_host_url="http://mystore.turbocommerce.com",
         )
 
         product_1 = Product.objects.create(

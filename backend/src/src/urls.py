@@ -28,6 +28,7 @@ urlpatterns = [
     path("api/core/", include("core.urls")),
     path("api/products/", include("products.urls")),
     path("api/customer/", include("customer.urls")),
+    path("api/store/", include("store.urls")),
     # swagger
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
