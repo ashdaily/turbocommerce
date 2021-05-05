@@ -23,7 +23,7 @@ export default () => {
     }
 
     const payload = {
-      username: email,
+      email: email,
       password: password,
     };
     axios
@@ -59,7 +59,7 @@ export default () => {
               </Form.Control.Feedback>
               {error ? (
                 <Form.Text className="text-danger">
-                  {error.username[0]}
+                  {error.email[0]}
                 </Form.Text>
               ) : (
                 ""

@@ -32,7 +32,7 @@ export default () => {
     }
 
     const payload = {
-      username: email,
+      email: email,
       password: password,
     };
     axios
