@@ -3,7 +3,7 @@
         "model": "core.user",
         "pk": 1,
         "fields": {
-            "username": "ash",
+            "email": "ash@gmail.com",
             "password": "ash123",
             "user_type": "CUSTOMER"
         }
@@ -15,7 +15,8 @@
             "store_owner": 1,
             "store_name": "ashstore",
             "store_logo": "https://lorempixel.com/50/50",
-            "store_host_url": "https://ashstore.turbocommerce.com"
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
         }
     },
     {

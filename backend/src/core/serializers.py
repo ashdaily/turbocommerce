@@ -10,7 +10,7 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = (
-            "username",
+            "email",
             "password",
             "first_name",
             "last_name",
@@ -18,15 +18,3 @@ class UserSerializer(ModelSerializer):
             "phone_number",
             "address_pincode",
         )
-
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
-
-    def validate_username(self, username):
-        username = username.strip().lower()
-        try:
-            validate_email(username)
-        except ValidationError:
-            raise serializers.ValidationError("Username should only be email")
-        return username
