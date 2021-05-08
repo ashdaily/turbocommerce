@@ -1,21 +1,21 @@
 FROM ubuntu:20.10
 
 ENV PYTHON_VERSION=3.9
-RUN apt update --yes
-RUN apt install --yes software-properties-common
+RUN apt-get update --yes
+RUN apt-get install --yes software-properties-common
 
 # for postgres to use
-RUN apt install --yes libpq-dev python${PYTHON_VERSION}-dev
+RUN apt-get install --yes libpq-dev python${PYTHON_VERSION}-dev
 
 # need to update ubuntu repository targets
 RUN sed -i -e 's|eoan|focal|g' /etc/apt/sources.list
-RUN apt update --yes
+RUN apt-get update --yes
 RUN add-apt-repository ppa:deadsnakes/ppa
 
 # install python3.9 and remove the symlink for python3.8
 # and create for python3.9 instead
-RUN apt install --yes python${PYTHON_VERSION}
-RUN apt install --yes python3-pip
+RUN apt-get install --yes python${PYTHON_VERSION}
+RUN apt-get install --yes python3-pip
 RUN rm /usr/bin/python3
 RUN ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python3
 
