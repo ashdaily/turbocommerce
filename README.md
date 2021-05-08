@@ -19,7 +19,7 @@ docker-compose up
 # run migrations
 docker-compose run backend
 cd backend/src/
-python manage.py migrate
+python3 manage.py migrate
 ```
 
 ---
