@@ -2,7 +2,6 @@ from django.db import models
 
 from core.models import Timestamp, User
 from products.models import Product, ProductSize
-from store.models import Store
 
 
 class Shipper(Timestamp):
@@ -16,7 +15,6 @@ class ShippingOrderDetail(Timestamp):
 
 
 class ShippingOrder(Timestamp):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     shipping_order_details = models.ForeignKey(
         ShippingOrderDetail, on_delete=models.CASCADE
     )

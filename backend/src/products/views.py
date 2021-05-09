@@ -34,7 +34,7 @@ class ProductListView(ListAPIView, PaginationMixin):
         slug = self.request.query_params.get("slug", None)
         if slug is None:
             # T0DO: send only variant that are published
-            return Product.objects.all()
+            return Product.objects.filter()
         return Product.objects.filter(slug=slug)
 
 

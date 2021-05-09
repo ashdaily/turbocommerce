@@ -5,7 +5,6 @@ from pyhustler.countries import COUNTRIES
 from pyhustler.measurement import MEASUREMENT_NAMES, MEASUREMENT_UNITS
 
 from core.models import Timestamp
-from store.models import Store
 
 
 class ProductMeasurement(models.Model):
@@ -24,7 +23,6 @@ class ProductMeasurement(models.Model):
 
 
 class ProductSize(Timestamp):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=True, blank=True)
     measurement = models.ManyToManyField(ProductMeasurement)
     comment = models.CharField(max_length=255, null=True, blank=True)
@@ -34,7 +32,6 @@ class ProductSize(Timestamp):
 
 
 class Warehouse(Timestamp):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     warehouse_name = models.CharField(max_length=255)
     address_street_line_1 = models.CharField(max_length=255, null=True, blank=True)
     address_street_line_2 = models.CharField(max_length=255, null=True, blank=True)
@@ -185,12 +182,6 @@ class ProductModelManager(models.Manager):
 
 
 class Product(Timestamp):
-    store = models.ForeignKey(
-        Store,
-        on_delete=models.CASCADE,
-        related_name="store_products",
-        related_query_name="store_product",
-    )
     child_category = models.ForeignKey(ProductChildCategory, on_delete=models.CASCADE)
     brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=255, null=True, blank=True)
@@ -263,7 +254,7 @@ class ProductVariant(Timestamp):
 
 def generate_upload_path_for_images(instance, filename):
     variant = instance.product_variant
-    return f"{variant.product.store.store_name}/{variant.id}/{filename}"
+    return f"{variant.product}/{variant.id}/{filename}"
 
 
 class ProductVariantImage(Timestamp):
