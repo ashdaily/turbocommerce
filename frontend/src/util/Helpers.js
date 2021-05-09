@@ -12,6 +12,15 @@ const truncate = (str, length, ending) => {
   }
 };
 
-const removeHyphenAndCapitalize = (url) => url.replace('-', ' ')[0].toUpperCase() + url.replace('-', ' ').slice(1)
 
-module.exports = { truncate, removeHyphenAndCapitalize };
+const removeHyphensAndCapitalize = (str) => {
+  if(str.length > 0){
+    str = str.replaceAll('-', ' ');
+    str = str[0].toUpperCase() + str.slice(1, str.length)
+    return str
+  }
+  return ""
+}
+
+
+module.exports = { truncate, removeHyphensAndCapitalize };

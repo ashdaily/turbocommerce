@@ -1,14 +1,14 @@
 import React from "react";
 import Breadcrumbs from "react-router-dynamic-breadcrumbs";
 
-import { removeHyphenAndCapitalize } from '../util/Helpers'
+import { removeHyphensAndCapitalize } from '../util/Helpers'
 
 const routes = {
   "/": "Home",
-  "/:grandParentCategory": (url, match) => removeHyphenAndCapitalize(match[':grandParentCategory']),
-  "/:grandParentCategory/:parentCategory": (url, match) => removeHyphenAndCapitalize(match[':parentCategory']),
-  "/:grandParentCategory/:parentCategory/:childCategory": (url, match) => removeHyphenAndCapitalize(match[':childCategory']),
-  "/:grandParentCategory/:parentCategory/:childCategory/:slug": (url, match) => removeHyphenAndCapitalize(match[':slug']),
+  "/:grandParentCategory": (url, match) => removeHyphensAndCapitalize(match[':grandParentCategory']),
+  "/:grandParentCategory/:parentCategory": (url, match) => removeHyphensAndCapitalize(match[':parentCategory']),
+  "/:grandParentCategory/:parentCategory/:childCategory": (url, match) => removeHyphensAndCapitalize(match[':childCategory']),
+  "/:grandParentCategory/:parentCategory/:childCategory/:slug": (url, match) => removeHyphensAndCapitalize(match[':slug']),
   "/:id": ":id",
 };
 
