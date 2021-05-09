@@ -2,7 +2,7 @@ FROM ubuntu:20.10
 
 ENV PYTHON_VERSION=3.9
 RUN apt-get update --yes
-RUN apt-get remove --purge dpkg
+RUN apt-get remove dpkg && apt clean && apt autoremove
 RUN apt-get install --yes software-properties-common
 
 # for postgres to use
