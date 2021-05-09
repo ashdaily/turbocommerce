@@ -2,6 +2,7 @@ FROM ubuntu:20.10
 
 ENV PYTHON_VERSION=3.9
 RUN apt-get update --yes
+RUN dpkg ––configure –a
 RUN apt-get install --yes software-properties-common
 
 # for postgres to use
