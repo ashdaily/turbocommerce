@@ -1,0 +1,13 @@
+[
+    {
+        "model": "store.storeinformation",
+        "pk": 1,
+        "fields": {
+            "store_name": "Ash Store",
+            "title_tag": "Yo chicas gotta buy my stuff",
+            "logo": "ashstore/1.png",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    }
+]
