@@ -14,10 +14,11 @@ class StoreInformation(Timestamp):
     logo = models.ImageField(upload_to=save_logo)
 
     def save(self, *args, **kwargs):
-        # we support only single store for now
-        # so we want to restrict the admin from adding multiple
-        # store informations
-        # TODO: add test for this
+        """
+        we support only single store for now
+        so we want to restrict the admin from adding multiple
+        store informations
+        """
         if StoreInformation.objects.all().count() == 1:
             raise Exception("Only single store information allowed")
 
