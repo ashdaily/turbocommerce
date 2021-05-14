@@ -19,7 +19,10 @@ class StoreInformation(Timestamp):
         so we want to restrict the admin from adding multiple
         store informations
         """
-        if StoreInformation.objects.all().count() == 1:
+        if self.pk is None and StoreInformation.objects.all().count() == 1:
             raise Exception("Only single store information allowed")
 
-        self.save(*args, **kwargs)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.store_name
