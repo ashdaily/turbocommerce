@@ -6,14 +6,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 BASE_DIR_PARENT = Path(__file__).resolve(strict=True).parent.parent.parent
 
-# Enviroment variables settings below
+# Enviroment variables
 
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR_PARENT, ".env"))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
@@ -21,7 +18,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["*"]
+
+# Allowed host settings
+
+ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
 
 
 # Application definition
