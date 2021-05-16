@@ -1,5 +1,5 @@
 - Please pick an issue or create a new one from [here](https://github.com/ashdaily/turbocommerce/issues).
-- Create a branch based off master.
-- Raise a PR corresponding to the issue with branch name `issue#10` where 10 is the issue number. 
+- Create a branch based off master, `git checkout master && git pull && git checkout -b issue#1`
+- Raise a PR corresponding to the issue with branch name `issue#1` where 1 is the issue number. 
 - Remember to add a test case.
 - Wait for travis to turn green and request a review to [ashdaily](https://github.com/ashdaily).
