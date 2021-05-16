@@ -5,6 +5,7 @@ echo "PROJECT_NAME=${PROJECT_NAME}" > .env
 
 # Using >> to append
 echo "SECRET_KEY=${SECRET_KEY}" >> .env
+echo "ALLOWED_HOSTS=*" >> .env
 echo "REACT_APP_URL=${REACT_APP_URL}" >> .env
 echo "DEBUG=${DEBUG}" >> .env
 echo "AWS_S3_REGION_NAME=${AWS_S3_REGION_NAME}" >> .env
