@@ -99,7 +99,7 @@ class ProductChildCategory(Timestamp):
         related_query_name="product_child_category",
     )
     category_name = models.CharField(max_length=255, null=True, blank=True)
-    slug = models.SlugField(max_length=520, null=True, blank=True, unique=True)
+    slug = models.SlugField(max_length=520, blank=True, unique=True)
 
     def _make_unique_slug(self):
         self.slug = slugify(self.category_name)
