@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
@@ -17,8 +17,15 @@ import ProductList from "./pages/ProductList";
 import ProductCategoryList from "./pages/ProductCategoryList";
 import ProductDetails from "./pages/ProductDetails";
 import "./App.scss";
+import {ShopContext} from "./context/ShopContext";
 
 function App() {
+  const { updateStoreInfo } = useContext(ShopContext);
+
+  useEffect(() => {
+    updateStoreInfo();
+      },[]);
+
   return (
     <Router>
       <Container fluid>

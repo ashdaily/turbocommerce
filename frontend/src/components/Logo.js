@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import logoImage from "../images/logo.png";
+import {ShopContext} from "../context/ShopContext";
 
 export default () => {
+    const { storeInfo } = useContext(ShopContext);
+
+    //  TODO: REMOVE logoImage once the storeInfo has valid image from backend
+
   return (
     <Link to="/" className="anchor-silent">
       <Image
