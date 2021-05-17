@@ -1,4 +1,5 @@
 import axios from "../util/Axios";
+import ToastUtils from "../util/ToastUtils";
 
 const Storage = (items) => {
   let cartIds = items.map((product) => product.id);
@@ -121,12 +122,16 @@ export const CartReducer = (state, action) => {
         cartItems: [...state.cartItems],
       };
     case "DECREASE":
-      state.cartItems[
-        state.cartItems.findIndex(
+      const tempIndex = state.cartItems.findIndex(
           (item) =>
-            item.id === action.productId && item.variant_id === action.variantId
-        )
+              item.id === action.productId && item.variant_id === action.variantId
+      );
+      state.cartItems[
+        tempIndex
       ].quantity--;
+      if (state.cartItems[tempIndex].quantity === 0) {
+        ToastUtils.showInfo('Product Removed');
+      }
       return {
         ...state,
         cartItems: [...state.cartItems.filter((item) => item.quantity !== 0)],
