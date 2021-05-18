@@ -252,9 +252,10 @@ class ProductVariant(Timestamp):
         return images
 
 
-def generate_upload_path_for_images(instance, filename):
-    variant = instance.product_variant
-    return f"{variant.product}/{variant.id}/{filename}"
+def generate_upload_path_for_images(instance, file_name):
+    folder_name = instance.product_variant.product.child_category.category_name.lower()
+
+    return f"{folder_name}/{file_name}"
 
 
 class ProductVariantImage(Timestamp):
