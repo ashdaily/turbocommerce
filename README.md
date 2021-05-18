@@ -2,7 +2,7 @@
 
 ---
 
-Turbcommerce is a full fledged e-commerce solution written with latest cutting
+Turbocommerce is a full fledged e-commerce solution written with latest cutting
 edge technology. It absolutely free to use. It's written in python3, django3 and
 React JS with react-bootstrap. It uses Docker as a container, poetry for managing
 pip dependencies and yarn for managing react project dependencies.
