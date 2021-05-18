@@ -5,6 +5,8 @@ import {AppSettingsReducer} from "./AppSettingsReducer";
 import {serviceGetStoreInformation} from "../services/AppSettings.service";
 import {toast} from "react-toastify";
 import ToastUtils from "../util/ToastUtils";
+import {isLoggedIn} from "../util/Auth";
+import {serviceGetWishlistData} from "../services/Wishlist.service";
 
 export const ShopContext = createContext();
 
@@ -45,6 +47,20 @@ const ShopContextProvider = ({ children }) => {
     initialWishlistState
   );
   const [appSettingState, appSettingDispatch] = useReducer(AppSettingsReducer, appSettingsInitialValue);
+
+  const syncWishlist = () => {
+    if (isLoggedIn) {
+      const req = serviceGetWishlistData();
+      req.then((res) => {
+        if (!res.error) {
+          const wishlistIds = res.data.results.map(item => {return {id: item.id} });
+          wishlistDispatch({type: 'SYNC_WISHLIST', payload: wishlistIds });
+        } else {
+          wishlistDispatch({type: 'SYNC_WISHLIST', payload: [] });
+        }
+      });
+    }
+  }
 
   const updateStoreInfo = (data) => {
     if (initialStoreInfo.title_tag != '') {
@@ -107,6 +123,7 @@ const ShopContextProvider = ({ children }) => {
     addProductToWishlist,
     removeProductFromWishlist,
     updateStoreInfo,
+    syncWishlist,
     ...state,
     ...wishlistState,
     ...appSettingState,

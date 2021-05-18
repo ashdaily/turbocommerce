@@ -1,6 +1,7 @@
 import axios from "../util/Axios";
 import { isLoggedIn } from "../util/Auth";
 
+// TODO: REMOVE AFTER TESTING EVERYTHING
 const Storage = () => {
   if (isLoggedIn) {
     axios
@@ -27,7 +28,7 @@ const Storage = () => {
 };
 
 export const sumWishlistItems = (items) => {
-  Storage();
+  // Storage();
   let totalWishlistItems =
     items.length > 0 ? items.reduce((total) => total + 1, 0) : 0;
   return { totalWishlistItems };
@@ -35,6 +36,14 @@ export const sumWishlistItems = (items) => {
 
 export const WishlistReducer = (state, action) => {
   switch (action.type) {
+    case "SYNC_WISHLIST":
+      const wishlistData = action.payload;
+      localStorage.setItem("wishlistItems", JSON.stringify(wishlistData));
+      return {
+        ...state,
+        totalWishlistItems: wishlistData.length,
+        wishlistItems: wishlistData,
+      };
     case "ADD_ITEM_TO_WISHLIST":
       if (!state.wishlistItems.find((item) => item.id === action.payload.id)) {
         state.wishlistItems.push({
