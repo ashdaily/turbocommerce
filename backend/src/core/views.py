@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.http import Http404
 from pyhustler.pagination import PaginationMixin
 from rest_framework import status
@@ -5,8 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import User
-from .serializers import UserSerializer
+from core.models import User
+from core.serializers import UserSerializer
 
 
 class CustomerDetailView(APIView, PaginationMixin):
@@ -34,6 +35,11 @@ class CustomerSignupView(APIView):
         serializer = self.serializer(data=payload)
 
         if serializer.is_valid():
-            serializer.save()
-            return Response({})
+            user = User()
+            user.email = payload.get("email").strip()
+            user.password = make_password(payload.get("password").strip())
+            user.user_type = payload.get("user_type")
+            user.save()
+
+            return Response({}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

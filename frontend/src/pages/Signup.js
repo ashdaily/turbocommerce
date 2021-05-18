@@ -29,7 +29,7 @@ export default () => {
     axios
       .post("api/core/customer/signup/", payload)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           setRedirect(true);
         }
       })
