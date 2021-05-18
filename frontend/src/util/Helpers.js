@@ -23,4 +23,17 @@ const removeHyphensAndCapitalize = (str) => {
 }
 
 
-module.exports = { truncate, removeHyphensAndCapitalize };
+const updatePageTitle = (title, logo) => {
+  document.title = title;
+
+  //TODO: UNCOMMENT WHEN IMAGE START COMING
+  /*
+  const favIcon = document.getElementById("favicon");
+  favIcon.href = logo;
+
+   */
+}
+
+
+
+module.exports = { updatePageTitle, truncate, removeHyphensAndCapitalize };

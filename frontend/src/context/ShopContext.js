@@ -1,6 +1,10 @@
 import React, { createContext, useReducer } from "react";
 import { CartReducer, sumItems } from "./CartReducer";
 import { WishlistReducer, sumWishlistItems } from "./WishListReducer";
+import {AppSettingsReducer} from "./AppSettingsReducer";
+import {serviceGetStoreInformation} from "../services/AppSettings.service";
+import {toast} from "react-toastify";
+import ToastUtils from "../util/ToastUtils";
 
 export const ShopContext = createContext();
 
@@ -18,10 +22,21 @@ const wishlistStorage = localStorage.getItem("wishlistItems")
   ? JSON.parse(localStorage.getItem("wishlistItems"))
   : [];
 
+const initialStoreInfo = localStorage.getItem('storeInfo') ? JSON.parse(localStorage.getItem('storeInfo')) :{
+  title_tag: '',
+  logo: '',
+  store_name: '',
+};
+
 const initialWishlistState = {
   wishlistItems: wishlistStorage,
   ...sumWishlistItems(wishlistStorage),
 };
+
+const appSettingsInitialValue = {
+  storeInfo: initialStoreInfo,
+};
+
 
 const ShopContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CartReducer, initialState);
@@ -29,6 +44,23 @@ const ShopContextProvider = ({ children }) => {
     WishlistReducer,
     initialWishlistState
   );
+  const [appSettingState, appSettingDispatch] = useReducer(AppSettingsReducer, appSettingsInitialValue);
+
+  const updateStoreInfo = (data) => {
+    if (initialStoreInfo.title_tag != '') {
+      appSettingDispatch({ type: 'UPDATE_STORE_INFO', payload: initialStoreInfo });
+    }
+    const req = serviceGetStoreInformation();
+    req.then((res) => {
+      if (!res.error) {
+        const data = res.data.length > 0 ? res.data[0] : null;
+        if (data) {
+          appSettingDispatch({ type: 'UPDATE_STORE_INFO', payload: data });
+        }
+      }
+    });
+
+  };
 
   const increase = (productId, variantId) => {
     dispatch({ type: "INCREASE", productId, variantId });
@@ -39,10 +71,12 @@ const ShopContextProvider = ({ children }) => {
   };
 
   const addProduct = (payload, variant) => {
+    ToastUtils.showInfo('Product Added');
     dispatch({ type: "ADD_ITEM", payload, variant });
   };
 
   const removeProduct = (productId, variantId) => {
+    ToastUtils.showInfo('Product Removed');
     dispatch({ type: "REMOVE_ITEM", productId, variantId });
   };
 
@@ -72,8 +106,10 @@ const ShopContextProvider = ({ children }) => {
     handleCheckout,
     addProductToWishlist,
     removeProductFromWishlist,
+    updateStoreInfo,
     ...state,
     ...wishlistState,
+    ...appSettingState,
   };
 
   return (
