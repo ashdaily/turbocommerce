@@ -6,7 +6,7 @@ import { ShopContext } from "../context/ShopContext";
 
 const Wishlist = () => {
   const { totalWishlistItems } = useContext(ShopContext);
-
+  console.log('totalWishlistItems', totalWishlistItems);
   let history = useHistory();
   return (
     <ListGroup.Item
