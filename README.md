@@ -92,6 +92,11 @@ Here is how to create the `.env` file.
     docker rm -f -v turbocommerce_db_1
     ```
 
+- Docker migrate backend container
+    ```
+    docker-compose run --rm backend bash ./run_backend_migrate.sh
+    ```
+
 - Travis add secret environment variables
     - make sure to install travis, `brew install travis`
     - To login, `travis login --pro --github-token <your_github_token`, generate the github_token from [here](https://github.com/settings/tokens)
