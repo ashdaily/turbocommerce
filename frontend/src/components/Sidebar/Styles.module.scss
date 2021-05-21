@@ -1,0 +1,268 @@
+@import '../../variables';
+
+.mainNavbar {
+  position: fixed;
+  background: $primaryBgColor;
+  color: $sidebarTextColor;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  font-size: 13.6px;
+  z-index: 5;
+  transition: left 250ms ease;
+  overflow: visible;
+}
+.navbar--with-shadow {
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.15);
+}
+.hydrated {
+  visibility: inherit;
+}
+.navContainer {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.logo, .logo .logotext {
+  color: #212b36;
+  text-decoration: none;
+}
+.logo {
+  background: #faf9f5;
+  font-family: Karla, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1.4em;
+  text-align: center;
+  margin-top: 50px;
+}
+.mainNavbar a {
+  color: $sidebarTextColor;
+  -moz-transition: color 100ms;
+  -webkit-transition: color 100ms;
+  transition: color 100ms;
+  text-decoration: none;
+
+}
+.logo, .logo .logotext {
+  color: #212b36;
+  text-decoration: none;
+}
+
+.mainNavbar .logo .logoimg {
+  margin: 27px;
+}
+.logo .logoimg {
+  display: block;
+}
+.logo img {
+  max-width: 100%;
+  vertical-align: top;
+}
+img, svg {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+.search-box {
+  position: relative;
+  border-bottom: 1px solid rgba(33, 43, 54, 0.25);
+}
+
+.mobile-only {
+  display: none;
+}
+.mainnav {
+  padding-top: 20px;
+  padding-bottom: 50px;
+  font-family: Karla, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.mainnav .tier1 {
+  transition: all 250ms ease;
+}
+.show-nav-mobile .mainnav .back, .nav-style-in .mainnav .back {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 50px;
+  padding: 9px 0 0;
+  margin: 0;
+  text-align: center;
+  z-index: 3;
+  font-size: 20px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms;
+}
+.mainnav .back {
+  display: none;
+}
+
+.mainnav a {
+  display: block;
+  margin: 0 27px;
+  padding: 5px 0;
+  transition: 250ms border-color;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(33, 43, 54, 0.25);
+}
+.mainnav ul {
+  margin: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+.mainnav ol, ul, dl {
+  margin-left: 2em;
+}
+.mainnav ul, ol, dl {
+  margin: 1em;
+  font-size: 100%;
+}
+.mainnav ol, ul {
+  list-style: none;
+}
+.mainnav li {
+  list-style: none;
+}
+.mainnav .tier1 > ul > li > a {
+  text-transform: uppercase;
+}
+.mainnav li.active > a, .mainnav li > a:hover, .mainnav .tier1 > ul > li.expanded > a {
+  border-bottom-color: rgba(33, 43, 54, 0.9);
+}
+.show-nav-mobile .mainnav .tier2, .nav-style-in .mainnav .tier2 {
+  display: none;
+}
+.show-nav-mobile .mainnav .tier2, .show-nav-mobile .mainnav .tier2 a, .show-nav-mobile .mainnav .tier2 a:hover, .nav-style-in .mainnav .tier2, .nav-style-in .mainnav .tier2 a, .nav-style-in .mainnav .tier2 a:hover {
+  color: inherit;
+}
+.show-nav-mobile .mainnav .tier2, .nav-style-in .mainnav .tier2 {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: calc(100% - 30px);
+  margin-left: 30px;
+  height: auto;
+  background: transparent;
+}
+.mainnav .tier2 {
+  display: none;
+  font-weight: normal;
+}
+.mainnav .tierTitle {
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 10px 27px 10px;
+}
+.mainnav .tier2 > ul {
+  padding-bottom: 50px;
+}
+.mainnav ul {
+  margin: 0;
+}
+.mainnav ol, ul {
+  list-style: none;
+}
+.mainnav ul {
+  margin: 0;
+}
+
+/*outside properties*/
+body.navOutsideExpandedMode {
+  overflow: hidden;
+}
+.navOutsideExpandedMode .mainnav .tier1 .outsideExpanded .tier2 {
+  width: 210px;
+  overflow-y: auto;
+}
+.navOutsideExpandedMode .mainnav .tier2, .navOutsideExpandedMode .mainnav .tier2 a, .navOutsideExpandedMode .mainnav .tier2 a:hover {
+  color: #333333;
+}
+.navOutsideExpandedMode .mainnav .tier1 > ul > li > a {
+  position: relative;
+}
+.mainnav .tier1 > ul > li > a {
+  text-transform: uppercase;
+}
+
+.mainnav li.active > a, .mainnav li > a:hover, .mainnav .tier1 > ul > li.expanded > a {
+  border-bottom-color: rgba(33, 43, 54, 0.9);
+}
+
+.navOutsideExpandedMode .mainnav .tier1 .outsideExpanded .tier2 {
+  width: 210px;
+  overflow-y: auto;
+}
+.navOutsideExpandedMode .mainnav .tier2, .navOutsideExpandedMode .mainnav .tier2 a, .navOutsideExpandedMode .mainnav .tier2 a:hover {
+  color: #333333;
+}
+.navOutsideExpandedMode .mainnav .tier2 {
+  display: block;
+  position: absolute;
+  left: 240px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  transition: width 250ms ease;
+  z-index: 5;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: #f2efe4;
+}
+.mainnav .tier2 {
+  display: none;
+  font-weight: normal;
+}
+.navOutsideExpandedMode .mainnav .tier2 > * {
+  min-width: 210px;
+}
+.navOutsideExpandedMode .mainnav .tierTitle {
+  padding-top: 30px;
+}
+.navOutsideExpandedMode .mainnav .tier2 > * {
+  min-width: 210px;
+}
+.mainnav .tier2 > ul {
+  padding-bottom: 50px;
+}
+.mainnav li {
+  list-style: none;
+}
+.navOutsideExpandedMode .mainnav .tier2 > ul > li > a {
+  border-bottom-color: rgba(51, 51, 51, 0.25);
+}
+.navOutsideExpandedMode .mainnav .tier2, .navOutsideExpandedMode .mainnav .tier2 a, .navOutsideExpandedMode .mainnav .tier2 a:hover {
+  color: #333333;
+}
+/*bubble right*/
+.navOutsideExpandedMode .mainnav .tier1 .outsideExpanded > a:after {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.navOutsideExpandedMode .mainnav .tier1 > ul > li > a:after {
+  content: '';
+  position: absolute;
+  right: -27px;
+  margin-top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 8px 8px 0;
+  border-color: transparent #f2efe4 transparent transparent;
+  opacity: 0;
+  -webkit-transform: translateX(5px);
+  transform: translateX(5px);
+  transition: all 250ms ease;
+}
