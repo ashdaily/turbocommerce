@@ -20,10 +20,11 @@ import "./App.scss";
 import {ShopContext} from "./context/ShopContext";
 
 function App() {
-  const { updateStoreInfo } = useContext(ShopContext);
+  const { updateStoreInfo, syncWishlist } = useContext(ShopContext);
 
   useEffect(() => {
     updateStoreInfo();
+    syncWishlist();
       },[]);
 
   return (
