@@ -21,7 +21,7 @@ DEBUG = env("DEBUG")
 
 # Allowed host settings
 
-ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 
 
 # Application definition

@@ -91,9 +91,9 @@ class ProductSuggestionListView(APIView, PaginationMixin):
         queryset = Product.objects.product_suggestion(last_seen_product_id=product_id)
         page = self.paginate_queryset(queryset)
         if page is not None:
-            serializer = self.serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        return Response(serializer.errors)
+            serialized = self.serializer(page, many=True)
+            return self.get_paginated_response(serialized.data)
+        return Response(self.serializer.errors)
 
 
 class ProductCategoriesListView(APIView):

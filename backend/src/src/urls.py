@@ -1,4 +1,6 @@
 import environ
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from drf_yasg import openapi
@@ -22,7 +24,7 @@ swagger_view = get_schema_view(
 
 
 urlpatterns = [
-    # admin
+    # django administration
     path("admin/", admin.site.urls),
     # project apps
     path("api/core/", include("core.urls")),
@@ -44,3 +46,6 @@ urlpatterns = [
         r"^redoc/$", swagger_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
 ]
+
+# serves uploaded media files
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -253,7 +253,8 @@ class ProductVariant(Timestamp):
 
 
 def generate_upload_path_for_images(instance, file_name):
-    folder_name = instance.product_variant.product.child_category.category_name.lower()
+    # using slug for folder_name to avoid space characters in folder names
+    folder_name = instance.product_variant.product.child_category.slug.lower()
 
     return f"{folder_name}/{file_name}"
 
