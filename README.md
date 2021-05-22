@@ -65,6 +65,15 @@ Here is how to create the `.env` file.
     yarn start
     ```
 
+- Add turbocommerce as a host (optional)
+    - Open hosts file
+    ```
+    sudo vi /etc/hosts/
+    ```
+    - Press `i` when file opens
+    - Add `0.0.0.0 turbocommerce` at the end of the file
+    - Press Esc, type `:x` and hit Enter.
+    - Open `https://turbocommerce:8000`
 ---
 
 ### Useful commands
