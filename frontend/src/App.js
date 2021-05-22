@@ -32,11 +32,9 @@ function App() {
     <Router>
       <Container fluid>
         <ToastContainer />
-        <Row>
-          <Col md={2}>
+
             <Sidebar />
-          </Col>
-          <Col md={10}>
+            <div className={'contentArea'}>
             <Switch>
               <PrivateRoute exact path="/pay" component={Pay} />
               <Route exact path="/" component={ProductList} />
@@ -55,8 +53,7 @@ function App() {
                 component={ProductDetails}
               />
             </Switch>
-          </Col>
-        </Row>
+            </div>
       </Container>
     </Router>
   );

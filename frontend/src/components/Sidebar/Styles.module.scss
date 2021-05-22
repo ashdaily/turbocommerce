@@ -12,10 +12,9 @@
   z-index: 5;
   transition: left 250ms ease;
   overflow: visible;
-}
-.navbar--with-shadow {
   box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.15);
 }
+
 .hydrated {
   visibility: inherit;
 }
@@ -25,11 +24,11 @@
   overflow-y: auto;
 }
 .logo, .logo .logotext {
-  color: #212b36;
+  color: $sidebarTextColor;
   text-decoration: none;
 }
 .logo {
-  background: #faf9f5;
+  background: $primaryBgColor;
   font-family: Karla, sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -47,7 +46,7 @@
 
 }
 .logo, .logo .logotext {
-  color: #212b36;
+  color: $sidebarTextColor;
   text-decoration: none;
 }
 
@@ -139,21 +138,11 @@ img, svg {
 .mainnav li.active > a, .mainnav li > a:hover, .mainnav .tier1 > ul > li.expanded > a {
   border-bottom-color: rgba(33, 43, 54, 0.9);
 }
-.show-nav-mobile .mainnav .tier2, .nav-style-in .mainnav .tier2 {
-  display: none;
+.categoryNameLi:hover a {
+  border-bottom-color: rgba(33, 43, 54, 0.9);
+  text-transform: capitalize;
 }
-.show-nav-mobile .mainnav .tier2, .show-nav-mobile .mainnav .tier2 a, .show-nav-mobile .mainnav .tier2 a:hover, .nav-style-in .mainnav .tier2, .nav-style-in .mainnav .tier2 a, .nav-style-in .mainnav .tier2 a:hover {
-  color: inherit;
-}
-.show-nav-mobile .mainnav .tier2, .nav-style-in .mainnav .tier2 {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  width: calc(100% - 30px);
-  margin-left: 30px;
-  height: auto;
-  background: transparent;
-}
+
 .mainnav .tier2 {
   display: none;
   font-weight: normal;
@@ -177,15 +166,15 @@ img, svg {
 }
 
 /*outside properties*/
-body.navOutsideExpandedMode {
-  overflow: hidden;
-}
+//body.navOutsideExpandedMode {
+//  overflow: hidden;
+//}
 .navOutsideExpandedMode .mainnav .tier1 .outsideExpanded .tier2 {
   width: 210px;
   overflow-y: auto;
 }
 .navOutsideExpandedMode .mainnav .tier2, .navOutsideExpandedMode .mainnav .tier2 a, .navOutsideExpandedMode .mainnav .tier2 a:hover {
-  color: #333333;
+  color: $sidebarTextColor;
 }
 .navOutsideExpandedMode .mainnav .tier1 > ul > li > a {
   position: relative;
@@ -218,7 +207,7 @@ body.navOutsideExpandedMode {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
-  background: #f2efe4;
+  background: $sidebarTier2Color;
 }
 .mainnav .tier2 {
   display: none;
@@ -260,9 +249,12 @@ body.navOutsideExpandedMode {
   height: 0;
   border-style: solid;
   border-width: 8px 8px 8px 0;
-  border-color: transparent #f2efe4 transparent transparent;
+  border-color: transparent $sidebarTier2Color transparent transparent;
   opacity: 0;
   -webkit-transform: translateX(5px);
   transform: translateX(5px);
   transition: all 250ms ease;
+}
+.tier1title {
+  cursor: pointer;
 }
