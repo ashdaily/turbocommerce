@@ -34,7 +34,6 @@ you are contributing to this project. To read more check out [pre-commit docs](h
     ```
 
 
-
 - Setup .env file
     - Create a `.env` file based on `.env.example file`. This file includes environment
 variables that backend requires. You will need get your own `AWS_S3_REGION_NAME`,
@@ -44,17 +43,19 @@ Here is how to create the `.env` file.
     cd backend
     cat .env.example | tee .env
     ```
+
+
+- Docker migrate backend container
+    ```
+    docker-compose run --rm backend bash ./run_backend_migrate.sh
+    ```
+
+
 - Run backend api server and postgreql db
     ```
     docker-compose up
     ```
 
-- Run migrations
-    ```
-    docker-compose run backend
-    cd backend/src/
-    python manage.py migrate
-    ```
 
 - Setup frontend
     ```
@@ -90,11 +91,6 @@ Here is how to create the `.env` file.
 - Delete all data from postgres for a fresh start
     ```
     docker rm -f -v turbocommerce_db_1
-    ```
-
-- Docker migrate backend container
-    ```
-    docker-compose run --rm backend bash ./run_backend_migrate.sh
     ```
 
 - Travis add secret environment variables
