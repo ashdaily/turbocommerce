@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-
+import csx from 'classnames';
 import ProductCard from "../components/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
@@ -53,16 +53,16 @@ export default () => {
     products = data.results.map(
       (product, index) =>
         product.product_variants.length > 0 && (
-          <Col md={4}>
             <ProductCard key={index} data={product} />
-          </Col>
         )
     );
   }
 
   return (
     <>
-      <Row>{products}</Row>
+      <div className={csx('d-flex', 'flex-wrap')}>
+        {products}
+      </div>
       <Row>
         <Col>{paginate}</Col>
       </Row>
