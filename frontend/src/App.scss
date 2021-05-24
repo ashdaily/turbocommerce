@@ -1,6 +1,7 @@
 /*
 common
 */
+@import "variables";
 
 body:after {
   content: '';
@@ -89,5 +90,20 @@ opacity: 1;
   margin: 2.8rem 0 3.1rem;
 }
 .contentArea {
-  padding: calc(2px + 2.4em) 0 20px 241px;
+  padding: calc(2px + 2.4em) 0 20px 240px;
+}
+.product-cont {
+
+}
+.product-card {
+  width: $productCardSize;
+}
+.product-card .card-body {
+  padding: 6px 2px;
+  border-top: 1px solid rgba(128, 128, 128, 0.38);
+  color: $primaryTextColor;
+  text-transform: capitalize;
+}
+.product-card .product-price {
+  color: $secondaryTextColor
 }
