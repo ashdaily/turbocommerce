@@ -1,6 +1,5 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
-
+import csx from 'classnames';
 import { logout } from "../../util/Auth";
 import styles from "./Styles.module.scss";
 import {Link} from "react-router-dom";
@@ -13,7 +12,7 @@ export default () => {
         window.location.reload();
     }
   return (
-      <ul className={styles.specialLinks}>
+      <ul className={csx(styles.specialLinks, 'm-0', 'p-0')}>
           <li className="special-link special-link--1">
               <Link to="/" onClick={handleClick} className="anchor-silent">
       Sign out

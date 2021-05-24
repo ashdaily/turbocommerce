@@ -21,7 +21,7 @@ const CategoryListItem = ({ category, }) => {
                aria-haspopup="true"
                aria-expanded="false">{category.category_name}</a>
             <div className={styles.tier2}>
-                <ul>
+                <ul className={'m-0 p-0'}>
                     {category.product_parent_categories.map((parentCategory, i) => (
                         <>
                             <li className={styles.active}>

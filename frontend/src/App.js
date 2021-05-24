@@ -12,7 +12,6 @@ import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import Signup from "./pages/Signup";
 import Pay from "./pages/Pay";
-import SideBar from "./components/SideBar";
 import ProductList from "./pages/ProductList";
 import ProductCategoryList from "./pages/ProductCategoryList";
 import ProductDetails from "./pages/ProductDetails";

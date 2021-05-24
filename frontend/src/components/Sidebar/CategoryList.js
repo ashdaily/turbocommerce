@@ -30,5 +30,5 @@ export default () => {
     ));
   }
 
-  return  <ul >{categoryNames}</ul>;
+  return  <ul className={'m-0 p-0'}>{categoryNames}</ul>;
 };
