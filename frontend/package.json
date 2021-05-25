@@ -22,9 +22,11 @@
     "react-router-dom": "^5.2.0",
     "react-router-dynamic-breadcrumbs": "^2.2.0",
     "react-scripts": "3.4.3",
+    "react-slick": "^0.28.1",
     "react-social-auth": "^1.1.8",
     "react-social-login": "^3.4.13",
-    "react-toastify": "^6.2.0"
+    "react-toastify": "^6.2.0",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "HTTPS=true react-scripts start",

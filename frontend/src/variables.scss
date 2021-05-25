@@ -6,4 +6,5 @@ $secondaryTextColor: rgba(33, 43, 54, 0.69);
 $defaultFontFamily:  sans-serif;
 $sideBarBorderColor: rgba(33, 43, 54, 0.25);
 $sideBarBorderColorActive: rgba(33, 43, 54, 0.9);
-$productCardSize: calc((100vw - 270px) / 6 - 2.2rem);
+$productCardWidth: calc((100vw - 270px) / 6 - 2.2rem);
+$productCardHeight: calc(((100vw - 270px) / 6 - 2.2rem) * 4/3);
