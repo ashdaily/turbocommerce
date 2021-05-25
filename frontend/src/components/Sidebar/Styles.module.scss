@@ -1,0 +1,215 @@
+@import '../../variables';
+
+.mainNavbar {
+  position: fixed;
+  background: $primaryBgColor;
+  color: $sidebarTextColor;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  font-size: 0.9rem;
+  z-index: 5;
+  transition: left 250ms ease;
+  overflow: visible;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.15);
+}
+
+.hydrated {
+  visibility: inherit;
+}
+
+.navContainer {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.logo {
+  background: $primaryBgColor;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.mainNavbar a {
+  color: $sidebarTextColor;
+  -moz-transition: color 100ms;
+  -webkit-transition: color 100ms;
+  transition: color 100ms;
+  text-decoration: none;
+
+}
+
+.logo img {
+  max-width: 100%;
+  vertical-align: top;
+  height: auto;
+}
+
+.mainnav {
+  padding-top: 20px;
+  padding-bottom: 50px;
+  font-family: $defaultFontFamily;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.mainnav .tier1 {
+  transition: all 250ms ease;
+}
+
+.mainnav .back {
+  display: none;
+}
+
+.mainnav a {
+  display: block;
+  margin: 0 27px;
+  transition: 250ms border-color;
+  padding: 14px 0;
+  border-bottom: 1px solid $sideBarBorderColor;
+}
+
+.mainnav ul {
+  border: 0;
+  vertical-align: baseline;
+}
+
+.mainnav ol, ul, dl {
+  margin-left: 2em;
+}
+
+.mainnav ul, ol, dl {
+  margin: 1em;
+}
+
+.mainnav ol, ul, li {
+  list-style: none;
+}
+
+.mainnav .tier1 > ul > li > a {
+  text-transform: uppercase;
+}
+
+.mainnav li.active > a, .mainnav li > a:hover, .mainnav .tier1 > ul > li.expanded > a {
+  border-bottom-color: $sideBarBorderColorActive;
+}
+
+.categoryNameLi:hover a {
+  border-bottom-color: $sideBarBorderColorActive;
+  text-transform: capitalize;
+}
+
+.mainnav .tier2 {
+  display: none;
+  font-weight: normal;
+}
+
+.mainnav .tierTitle {
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 10px 27px 10px;
+}
+
+.mainnav .tier2 > ul {
+  padding-bottom: 50px;
+}
+
+.mainnav ul {
+  margin: 0;
+}
+
+/*outside properties*/
+
+.navOutsideExpandedMode .mainnav .tier1 .outsideExpanded .tier2 {
+  width: 210px;
+  overflow-y: auto;
+}
+
+.navOutsideExpandedMode .mainnav .tier2, .navOutsideExpandedMode .mainnav .tier2 a, .navOutsideExpandedMode .mainnav .tier2 a:hover {
+  color: $sidebarTextColor;
+}
+
+.navOutsideExpandedMode .mainnav .tier1 > ul > li > a {
+  position: relative;
+}
+
+.navOutsideExpandedMode .mainnav .tier1 .outsideExpanded .tier2 {
+  width: 210px;
+  overflow-y: auto;
+}
+
+.navOutsideExpandedMode .mainnav .tier2, .navOutsideExpandedMode .mainnav .tier2 a, .navOutsideExpandedMode .mainnav .tier2 a:hover {
+  color: $sidebarTextColor;
+}
+
+.navOutsideExpandedMode .mainnav .tier2 {
+  display: block;
+  position: absolute;
+  left: 240px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  transition: width 250ms ease;
+  z-index: 5;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: $sidebarTier2Color;
+}
+
+.mainnav .tier2 {
+  display: none;
+  font-weight: normal;
+}
+
+.navOutsideExpandedMode .mainnav .tier2 > * {
+  min-width: 210px;
+}
+
+.navOutsideExpandedMode .mainnav .tierTitle {
+  padding-top: 30px;
+}
+
+.navOutsideExpandedMode .mainnav .tier2 > * {
+  min-width: 210px;
+}
+
+.mainnav .tier2 > ul {
+  padding-bottom: 50px;
+}
+
+.mainnav li {
+  list-style: none;
+}
+
+.navOutsideExpandedMode .mainnav .tier2 > ul > li > a {
+  border-bottom-color: $sideBarBorderColor;
+}
+
+/*bubble right*/
+.navOutsideExpandedMode .mainnav .tier1 .outsideExpanded > a:after {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.navOutsideExpandedMode .mainnav .tier1 > ul > li > a:after {
+  content: '';
+  position: absolute;
+  right: -27px;
+  margin-top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 8px 8px 0;
+  border-color: transparent $sidebarTier2Color transparent transparent;
+  opacity: 0;
+  -webkit-transform: translateX(5px);
+  transform: translateX(5px);
+  transition: all 250ms ease;
+}
+.tier1title {
+  cursor: pointer;
+}

@@ -2,16 +2,17 @@ import React from "react";
 import { ListGroup } from "react-bootstrap";
 
 import { isLoggedIn } from "../util/Auth";
-import Logo from "../components/Logo";
-import Logout from "../components/Logout";
-import Cart from "./Cart";
-import Wishlist from "./Wishlist";
-import CategoryList from "./CategoryList";
-import LoginSignup from "./LoginSignup";
+import Logo from "./Sidebar/Logo";
+import Logout from "./Sidebar/Logout";
+import Cart from "./Sidebar/Cart";
+import Wishlist from "./Sidebar/Wishlist";
+import CategoryList from "./Sidebar/CategoryList";
+import LoginSignup from "./Sidebar/LoginSignup";
 
 export default (props) => {
   return (
     <>
+        <div className={'bgColor'}>
       <Logo />
       <ListGroup as="ul">
         <CategoryList />
@@ -19,6 +20,7 @@ export default (props) => {
         <Wishlist />
         {isLoggedIn ? <Logout /> : <LoginSignup />}
       </ListGroup>
+        </div>
     </>
   );
 };

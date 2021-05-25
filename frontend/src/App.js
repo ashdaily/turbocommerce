@@ -12,12 +12,12 @@ import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import Signup from "./pages/Signup";
 import Pay from "./pages/Pay";
-import SideBar from "./components/SideBar";
 import ProductList from "./pages/ProductList";
 import ProductCategoryList from "./pages/ProductCategoryList";
 import ProductDetails from "./pages/ProductDetails";
 import "./App.scss";
 import {ShopContext} from "./context/ShopContext";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
   const { updateStoreInfo, syncWishlist } = useContext(ShopContext);
@@ -31,11 +31,9 @@ function App() {
     <Router>
       <Container fluid>
         <ToastContainer />
-        <Row>
-          <Col md={2}>
-            <SideBar />
-          </Col>
-          <Col md={10}>
+
+            <Sidebar />
+            <div className={'contentArea'}>
             <Switch>
               <PrivateRoute exact path="/pay" component={Pay} />
               <Route exact path="/" component={ProductList} />
@@ -54,8 +52,7 @@ function App() {
                 component={ProductDetails}
               />
             </Switch>
-          </Col>
-        </Row>
+            </div>
       </Container>
     </Router>
   );

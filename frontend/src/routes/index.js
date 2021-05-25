@@ -11,7 +11,7 @@ import Login from "../pages/Login";
 import Cart from "../pages/Cart";
 import Signup from "../pages/Signup";
 import Pay from "../pages/Pay";
-import SideBar from "../components/SideBar";
+import SideBar from "../components/Sidebar/Sidebar";
 import ProductList from "../pages/ProductList";
 import ProductDetails from "../pages/ProductDetails";
 import "../App.scss";
