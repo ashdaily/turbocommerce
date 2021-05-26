@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
+import styles from './Style.module.scss';
+import csx from 'classnames';
 
-
-const ImageLoader = ({url}) => {
+const ImageLoader = ({src, className}) => {
     const [loading, setLoading] = useState(true);
 
     const imageLoaded = () => {
@@ -10,14 +11,14 @@ const ImageLoader = ({url}) => {
 
     return (
         <>
-            <div style={{display: loading ? "block" : "none"}}>
-                Loading images,
+            <div style={{display: loading ? "block" : "none"}} className={csx(styles.skeleton, className)}>
             </div>
-            <div style={{display: loading ? "none" : "block"}}>
                     <img
-                        src={url}
-                        onLoad={imageLoaded}/>)
-            </div>
+                        className={className}
+                        src={src}
+                        onLoad={imageLoaded}
+                        style={{display: loading ? "none" : "block"}}
+                    />
         </>
     );
 };

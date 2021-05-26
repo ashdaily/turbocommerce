@@ -41,9 +41,10 @@
 }
 
 .logo img {
-  max-width: 100%;
+  width: 150px;
+  height: 150px;
   vertical-align: top;
-  height: auto;
+  object-fit: cover;
 }
 
 .mainnav {

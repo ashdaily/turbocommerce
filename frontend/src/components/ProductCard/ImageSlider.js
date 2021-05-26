@@ -2,8 +2,9 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
-const ImageSlider = () => {
+const ImageSlider = ({images}) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -17,10 +18,10 @@ const ImageSlider = () => {
     return (
         <div className={'image-slider'}>
             <Slider {...settings}>
-                {[...Array(5).keys()].map((val) => {
+                {images.map((image) => {
                     return (<div className={'slider-cont'}>
-                        <img className={'slider-img'}
-                             src={'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'}/>
+                        <ImageLoader className={'slider-img'}
+                             src={image}/>
                     </div>);
                 })
                 }

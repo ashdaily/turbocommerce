@@ -17,11 +17,11 @@ export default () => {
       axios
         .get(
           `/api/products/by-category/?grand_parent_category_slug=${grandParentCategory}&parent_category_slug=${parentCategory}&child_category_slug=${childCategory}&page=${pageNumber}`
-        )
-        .then((response) => {
-          if (response.status === 200) {
-            let productData = response.data;
-            setProductData(productData);
+          )
+          .then((response) => {
+            if (response.status === 200) {
+              let productData = response.data;
+              setProductData(productData);
           }
         });
     };
