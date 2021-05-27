@@ -1,0 +1,83 @@
+.cartCont {
+  display: flex;
+}
+
+.leftCont {
+  flex: 0.65;
+  padding-right: 20px;
+  border-right: 1px solid #eaeaec;
+  padding-top: 32px;
+}
+
+.rightCont {
+  flex: 0.35;
+  vertical-align: top;
+  padding: 24px 0 0 16px;
+}
+
+.cartHeader {
+  padding: 8px 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bagTitle, .bagTotal {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+// Item Styles
+.itemContainer {
+  margin-bottom: 8px;
+  font-size: 14px;
+  border: 1px solid #eaeaec;
+  border-radius: 8px;
+  position: relative;
+  padding: 12px 12px 0;
+}
+
+.upperTile {
+  display: flex;
+}
+
+.productImg img {
+  height: 130px;
+  width: 98px;
+  object-fit: contain;
+}
+
+.detailCont {
+  padding-left: 12px;
+  text-transform: capitalize;
+  display: flex;
+  flex: 1;
+}
+
+.nameCont {
+  flex: 1;
+}
+
+.brandText, .priceText  {
+  font-weight: 600;
+}
+
+.nameText {
+  color: #565e70;
+  font-weight: 400;
+}
+
+.lowerTile {
+  border-top: 1px solid #eaeaec;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.removeBtn {
+  outline: none;
+  border: none;
+  background: white;
+  color: #696b79;
+  padding: 10px;
+}

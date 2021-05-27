@@ -1,5 +1,6 @@
 import axios from "../util/Axios";
 import ToastUtils from "../util/ToastUtils";
+import ProductUtils from "../util/ProductUtils";
 
 const Storage = (items) => {
   let cartIds = items.map((product) => product.id);
@@ -71,6 +72,8 @@ export const CartReducer = (state, action) => {
           in_stock: true,
           size: action.variant.size.name,
           color: action.variant.color,
+          image: ProductUtils.getFrontImage(action.payload),
+          brand: action.payload.brand.brand_name,
           quantity: 1,
         });
       }

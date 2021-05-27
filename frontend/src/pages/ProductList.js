@@ -4,10 +4,12 @@ import csx from 'classnames';
 import ProductCard from "../components/ProductCard/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
+import WaitingComponent from "../components/WaitingComponent/WaitingComponent";
 
 export default () => {
   const [data, setData] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = () => {
@@ -15,12 +17,19 @@ export default () => {
         if (response.status === 200) {
           setData(response.data);
         }
+        setLoading(false);
       });
     };
     loadData();
   }, [pageNumber]);
 
-  if (!data) {
+  if (isLoading && false) {
+    return (
+        <WaitingComponent/>
+    );
+  }
+
+  if (!data || true) {
     return (
       <Row className="p-3 wishlistLogin">
         <Col md={{ span: 12 }}>

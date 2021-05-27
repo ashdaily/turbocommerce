@@ -6,10 +6,10 @@ class ProductUtils {
     }
 
     getFrontImage = (product) => {
-        let frontImage = 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png';
+        let frontImage = require('../assets/images/logo/logo.jpg');
         if (product.product_variants.length >0) {
             const variant = product.product_variants[0];
-            frontImage = variant.images.length > 0 ? this.makeImageUrl(variant.images[0]) : 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png';
+            frontImage = variant.images.length > 0 ? this.makeImageUrl(variant.images[0]) : frontImage;
         }
         return frontImage;
     }

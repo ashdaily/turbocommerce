@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
-import Cart from "./pages/Cart";
+import Cart from "./pages/Cart/Cart";
 import Wishlist from "./pages/Wishlist";
 import Signup from "./pages/Signup";
 import Pay from "./pages/Pay";
