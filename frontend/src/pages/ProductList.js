@@ -5,6 +5,7 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
 import WaitingComponent from "../components/WaitingComponent/WaitingComponent";
+import NoProduct from "../components/NoProduct/NoProduct";
 
 export default () => {
   const [data, setData] = useState(null);
@@ -23,25 +24,15 @@ export default () => {
     loadData();
   }, [pageNumber]);
 
-  if (isLoading && false) {
+  if (isLoading) {
     return (
         <WaitingComponent/>
     );
   }
 
-  if (!data || true) {
+  if (!data) {
     return (
-      <Row className="p-3 wishlistLogin">
-        <Col md={{ span: 12 }}>
-          <div className="wishlistLogin-heading">Sorry No Products Found</div>
-          <div className="wishlistLogin-info">
-            Stay tuned for the new products coming soon
-          </div>
-          <div className="wishlistLogin-icon">
-            <i className="fas fa-shopping-basket"></i>
-          </div>
-        </Col>
-      </Row>
+        <NoProduct/>
     );
   }
 

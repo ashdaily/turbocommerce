@@ -24,6 +24,12 @@ class ProductUtils {
 
         return imageArr;
     }
+
+    getProductDetailSliderImages = (product) => {
+        return this.getImageArray(product).map((val) => {
+            return { original: val, thumbnail: val }
+        });
+    }
 }
 
 export default new ProductUtils();

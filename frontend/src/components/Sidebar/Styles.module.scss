@@ -96,9 +96,12 @@
   border-bottom-color: $sideBarBorderColorActive;
 }
 
+.categoryNameLi a {
+  text-transform: capitalize;
+}
+
 .categoryNameLi:hover a {
   border-bottom-color: $sideBarBorderColorActive;
-  text-transform: capitalize;
 }
 
 .mainnav .tier2 {

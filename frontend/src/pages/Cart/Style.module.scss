@@ -1,3 +1,4 @@
+@import "../../variables";
 .cartCont {
   display: flex;
 }
@@ -5,14 +6,14 @@
 .leftCont {
   flex: 0.65;
   padding-right: 20px;
-  border-right: 1px solid #eaeaec;
+  border-right: 1px solid $cartBorderColors;
   padding-top: 32px;
 }
 
 .rightCont {
   flex: 0.35;
   vertical-align: top;
-  padding: 24px 0 0 16px;
+  padding: 32px 0 0 16px;
 }
 
 .cartHeader {
@@ -31,7 +32,7 @@
 .itemContainer {
   margin-bottom: 8px;
   font-size: 14px;
-  border: 1px solid #eaeaec;
+  border: 1px solid $cartBorderColors;
   border-radius: 8px;
   position: relative;
   padding: 12px 12px 0;
@@ -47,11 +48,14 @@
   object-fit: contain;
 }
 
-.detailCont {
+.flex {
   padding-left: 12px;
+  flex: 1;
+}
+
+.detailCont {
   text-transform: capitalize;
   display: flex;
-  flex: 1;
 }
 
 .nameCont {
@@ -68,7 +72,7 @@
 }
 
 .lowerTile {
-  border-top: 1px solid #eaeaec;
+  border-top: 1px solid $cartBorderColors;
   margin-top: 12px;
   display: flex;
   justify-content: center;
@@ -80,4 +84,50 @@
   background: white;
   color: #696b79;
   padding: 10px;
+}
+
+.priceHeader {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 10px 0 16px;
+  color: $secondaryTextColor;
+}
+
+.priceInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: $secondaryTextColor;
+}
+
+.totalPriceInfo {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding-top: 16px;
+  border-top: 1px solid $cartBorderColors;
+  display: flex;
+  justify-content: space-between;
+}
+
+.orderBtn {
+  background: $primaryBgColor;
+  color: $sidebarTextColor;
+  width: 100%;
+  border-color: $cartBorderColors;
+}
+
+.qtyBtn {
+  outline: none;
+  border: none;
+  display: flex;
+}
+
+.qtyBtn > span {
+  margin-top: 2px;
+  margin-left: 4px;
+}
+
+.qtyBtn:focus {
+  outline: none;
 }

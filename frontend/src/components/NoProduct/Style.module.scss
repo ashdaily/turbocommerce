@@ -1,0 +1,17 @@
+.noDataCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(10vh);
+}
+
+.noDataText {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.codeText {
+  font-size: 12rem;
+  line-height: 13rem;
+}
