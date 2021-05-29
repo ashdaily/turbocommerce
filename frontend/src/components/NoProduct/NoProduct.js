@@ -6,12 +6,16 @@ import csx from 'classnames';
 const NoProduct = () => {
     return (
         <div className={styles.noDataCont}>
+            <div className={styles.wishlistLoginIcon}>
+                <img src={require('../../assets/images/no-results.svg')} alt="No Product Found Icon"/>
+            </div>
             <div className={styles.noDataText}>
-                The page you are looking for can't be found.
+                We couldn't find any matches!
             </div>
-            <div className={styles.codeText}>
-                404
+            <div className={styles.subText}>
+                Please check the spelling or try searching something else
             </div>
+
         </div>
     )
 };

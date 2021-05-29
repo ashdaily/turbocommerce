@@ -8,7 +8,6 @@ import Wishlist from "./Wishlist";
 import {isLoggedIn} from "../../util/Auth";
 import Logout from "./Logout";
 import LoginSignup from "./LoginSignup";
-import {ListGroup} from "react-bootstrap";
 
 const Sidebar = () => {
     return (

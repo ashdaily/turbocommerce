@@ -9,16 +9,17 @@ const QuantityModal = ({visible, handleQtyChange, selectedQty}) => {
 
     useEffect(() => {
         setQty(selectedQty);
-    }, [selectedQty]);
+    }, [visible, selectedQty]);
 
     const handleChange = (qty) => {
         setQty(qty);
     };
 
     const handleDone = () => {
-      handleChange(qty);
+        handleQtyChange(qty);
     };
 
+    console.log('qty', qty);
     return (
         <Modal
             show={visible}
@@ -33,7 +34,7 @@ const QuantityModal = ({visible, handleQtyChange, selectedQty}) => {
                         Select Quantity
                     </div>
                     <div>
-                        <button className={styles.closeBtn} type={'button'}>
+                        <button onClick={() => {handleQtyChange(null)}} className={styles.closeBtn} type={'button'}>
                             <span className={'fa fa-times'}></span>
                         </button>
                     </div>
@@ -43,7 +44,7 @@ const QuantityModal = ({visible, handleQtyChange, selectedQty}) => {
                         {[...Array(10).keys()].map((val) => {
                             return (
                                 <QtyItem key={'QUANTITY_KEY_' + val}
-                                         isSelected={qty == val + 1}
+                                         isSelected={qty === val + 1}
                                          handleChange={handleChange}
                                          title={val + 1}
                                 />

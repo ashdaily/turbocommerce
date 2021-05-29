@@ -7,13 +7,14 @@ const ImageLoader = ({src, className}) => {
 
     const imageLoaded = () => {
         setLoading(false);
-    }
+    };
 
     return (
         <>
             <div style={{display: loading ? "block" : "none"}} className={csx(styles.skeleton, className)}>
             </div>
                     <img
+                        alt={'Product Image'}
                         className={className}
                         src={src}
                         onLoad={imageLoaded}

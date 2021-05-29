@@ -17,7 +17,7 @@ export default () => {
         const loadData = () => {
             axios
                 .get(
-                    `/api/products/by-category/?grand_parent_category_slug=${grandParentCategory}&parent_category_slug=${parentCategory}&child_category_slug=${childCategory}&page=${pageNumber}`
+                    generateRequestUrl()
                 )
                 .then((response) => {
                     if (response.status === 200) {
@@ -28,6 +28,21 @@ export default () => {
         };
         loadData();
     }, [childCategory, grandParentCategory, parentCategory, pageNumber]);
+
+    const generateRequestUrl = () => {
+        let reqUrl = `/api/products/by-category/`;
+        if (grandParentCategory)
+            reqUrl += `?grand_parent_category_slug=${grandParentCategory}`;
+
+        if (parentCategory)
+            reqUrl += `&parent_category_slug=${parentCategory}`;
+
+        if (childCategory)
+            reqUrl += `&child_category_slug=${childCategory}`;
+
+        return `${reqUrl}&page=${pageNumber}`;
+    }
+
 
     if (productData && !productData.count) {
         return (

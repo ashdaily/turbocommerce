@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .noDataCont {
   display: flex;
   flex-direction: column;
@@ -7,11 +9,24 @@
 }
 
 .noDataText {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 2rem;
+  font-weight: 200;
 }
 
 .codeText {
   font-size: 12rem;
   line-height: 13rem;
+}
+
+.subText {
+  font-size: 0.8rem;
+  color: $secondaryAccentColor
+}
+
+.wishlistLoginIcon {
+  img {
+    width: 300px;
+    margin-left: 20px;
+  }
+  margin: 2.8rem 0 3.1rem;
 }

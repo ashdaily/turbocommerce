@@ -7,9 +7,12 @@ import CartItem from "./CartItem";
 import QuantityModal from "../../components/QuantityModal/QuantityModal";
 
 const Cart = () => {
+    const {changeCartQty} = useContext(ShopContext);
+    const {cartItems, total} = useContext(ShopContext);
     const [showQtyModal, setQtyModal] = useState(false);
     const [cartItem, setCartItem] = useState(null);
-    const {cartItems, total} = useContext(ShopContext);
+
+    console.log('cartItems', cartItems);
 
     const renderTotalItems = () => {
         return (<>{cartItems.length} {cartItems.length > 1 ? 'Items' : 'Item'}</>);
@@ -17,9 +20,10 @@ const Cart = () => {
 
     const handleQtyChange = (qty) => {
         if (qty) {
-
+            changeCartQty(cartItem.id, cartItem.variant_id, qty);
         }
         setQtyModal(false);
+        setCartItem(null);
     };
 
     const handleQtyBtn = useCallback((cartItem) => {
@@ -62,6 +66,7 @@ const Cart = () => {
                 </div>
             </div>
             <QuantityModal
+                selectedQty={cartItem ? cartItem.quantity : 0}
                 visible={showQtyModal}
                 handleQtyChange={handleQtyChange} />
         </div>

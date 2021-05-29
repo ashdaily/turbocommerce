@@ -101,6 +101,23 @@ export const CartReducer = (state, action) => {
           ),
         ],
       };
+
+    case "CHANGE_CART_QTY":
+      const { productId, variantId, qty } = action.payload;
+      const cartItems = JSON.parse(JSON.stringify(state.cartItems));
+      const itemIndex = cartItems.findIndex(
+          (item) =>
+              item.id === productId &&
+              item.variant_id === variantId
+      );
+      if (itemIndex >= 0) {
+        cartItems[itemIndex].quantity = qty;
+      }
+      return {
+        ...state,
+        ...sumItems(cartItems),
+        cartItems: cartItems,
+      };
     case "INCREASE":
       if (
         state.cartItems[
