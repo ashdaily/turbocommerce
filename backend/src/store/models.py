@@ -12,6 +12,7 @@ class StoreInformation(Timestamp):
     store_name = models.CharField(max_length=255)
     title_tag = models.CharField(max_length=100)
     logo = models.ImageField(upload_to=save_logo)
+    default_currency = models.CharField(max_length=20)
 
     def save(self, *args, **kwargs):
         """
