@@ -8,15 +8,12 @@ import {ShopContext} from "../../context/ShopContext";
 export default () => {
     const { storeInfo } = useContext(ShopContext);
 
-    //  TODO: REMOVE logoImage once the storeInfo has valid image from backend
-
   return (
     <Link to="/" className="anchor-silent">
       <Image
-        src={logoImage}
+        src={storeInfo.logo}
         roundedCircle
-        alt="logo-coco-rose"
-        style={{ height: "10rem" }}
+        alt={storeInfo.title_tag}
         className="mx-auto d-block"
       />
     </Link>

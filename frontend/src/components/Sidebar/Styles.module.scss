@@ -41,9 +41,10 @@
 }
 
 .logo img {
-  max-width: 100%;
+  width: 150px;
+  height: 150px;
   vertical-align: top;
-  height: auto;
+  object-fit: cover;
 }
 
 .mainnav {
@@ -95,9 +96,12 @@
   border-bottom-color: $sideBarBorderColorActive;
 }
 
+.categoryNameLi a {
+  text-transform: capitalize;
+}
+
 .categoryNameLi:hover a {
   border-bottom-color: $sideBarBorderColorActive;
-  text-transform: capitalize;
 }
 
 .mainnav .tier2 {
@@ -109,6 +113,11 @@
   text-transform: uppercase;
   font-weight: 700;
   padding: 10px 27px 10px;
+}
+
+.tier2Link a {
+  padding-left: 0px !important;
+  border: none !important;
 }
 
 .mainnav .tier2 > ul {

@@ -1,0 +1,17 @@
+.skeleton {
+  -webkit-animation: skeletonLoading 1.4s ease infinite;
+  animation: skeletonLoading 1.4s ease infinite;
+  background: linear-gradient(90deg, hsla(0, 0%, 75%, .2) 25%, hsla(0, 0%, 51%, .24) 37%, hsla(0, 0%, 75%, .2) 63%);
+  background-size: 400% 100%;
+  width: 700px;
+  height: 700px;
+}
+
+@keyframes skeletonLoading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

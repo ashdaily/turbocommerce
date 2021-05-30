@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import {Badge, ListGroup} from "react-bootstrap";
-import {Link, useHistory} from "react-router-dom";
+import {Badge} from "react-bootstrap";
+import {Link} from "react-router-dom";
 import csx from 'classnames';
 import {ShopContext} from "../../context/ShopContext";
 import styles from "./Styles.module.scss";
@@ -8,7 +8,7 @@ import styles from "./Styles.module.scss";
 export default (props) => {
     const {totalCartItems} = useContext(ShopContext);
 
-    let history = useHistory();
+    // let history = useHistory();
     return (
         <ul className={csx(styles.specialLinks, 'm-0', 'p-0')}>
             <li className="special-link special-link--1">

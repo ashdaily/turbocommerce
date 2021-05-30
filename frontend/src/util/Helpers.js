@@ -32,8 +32,7 @@ const updatePageTitle = (title, logo) => {
   favIcon.href = logo;
 
    */
-}
-
+};
 
 
 module.exports = { updatePageTitle, truncate, removeHyphensAndCapitalize };

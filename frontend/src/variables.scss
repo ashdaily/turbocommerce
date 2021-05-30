@@ -1,9 +1,13 @@
+$primaryAccentColor: #212b36;
+$secondaryAccentColor: #9d9d9f;
 $primaryBgColor: #FAF9F5;
 $sidebarTextColor: #212b36;
 $primaryTextColor: #212b36;
 $sidebarTier2Color: #f2efe4;
 $secondaryTextColor: rgba(33, 43, 54, 0.69);
 $defaultFontFamily:  sans-serif;
+$cartBorderColors: #eaeaec;
 $sideBarBorderColor: rgba(33, 43, 54, 0.25);
 $sideBarBorderColorActive: rgba(33, 43, 54, 0.9);
-$productCardSize: calc((100vw - 270px) / 6 - 2.2rem);
+$productCardWidth: calc((100vw - 270px) / 5 - 2.2rem);
+$productCardHeight: calc(((100vw - 270px) / 5 - 2.2rem) * 4/3);

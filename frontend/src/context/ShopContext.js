@@ -96,6 +96,10 @@ const ShopContextProvider = ({ children }) => {
     dispatch({ type: "REMOVE_ITEM", productId, variantId });
   };
 
+  const changeCartQty = (productId, variantId, qty) => {
+    dispatch({ type: 'CHANGE_CART_QTY', payload: { productId, variantId, qty } });
+  };
+
   const clearCart = () => {
     dispatch({ type: "CLEAR" });
   };
@@ -124,6 +128,7 @@ const ShopContextProvider = ({ children }) => {
     removeProductFromWishlist,
     updateStoreInfo,
     syncWishlist,
+    changeCartQty,
     ...state,
     ...wishlistState,
     ...appSettingState,

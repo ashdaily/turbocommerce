@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import csx from 'classnames';
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/ProductCard/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
+import WaitingComponent from "../components/WaitingComponent/WaitingComponent";
+import NoProduct from "../components/NoProduct/NoProduct";
 
 export default () => {
   const [data, setData] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = () => {
@@ -15,24 +18,21 @@ export default () => {
         if (response.status === 200) {
           setData(response.data);
         }
+        setLoading(false);
       });
     };
     loadData();
   }, [pageNumber]);
 
+  if (isLoading) {
+    return (
+        <WaitingComponent/>
+    );
+  }
+
   if (!data) {
     return (
-      <Row className="p-3 wishlistLogin">
-        <Col md={{ span: 12 }}>
-          <div className="wishlistLogin-heading">Sorry No Products Found</div>
-          <div className="wishlistLogin-info">
-            Stay tuned for the new products coming soon
-          </div>
-          <div className="wishlistLogin-icon">
-            <i className="fas fa-shopping-basket"></i>
-          </div>
-        </Col>
-      </Row>
+        <NoProduct/>
     );
   }
 

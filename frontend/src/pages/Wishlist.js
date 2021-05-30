@@ -3,7 +3,7 @@ import { isLoggedIn } from "../util/Auth";
 import { Link } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/ProductCard/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
 

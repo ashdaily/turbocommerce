@@ -1,0 +1,32 @@
+@import "../../variables";
+
+.noDataCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(10vh);
+}
+
+.noDataText {
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.codeText {
+  font-size: 12rem;
+  line-height: 13rem;
+}
+
+.subText {
+  font-size: 0.8rem;
+  color: $secondaryAccentColor
+}
+
+.wishlistLoginIcon {
+  img {
+    width: 300px;
+    margin-left: 20px;
+  }
+  margin: 2.8rem 0 3.1rem;
+}
