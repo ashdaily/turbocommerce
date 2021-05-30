@@ -6,6 +6,7 @@
             "store_name": "Ash Store",
             "title_tag": "Yo chicas gotta buy my stuff",
             "logo": "ashstore/1.png",
+            "default_currency": "₹",
             "created": "2021-01-01T00:00:00.000Z",
             "last_updated": "2021-01-01T00:00:00.000Z"
         }

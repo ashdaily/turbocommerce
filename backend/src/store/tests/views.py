@@ -24,6 +24,7 @@ class TestStoreInformationListView(TestCaseBase):
                     "store_name": "Ash Store",
                     "title_tag": "Yo chicas gotta buy my stuff",
                     "logo": "http://testserver/media/ashstore/1.png",
+                    "default_currency": "₹",
                 }
             ],
         )
@@ -34,6 +35,7 @@ class TestStoreInformationListView(TestCaseBase):
                 store_name="Pokemon",
                 title_tag="Yo chicas gotta buy my stuff",
                 logo="https://lorempixel.com/50/50",
+                default_currency="₹",
             )
 
     def test_should_be_able_to_update_the_only_existing_store_info_object(self):
@@ -58,6 +60,7 @@ class TestStoreInformationListView(TestCaseBase):
                     "store_name": STORE_NAME,
                     "title_tag": "Yo chicas gotta buy my stuff",
                     "logo": "http://testserver/media/ashstore/1.png",
+                    "default_currency": "₹",
                 }
             ],
         )
