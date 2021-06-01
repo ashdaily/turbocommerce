@@ -7,12 +7,9 @@ import CartItem from "./CartItem";
 import QuantityModal from "../../components/QuantityModal/QuantityModal";
 
 const Cart = () => {
-    const {changeCartQty} = useContext(ShopContext);
-    const {cartItems, total} = useContext(ShopContext);
+    const {changeCartQty, storeInfo, cartItems, total} = useContext(ShopContext);
     const [showQtyModal, setQtyModal] = useState(false);
     const [cartItem, setCartItem] = useState(null);
-
-    console.log('cartItems', cartItems);
 
     const renderTotalItems = () => {
         return (<>{cartItems.length} {cartItems.length > 1 ? 'Items' : 'Item'}</>);
@@ -37,7 +34,7 @@ const Cart = () => {
                 <div className={styles.leftCont}>
                     <div className={styles.cartHeader}>
                         <div className={styles.bagTitle}>My Shopping Bag ({renderTotalItems()})</div>
-                        <div className={styles.bagTotal}>Total: ₹ {total}</div>
+                        <div className={styles.bagTotal}>Total: {storeInfo.default_currency} {total}</div>
                     </div>
                     {cartItems.map((product, index) => (
                         <CartItem
@@ -54,11 +51,11 @@ const Cart = () => {
                     </div>
                     <div className={styles.priceInfo}>
                         <div>Total MRP</div>
-                        <div> ₹ {total}</div>
+                        <div> {storeInfo.default_currency} {total}</div>
                     </div>
                     <div className={styles.totalPriceInfo}>
                         <div>Total Amount</div>
-                        <div> ₹ {total}</div>
+                        <div> {storeInfo.default_currency} {total}</div>
                     </div>
                     <div>
                         <Button variant="outline-secondary" className={csx(styles.orderBtn, 'mt-4')}>Place Order</Button>

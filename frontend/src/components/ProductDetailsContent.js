@@ -1,12 +1,14 @@
-import React, { useReducer } from "react";
+import React, {useContext, useReducer} from "react";
 import { Row, Col, Table } from "react-bootstrap";
 
 import ColorSwatch from "./ColorSwatch";
 import Sizes from "./Sizes";
 import AddToCartButton from "./AddToCartButton";
 import WishlistButton from "./WishlistButton";
+import {ShopContext} from "../context/ShopContext";
 
 const ProductDetailsContent = ({ data }) => {
+  const { storeInfo } = useContext(ShopContext);
   const initvariant = 0;
 
   const reducer = (variant, action) => {
@@ -120,7 +122,7 @@ const ProductDetailsContent = ({ data }) => {
               </tr>
               <tr>
                 <td>Price</td>
-                <td>Rs. {data.product_variants[variant].price}</td>
+                <td>{storeInfo.default_currency} {data.product_variants[variant].price}</td>
               </tr>
               <tr>
                 <td>Weight</td>

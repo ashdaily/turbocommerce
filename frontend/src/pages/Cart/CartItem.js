@@ -3,9 +3,10 @@ import styles from './Style.module.scss';
 import ImageLoader from "../../components/ImageLoader/ImageLoader";
 import csx from 'classnames';
 import {ShopContext} from "../../context/ShopContext";
+import {Link} from "react-router-dom";
 
 const CartItem = ({product, handleQtyBtn}) => {
-    const {removeProduct, increase, decrease} = useContext(ShopContext);
+    const {removeProduct, storeInfo} = useContext(ShopContext);
 
     const handleRemove = (id, variant_id) => {
         removeProduct(id, variant_id);
@@ -15,7 +16,9 @@ const CartItem = ({product, handleQtyBtn}) => {
         <div className={styles.itemContainer}>
             <div className={styles.upperTile}>
                 <div className={styles.productImg}>
+                    <Link to={product.product_url}>
                     <ImageLoader src={product.image} alt={product.name}/>
+                    </Link>
                 </div>
                 <div className={styles.flex}>
                     <div className={styles.detailCont}>
@@ -24,12 +27,14 @@ const CartItem = ({product, handleQtyBtn}) => {
                                 {product.brand}
                             </div>
                             <div className={styles.nameText}>
+                                <Link to={product.product_url}>
                                 {product.name}
+                                </Link>
                             </div>
                         </div>
                         <div className={styles.priceCont}>
                             <div className={styles.priceText}>
-                                ₹ {product.price}
+                                {storeInfo.default_currency} {product.price}
                             </div>
                         </div>
                     </div>
