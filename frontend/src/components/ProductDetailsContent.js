@@ -1,4 +1,4 @@
-import React, {useContext, useReducer} from "react";
+import React, {useContext, useEffect, useReducer} from "react";
 import { Row, Col, Table } from "react-bootstrap";
 
 import ColorSwatch from "./ColorSwatch";
@@ -58,9 +58,7 @@ const ProductDetailsContent = ({ data }) => {
     initVariantSizes
   );
 
-  const product_specification = data.product_variants[
-    variant
-  ].product_variant_specifications.map(
+  const product_specification = data.product_variants[variant].product_variant_specifications.map(
     ({ specification_name, specification_value }, index) => {
       return (
         <tr key={index}>

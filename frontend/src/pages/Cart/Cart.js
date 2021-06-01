@@ -1,10 +1,12 @@
 import React, {useCallback, useContext, useState} from "react";
-import { Button } from 'react-bootstrap';
+import {Button, Col} from 'react-bootstrap';
 import {ShopContext} from "../../context/ShopContext";
 import styles from './Style.module.scss';
 import csx from 'classnames';
 import CartItem from "./CartItem";
 import QuantityModal from "../../components/QuantityModal/QuantityModal";
+import EmptyCart from "./EmptyCart";
+import ProductCarousel from "../../components/ProductCarousel";
 
 const Cart = () => {
     const {changeCartQty, storeInfo, cartItems, total} = useContext(ShopContext);
@@ -27,6 +29,10 @@ const Cart = () => {
         setCartItem(cartItem);
         setQtyModal(true);
     }, [setQtyModal, setCartItem]);
+
+    if (cartItems.length === 0) {
+        return (<EmptyCart/>);
+    }
 
     return (
         <div className={csx('container')}>
@@ -58,14 +64,19 @@ const Cart = () => {
                         <div> {storeInfo.default_currency} {total}</div>
                     </div>
                     <div>
-                        <Button variant="outline-secondary" className={csx(styles.orderBtn, 'mt-4')}>Place Order</Button>
+                        <Button variant="outline-secondary" className={csx(styles.orderBtn, 'mt-4')}>Place
+                            Order</Button>
                     </div>
                 </div>
             </div>
+            <ProductCarousel
+                startContent={(<div className={styles.suggestedCont}></div>)}
+                productId={cartItems[0].id}
+            />
             <QuantityModal
                 selectedQty={cartItem ? cartItem.quantity : 0}
                 visible={showQtyModal}
-                handleQtyChange={handleQtyChange} />
+                handleQtyChange={handleQtyChange}/>
         </div>
     )
 };

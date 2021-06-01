@@ -165,3 +165,22 @@ body.navExpanded:after {
   width: 200px;
   height: 300px;
 }
+
+.suggestionText {
+
+}
+
+//breadcrumb
+.breadcrumb {
+  background: transparent;
+  margin: 0px;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb > li.active {
+  color: $primaryAccentColor;
+}
+
+.breadcrumb > li > a {
+  color: $secondaryAccentColor;
+}

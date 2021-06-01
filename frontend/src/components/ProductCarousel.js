@@ -4,8 +4,10 @@ import { Row, Col } from "react-bootstrap";
 import ProductCard from "./ProductCard/ProductCard";
 import Paginate from "./Paginate";
 import axios from "../util/Axios";
+import csx from "classnames";
 
-export default (props) => {
+const ProductCarousel = (props) => {
+  const {startContent} = props;
   const [data, setData] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -44,9 +46,7 @@ export default (props) => {
     products = data.results.map(
       (product, index) =>
         product.product_variants.length > 0 && (
-          <Col md={4}>
             <ProductCard key={index} data={product} />
-          </Col>
         )
     );
   }
@@ -55,11 +55,20 @@ export default (props) => {
 
   return (
     <>
-      <h4> You May Also Like </h4>
-      <Row>{products}</Row>
+      {startContent}
+      <h5 className={'my-0 ml-3'}>You May Also Like </h5>
+      <div className={csx('d-flex', 'flex-wrap')}>
+        {products}
+      </div>
       <Row>
         <Col>{paginate}</Col>
       </Row>
     </>
   );
 };
+
+ProductCarousel.defaultProps = {
+  startContent: (<></>)
+}
+
+export default ProductCarousel;
