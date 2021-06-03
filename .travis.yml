@@ -1,8 +1,11 @@
+arch: amd64
 os: linux
-dist: trusty
+dist: focal
 language: python
+
 python:
   - "3.9"
+
 services:
   - docker
 
