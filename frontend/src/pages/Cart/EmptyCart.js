@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Style.module.scss';
-import csx from 'classnames';
 import {Link} from "react-router-dom";
 
 
