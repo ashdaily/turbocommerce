@@ -1,2 +1,2 @@
 cd backend/src
-python manage.py test --keepdb --noinput
+python3 manage.py test --keepdb --noinput

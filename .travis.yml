@@ -1,8 +1,11 @@
+arch: amd64
 os: linux
-dist: xenial
+dist: focal # xenial and trusty fail to install PPA (see Dockerfile step-> add-apt-repository ppa:deadsnakes/ppa)
 language: python
+
 python:
   - "3.9"
+
 services:
   - docker
 
