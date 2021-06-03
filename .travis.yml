@@ -1,6 +1,6 @@
 arch: amd64
 os: linux
-dist: focal
+dist: focal # xenial and trusty fail to install PPA (see Dockerfile step-> add-apt-repository ppa:deadsnakes/ppa)
 language: python
 
 python:
