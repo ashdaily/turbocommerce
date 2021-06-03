@@ -19,6 +19,7 @@ export default () => {
 
   useEffect(() => {
     const loadData = () => {
+      setLoading(true);
       axios.get(`/api/products/?slug=${slug}`).then((response) => {
         if (response.status === 200) {
           setData(response.data.results[0]);

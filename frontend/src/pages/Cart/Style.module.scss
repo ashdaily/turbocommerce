@@ -66,7 +66,7 @@
   font-weight: 600;
 }
 
-.nameText {
+.nameText > a {
   color: #565e70;
   font-weight: 400;
 }
@@ -131,4 +131,48 @@
 
 .qtyBtn:focus {
   outline: none;
+}
+
+.suggestedCont {
+  margin-top: 5rem;
+  border-top: 1px solid $cartBorderColors;
+  padding-top: 20px;
+}
+
+//Empty Cart
+.noDataCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(4vh);
+}
+
+.noDataText {
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.codeText {
+  font-size: 12rem;
+  line-height: 13rem;
+}
+
+.subText {
+  font-size: 0.8rem;
+  color: $secondaryAccentColor
+}
+
+.wishlistLoginIcon {
+  img {
+    width: 300px;
+    margin-left: 20px;
+  }
+}
+
+.wishListBtn {
+  border: 1px solid $cartBorderColors;
+  padding: 5px 30px;
+  margin-top: 20px;
+  color: $primaryAccentColor;
 }

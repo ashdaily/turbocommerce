@@ -75,6 +75,7 @@ export const CartReducer = (state, action) => {
           image: ProductUtils.getFrontImage(action.payload),
           brand: action.payload.brand.brand_name,
           quantity: 1,
+          product_url: `/${action.payload.child_category.parent_category.grand_parent_category.slug}/${action.payload.child_category.parent_category.slug}/${action.payload.child_category.slug}/${action.payload.slug}`
         });
       }
 

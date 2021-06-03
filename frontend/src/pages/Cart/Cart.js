@@ -1,18 +1,17 @@
 import React, {useCallback, useContext, useState} from "react";
-import { Button } from 'react-bootstrap';
+import {Button, Col} from 'react-bootstrap';
 import {ShopContext} from "../../context/ShopContext";
 import styles from './Style.module.scss';
 import csx from 'classnames';
 import CartItem from "./CartItem";
 import QuantityModal from "../../components/QuantityModal/QuantityModal";
+import EmptyCart from "./EmptyCart";
+import ProductCarousel from "../../components/ProductCarousel";
 
 const Cart = () => {
-    const {changeCartQty} = useContext(ShopContext);
-    const {cartItems, total} = useContext(ShopContext);
+    const {changeCartQty, storeInfo, cartItems, total} = useContext(ShopContext);
     const [showQtyModal, setQtyModal] = useState(false);
     const [cartItem, setCartItem] = useState(null);
-
-    console.log('cartItems', cartItems);
 
     const renderTotalItems = () => {
         return (<>{cartItems.length} {cartItems.length > 1 ? 'Items' : 'Item'}</>);
@@ -31,13 +30,17 @@ const Cart = () => {
         setQtyModal(true);
     }, [setQtyModal, setCartItem]);
 
+    if (cartItems.length === 0) {
+        return (<EmptyCart/>);
+    }
+
     return (
         <div className={csx('container')}>
             <div className={styles.cartCont}>
                 <div className={styles.leftCont}>
                     <div className={styles.cartHeader}>
                         <div className={styles.bagTitle}>My Shopping Bag ({renderTotalItems()})</div>
-                        <div className={styles.bagTotal}>Total: ₹ {total}</div>
+                        <div className={styles.bagTotal}>Total: {storeInfo.default_currency} {total}</div>
                     </div>
                     {cartItems.map((product, index) => (
                         <CartItem
@@ -54,21 +57,26 @@ const Cart = () => {
                     </div>
                     <div className={styles.priceInfo}>
                         <div>Total MRP</div>
-                        <div> ₹ {total}</div>
+                        <div> {storeInfo.default_currency} {total}</div>
                     </div>
                     <div className={styles.totalPriceInfo}>
                         <div>Total Amount</div>
-                        <div> ₹ {total}</div>
+                        <div> {storeInfo.default_currency} {total}</div>
                     </div>
                     <div>
-                        <Button variant="outline-secondary" className={csx(styles.orderBtn, 'mt-4')}>Place Order</Button>
+                        <Button variant="outline-secondary" className={csx(styles.orderBtn, 'mt-4')}>Place
+                            Order</Button>
                     </div>
                 </div>
             </div>
+            <ProductCarousel
+                startContent={(<div className={styles.suggestedCont}></div>)}
+                productId={cartItems[0].id}
+            />
             <QuantityModal
                 selectedQty={cartItem ? cartItem.quantity : 0}
                 visible={showQtyModal}
-                handleQtyChange={handleQtyChange} />
+                handleQtyChange={handleQtyChange}/>
         </div>
     )
 };

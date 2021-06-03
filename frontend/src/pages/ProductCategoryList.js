@@ -7,6 +7,7 @@ import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
 import csx from "classnames";
 import NoProduct from "../components/NoProduct/NoProduct";
+import DynamicBreadcrumbs from "../components/DynamicBreadcrumbs";
 
 export default () => {
     const {grandParentCategory, parentCategory, childCategory} = useParams();
@@ -74,6 +75,7 @@ export default () => {
 
     return (
         <>
+            <DynamicBreadcrumbs />
             <div className={csx('d-flex', 'flex-wrap')}>
                 {products}
             </div>
