@@ -79,6 +79,10 @@ Here is how to create the `.env` file.
 ### Useful commands
 
 ---
+- Build backend docker image
+    ```
+    docker-compose build backend
+    ```
 
 - Run pre-commit on whole project
     ```
