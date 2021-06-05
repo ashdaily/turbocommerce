@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useState} from "react";
-import {Button, Col} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import {ShopContext} from "../../context/ShopContext";
 import styles from './Style.module.scss';
 import csx from 'classnames';

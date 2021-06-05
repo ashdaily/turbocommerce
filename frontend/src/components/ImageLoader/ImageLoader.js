@@ -13,7 +13,7 @@ const ImageLoader = ({src, className}) => {
         <>
             <div style={{display: loading ? "block" : "none"}} className={csx(styles.skeleton, className)}>
             </div>
-                    <img
+                        <img
                         alt={'Product Image'}
                         className={className}
                         src={src}

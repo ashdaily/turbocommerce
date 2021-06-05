@@ -12,6 +12,10 @@ export default (props) => {
   const { storeInfo } = useContext(ShopContext);
   const [showSlider, setShowSlider] = useState(false);
 
+  if (!data) {
+    return null;
+  }
+
   const mouseEnter = () => {
     setShowSlider(true);
   };

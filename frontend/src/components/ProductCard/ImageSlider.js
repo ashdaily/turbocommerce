@@ -19,8 +19,8 @@ const ImageSlider = ({images}) => {
     return (
         <div className={'image-slider'}>
             <Slider {...settings}>
-                {images.map((image) => {
-                    return (<div className={'slider-cont'}>
+                {images.map((image, index) => {
+                    return (<div key={'imageSLIDER_'+index} className={'slider-cont'}>
                         <ImageLoader className={'slider-img'}
                              src={image}/>
                     </div>);
