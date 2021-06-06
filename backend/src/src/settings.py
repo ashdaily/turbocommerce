@@ -2,6 +2,15 @@ import environ
 import os
 from pathlib import Path
 
+# Target environment
+TARGET_ENV = os.environ["TARGET_ENV"]
+TARGET_ENV_VALID = ["local", "development", "testing", "staging", "production"]
+
+if TARGET_ENV not in TARGET_ENV_VALID:
+    raise Exception(
+        f"TARGET_ENV:{TARGET_ENV} is invalid, please choose from {TARGET_ENV_VALID}"
+    )
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 BASE_DIR_PARENT = Path(__file__).resolve(strict=True).parent.parent.parent
@@ -9,7 +18,7 @@ BASE_DIR_PARENT = Path(__file__).resolve(strict=True).parent.parent.parent
 # Enviroment variables
 
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR_PARENT, ".env"))
+environ.Env.read_env(os.path.join(BASE_DIR_PARENT, f".env.{TARGET_ENV}"))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
