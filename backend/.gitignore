@@ -1,4 +1,9 @@
-.env
+.env.production
+.env.staging
+.env.testing
+.env.development
+.env.local
+
 __pycache__
 src/db.sqlite3
 src/media/*
