@@ -34,28 +34,43 @@ you are contributing to this project. To read more check out [pre-commit docs](h
     ```
 
 
-- Setup .env file
-    - Create a `.env` file based on `.env.example file`. This file includes environment
+- Setup .env files
+    - Create a `.env.local` file based on `.env.example file`. This file includes environment
 variables that backend requires. You will need get your own `AWS_S3_REGION_NAME`,
 `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-Here is how to create the `.env` file.
+Here is how to create the `.env.local` file.
     ```
     cd backend
-    cat .env.example | tee .env
+    cat .env.example | tee .env.local
     ```
-
-
-- Docker migrate backend container
-    ```
-    docker-compose run --rm backend bash ./run_backend_migrate.sh
-    ```
-
+    - Similarly, You can create `.env.development`, `.env.testing`, `.env.staging`, `.env.production`.
+    - Remember to word the file names exactly as mentioned above for smooth docker build experience.
 
 - Run backend api server and postgreql db
     ```
+    docker-compose build backend
     docker-compose up
     ```
 
+- Build backend docker image with target environment
+    ```
+    # For local environment, using --build-arg is not required.
+    docker-compose build backend
+    OR
+    docker-compose build --build-arg TARGET_ENV=local backend
+
+    # For development environment
+    docker-compose build --build-arg TARGET_ENV=development backend
+
+    # For testing environment
+    docker-compose build --build-arg TARGET_ENV=testing backend
+
+    # For staging environment
+    docker-compose build --build-arg TARGET_ENV=staging backend
+
+    # For production environment
+    docker-compose build --build-arg TARGET_ENV=production backend
+    ```
 
 - Setup frontend
     ```
@@ -79,10 +94,6 @@ Here is how to create the `.env` file.
 ### Useful commands
 
 ---
-- Build backend docker image
-    ```
-    docker-compose build backend
-    ```
 
 - Run pre-commit on whole project
     ```
