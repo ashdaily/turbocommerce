@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import {Link, useHistory} from "react-router-dom";
-
 import axios from "../../util/Axios";
-import csx from "classnames";
-import styles from "./Styles.module.scss";
 import CategoryListItem from "./CategoryListItem";
 
 

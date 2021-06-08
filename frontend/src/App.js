@@ -19,6 +19,7 @@ import "./App.scss";
 import {ShopContext} from "./context/ShopContext";
 import Sidebar from "./components/Sidebar/Sidebar";
 import NotFound from "./pages/404/NotFound";
+import Topbar from "./components/Topbar/Topbar";
 
 function App() {
     const {updateStoreInfo, syncWishlist} = useContext(ShopContext);
@@ -30,9 +31,9 @@ function App() {
 
     return (
         <Router>
+            <Topbar/>
             <Container fluid>
                 <ToastContainer/>
-
                 <Sidebar/>
                 <div className={'contentArea'}>
                     <Switch>

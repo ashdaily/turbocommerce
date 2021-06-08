@@ -1,0 +1,39 @@
+@import "../../variables";
+
+.topbarCont {
+  background: $primaryBgColor;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .logoCont{
+    flex: 1;
+  }
+  .logoCont img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  @media screen and (min-width: 767px) {
+    display: none;
+  }
+}
+
+.sidebarBtn {
+  flex: 0.3;
+  button {
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+  }
+}
+
+.cartCont {
+  flex: 0.3;
+  text-align: right;
+  a {
+    font-size: 1rem;
+    color: $sidebarTextColor;
+  }
+}

@@ -131,7 +131,7 @@
 /*outside properties*/
 
 .navOutsideExpandedMode .mainnav .tier1 .outsideExpanded .tier2 {
-  width: 210px;
+  width: 240px;
   overflow-y: auto;
 }
 
@@ -143,10 +143,6 @@
   position: relative;
 }
 
-.navOutsideExpandedMode .mainnav .tier1 .outsideExpanded .tier2 {
-  width: 210px;
-  overflow-y: auto;
-}
 
 .navOutsideExpandedMode .mainnav .tier2, .navOutsideExpandedMode .mainnav .tier2 a, .navOutsideExpandedMode .mainnav .tier2 a:hover {
   color: $sidebarTextColor;
@@ -179,10 +175,6 @@
 
 .navOutsideExpandedMode .mainnav .tierTitle {
   padding-top: 30px;
-}
-
-.navOutsideExpandedMode .mainnav .tier2 > * {
-  min-width: 210px;
 }
 
 .mainnav .tier2 > ul {
@@ -219,6 +211,25 @@
   transform: translateX(5px);
   transition: all 250ms ease;
 }
+
 .tier1title {
   cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .mainNavbar {
+    left: -240px;
+  }
+
+
+  .navOutsideExpandedMode .mainnav .tier2 {
+    left: 0px;
+    //width: 240px;
+  }
+
+
+}
+
+.sidebarOpened {
+  left: 0px;
 }

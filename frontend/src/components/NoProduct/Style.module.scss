@@ -11,6 +11,10 @@
 .noDataText {
   font-size: 2rem;
   font-weight: 200;
+  text-align: center;
+  @media screen and (max-width: 767px) {
+    font-size: 1.6rem;
+  }
 }
 
 .codeText {

@@ -1,6 +1,9 @@
 @import "../../variables";
 .cartCont {
   display: flex;
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+  }
 }
 
 .leftCont {
@@ -8,12 +11,21 @@
   padding-right: 20px;
   border-right: 1px solid $cartBorderColors;
   padding-top: 32px;
+  @media screen and (max-width: 767px) {
+    min-width: 100%;
+    border-right: none;
+    padding-right: 0px;
+  }
 }
 
 .rightCont {
   flex: 0.35;
   vertical-align: top;
   padding: 32px 0 0 16px;
+  @media screen and (max-width: 767px) {
+    flex: 1;
+    padding: 32px 0px;
+  }
 }
 
 .cartHeader {
@@ -26,6 +38,12 @@
 .bagTitle, .bagTotal {
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+@media screen and (max-width: 767px) {
+  .bagTotal {
+    text-align: right;
+  }
 }
 
 // Item Styles
