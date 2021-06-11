@@ -29,7 +29,7 @@ const Topbar = () => {
                 />
             </Link>
             <div className={styles.cartCont}>
-                <Link to="/cart" className={'anchor-silent'}>
+                <Link id={'cartLink'} to="/cart" className={'anchor-silent'}>
                     Cart ({totalCartItems})
                 </Link>
             </div>

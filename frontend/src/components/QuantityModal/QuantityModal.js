@@ -18,8 +18,6 @@ const QuantityModal = ({visible, handleQtyChange, selectedQty}) => {
     const handleDone = () => {
         handleQtyChange(qty);
     };
-
-    console.log('qty', qty);
     return (
         <Modal
             show={visible}

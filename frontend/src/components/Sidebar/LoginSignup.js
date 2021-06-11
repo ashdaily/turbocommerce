@@ -8,12 +8,12 @@ export default () => {
     return (
         <ul className={csx(styles.specialLinks, 'm-0', 'p-0')}>
             <li className="special-link special-link--1">
-                <Link to="/login" className="anchor-silent">
+                <Link id={'sidebarLoginLink'} to="/login" className="anchor-silent">
                     Login
                 </Link>
             </li>
             <li className="special-link special-link--1">
-                <Link to="/signup" className="anchor-silent">
+                <Link id={'sidebarSignupLink'} to="/signup" className="anchor-silent">
                     Signup
                 </Link>
             </li>

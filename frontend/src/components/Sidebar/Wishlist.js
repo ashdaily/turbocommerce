@@ -20,10 +20,8 @@ const Wishlist = () => {
                     onClick={handleLinkClick}
                     to="/wishlist"
                     className="anchor-silent">
-                    <i className="fa fa-heart"></i> Wishlist &nbsp;
-                    <Badge variant="primary" size="md">
-                        {totalWishlistItems}
-                    </Badge>
+                    <i className="fa fa-heart"></i>Wishlist
+                    <Badge variant="primary" size="md"> {totalWishlistItems}</Badge>
                 </Link>
             </li>
         </ul>

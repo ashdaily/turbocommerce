@@ -17,11 +17,9 @@ export default (props) => {
     return (
         <ul className={csx(styles.specialLinks, 'm-0', 'p-0')}>
             <li className="special-link special-link--1">
-                <Link onClick={handleLinkClick} to="/cart" className="anchor-silent">
-                    <i className="fa fa-shopping-cart"></i> Cart &nbsp;
-                    <Badge variant="primary" size="md">
-                        {totalCartItems}
-                    </Badge>
+                <Link id={'sidebarCartLink'} onClick={handleLinkClick} to="/cart" className="anchor-silent">
+                    <i className="fa fa-shopping-cart"></i>Cart
+                    <Badge variant="primary" size="md"> {totalCartItems}</Badge>
                 </Link>
             </li>
         </ul>
