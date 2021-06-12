@@ -1,16 +1,21 @@
 import React, {useContext} from "react";
-import {Badge, ListGroup} from "react-bootstrap";
+import {Badge} from "react-bootstrap";
 import csx from 'classnames';
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {ShopContext} from "../../context/ShopContext";
 import styles from "./Styles.module.scss";
 import EventEmitter from "../../util/EventsUtils";
+import {checkIfMobile} from '../../util/Helpers';
+import useWindowDimensions from "../../util/WindowDimensions";
 
 const Wishlist = () => {
     const {totalWishlistItems} = useContext(ShopContext);
+    const {width} = useWindowDimensions();
 
     const handleLinkClick = () => {
-        EventEmitter.dispatch(EventEmitter.TOGGLE_SIDEBAR, {close: true});
+        if (checkIfMobile(width)) {
+            EventEmitter.dispatch(EventEmitter.TOGGLE_SIDEBAR, {close: true});
+        }
     }
 
     return (

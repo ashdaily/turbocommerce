@@ -1,11 +1,9 @@
 import React, {useContext, useEffect} from "react";
-
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {Container, Row, Col} from "react-bootstrap";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Container} from "react-bootstrap";
 import {ToastContainer} from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart/Cart";

@@ -1,0 +1,13 @@
+.wishlistBtn {
+  border: none;
+  outline: none;
+  transition: 0.4s all;
+  &:active, &:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  &:active {
+    transform: scale(1.5);
+  }
+}

@@ -48,8 +48,8 @@ const CategoryListItem = ({category,}) => {
             <div className={styles.tier2}>
                 <ul className={'m-0 p-0'}>
                     {category.product_parent_categories.map((parentCategory, i) => (
-                        <>
-                            <li className={csx(styles.active, styles.tier2Link)}>
+                        <React.Fragment key={'PARENT_CATEGORY_'+i}>
+                            <li  className={csx(styles.active, styles.tier2Link)}>
                                 <Link
                                     to={`/${category.slug}/${parentCategory.slug}`}
                                     onClick={handleLinkClick}
@@ -60,7 +60,7 @@ const CategoryListItem = ({category,}) => {
                             </li>
                             {parentCategory.product_child_categories.map(
                                 (childCategory, index) => (
-                                    <li className={styles.categoryNameLi}>
+                                    <li key={'PRODUCT_CHILD_CATEGORY'+index} className={styles.categoryNameLi}>
                                         <Link to={`/${category.slug}/${parentCategory.slug}/${childCategory.slug}`}
                                               onClick={handleLinkClick}
                                               key={index}>
@@ -69,7 +69,7 @@ const CategoryListItem = ({category,}) => {
                                     </li>
                                 )
                             )}
-                        </>
+                        </React.Fragment>
                     ))}
                 </ul>
             </div>

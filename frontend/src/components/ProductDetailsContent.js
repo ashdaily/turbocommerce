@@ -1,11 +1,10 @@
-import React, {useContext, useEffect, useReducer} from "react";
+import React, {useContext, useReducer} from "react";
 import { Row, Col, Table } from "react-bootstrap";
-
 import ColorSwatch from "./ColorSwatch";
 import Sizes from "./Sizes";
 import AddToCartButton from "./AddToCartButton";
-import WishlistButton from "./WishlistButton";
 import {ShopContext} from "../context/ShopContext";
+import Wishlist from "./Wishlist/Wishlist";
 
 const ProductDetailsContent = ({ data }) => {
   const { storeInfo } = useContext(ShopContext);
@@ -147,7 +146,7 @@ const ProductDetailsContent = ({ data }) => {
           </Table>
         </div>
         <AddToCartButton data={data} variant={data.product_variants[variant]} />
-        <WishlistButton data={data} />
+        <Wishlist data={data} />
 
         <h5 className="mt-5">Product Specifications</h5>
         <div className="table-responsive">

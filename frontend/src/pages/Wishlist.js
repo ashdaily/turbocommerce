@@ -5,6 +5,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import ProductCard from "../components/ProductCard/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
+import csx from "classnames";
 
 const Wishlist = () => {
   const [productData, setProductData] = useState(null);
@@ -65,15 +66,15 @@ const Wishlist = () => {
     products = productData.results.map(
       (product, index) =>
         product.product_variants.length > 0 && (
-          <Col md={4}>
             <ProductCard key={index} data={product} />
-          </Col>
         )
     );
 
     return (
       <>
-        <Row>{products}</Row>
+        <div className={csx('d-flex', 'flex-wrap')}>
+          {products}
+        </div>
         <Row>
           <Col>{paginate}</Col>
         </Row>

@@ -3,7 +3,6 @@ import {CartReducer, sumItems} from "./CartReducer";
 import {WishlistReducer, sumWishlistItems} from "./WishListReducer";
 import {AppSettingsReducer} from "./AppSettingsReducer";
 import {serviceGetStoreInformation} from "../services/AppSettings.service";
-import {toast} from "react-toastify";
 import ToastUtils from "../util/ToastUtils";
 import {isLoggedIn} from "../util/Auth";
 import {serviceGetWishlistData} from "../services/Wishlist.service";

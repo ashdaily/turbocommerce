@@ -112,7 +112,24 @@ body.navExpanded:after {
 }
 
 .product-card .product-price {
-  color: $secondaryTextColor
+  color: $secondaryTextColor;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 2px 10px;
+  }
+
+  .fa.fa-heart {
+    color: red;
+  }
+  .far.fa-heart {
+    color: black;
+  }
 }
 
 .product-image-container {

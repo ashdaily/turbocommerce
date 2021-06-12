@@ -14,11 +14,9 @@ const Sidebar = () => {
     const [isOpen, setOpen] = useState(false);
     const isOpenRef = useRef(false);
     useEffect(() => {
-        console.log('event mounted');
         EventEmitter.subscribe(EventEmitter.TOGGLE_SIDEBAR, toggleSideBar);
         document.body.addEventListener('click', bodyClick);
         return () => {
-            console.log('event unmounted');
             EventEmitter.unsubscribe(EventEmitter.TOGGLE_SIDEBAR);
             document.body.removeEventListener('click', bodyClick);
         }
@@ -36,7 +34,6 @@ const Sidebar = () => {
     };
 
     const bodyClick = (e) => {
-        console.log(e.target);
         if (e.target.tagName === 'BODY') {
             if (isOpenRef.current) {
                 toggleSideBar()

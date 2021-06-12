@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import styles from './Style.module.scss';
 import csx from 'classnames';
 
@@ -13,13 +13,13 @@ const ImageLoader = ({src, className}) => {
         <>
             <div style={{display: loading ? "block" : "none"}} className={csx(styles.skeleton, className)}>
             </div>
-                        <img
-                        alt={'Product Image'}
-                        className={className}
-                        src={src}
-                        onLoad={imageLoaded}
-                        style={{display: loading ? "none" : "block"}}
-                    />
+            <img
+                alt={'Product Images'}
+                className={className}
+                src={src}
+                onLoad={imageLoaded}
+                style={{display: loading ? "none" : "block"}}
+            />
         </>
     );
 };

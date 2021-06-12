@@ -5,15 +5,19 @@ import csx from 'classnames';
 import {ShopContext} from "../../context/ShopContext";
 import styles from "./Styles.module.scss";
 import EventEmitter from "../../util/EventsUtils";
+import {checkIfMobile} from "../../util/Helpers";
+import useWindowDimensions from "../../util/WindowDimensions";
 
 export default (props) => {
     const {totalCartItems} = useContext(ShopContext);
+    const {width} = useWindowDimensions();
 
     const handleLinkClick = () => {
-        EventEmitter.dispatch(EventEmitter.TOGGLE_SIDEBAR, { close: true });
+        if (checkIfMobile(width)) {
+            EventEmitter.dispatch(EventEmitter.TOGGLE_SIDEBAR, {close: true});
+        }
     };
 
-    // let history = useHistory();
     return (
         <ul className={csx(styles.specialLinks, 'm-0', 'p-0')}>
             <li className="special-link special-link--1">
