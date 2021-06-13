@@ -137,7 +137,6 @@ class ProductVariantInventoryListView(ListAPIView, PaginationMixin):
     PATH: /api/products/variant-inventory/in-ids/?product_variant_ids=
     """
 
-    pagination_class = StandardPagination
     permission_classes = [IsAuthenticated]
     serializer_class = ProductVariantInventorySerializer
 
