@@ -19,6 +19,7 @@ body:after {
 
 body.navExpanded:after {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .facebook-btn {
@@ -94,10 +95,13 @@ body.navExpanded:after {
 
 .contentArea {
   padding: calc(2px + 2.4em) 0 20px 240px;
+  @media screen and(max-width: 767px) {
+    padding: 0px;
+  }
 }
 
 .product-card {
-  width: $productCardWidth;
+  width: var(--productWidth);
 }
 
 .product-card .card-body {
@@ -108,12 +112,29 @@ body.navExpanded:after {
 }
 
 .product-card .product-price {
-  color: $secondaryTextColor
+  color: $secondaryTextColor;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 2px 10px;
+  }
+
+  .fa.fa-heart {
+    color: red;
+  }
+  .far.fa-heart {
+    color: black;
+  }
 }
 
 .product-image-container {
-  width: $productCardWidth;
-  height: $productCardHeight;
+  width: var(--productWidth);
+  height: var(--productHeight);
   position: relative;
 }
 
@@ -125,8 +146,8 @@ body.navExpanded:after {
 }
 
 .slider-cont {
-  width: $productCardWidth;
-  height: $productCardHeight;
+  width: var(--productWidth);
+  height: var(--productHeight);
 }
 
 .image-slider {

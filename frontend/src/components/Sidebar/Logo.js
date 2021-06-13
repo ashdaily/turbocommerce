@@ -1,8 +1,7 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
-import logoImage from "../../images/logo.png";
 import {ShopContext} from "../../context/ShopContext";
 
 export default () => {

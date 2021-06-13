@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {Row, Col} from "react-bootstrap";
+import React, {useCallback, useEffect, useState} from "react";
+import {Col, Row} from "react-bootstrap";
 import {useParams} from "react-router-dom";
-
 import ProductCard from "../components/ProductCard/ProductCard";
 import Paginate from "../components/Paginate";
 import axios from "../util/Axios";
@@ -14,23 +13,7 @@ export default () => {
     const [productData, setProductData] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
-    useEffect(() => {
-        const loadData = () => {
-            axios
-                .get(
-                    generateRequestUrl()
-                )
-                .then((response) => {
-                    if (response.status === 200) {
-                        let productData = response.data;
-                        setProductData(productData);
-                    }
-                });
-        };
-        loadData();
-    }, [childCategory, grandParentCategory, parentCategory, pageNumber]);
-
-    const generateRequestUrl = () => {
+    const generateRequestUrl = useCallback(() => {
         let reqUrl = `/api/products/by-category/`;
         if (grandParentCategory)
             reqUrl += `?grand_parent_category_slug=${grandParentCategory}`;
@@ -42,12 +25,26 @@ export default () => {
             reqUrl += `&child_category_slug=${childCategory}`;
 
         return `${reqUrl}&page=${pageNumber}`;
-    }
+    },[grandParentCategory, parentCategory, pageNumber, childCategory]);
+
+    useEffect(() => {
+        const loadData = () => {
+            axios
+                .get(generateRequestUrl())
+                .then((response) => {
+                    if (response.status === 200) {
+                        let productData = response.data;
+                        setProductData(productData);
+                    }
+                });
+        };
+        loadData();
+    }, [childCategory, grandParentCategory, parentCategory, pageNumber, generateRequestUrl]);
 
 
     if (productData && !productData.count) {
         return (
-           <NoProduct/>
+            <NoProduct/>
         );
     }
 
@@ -75,7 +72,7 @@ export default () => {
 
     return (
         <>
-            <DynamicBreadcrumbs />
+            <DynamicBreadcrumbs/>
             <div className={csx('d-flex', 'flex-wrap')}>
                 {products}
             </div>

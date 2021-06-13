@@ -34,5 +34,11 @@ const updatePageTitle = (title, logo) => {
    */
 };
 
+const checkIfMobile = (width) => {
+  if (width <= 767) {
+    return true;
+  } return false;
+};
 
-module.exports = { updatePageTitle, truncate, removeHyphensAndCapitalize };
+
+module.exports = { checkIfMobile, updatePageTitle, truncate, removeHyphensAndCapitalize };

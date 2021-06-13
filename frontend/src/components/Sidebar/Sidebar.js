@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from  './Styles.module.scss';
+import React, {useEffect, useRef, useState} from 'react';
+import styles from './Styles.module.scss';
 import csx from 'classnames';
 import Logo from "./Logo";
 import CategoryList from "./CategoryList";
@@ -8,13 +8,45 @@ import Wishlist from "./Wishlist";
 import {isLoggedIn} from "../../util/Auth";
 import Logout from "./Logout";
 import LoginSignup from "./LoginSignup";
+import EventEmitter from "../../util/EventsUtils";
 
 const Sidebar = () => {
+    const [isOpen, setOpen] = useState(false);
+    const isOpenRef = useRef(false);
+    useEffect(() => {
+        EventEmitter.subscribe(EventEmitter.TOGGLE_SIDEBAR, toggleSideBar);
+        document.body.addEventListener('click', bodyClick);
+        return () => {
+            EventEmitter.unsubscribe(EventEmitter.TOGGLE_SIDEBAR);
+            document.body.removeEventListener('click', bodyClick);
+        }
+    }, []);
+
+
+    const toggleSideBar = () => {
+        if (!isOpenRef.current) {
+            document.body.classList.add("navExpanded");
+        } else {
+            document.body.classList.remove("navExpanded");
+        }
+        setOpen(!isOpenRef.current);
+        isOpenRef.current = !isOpenRef.current;
+    };
+
+    const bodyClick = (e) => {
+        if (e.target.tagName === 'BODY') {
+            if (isOpenRef.current) {
+                toggleSideBar()
+            }
+        }
+    };
+
     return (
-        <div className={csx(styles.mainNavbar, styles.navOutsideExpandedMode)} data-section-type="sidebar-section">
+        <div className={csx(styles.mainNavbar, styles.navOutsideExpandedMode, isOpen ? styles.sidebarOpened : '')}
+             data-section-type="sidebar-section">
             <div className={styles.navContainer}>
                 <div className={styles.logo}>
-                   <Logo/>
+                    <Logo/>
                 </div>
 
                 <div className={styles.mainnav}>
@@ -32,13 +64,13 @@ const Sidebar = () => {
                         <CategoryList/>
                         <Cart/>
                         <Wishlist/>
-                        {isLoggedIn ? <Logout /> : <LoginSignup />}
+                        {isLoggedIn ? <Logout/> : <LoginSignup/>}
                     </div>
 
                 </div>
             </div>
         </div>
-)
-}
+    );
+};
 
 export default Sidebar;

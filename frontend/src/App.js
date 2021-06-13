@@ -1,11 +1,9 @@
 import React, {useContext, useEffect} from "react";
-
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {Container, Row, Col} from "react-bootstrap";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Container} from "react-bootstrap";
 import {ToastContainer} from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart/Cart";
@@ -19,6 +17,7 @@ import "./App.scss";
 import {ShopContext} from "./context/ShopContext";
 import Sidebar from "./components/Sidebar/Sidebar";
 import NotFound from "./pages/404/NotFound";
+import Topbar from "./components/Topbar/Topbar";
 
 function App() {
     const {updateStoreInfo, syncWishlist} = useContext(ShopContext);
@@ -30,9 +29,9 @@ function App() {
 
     return (
         <Router>
+            <Topbar/>
             <Container fluid>
                 <ToastContainer/>
-
                 <Sidebar/>
                 <div className={'contentArea'}>
                     <Switch>

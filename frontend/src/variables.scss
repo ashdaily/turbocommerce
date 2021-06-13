@@ -1,3 +1,7 @@
+:root {
+  --productWidth: calc((100vw - 270px) / 6 - 2.2rem);
+  --productHeight: calc(((100vw - 270px) / 6 - 2.2rem) * 4/3);
+}
 $primaryAccentColor: #212b36;
 $secondaryAccentColor: #9d9d9f;
 $primaryBgColor: #FAF9F5;
@@ -11,3 +15,11 @@ $sideBarBorderColor: rgba(33, 43, 54, 0.25);
 $sideBarBorderColorActive: rgba(33, 43, 54, 0.9);
 $productCardWidth: calc((100vw - 270px) / 6 - 2.2rem);
 $productCardHeight: calc(((100vw - 270px) / 6 - 2.2rem) * 4/3);
+
+
+@media screen and (max-width: 767px) {
+  :root {
+    --productWidth: calc((100vw - 30px) / 2 - 2.2rem);
+    --productHeight: calc(((100vw - 30px) / 2 - 2.2rem) * 4/3);;
+  }
+}
