@@ -138,7 +138,7 @@ class ProductVariantInventoryListView(ListAPIView, PaginationMixin):
     """
 
     pagination_class = StandardPagination
-    permission_classes = IsAuthenticated
+    permission_classes = [IsAuthenticated]
     serializer_class = ProductVariantInventorySerializer
 
     def get_queryset(self):
