@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.urls import reverse
+from django.utils.http import urlencode
 
 from products.models import Product
 from products.views import ProductListView
@@ -332,5 +333,27 @@ class TestProductCategoriesListView(TestCaseBase):
                     ],
                     "slug": "women",
                 }
+            ],
+        )
+
+
+class ProductVariantInventoryListView(TestCaseBase):
+    fixtures = [
+        "products/tests/fixtures/products.json",
+    ]
+
+    def test_should_get_product_variant_stock_availability(self):
+        url = reverse("product-variant-inventory")
+        kwargs = {"product_variant_ids": "1,2"}
+        url = f"{url}?{urlencode(kwargs)}"
+
+        r = self.client.get(url, **self.customer_bearer_token)
+
+        payload = self.deserialize(r)
+        self.assertEqual(
+            payload,
+            [
+                {"in_stock": True, "product_variant": 1},
+                {"in_stock": True, "product_variant": 2},
             ],
         )
