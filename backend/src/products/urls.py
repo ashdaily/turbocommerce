@@ -24,4 +24,10 @@ urlpatterns = [
         views.ProductCategoriesListView.as_view(),
         name="product-categories",
     ),
+    # product variant
+    path(
+        "variant-inventory/in-ids/",
+        views.ProductVariantInventoryListView.as_view(),
+        name="product-variant-inventory",
+    ),
 ]

@@ -313,5 +313,9 @@ class ProductVariantInventory(Timestamp):
         null=True,
     )
 
+    @property
+    def in_stock(self):
+        return True if self.quantity > 0 else False
+
     def __str__(self):
         return f"{self.product_variant.product.product_name}"

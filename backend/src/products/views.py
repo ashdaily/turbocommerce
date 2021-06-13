@@ -7,17 +7,15 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 
 from utils.pagination import StandardPagination, ProductSuggestionPagination
 from utils.strings import query_params_to_list
-from .models import (
-    Product,
-    ProductGrandParentCategory,
-    ProductChildCategory,
-    ProductVariant,
-)
+from .models import Product, ProductGrandParentCategory, ProductVariantInventory
 from products.serializers.product import (
     ProductSerializer,
     ProductChildCategorySerializer,
 )
 from products.serializers.category import ProductGrandParentCategorySerializer
+from products.serializers.product_variant_inventory import (
+    ProductVariantInventorySerializer,
+)
 
 
 class ProductListView(ListAPIView, PaginationMixin):
@@ -132,3 +130,23 @@ class ProductByCategoryListView(ListAPIView, PaginationMixin):
         )
 
         return queryset
+
+
+class ProductVariantInventoryListView(ListAPIView, PaginationMixin):
+    """
+    PATH: /api/products/variant-inventory/in-ids/?product_variant_ids=
+    """
+
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProductVariantInventorySerializer
+
+    def get_queryset(self):
+        id_string = self.request.query_params.get("product_variant_ids", None)
+        try:
+            product_variant_ids = query_params_to_list(id_string)
+        except ValueError:
+            return ProductVariantInventory.objects.none()
+        else:
+            return ProductVariantInventory.objects.filter(
+                product_variant_id__in=product_variant_ids
+            )
