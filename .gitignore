@@ -5,3 +5,4 @@
 .vscode
 .config/
 .python_history
+postgres/*
