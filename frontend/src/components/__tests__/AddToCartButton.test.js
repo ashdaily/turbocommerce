@@ -23,7 +23,7 @@ describe('<AddToCartButton />', () => {
                 <AddToCartButton data={product} variant={variant}/>
             </ShopContext.Provider>
         </Router>);
-        expect(wrapper.find("button").text()).toEqual(' 4 ');
+        expect(wrapper.find("span").text()).toEqual('4');
     });
 
     it('renders AddToCartButton button with no quantity', () => {

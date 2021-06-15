@@ -201,3 +201,45 @@ body.navExpanded:after {
 .breadcrumb > li > a {
   color: $secondaryAccentColor;
 }
+
+.product-detail-action {
+  display: flex;
+}
+
+.wishlist-icon .fa.fa-heart{
+  color: red;
+}
+
+.add-to-cart-btn {
+  background: $primaryBgColor;
+  border: 1px solid $sideBarBorderColor;
+  border-radius: 0px !important;
+  color: black;
+  &:hover, &:active, &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.cart-btns {
+  display: flex;
+  align-items: center;
+  i {
+    background: $primaryBgColor;
+    border: 1px solid $sideBarBorderColor;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0rem 1.5rem;
+    height: 100%;
+    cursor: pointer;
+    &:hover {
+      background: $secondaryBtnColor;
+      color: white;
+    }
+  }
+  span {
+
+  }
+}

@@ -1,13 +1,13 @@
 import React, {useContext, useReducer} from "react";
-import { Row, Col, Table } from "react-bootstrap";
+import {Col, Row, Table} from "react-bootstrap";
 import ColorSwatch from "./ColorSwatch";
 import Sizes from "./Sizes";
 import AddToCartButton from "./AddToCartButton";
 import {ShopContext} from "../context/ShopContext";
 import Wishlist from "./Wishlist/Wishlist";
 
-const ProductDetailsContent = ({ data }) => {
-  const { storeInfo } = useContext(ShopContext);
+const ProductDetailsContent = ({data}) => {
+  const {storeInfo} = useContext(ShopContext);
   const initvariant = 0;
 
   const reducer = (variant, action) => {
@@ -16,7 +16,7 @@ const ProductDetailsContent = ({ data }) => {
   };
 
   const variantColor = Array.from(
-    new Set(data.product_variants.map((variant) => variant.color))
+      new Set(data.product_variants.map((variant) => variant.color))
   ).map((color) => {
     return {
       color: color,
@@ -27,11 +27,11 @@ const ProductDetailsContent = ({ data }) => {
   const initColor = variantColor[0].color;
 
   const initVariantSizes = data.product_variants.filter(
-    (variant) => variant.color === initColor
+      (variant) => variant.color === initColor
   );
 
   const initsize = data.product_variants.find(
-    (item) => item.color === initColor
+      (item) => item.color === initColor
   ).size.name;
 
   const changeSize = (size, action) => {
@@ -53,19 +53,19 @@ const ProductDetailsContent = ({ data }) => {
   const [size, dispatchSize] = useReducer(changeSize, initsize);
   const [color, dispatchColor] = useReducer(changeColor, initColor);
   const [variantSizes, dispatchVariantSizes] = useReducer(
-    changeVariantSizes,
-    initVariantSizes
+      changeVariantSizes,
+      initVariantSizes
   );
 
   const product_specification = data.product_variants[variant].product_variant_specifications.map(
-    ({ specification_name, specification_value }, index) => {
-      return (
-        <tr key={index}>
-          <td>{specification_name}</td>
-          <td>{specification_value}</td>
-        </tr>
-      );
-    }
+      ({specification_name, specification_value}, index) => {
+        return (
+            <tr key={index}>
+              <td>{specification_name}</td>
+              <td>{specification_value}</td>
+            </tr>
+        );
+      }
   );
 
   const handleSwatchColor = (color) => {
@@ -73,7 +73,7 @@ const ProductDetailsContent = ({ data }) => {
       color: color,
     });
     let newSizes = data.product_variants.filter(
-      (variant) => variant.color === color
+        (variant) => variant.color === color
     );
     dispatchVariantSizes({
       variantSizes: newSizes,
@@ -82,8 +82,8 @@ const ProductDetailsContent = ({ data }) => {
       size: newSizes[0].size.name,
     });
     let index = data.product_variants.findIndex(
-      (variant) =>
-        variant.color === color && variant.size.name === newSizes[0].size.name
+        (variant) =>
+            variant.color === color && variant.size.name === newSizes[0].size.name
     );
     dispatchSwatch({
       index: index,
@@ -95,7 +95,7 @@ const ProductDetailsContent = ({ data }) => {
       size: size,
     });
     let index = data.product_variants.findIndex(
-      (variant) => variant.color === color && variant.size.name === size
+        (variant) => variant.color === color && variant.size.name === size
     );
     dispatchSwatch({
       index: index,
@@ -103,12 +103,12 @@ const ProductDetailsContent = ({ data }) => {
   };
 
   return (
-    <Row className="product-details-content">
-      <Col>
-        <h5>{data.product_name}</h5>
-        <div className="table-responsive">
-          <Table size="lg">
-            <tbody>
+      <Row className="product-details-content">
+        <Col>
+          <h5>{data.product_name}</h5>
+          <div className="table-responsive">
+            <Table size="lg">
+              <tbody>
               <tr>
                 <td>Brand</td>
                 <td>{data.brand.brand_name}</td>
@@ -132,30 +132,31 @@ const ProductDetailsContent = ({ data }) => {
                 <td>{data.returnable ? "Yes" : "No"}</td>
               </tr>
               <ColorSwatch
-                variants={data.product_variants}
-                onClick={(color) => handleSwatchColor(color)}
-                active={color}
-                colors={variantColor}
+                  variants={data.product_variants}
+                  onClick={(color) => handleSwatchColor(color)}
+                  active={color}
+                  colors={variantColor}
               />
               <Sizes
-                sizes={variantSizes}
-                onClick={(size) => handleSwatchSize(size)}
-                size={size}
+                  sizes={variantSizes}
+                  onClick={(size) => handleSwatchSize(size)}
+                  size={size}
               />
-            </tbody>
-          </Table>
-        </div>
-        <AddToCartButton data={data} variant={data.product_variants[variant]} />
-        <Wishlist data={data} />
-
-        <h5 className="mt-5">Product Specifications</h5>
-        <div className="table-responsive">
-          <Table size="lg">
-            <tbody>{product_specification}</tbody>
-          </Table>
-        </div>
-      </Col>
-    </Row>
+              </tbody>
+            </Table>
+          </div>
+          <div className={'product-detail-action'}>
+            <AddToCartButton data={data} variant={data.product_variants[variant]}/>
+            <Wishlist data={data}/>
+          </div>
+          <h5 className="mt-5">Product Specifications</h5>
+          <div className="table-responsive">
+            <Table size="lg">
+              <tbody>{product_specification}</tbody>
+            </Table>
+          </div>
+        </Col>
+      </Row>
   );
 };
 

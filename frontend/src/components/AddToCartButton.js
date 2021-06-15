@@ -21,23 +21,23 @@ const AddToCartButton = ({ data, variant }) => {
 
   if (isInCart(data, variant)) {
     return (
-      <Button variant="primary" className="w-100 mt-4">
+      <div className="w-100 mx-2 cart-btns">
         <i
           onClick={() => decrease(data.id, variant.id)}
           className="fa fa-minus"
-        ></i>{" "}
-        {productQuantity(data, variant)}{" "}
+        ></i>
+        <span>{productQuantity(data, variant)}</span>
         <i
           onClick={() => increase(data.id, variant.id)}
           className="fa fa-plus"
         ></i>
-      </Button>
+      </div>
     );
   } else {
     return (
       <Button
-        variant="primary"
-        className="w-100 mt-4"
+          variant="outline-secondary"
+        className="w-100 mx-2 add-to-cart-btn"
         onClick={() => addProduct(data, variant)}
       >
         Add to cart <i className="fa fa-shopping-cart"></i>
