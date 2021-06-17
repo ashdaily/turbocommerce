@@ -27,7 +27,7 @@ const CategoryListItem = ({category,}) => {
     const renderParentLink = () => {
         if (checkIfMobile(width)) {
             return (
-                <a className={styles.tier1title}>
+                <a href={'# '} className={styles.tier1title}>
                     {category.category_name}
                 </a>
             )

@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import {Button, Card, Col, Form, Row} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
 import {toast} from "react-toastify";
-
+import Constants from '../config/constants';
 import {saveTokens} from "../util/Auth";
 import axios from "../util/Axios";
 import SocialButton from "../components/SocialButton";
@@ -103,7 +103,7 @@ export default () => {
             <SocialButton
                 className="gmail-btn mt-2"
                 provider="google"
-                appId="427421314489-kd63pc8k47enqeuauctb5dtu3c6hhi6f.apps.googleusercontent.com"
+                appId={Constants.GOOGLE_LOGIN_KEY}
                 onLoginSuccess={handleSocialLogin}
                 onLoginFailure={handleSocialLoginFailure}
             >
@@ -113,7 +113,7 @@ export default () => {
                 variant="primary"
                 className="facebook-btn mt-2"
                 provider="facebook"
-                appId="1762595890586028"
+                appId={Constants.FACEBOOK_KEY}
                 onLoginSuccess={handleSocialLogin}
                 onLoginFailure={handleSocialLoginFailure}
             >

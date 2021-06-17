@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useRef} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {Container} from "react-bootstrap";
 import {ToastContainer} from "react-toastify";
@@ -21,11 +21,15 @@ import Topbar from "./components/Topbar/Topbar";
 
 function App() {
     const {updateStoreInfo, syncWishlist} = useContext(ShopContext);
+    const mountRef = useRef(false);
 
     useEffect(() => {
-        updateStoreInfo();
-        syncWishlist();
-    }, []);
+        if (!mountRef.current) {
+            updateStoreInfo();
+            syncWishlist();
+        }
+        mountRef.current = true;
+    }, [mountRef, updateStoreInfo, syncWishlist]);
 
     return (
         <Router>

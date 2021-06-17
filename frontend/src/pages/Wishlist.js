@@ -31,7 +31,7 @@ const Wishlist = () => {
       return [];
     }
     return productData.results.filter((item) => {
-      return wishlistItems.findIndex((val) => val.id == item.id) >= 0;
+      return wishlistItems.findIndex((val) => val.id === item.id) >= 0;
     });
   }, [productData, wishlistItems]);
 
