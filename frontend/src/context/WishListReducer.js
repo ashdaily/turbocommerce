@@ -1,32 +1,3 @@
-import axios from "../util/Axios";
-import { isLoggedIn } from "../util/Auth";
-
-// TODO: REMOVE AFTER TESTING EVERYTHING
-const Storage = () => {
-  if (isLoggedIn) {
-    axios
-      .get(`api/customer/wishlist/`)
-      .then((response) => {
-        if (response.status === 200) {
-          let wishlistData = [];
-          if (response.data.count > 0) {
-            response.data.results.map((item) =>
-              wishlistData.push({
-                id: item.id,
-              })
-            );
-            localStorage.setItem("wishlistItems", JSON.stringify(wishlistData));
-          } else {
-            localStorage.setItem("wishlistItems", JSON.stringify([]));
-          }
-        }
-      })
-      .catch(() => {
-        localStorage.setItem("wishlistItems", JSON.stringify([]));
-      });
-  }
-};
-
 export const sumWishlistItems = (items) => {
   // Storage();
   let totalWishlistItems =

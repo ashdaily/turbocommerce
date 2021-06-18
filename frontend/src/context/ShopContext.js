@@ -79,7 +79,7 @@ const ShopContextProvider = ({children}) => {
     }
 
     const updateStoreInfo = (data) => {
-        if (initialStoreInfo.title_tag != '') {
+        if (initialStoreInfo.title_tag !== '') {
             appSettingDispatch({type: 'UPDATE_STORE_INFO', payload: initialStoreInfo});
         }
         const req = serviceGetStoreInformation();

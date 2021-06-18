@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styles from './Styles.module.scss';
 import csx from 'classnames';
 import Logo from "./Logo";
@@ -13,17 +13,8 @@ import EventEmitter from "../../util/EventsUtils";
 const Sidebar = () => {
     const [isOpen, setOpen] = useState(false);
     const isOpenRef = useRef(false);
-    useEffect(() => {
-        EventEmitter.subscribe(EventEmitter.TOGGLE_SIDEBAR, toggleSideBar);
-        document.body.addEventListener('click', bodyClick);
-        return () => {
-            EventEmitter.unsubscribe(EventEmitter.TOGGLE_SIDEBAR);
-            document.body.removeEventListener('click', bodyClick);
-        }
-    }, []);
 
-
-    const toggleSideBar = () => {
+    const toggleSideBar = useCallback(() => {
         if (!isOpenRef.current) {
             document.body.classList.add("navExpanded");
         } else {
@@ -31,15 +22,26 @@ const Sidebar = () => {
         }
         setOpen(!isOpenRef.current);
         isOpenRef.current = !isOpenRef.current;
-    };
+    }, [isOpenRef]);
 
-    const bodyClick = (e) => {
+    const bodyClick = useCallback((e) => {
         if (e.target.tagName === 'BODY') {
             if (isOpenRef.current) {
                 toggleSideBar()
             }
         }
-    };
+    }, [isOpenRef, toggleSideBar]);
+
+    useEffect(() => {
+        EventEmitter.subscribe(EventEmitter.TOGGLE_SIDEBAR, toggleSideBar);
+        document.body.addEventListener('click', bodyClick);
+        return () => {
+            EventEmitter.unsubscribe(EventEmitter.TOGGLE_SIDEBAR);
+            document.body.removeEventListener('click', bodyClick);
+        }
+    }, [bodyClick, toggleSideBar]);
+
+
 
     return (
         <div className={csx(styles.mainNavbar, styles.navOutsideExpandedMode, isOpen ? styles.sidebarOpened : '')}
@@ -51,7 +53,7 @@ const Sidebar = () => {
 
                 <div className={styles.mainnav}>
                     <div className={styles.tier1} role="navigation" aria-label="Navigation">
-                        <a className={styles.back} href="#" aria-controls="current-submenu"
+                        <a className={styles.back} href="# " aria-controls="current-submenu"
                            aria-label="Return to previous menu" tabIndex="-1">
                             <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24"
                                  xmlns="http://www.w3.org/2000/svg">

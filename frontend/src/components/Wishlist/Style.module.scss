@@ -1,13 +1,30 @@
+@import "../../variables";
+
 .wishlistBtn {
   border: none;
   outline: none;
-  transition: 0.4s all;
+
   &:active, &:focus {
     border: none;
     outline: none;
     box-shadow: none;
   }
-  &:active {
+
+  i {
+    transition: 0.4s all;
+  }
+
+  &:active i {
     transform: scale(1.5);
+  }
+}
+
+.detailWishlist {
+  min-width: 80px;
+  border: 1px solid $sideBarBorderColor !important;
+  border-radius: 0px;
+
+  i {
+    color: black;
   }
 }
