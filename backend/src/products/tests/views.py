@@ -337,7 +337,7 @@ class TestProductCategoriesListView(TestCaseBase):
         )
 
 
-class ProductVariantInventoryListView(TestCaseBase):
+class TestProductVariantInventoryListView(TestCaseBase):
     fixtures = [
         "products/tests/fixtures/products.json",
     ]
@@ -356,4 +356,359 @@ class ProductVariantInventoryListView(TestCaseBase):
                 {"in_stock": True, "product_variant": 1},
                 {"in_stock": True, "product_variant": 2},
             ],
+        )
+
+
+class TestProductByCategoryListView(TestCaseBase):
+    url = reverse("products-by-category")
+    fixtures = [
+        "products/tests/fixtures/products.json",
+    ]
+
+    def test_get_products_by_grand_parent_category_slug(self):
+        kwargs = {"grand_parent_category_slug": "women"}
+        url = f"{self.url}?{urlencode(kwargs)}"
+
+        r = self.client.get(url)
+        payload = self.deserialize(r)
+
+        self.assertEqual(
+            payload,
+            {
+                "count": 1,
+                "next": None,
+                "previous": None,
+                "results": [
+                    {
+                        "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
+                        "child_category": {
+                            "category_name": "Pants",
+                            "id": 1,
+                            "parent_category": {
+                                "category_name": "Formal",
+                                "grand_parent_category": {
+                                    "category_name": "Women",
+                                    "id": 1,
+                                    "slug": "women",
+                                },
+                                "id": 1,
+                                "slug": "formal",
+                            },
+                            "slug": "pants",
+                        },
+                        "country_of_origin": "Japan",
+                        "id": 1,
+                        "product_description": "Torn clothes are the new cool",
+                        "product_name": "Bizarre shirt",
+                        "product_variants": [
+                            {
+                                "color": "#FFFFFF",
+                                "discount": 10,
+                                "id": 1,
+                                "images": ["/media/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 500,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made with",
+                                        "specification_value": "Hand",
+                                    }
+                                ],
+                                "published": True,
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 6 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "XL",
+                                },
+                                "stock_keeping_unit": 87987,
+                                "weight_in_grams": 344,
+                            },
+                            {
+                                "color": "#000000",
+                                "discount": 1,
+                                "id": 2,
+                                "images": ["/media/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 5000,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made with",
+                                        "specification_value": "Machine",
+                                    }
+                                ],
+                                "published": True,
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 5'8 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "M",
+                                },
+                                "stock_keeping_unit": 87988,
+                                "weight_in_grams": 344,
+                            },
+                        ],
+                        "returnable": True,
+                        "slug": "bizarre-shirt",
+                    }
+                ],
+            },
+        )
+
+    def test_get_products_by_parent_category_slug(self):
+        kwargs = {"parent_category_slug": "formal"}
+        url = f"{self.url}?{urlencode(kwargs)}"
+
+        r = self.client.get(url)
+        payload = self.deserialize(r)
+
+        self.assertEqual(
+            payload,
+            {
+                "count": 1,
+                "next": None,
+                "previous": None,
+                "results": [
+                    {
+                        "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
+                        "child_category": {
+                            "category_name": "Pants",
+                            "id": 1,
+                            "parent_category": {
+                                "category_name": "Formal",
+                                "grand_parent_category": {
+                                    "category_name": "Women",
+                                    "id": 1,
+                                    "slug": "women",
+                                },
+                                "id": 1,
+                                "slug": "formal",
+                            },
+                            "slug": "pants",
+                        },
+                        "country_of_origin": "Japan",
+                        "id": 1,
+                        "product_description": "Torn clothes are the new cool",
+                        "product_name": "Bizarre shirt",
+                        "product_variants": [
+                            {
+                                "color": "#FFFFFF",
+                                "discount": 10,
+                                "id": 1,
+                                "images": ["/media/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 500,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made with",
+                                        "specification_value": "Hand",
+                                    }
+                                ],
+                                "published": True,
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 6 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "XL",
+                                },
+                                "stock_keeping_unit": 87987,
+                                "weight_in_grams": 344,
+                            },
+                            {
+                                "color": "#000000",
+                                "discount": 1,
+                                "id": 2,
+                                "images": ["/media/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 5000,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made with",
+                                        "specification_value": "Machine",
+                                    }
+                                ],
+                                "published": True,
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 5'8 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "M",
+                                },
+                                "stock_keeping_unit": 87988,
+                                "weight_in_grams": 344,
+                            },
+                        ],
+                        "returnable": True,
+                        "slug": "bizarre-shirt",
+                    }
+                ],
+            },
+        )
+
+    def test_get_products_by_child_category_slug(self):
+        kwargs = {"child_category_slug": "pants"}
+        url = f"{self.url}?{urlencode(kwargs)}"
+
+        r = self.client.get(url)
+        payload = self.deserialize(r)
+
+        self.assertEqual(
+            payload,
+            {
+                "count": 1,
+                "next": None,
+                "previous": None,
+                "results": [
+                    {
+                        "brand": {"brand_name": "Abc inc", "id": 1, "slug": "abc-inc"},
+                        "child_category": {
+                            "category_name": "Pants",
+                            "id": 1,
+                            "parent_category": {
+                                "category_name": "Formal",
+                                "grand_parent_category": {
+                                    "category_name": "Women",
+                                    "id": 1,
+                                    "slug": "women",
+                                },
+                                "id": 1,
+                                "slug": "formal",
+                            },
+                            "slug": "pants",
+                        },
+                        "country_of_origin": "Japan",
+                        "id": 1,
+                        "product_description": "Torn clothes are the new cool",
+                        "product_name": "Bizarre shirt",
+                        "product_variants": [
+                            {
+                                "color": "#FFFFFF",
+                                "discount": 10,
+                                "id": 1,
+                                "images": ["/media/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 500,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made with",
+                                        "specification_value": "Hand",
+                                    }
+                                ],
+                                "published": True,
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 6 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "XL",
+                                },
+                                "stock_keeping_unit": 87987,
+                                "weight_in_grams": 344,
+                            },
+                            {
+                                "color": "#000000",
+                                "discount": 1,
+                                "id": 2,
+                                "images": ["/media/https%3A/lorempixel/500/500"],
+                                "in_stock": True,
+                                "price": 5000,
+                                "product_variant_specifications": [
+                                    {
+                                        "specification_name": "Made with",
+                                        "specification_value": "Machine",
+                                    }
+                                ],
+                                "published": True,
+                                "quantity": 5000,
+                                "size": {
+                                    "comment": "Fits a 5'8 feet tall woman",
+                                    "measurement": [
+                                        {
+                                            "id": 1,
+                                            "measurement_name": "LENGTH",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "measurement_name": "WAIST",
+                                            "measurement_unit": "CENTIMETER",
+                                            "measurement_value": 45,
+                                        },
+                                    ],
+                                    "name": "M",
+                                },
+                                "stock_keeping_unit": 87988,
+                                "weight_in_grams": 344,
+                            },
+                        ],
+                        "returnable": True,
+                        "slug": "bizarre-shirt",
+                    }
+                ],
+            },
         )

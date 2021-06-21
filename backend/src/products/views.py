@@ -144,12 +144,8 @@ class ProductByCategoryListView(ListAPIView, PaginationMixin):
         )
         child_category_slug = self.request.query_params.get("child_category_slug", None)
 
-        queryset = (
-            Product.objects.prefetch_related("product_variants")
-            .select_related("brand", "child_category")
-            .get_product_by_category(
-                grand_parent_category_slug, parent_category_slug, child_category_slug
-            )
+        queryset = Product.objects.get_product_by_category(
+            grand_parent_category_slug, parent_category_slug, child_category_slug
         )
 
         return queryset
