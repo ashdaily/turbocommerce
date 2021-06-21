@@ -13,7 +13,6 @@ services:
       - turbocommerce_db
     ports:
       - "8000:8000"
-    restart: always
     volumes:
       - .:/backend
     stdin_open: true
