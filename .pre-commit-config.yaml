@@ -1,18 +1,22 @@
 repos:
     -   repo: https://github.com/pre-commit/pre-commit-hooks
-        rev: v3.4.0
+        rev: v4.0.1
         hooks:
-        -   id: check-yaml
         -   id: end-of-file-fixer
+        -   id: check-ast
+        -   id: check-yaml
         -   id: trailing-whitespace
         -   id: debug-statements
+        -   id: check-merge-conflict
+        -   id: check-json
+        -   id: pretty-format-json
 
     -   repo: https://github.com/psf/black
-        rev: 20.8b1
+        rev: 21.6b0
         hooks:
         -   id: black
 
     -   repo: https://github.com/pre-commit/mirrors-eslint
-        rev: 'v7.24.0'
+        rev: 'v7.29.0'
         hooks:
         -   id: eslint
