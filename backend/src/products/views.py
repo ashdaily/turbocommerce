@@ -33,7 +33,11 @@ class ProductListView(ListAPIView, PaginationMixin):
         if slug is None:
             # T0DO: send only variant that are published
             return Product.objects.filter()
-        return Product.objects.filter(slug=slug)
+        return (
+            Product.objects.prefetch_related("product_variants")
+            .select_related("brand", "child_category")
+            .filter(slug=slug)
+        )
 
 
 class ProductDetailsView(APIView):
@@ -47,7 +51,11 @@ class ProductDetailsView(APIView):
 
     def get_object(self, pk):
         try:
-            return self.model.objects.get(pk=pk)
+            return (
+                self.model.objects.prefetch_related("product_variants")
+                .select_related("brand", "child_category")
+                .get(pk=pk)
+            )
         except self.model.DoesNotExist:
             raise Http404
 
@@ -73,7 +81,11 @@ class ProductsByIdsListView(ListAPIView, PaginationMixin):
         except ValueError:
             return Product.objects.none()
         else:
-            return Product.objects.filter(id__in=ids)
+            return (
+                Product.objects.prefetch_related("product_variants")
+                .select_related("brand", "child_category")
+                .filter(id__in=ids)
+            )
 
 
 class ProductSuggestionListView(APIView, PaginationMixin):
@@ -86,7 +98,11 @@ class ProductSuggestionListView(APIView, PaginationMixin):
     serializer = ProductSerializer
 
     def get(self, request, product_id, format=None):
-        queryset = Product.objects.product_suggestion(last_seen_product_id=product_id)
+        queryset = (
+            Product.objects.prefetch_related("product_variants")
+            .select_related("brand", "child_category")
+            .product_suggestion(last_seen_product_id=product_id)
+        )
         page = self.paginate_queryset(queryset)
         if page is not None:
             serialized = self.serializer(page, many=True)
@@ -102,7 +118,13 @@ class ProductCategoriesListView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get(self, request, format=None):
-        queryset = ProductGrandParentCategory.objects.all().order_by("id")
+        queryset = (
+            ProductGrandParentCategory.objects.prefetch_related(
+                "product_parent_categories"
+            )
+            .all()
+            .order_by("id")
+        )
         serializer = ProductGrandParentCategorySerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -125,8 +147,12 @@ class ProductByCategoryListView(ListAPIView, PaginationMixin):
         )
         child_category_slug = self.request.query_params.get("child_category_slug", None)
 
-        queryset = Product.objects.get_product_by_category(
-            grand_parent_category_slug, parent_category_slug, child_category_slug
+        queryset = (
+            Product.objects.prefetch_related("product_variants")
+            .select_related("brand", "child_category")
+            .get_product_by_category(
+                grand_parent_category_slug, parent_category_slug, child_category_slug
+            )
         )
 
         return queryset
