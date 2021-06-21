@@ -8,10 +8,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from utils.pagination import StandardPagination, ProductSuggestionPagination
 from utils.strings import query_params_to_list
 from .models import Product, ProductGrandParentCategory, ProductVariantInventory
-from products.serializers.product import (
-    ProductSerializer,
-    ProductChildCategorySerializer,
-)
+from products.serializers.product import ProductSerializer
 from products.serializers.category import ProductGrandParentCategorySerializer
 from products.serializers.product_variant_inventory import (
     ProductVariantInventorySerializer,
