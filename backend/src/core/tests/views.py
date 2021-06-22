@@ -31,6 +31,17 @@ class TestCustomerSignup(TestCaseBase):
         r = self.deserialize(r)
         self.assertEqual(r["email"], ["Enter a valid email address."])
 
+    def test_signup_process_strips_extra_spaces(self):
+        payload = {
+            "email": "    ash1@gmail.com    ",
+            "password": "ashish123  ",
+        }
+        r = self.client.post(self.url, payload)
+        self.assertEqual(r.status_code, 201)
+        r = self.deserialize(r)
+
+        self.assertEqual(User.objects.last().email, "ash1@gmail.com")
+
 
 class TestCustomerLogin(TestCaseBase):
     fixtures = [
@@ -48,3 +59,6 @@ class TestCustomerLogin(TestCaseBase):
 
         r = self.client.post(self.url, payload)
         self.assertEqual(r.status_code, 200)
+
+        self.assertContains(r, "access")
+        self.assertContains(r, "refresh")

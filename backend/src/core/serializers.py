@@ -16,5 +16,4 @@ class UserSerializer(ModelSerializer):
             "last_name",
             "user_type",
             "phone_number",
-            "address_pincode",
         )
