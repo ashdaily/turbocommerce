@@ -1,6 +1,6 @@
 from django.urls import reverse
 
-from customer.models import CustomerWishlist
+from customer.models import CustomerWishlist, CustomerShippingAddress
 from utils.tests import TestCaseBase
 from utils.print import pprint
 
@@ -188,3 +188,57 @@ class TestCustomerWishlistView(TestCaseBase):
         self.assertEqual(
             CustomerWishlist.objects.filter(id=wishlist_id).exists(), False
         )
+
+
+class TestCustomerShippingAddressView(TestCaseBase):
+    fixtures = [
+        "customer/tests/fixtures/customer.json",
+    ]
+
+    def test_should_create_get_delete_customer_shipping_address(self):
+        # create customer shipping address
+        url1 = reverse("customer-shipping-address")
+        payload = {
+            "address": "XXX",
+            "city": "XXX",
+            "province": "XXX",
+            "country": "XXX",
+            "postal_code": "XXX",
+            "country_code_primary_phone_number": "XXX",
+            "primary_phone_number": "XXX",
+            "country_code_alternate_phone_number": "XXX",
+            "alternate_phone_number": "XXX",
+            "address_type": CustomerShippingAddress.ADDRESS_TYPE_HOME,
+            "default_address": True,
+        }
+        r1 = self.client.post(url1, data=payload, **self.customer_bearer_token)
+        self.assertEqual(r1.status_code, 201)
+
+        # get the customer shipping address
+        r2 = self.client.get(url1, data=payload, **self.customer_bearer_token)
+        self.assertEqual(
+            r2.json(),
+            [
+                {
+                    "address": "XXX",
+                    "address_type": "HOME",
+                    "alternate_phone_number": "XXX",
+                    "city": "XXX",
+                    "country": "XXX",
+                    "country_code_alternate_phone_number": "XXX",
+                    "country_code_primary_phone_number": "XXX",
+                    "customer": 1,
+                    "default_address": True,
+                    "id": 1,
+                    "postal_code": "XXX",
+                    "primary_phone_number": "XXX",
+                    "province": "XXX",
+                }
+            ],
+        )
+
+        # delete the customer shipping address
+        address_id = r1.json()["id"]
+        url2 = reverse("customer-shipping-address-delete", kwargs={"id": address_id})
+        r3 = self.client.delete(url2, data=payload, **self.customer_bearer_token)
+        self.assertEqual(r3.status_code, 204)
