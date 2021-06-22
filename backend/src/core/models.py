@@ -67,7 +67,6 @@ class User(AbstractUser):
 
     user_type = models.CharField(max_length=20, choices=USER_TYPES)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-    address_pincode = models.IntegerField(null=True, blank=True)
 
     objects = CustomUserManager()
 
@@ -82,3 +81,10 @@ class User(AbstractUser):
         if self.user_type == self.ADMIN:
             return True
         return False
+
+    def save(self, *args, **kwargs):
+        if self.email:
+            self.email = self.email.strip()
+        if self.phone_number:
+            self.phone_number = self.phone_number.strip()
+        super().save(*args, **kwargs)
