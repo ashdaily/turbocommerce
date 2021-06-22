@@ -17,7 +17,7 @@ class CustomerWishlistView(
     PaginationMixin,
 ):
     """
-    PATH: /api/wishlist/
+    PATH: /api/customer/wishlist/
     """
 
     permission_classes = (IsAuthenticated,)
@@ -35,10 +35,6 @@ class CustomerWishlistView(
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
-
-    def get_object(self):
-        product_id = kwargs.get("product_id")
-        return Customer.objects.get(product__id=product_id, customer=request.user)
 
     def get_serializer_class(self):
         if self.request.method == "GET":
@@ -58,7 +54,7 @@ class CustomerWishlistView(
 
 class CustomerWishlistDetailView(generics.DestroyAPIView):
     """
-    PATH: /api/wishlist/<pk>/
+    PATH: /api/customer/wishlist/<pk>/
     """
 
     permission_classes = (IsAuthenticated,)
