@@ -9,6 +9,7 @@ import {isLoggedIn} from "../../util/Auth";
 import Logout from "./Logout";
 import LoginSignup from "./LoginSignup";
 import EventEmitter from "../../util/EventsUtils";
+import OtherLinks from "./OtherLinks";
 
 const Sidebar = () => {
     const [isOpen, setOpen] = useState(false);
@@ -66,6 +67,8 @@ const Sidebar = () => {
                         <CategoryList/>
                         <Cart/>
                         <Wishlist/>
+                        <OtherLinks/>
+                        {/*{isLoggedIn ? <OtherLinks/> : <></> }*/}
                         {isLoggedIn ? <Logout/> : <LoginSignup/>}
                     </div>
 
