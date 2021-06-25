@@ -1,145 +1,167 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import styles from './Style.module.scss';
 import csx from 'classnames';
+import FormText from "./component/FormText";
+import {serviceCreateAddress, serviceGetAddress} from "../../services/Address.service";
+
+const requiredFields = ['postal_code', 'country', 'address', 'city', 'province', 'primary_phone_number'];
 
 const initialData = {
     postal_code: '',
     country: '',
     address: '',
-    landmark: '',
     city: '',
     province: '',
     primary_phone_number: '',
     alternate_phone_number: '',
+    default_address: false,
+    country_code_primary_phone_number: '+91',
+    country_code_alternate_phone_number: '+91',
+    address_type: 'HOME'
 };
 
 const Address = () => {
-
     const [formData, setFormData] = useState(initialData);
+    const [errorData, setErrors] = useState({});
+
+    useEffect(() => {
+        serviceGetAddress();
+    });
 
     const handleChange = useCallback((e) => {
         const data = JSON.parse(JSON.stringify(formData));
-        data[e.target.name] = e.target.value;
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+        if (fieldName === 'default_address') {
+            data[fieldName] = !data[fieldName];
+        } else {
+            data[fieldName] = fieldValue;
+        }
         setFormData(data);
-    }, [formData]);
+
+        const errors = JSON.parse(JSON.stringify(errorData));
+        errors[e.target.name] = false;
+        setErrors(errors);
+    }, [formData, setErrors, errorData, setFormData]);
+
+    const checkFormValidation = useCallback(() => {
+        const errors = {};
+        requiredFields.forEach(field => {
+            if (!formData[field]) {
+                errors[field] = 'Required'
+            }
+        });
+        return errors;
+    });
+
+    const handleSubmit = useCallback((e) => {
+        e.preventDefault();
+        const errors = checkFormValidation();
+        console.log('errors', errors);
+        if (Object.keys(errors).length === 0) {
+            serviceCreateAddress({
+                ...formData,
+            })
+        } else {
+            setErrors(errors);
+        }
+    }, [setErrors, checkFormValidation,formData]);
 
     return (
         <div className={styles.checkoutShipping}>
             <h2 className={styles.heading}>Enter Your Address</h2>
             <div className={styles.addressForm}>
-                <form id="shipping-address-form">
+                <form onSubmit={handleSubmit} id="shipping-address-form">
                     <div className={styles.customerInfo}>
 
-                        <div className="row">
-                            <label className="col-xs-5 form-lbl">Pincode</label>
-                            <input type="text"
-                                   value={formData.postal_code}
-                                   maxLength="6"
-                                   onChange={handleChange}
-                                   className={csx('col-xs-5', styles.valid, styles.area)} name="postal_code"
-                                   placeholder="Enter 6 digit pincode"
-                                   data-required="true" data-invalid="false"
-                                   data-required-msg="Please enter your pincode"
-                                   data-validation="num size-6"
+                        <div className={csx(styles.formCont, 'row')}>
+                            <FormText
+                                value={formData.postal_code}
+                                onChange={handleChange}
+                                isError={errorData.postal_code}
+                                name={'postal_code'}
+                                label={'Pincode'}
+                                placeholder="Enter 6 digit pincode"
                             />
                         </div>
 
-                        <div className="row">
-                            <label className="col-xs-5 form-lbl">Name</label>
-                            <input type="text"
-                                   maxLength="128"
-                                   data-address-field="country"
-                                   value={formData.country}
-                                   onChange={handleChange}
-                                   className={csx(styles.inputbox2, 'col-xs-7')}
-                                   name="country"
-                                   placeholder="Country"
-                                   data-required="true"
-                                   data-required-msg="Please enter country name"/>
+                        <div className={csx(styles.formCont, 'row')}>
+                            <FormText
+                                value={formData.country}
+                                onChange={handleChange}
+                                isError={errorData.country}
+                                name={'country'}
+                                label={'Country'}
+                                placeholder="Country"
+                            />
                         </div>
 
-                        <div className="row">
-                            <label className="col-xs-5 form-lbl">Address</label>
-                            <textarea
-                                name="address"
-                                data-address-field="address"
-                                onChange={handleChange}
+                        <div className={csx(styles.formCont, 'row')}>
+                            <FormText
                                 value={formData.address}
-                                className={csx(styles.inputbox2, 'col-xs-7', 'text-area')}
-                                placeholder="Flat/House No. Colony/Street No."
-                                data-required="true"
-                                data-required-msg="Please enter your address"
-                                data-validation="address"></textarea>
-                        </div>
-
-
-                        <div className="row">
-                            <label className="col-xs-5 form-lbl">City</label>
-                            <input
-                                maxLength="48"
-                                type="text"
-                                data-address-field="city"
-                                value={formData.city}
-                                className={csx(styles.inputbox2, 'col-xs-7')}
-                                name="city"
                                 onChange={handleChange}
-                                placeholder="City"
-                                data-required="true"
-                                data-required-msg="Please enter the city name"
-                                data-validation="city"/>
+                                isError={errorData.address}
+                                name={'address'}
+                                label={'Address'}
+                                multiline
+                                rows={3}
+                                placeholder="Flat/House No. Colony/Street No."
+                            />
                         </div>
 
-                        <div className="row">
-                            <label className="col-xs-5 form-lbl">Province</label>
-                            <input
-                                maxLength="48"
-                                type="text"
-                                data-address-field="province"
+
+                        <div className={csx(styles.formCont, 'row')}>
+                            <FormText
+                                value={formData.city}
+                                onChange={handleChange}
+                                isError={errorData.city}
+                                name={'city'}
+                                label={'City'}
+                                placeholder="City"
+                            />
+                        </div>
+
+                        <div className={csx(styles.formCont, 'row')}>
+                            <FormText
                                 value={formData.province}
                                 onChange={handleChange}
-                                className={csx(styles.inputbox2, 'col-xs-7')}
-                                name="province"
+                                isError={errorData.province}
+                                name={'province'}
+                                label={'Province'}
                                 placeholder="Province"
-                                data-required="true"
-                                data-required-msg="Please enter the state name"
-                                data-validation="state"/>
+                            />
                         </div>
 
-                        <div className="row">
+                        <div className={csx(styles.formCont, 'row')}>
                             <label className="col-xs-5 form-lbl">Mobile Number</label>
                             <div className={styles.checkboxFlex}>
                                 <input type="checkbox" id="walletMobile"/>
                                 <label>Same as registered mobile</label>
                             </div>
-                            <span className={styles.mobilePrepend}>+91</span>
-                            <input
-                                type="text"
-                                data-address-field="recipientMobile"
-                                value={formData.primary_phone_number}
-                                onChange={handleChange}
-                                className={csx(styles.inputbox2, 'col-xs-6')}
-                                maxLength="10"
-                                name="primary_phone_number"
-                                placeholder="10 digit mobile number"
-                                data-required="true"
-                                data-required-msg="Please enter your mobile number"
-                                data-validation="mob"/>
                         </div>
 
-                        <div className="row">
+                        <div className={csx(styles.formCont, 'row')}>
+                            <label className="col-xs-5 form-lbl"></label>
+                            <span className={styles.mobilePrepend}>+91</span>
+                            <FormText
+                                value={formData.primary_phone_number}
+                                onChange={handleChange}
+                                isError={errorData.primary_phone_number}
+                                name={'primary_phone_number'}
+                                placeholder="10 digit mobile number"
+                            />
+                        </div>
+
+                        <div className={csx(styles.formCont, 'row')}>
                             <label className="col-xs-5 form-lbl">Alternate Mobile Number</label>
                             <span className={styles.mobilePrepend}>+91</span>
-                            <input
-                                type="text"
-                                data-address-field="landLine"
+                            <FormText
                                 value={formData.alternate_phone_number}
                                 onChange={handleChange}
-                                className={csx(styles.inputbox2, 'col-xs-6')}
-                                maxLength="10"
-                                name="alternate_phone_number"
+                                isError={errorData.alternate_phone_number}
+                                name={'alternate_phone_number'}
                                 placeholder="10 digit mobile number"
-                                data-required-msg="Please enter your mobile number"
-                                data-validation="altMob"/>
+                            />
                         </div>
 
                         <div className="row address-type-checkbox">
@@ -162,21 +184,20 @@ const Address = () => {
                             </div>
                         </div>
 
-                        <div className="row">
+                        <div className={csx(styles.formCont, 'row')}>
                             <label className="col-xs-5 form-lbl"></label>
                             <div className={csx(styles.sdCheckbox, 'col-xs-7', styles.padLt0)}>
-                                <input type="checkbox" name="defaultAddress"
-                                       value="true"/>
+                                <input type="checkbox" name="default_address" value={formData.default_address}/>
                                 <label className={styles.label200Wide}>
                                     Make this my default address
                                 </label>
                             </div>
                         </div>
 
-                        <div className="row">
+                        <div className={csx(styles.formCont, 'row')}>
                             <label className="col-xs-5 form-lbl"></label>
                             <button className={csx(styles.saveBtn, styles.rippleWhite, 'btn', 'col-xs-7')}
-                                    type="button">
+                                    type="submit">
                                 <span>Save</span>
                             </button>
                         </div>
