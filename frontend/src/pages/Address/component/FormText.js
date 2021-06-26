@@ -9,7 +9,7 @@ const FormText = ({value, isError, onChange, name, label, placeholder, type, mul
             rows={rows}
             value={value}
             onChange={onChange}
-            className={csx('col-xs-7', styles.inputbox2, (isError ? styles.error : ''))}
+            className={csx(styles.inputbox2, (isError ? styles.error : ''))}
             name={name}
             placeholder={placeholder}
         />)
@@ -18,14 +18,14 @@ const FormText = ({value, isError, onChange, name, label, placeholder, type, mul
             type={type}
             value={value}
             onChange={onChange}
-            className={csx('col-xs-7', styles.inputbox2, (isError ? styles.error : ''))}
+            className={csx(styles.inputbox2, (isError ? styles.error : ''))}
             name={name}
             placeholder={placeholder}
         />)
     }
     return (
         <>
-            {label && (<label className="col-xs-5 form-lbl">{label}</label>)}
+            {label && (<label>{label}</label>)}
             {tempComponent}
         </>
     )

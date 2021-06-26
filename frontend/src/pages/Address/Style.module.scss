@@ -1,4 +1,6 @@
-.heading{
+@import "../../variables";
+
+.heading {
   line-height: 22px;
   font-size: 22px;
   font-weight: normal;
@@ -6,20 +8,23 @@
   margin-bottom: 30px;
 }
 
-.customerInfo{
-  width: 685px;
+.customerInfo {
+  //width: 685px;
   padding-bottom: 50px;
 }
 
-.customerInfo label {
+.formCont > label {
   margin: 11px 2px;
-  font-size: 13px;
+  font-size: 0.9rem;
   color: #242424;
   display: block;
   width: 150px;
   padding-right: 10px;
   line-height: 17px;
   font-weight: 400;
+  @media screen and(max-width: 767px) {
+    width: 100%;
+  }
 }
 
 .checkoutShipping .addressForm input[type='text'] {
@@ -42,9 +47,18 @@
 
 .formCont {
   margin: 5px 0px;
+  padding: 2px 0px;
+  display: flex;
 }
 
-.error{
+.mobileSame label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin: 0px 0px 0px 7px;
+}
+
+.error {
   border: 1px solid red !important;
 }
 
@@ -65,7 +79,7 @@
   border-radius: 3px;
 }
 
-.checkboxFlex{
+.checkboxFlex {
   display: flex;
   align-items: center;
 }
@@ -82,7 +96,7 @@
   width: 178px;
 }
 
-.checkoutShipping .addressForm .address-type-checkbox {
+.checkoutShipping .addressForm .addressTypeCheckbox {
   padding-top: 8px;
 }
 
@@ -97,27 +111,25 @@
 }
 
 .sdRadio {
+  display: flex;
+  align-items: center;
   position: relative;
 }
-.sdRadio {
-  position: relative;
+
+.sdRadio label {
+  font-size: 0.9rem;
+  margin: 0px 0px 0px 4px;
 }
 
-.checkbox+.checkbox, .radio+.radio{
-  margin-top: 13px !important;
+.checkbox {
+  margin-left: 15px !important;
 }
 
-.checkbox{
-  margin-left: 5px !important;
-}
-
-.checkoutShipping .addressForm .padLt0 {
-  padding-left: 0;
-}
-
-
-.label200Wide {
-  width: 200px !important;
+.defaultAddressCont {
+  label {
+    font-size: 0.9rem;
+    margin: 0px 0px 0px 4px;
+  }
 }
 
 .saveBtn {
@@ -142,4 +154,145 @@
 .rippleWhite, .rippleGrey {
   overflow: hidden;
   position: relative;
+}
+
+.accountOrder {
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 1.4rem;
+  padding: 0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.accountOrder:after {
+  width: 91px;
+  height: 3px;
+  background: #d0d0d0;
+  content: "";
+  display: block;
+  margin-top: 6px;
+}
+
+.addressTileCont {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.addressTile {
+  position: relative;
+  width: 200px;
+  border: 1px solid #eee;
+  padding: 10px 20px 35px;
+  overflow: hidden;
+  position: relative;
+  min-height: 201px;
+  margin-right: 20px;
+  margin-top: 20px;
+
+  &:hover {
+    border-color: black;
+  }
+}
+
+.location {
+  color: #b3b3b3;
+  font-size: 14px;
+}
+
+.location.default {
+  background: center right no-repeat #60bf79;
+  color: #fff;
+  padding: 1px 0;
+  margin-left: -20px;
+  text-indent: 10px;
+  width: 93%;
+  font-size: 14px;
+}
+
+.defaultMention {
+  text-indent: 0;
+  margin-left: 1px;
+}
+
+.defaultAddArrow {
+  border-color: transparent transparent transparent #60bf79;
+  border-style: solid none solid solid;
+  border-width: 12px 0 11px 11px;
+  width: 0;
+  height: 0;
+  margin: -1px -11px 0 0px;
+  float: right;
+}
+
+.addressCont {
+  margin: 0px;
+  padding: 0px;
+  color: $secondaryAccentColor;
+  font-size: 0.9rem;
+}
+
+.countrySpan {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.contactCont {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 6px 11px;
+    color: #b3b3b3;
+    width: 50%;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+  }
+
+  li button {
+    color: #b3b3b3;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 0.9rem;
+
+    span {
+      font-size: 0.8rem;
+      margin-right: 3px;
+    }
+  }
+}
+
+.newAddressCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    height: 43px;
+    margin-top: 50px;
+    outline: none;
+    background: white;
+    border: 1px solid $sideBarBorderColor;
+    padding: 0px 20px;
+    &:hover {
+      background: $sidebarTextColor;
+      color: white;
+    }
+  }
 }
