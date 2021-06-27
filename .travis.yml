@@ -28,6 +28,7 @@ env:
     - secure: "MmeOqFoDLDVLUmTSSesEDX78SrukhhsYZXZZu9YK+EG/jtCwvsRbwUoq56nNdRMaFlYfvkBN1Vq4g1GwEW7yN4NyquqPY+y/3SaVt2cQ9OC+J1bUoVHb/Lgr+8GZbVv8ekybItin5LqvseD7L1ckyotSqKtJa/wv3nsI7bZwDlAfzeA+CN2bumN7AkFZWXHTROmKzWEdpU7+jVJ6SHh6jStqzB6qan/l/t1Tzp/1DRJm8H6Dk7ZdiidjdhHkqzLsj/0B2JoswqtBf9AIUzN9TWDz+YKk6t0L34Hf6XIq/FgW9LhIm8vF08UsJICg3gYs6qXiWXzITU3OY3lEeR6bDNTdLZrQltV4kopgg5PLFwI+YUaQGxuYABnYSzNAejLdHEGf+JDdxv1bzMXU5Ij6rrXm4nIEJzVjqZ3i8AD3ivcRxD2A4hw3hbLG/5TSX1GJvprRU3FYuXb1vdGlzu4OfX/ieVcjHOlSDp+IqTMXXdXqRdrt6+Ge3tQzuUXz1LTS3i+fonp4eJkZ+TLvWtIeVqB1Jpgp1o+4MFygQjJTSprODqY2sr5KiHLmGoWUY3BTK0eaKpFnO95uh4lb5arSMoaSqeK7TclPgm97hkUkhXLXbA9eQyIgWbMep/iwTdwZQKhYYzeyyD4E2YlgyCGLjUDPZt1wOuOJc25oHYinyj0="
     - POSTGRES_HOST: "turbocommerce_db"
     - POSTGRES_PORT: 5432
+    - DOCKER_COMPOSE_VERSION: 3.3
 
 cache:
   - pip
@@ -36,6 +37,10 @@ before_install:
   - chmod +x $HOME
   - chown -R travis $HOME
   - bash ./travis/make_env_file.sh
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
   - docker-compose run -d turbocommerce_db
   - docker-compose build turbocommerce_backend
 
