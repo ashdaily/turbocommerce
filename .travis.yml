@@ -41,7 +41,7 @@ before_install:
   - sudo mv ~/docker-compose /usr/local/bin/docker-compose
   - docker-compose run -d turbocommerce_db
   - whoami
-  - chown -R travis $HOME
+  - sudo chown -R travis $HOME
   - docker-compose build turbocommerce_backend
 
 script:
