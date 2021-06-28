@@ -46,7 +46,7 @@ function App() {
                         <Route exact path="/login" component={Login}/>
                         <Route exact path="/cart" component={Cart}/>
                         <Route exact path="/wishlist" component={Wishlist}/>
-                        <Route exact path="/addresses" component={Address}/>
+                        <PrivateRoute exact path="/addresses" component={Address}/>
                         <Route
                             exact
                             path="/:grandParentCategory"

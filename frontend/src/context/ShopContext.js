@@ -57,7 +57,7 @@ const appSettingsInitialValue = {
 
 const addressInitialValue = {
     addresses: [],
-    is_fetching: false,
+    is_address_fetching: true,
 };
 
 const ShopContextProvider = ({children}) => {

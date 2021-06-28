@@ -67,8 +67,7 @@ const Sidebar = () => {
                         <CategoryList/>
                         <Cart/>
                         <Wishlist/>
-                        <OtherLinks/>
-                        {/*{isLoggedIn ? <OtherLinks/> : <></> }*/}
+                        {isLoggedIn ? <OtherLinks/> : <></> }
                         {isLoggedIn ? <Logout/> : <LoginSignup/>}
                     </div>
 

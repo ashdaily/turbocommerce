@@ -1,0 +1,47 @@
+@import "../../variables";
+
+.modalCont {
+  background: white;
+  border-radius: 10px;
+}
+
+.modalHeader {
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid $cartBorderColors;
+}
+
+.titleText {
+  flex: 1;
+  font-size: 1rem;
+}
+
+.closeBtn {
+  outline: none;
+  border: none;
+  background: white;
+}
+.closeBtn > span {
+  font-size: 20px;
+}
+
+.closeBtn:focus {
+  outline: none;
+}
+
+.modalBody {
+  padding: 15px;
+}
+
+.qtyCont {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.doneBtn {
+  width: 100%;
+  background: $primaryBgColor;
+  border-color: $secondaryAccentColor;
+  color: $sidebarTextColor;
+}

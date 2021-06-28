@@ -4,13 +4,13 @@ export const AddressReducer = (state, action) => {
             return {
                 ...state,
                 addresses: [],
-                is_fetching: false,
+                is_address_fetching: true,
             };
         case "ADDRESS_DONE": {
             return {
                 ...state,
                 addresses: action.payload,
-                is_fetching: false,
+                is_address_fetching: false,
             }
         }
         case "CREATE_ADDRESS": {
