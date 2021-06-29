@@ -91,7 +91,9 @@ class CustomerShippingAddressView(generics.CreateAPIView, generics.ListAPIView):
         return CustomerShippingAddress.objects.filter(customer=self.request.user)
 
 
-class CustomerShippingAddressDetailView(generics.DestroyAPIView):
+class CustomerShippingAddressDetailView(
+    generics.DestroyAPIView, generics.UpdateAPIView
+):
     """
     PATH: /api/customer/customer-shipping-address/<pk>/
     """
