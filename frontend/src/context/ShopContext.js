@@ -7,7 +7,7 @@ import ToastUtils from "../util/ToastUtils";
 import {isLoggedIn} from "../util/Auth";
 import {serviceGetWishlistData} from "../services/Wishlist.service";
 import { AddressReducer } from './AddressReducer';
-import {serviceDeleteAddress, serviceGetAddress} from "../services/Address.service";
+import {serviceDeleteAddress, serviceEditAddress, serviceGetAddress} from "../services/Address.service";
 
 export const ShopContext = createContext({
     cartItems: [],
@@ -158,6 +158,10 @@ const ShopContextProvider = ({children}) => {
         addressDispatch({ type: 'DELETE_ADDRESS', payload: id });
     };
 
+    const actionUpdateAddress = (data) => {
+        addressDispatch({type: 'UPDATE_ADDRESS', payload: data});
+    };
+
     const contextValues = {
         removeProduct,
         addProduct,
@@ -173,6 +177,7 @@ const ShopContextProvider = ({children}) => {
         actionGetAddresses,
         actionCreateAddress,
         actionDeleteAddress,
+        actionUpdateAddress,
         ...state,
         ...wishlistState,
         ...appSettingState,

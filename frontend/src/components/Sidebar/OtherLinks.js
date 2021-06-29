@@ -22,6 +22,9 @@ const OtherLinks = () => {
                 <Link id={'sidebarCartLink'} onClick={handleLinkClick} to="/addresses" className="anchor-silent">
                     Address
                 </Link>
+                <Link onClick={handleLinkClick} to="/change/password" className="anchor-silent">
+                    Change Password
+                </Link>
             </li>
         </ul>
     )

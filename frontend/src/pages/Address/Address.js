@@ -7,7 +7,7 @@ import WaitingComponent from "../../components/WaitingComponent/WaitingComponent
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 
 const Address = () => {
-    const { actionGetAddresses, addresses, actionDeleteAddress, actionCreateAddress, is_address_fetching } = useContext(ShopContext);
+    const { actionGetAddresses, addresses, actionDeleteAddress, actionCreateAddress, is_address_fetching, actionUpdateAddress } = useContext(ShopContext);
     const [showForm, setShowForm] = useState(false);
     const [editData, setEditData] = useState(null);
     const [confirmVisible, setConfirmVisible] = useState(false);
@@ -21,13 +21,20 @@ const Address = () => {
         setShowForm((e) => !e);
     }, [setShowForm]);
 
-    const handleFormSubmit = useCallback((data) => {
+    const handleFormSubmit = useCallback((data, type) => {
         setShowForm(false);
-        actionCreateAddress(data);
-    }, [setShowForm]);
-
-    const handleEditClick = useCallback(() => {
+        if (type === 'UPDATE') {
+            actionUpdateAddress(data);
+        } else {
+            actionCreateAddress(data);
+        }
         setEditData(null);
+    }, [editData, setShowForm, setEditData]);
+
+
+    const handleEditClick = useCallback((data) => {
+        setEditData(data);
+        setShowForm(true);
     }, [setEditData]);
 
     const handleDone = useCallback(() => {
@@ -65,7 +72,7 @@ const Address = () => {
         } return ( <div className={styles.addressTileCont}>
             {addresses.map((address) => <AddressTile
                 key={'ADDREES_TILE_'+address.id}
-                handleClick={handleEditClick}
+                handleEditClick={handleEditClick}
                 handleDelete={handleDelete}
                 data={address}/>
             )}

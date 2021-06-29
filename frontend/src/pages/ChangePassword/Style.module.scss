@@ -1,0 +1,137 @@
+@import "../../variables";
+
+.customerInfo {
+  //width: 685px;
+  padding-bottom: 50px;
+}
+
+.formCont > label {
+  margin: 11px 2px;
+  font-size: 0.9rem;
+  color: #242424;
+  display: block;
+  width: 150px;
+  padding-right: 10px;
+  line-height: 17px;
+  font-weight: 400;
+  @media screen and(max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.checkoutShipping .addressForm input[type='text'] {
+  height: 36px;
+  font-size: 13px;
+  padding: 0 10px;
+  box-shadow: none;
+}
+
+.checkoutShipping .addressForm input {
+  box-sizing: border-box;
+  border: 1px solid #e2e2e2;
+  box-shadow: none;
+  border-radius: 3px;
+}
+
+.checkoutShipping .addressForm .row {
+  padding: 5px 0;
+}
+
+.formCont {
+  margin: 5px 0px;
+  padding: 2px 0px;
+  display: flex;
+}
+
+.mobileSame label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin: 0px 0px 0px 7px;
+}
+
+.checkoutShipping .addressForm textarea {
+  box-sizing: border-box;
+  border: 1px solid #e2e2e2;
+  font-size: 13px;
+  padding: 6px;
+  box-shadow: none;
+  resize: none;
+  height: 73px;
+  overflow: auto;
+  width: 205px;
+  border-radius: 3px;
+}
+
+.checkboxFlex {
+  display: flex;
+  align-items: center;
+}
+
+.mobilePrepend {
+  float: left;
+  margin-right: 5px;
+  font-size: 13px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.checkoutShipping .addressForm #mobile, .checkoutShipping .addressForm #landLine {
+  width: 178px;
+}
+
+.checkoutShipping .addressForm .addressTypeCheckbox {
+  padding-top: 8px;
+}
+
+.checkoutShipping .addressForm .padLt0 {
+  padding-left: 0;
+}
+
+.checkoutShipping .addressForm .padLt0 {
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.saveBtn {
+  height: 40px;
+  margin-top: 10px;
+  font-size: 14px;
+  width: 200px;
+  text-align: center;
+  color: #fff;
+  border-radius: 3px;
+  transition: all 0.2s ease-out 0s;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  position: relative;
+  border: none;
+  outline: none;
+  border-width: 0;
+  border-color: #333;
+  background: #333;
+}
+
+.rippleWhite, .rippleGrey {
+  overflow: hidden;
+  position: relative;
+}
+
+.heading {
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 1.4rem;
+  padding: 0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.heading:after {
+  width: 91px;
+  height: 3px;
+  background: #d0d0d0;
+  content: "";
+  display: block;
+  margin-top: 6px;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../Style.module.scss';
 import csx from 'classnames';
 
-const AddressTile = ({data, handleDelete}) => {
+const AddressTile = ({data, handleDelete, handleEditClick}) => {
     return (
         <div className={styles.addressTile}>
             <div className={csx(styles.location, (data.default_address ? styles.default : ''))}>
@@ -36,7 +36,7 @@ const AddressTile = ({data, handleDelete}) => {
                         </button>
                     </li>
                     <li>
-                        <button>
+                        <button onClick={() => {handleEditClick(data)}}>
                             <span className="fa fa-edit"></span> Edit
                         </button>
                     </li>

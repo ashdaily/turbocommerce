@@ -1,6 +1,6 @@
 import React from 'react';
 import csx from "classnames";
-import styles from "../Style.module.scss";
+import styles from "./Style.module.scss";
 
 const FormText = ({value, isError, onChange, name, label, placeholder, type, multiline, rows}) => {
     let tempComponent = null;

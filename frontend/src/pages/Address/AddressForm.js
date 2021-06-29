@@ -1,8 +1,9 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import styles from './Style.module.scss';
 import csx from 'classnames';
-import FormText from "./component/FormText";
-import {serviceCreateAddress} from "../../services/Address.service";
+import FormText from "../../components/FormText/FormText";
+import {serviceCreateAddress, serviceEditAddress} from "../../services/Address.service";
+import ToastUtils from "../../util/ToastUtils";
 
 const requiredFields = ['postal_code', 'country', 'address', 'city', 'province', 'primary_phone_number'];
 
@@ -20,9 +21,17 @@ const initialData = {
     address_type: 'HOME'
 };
 
-const AddressForm = ({handleToggle}) => {
+const AddressForm = ({handleToggle, data}) => {
     const [formData, setFormData] = useState(initialData);
     const [errorData, setErrors] = useState({});
+
+    useEffect(() => {
+        if (data) {
+            setFormData({
+                ...data
+            });
+        }
+    },[data]);
 
     const handleChange = useCallback((e) => {
         const data = JSON.parse(JSON.stringify(formData));
@@ -53,16 +62,24 @@ const AddressForm = ({handleToggle}) => {
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
         const errors = checkFormValidation();
-        console.log('errors', errors);
         if (Object.keys(errors).length === 0) {
-            serviceCreateAddress({
-                ...formData,
-            }).then((res) => {
-                console.log('res', res);
-                if (!res.error) {
-                    handleToggle(res.data)
-                }
-            })
+            if (data) {
+                serviceEditAddress(data.id, formData).then((res) => {
+                    if (!res.error) {
+                        handleToggle(res.data, 'UPDATE');
+                        ToastUtils.showInfo('Address Updated');
+                    }
+                });
+            } else {
+                serviceCreateAddress({
+                    ...formData,
+                }).then((res) => {
+                    if (!res.error) {
+                        handleToggle(res.data, 'CREATE');
+                        ToastUtils.showInfo('New Address Added');
+                    }
+                })
+            }
         } else {
             setErrors(errors);
         }
