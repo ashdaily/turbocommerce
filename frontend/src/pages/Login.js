@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {Button, Card, Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
 import {toast} from "react-toastify";
 import Constants from '../config/constants';
@@ -64,9 +64,13 @@ export default () => {
   }
 
   const form = (
-      <Row>
-        <Col md={{span: 6, offset: 3}}>
-          <Card title="Login" className="p-3 mt-5 text-center">
+      <Row className={'loginCont'}>
+        <Col md={{span: 5}}>
+          <img style={{width: '100%'}} src={require('../assets/images/ic_login.svg')}/>
+        </Col>
+        <Col md={{span: 6, offset: 1}}>
+          <div className="loginBox">
+            <h2>Login</h2>
             <Form noValidate validated={validated} onSubmit={handleForm}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -74,7 +78,10 @@ export default () => {
                     required
                     type="email"
                     placeholder="Enter email"
-                    onChange={(e) => {setEmail(e.target.value); toastRef.current = false;}}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      toastRef.current = false;
+                    }}
                 />
                 <Form.Control.Feedback type="invalid">
                   Please choose a email.
@@ -87,15 +94,20 @@ export default () => {
                     required
                     type="password"
                     placeholder="Password"
-                    onChange={(e) => {setPassword(e.target.value); toastRef.current = false;}}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      toastRef.current = false;
+                    }}
                 />
                 <Form.Control.Feedback type="invalid">
                   Please choose a password.
                 </Form.Control.Feedback>
               </Form.Group>
-              <Button variant="primary" type="submit" block>
-                Login
-              </Button>
+              <div className={'loginBtnCont'}>
+                <Button variant="primary" type="submit" className={'loginBtn'} block>
+                  Login
+                </Button>
+              </div>
             </Form>
             <center className="center-line">
               <span>OR</span>
@@ -119,7 +131,7 @@ export default () => {
             >
               <i className="fa fa-facebook-square"></i> Login with Facebook
             </SocialButton>
-          </Card>
+          </div>
         </Col>
       </Row>
   );

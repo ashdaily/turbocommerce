@@ -1,3 +1,44 @@
+@import "../variables";
+
+.loginCont {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: calc(90vh);
+	width: 90%;
+	margin: auto;
+}
+
+.loginBox {
+	h2 {
+		margin: 0px;
+		margin-bottom: 10px;
+
+	}
+	.form-label {
+		margin-bottom: 2px;
+		color: $sidebarTextColor;
+		font-size: 0.9rem;
+		margin-left: 2px;
+	}
+
+	input.form-control {
+		border-radius: 0px;
+		border-color: $secondaryAccentColor;
+	}
+
+	.loginBtnCont{
+		text-align: right;
+	}
+
+	.loginBtn {
+		border-radius: 0px;
+	}
+	.facebook-btn {
+		border-radius: 0px;
+	}
+}
+
 .gmail-btn {
 	&:hover {
 		background: #eee;
@@ -25,6 +66,7 @@
 		padding: 0 .33rem;
 	}
 	border-bottom: 1px solid #ced4da;
+	text-align: center;
 	line-height: 0.1em;
-	margin: 1rem 0;
+	margin: 1.5rem 0;
 }
