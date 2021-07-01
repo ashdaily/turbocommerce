@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Button, Card } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-
+import "../css/login.scss";
 import axios from "../util/Axios";
 
 export default () => {
@@ -39,9 +39,13 @@ export default () => {
   }
 
   const form = (
-    <Row>
-      <Col md={{ span: 6, offset: 3 }}>
-        <Card title="Login" className="p-3 mt-5">
+      <Row className={'loginCont'}>
+        <Col md={{span: 5}}>
+          <img style={{width: '100%'}} src={require('../assets/images/ic_signup.svg')}/>
+        </Col>
+        <Col md={{span: 6, offset: 1}}>
+          <div className="loginBox">
+            <h2>Signup</h2>
           <Form noValidate validated={validated} onSubmit={handleForm}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -91,7 +95,7 @@ export default () => {
               Sign up
             </Button>
           </Form>
-        </Card>
+          </div>
       </Col>
     </Row>
   );
