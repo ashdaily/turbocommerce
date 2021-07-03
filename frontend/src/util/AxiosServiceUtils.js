@@ -5,7 +5,7 @@ import Constants from '../config/constants';
 export async function postRequest(url, params) {
     try {
         const tempRequest = await axios.post(`${Constants.DEFAULT_APP_URL}${url}`, {...params});
-        if (tempRequest.status === 200 || tempRequest.status === 201) {
+        if ([200, 201, 204].indexOf(tempRequest.status) >= 0) {
             return {
                 error: false,
                 message: '',
@@ -28,7 +28,7 @@ export async function postRequest(url, params) {
 export async function deleteRequest(url, params) {
     try {
         const tempRequest = await axios.delete(`${Constants.DEFAULT_APP_URL}${url}`, {...params});
-        if (tempRequest.status === 200 || tempRequest.status === 201) {
+        if ([200, 201, 204].indexOf(tempRequest.status) >= 0) {
             return {
                 error: false,
                 message: '',
@@ -51,7 +51,7 @@ export async function deleteRequest(url, params) {
 export async function putRequest(url, params) {
     try {
         const tempRequest = await axios.put(`${Constants.DEFAULT_APP_URL}${url}`, {...params});
-        if (tempRequest.status === 200 || tempRequest.status === 201) {
+        if ([200, 201, 204].indexOf(tempRequest.status) >= 0) {
             return {
                 error: false,
                 message: '',

@@ -100,8 +100,13 @@ body.navExpanded:after {
   }
 }
 
+
 .product-card {
   width: var(--productWidth);
+  @media screen and(max-width: 767px) {
+    margin-top: 0px !important;
+    margin-bottom: 2rem !important;
+  }
 }
 
 .product-card .card-body {
@@ -192,10 +197,19 @@ body.navExpanded:after {
   background: transparent;
   margin: 0px;
   margin-bottom: 1rem;
+  @media screen and (max-width: 767px) {
+    margin-bottom: 0px;
+  }
 }
 
 .breadcrumb > li.active {
   color: $primaryAccentColor;
+}
+
+.breadcrumb > li {
+  @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
 }
 
 .breadcrumb > li > a {

@@ -22,9 +22,6 @@
   padding-right: 10px;
   line-height: 17px;
   font-weight: 400;
-  @media screen and(max-width: 767px) {
-    width: 100%;
-  }
 }
 
 .checkoutShipping .addressForm input[type='text'] {
@@ -141,6 +138,9 @@
   border-width: 0;
   border-color: #333;
   background: #333;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 }
 
 .rippleWhite, .rippleGrey {

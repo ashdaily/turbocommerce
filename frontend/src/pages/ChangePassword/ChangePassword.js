@@ -3,6 +3,7 @@ import styles from './Style.module.scss';
 import csx from 'classnames';
 import FormText from "../../components/FormText/FormText";
 import ToastUtils from "../../util/ToastUtils";
+import {serviceChangePassword} from "../../services/AppSettings.service";
 
 const requiredFields = ['password'];
 
@@ -41,11 +42,19 @@ const ChangePassword = () => {
         e.preventDefault();
         const errors = checkFormValidation();
         if (Object.keys(errors).length === 0) {
-            // ToastUtils.showInfo('New Address Added');
+            serviceChangePassword({ new_password: formData.password }).then((res) => {
+                if(!res.error) {
+                    ToastUtils.showInfo('Password Changed Successfully');
+                    setFormData({password: ''})
+                } else {
+                    ToastUtils.showInfo('Enter a strong password');
+                }
+            })
+
         } else {
             setErrors(errors);
         }
-    }, [setErrors, checkFormValidation, formData]);
+    }, [setErrors, checkFormValidation, setFormData, formData]);
 
     return (
         <div className={csx(styles.checkoutShipping, 'container')}>

@@ -16,8 +16,10 @@ const Topbar = () => {
     return (
         <div className={styles.topbarCont}>
             <div className={styles.sidebarBtn}>
-                <button onClick={handleBarClick}>
-                    <span className={'fa fa-bars'}></span>
+                <button className={styles.hamBtn} onClick={handleBarClick}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
             <Link to="/" className={csx('anchor-silent', styles.logoCont)}>
@@ -30,7 +32,7 @@ const Topbar = () => {
             </Link>
             <div className={styles.cartCont}>
                 <Link id={'cartLink'} to="/cart" className={'anchor-silent'}>
-                    Cart ({totalCartItems})
+                    <i className="fas fa-cart-arrow-down"></i> Cart ({totalCartItems})
                 </Link>
             </div>
         </div>

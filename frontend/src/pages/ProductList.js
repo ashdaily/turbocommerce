@@ -60,7 +60,7 @@ export default () => {
 
   return (
     <>
-      <div className={csx('d-flex', 'flex-wrap')}>
+      <div className={csx('d-flex', 'mt-3', 'flex-wrap')}>
         {products}
       </div>
       <Row>

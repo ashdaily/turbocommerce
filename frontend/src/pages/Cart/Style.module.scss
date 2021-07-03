@@ -33,11 +33,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 767px) {
+    padding: 0px 0px 10px;
+  }
 }
 
 .bagTitle, .bagTotal {
   font-size: 1.1rem;
   font-weight: 600;
+  @media screen and (max-width: 767px) {
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -102,6 +108,10 @@
   background: white;
   color: #696b79;
   padding: 10px;
+  font-size: 1rem;
+  @media screen and(max-width: 767px) {
+    font-size: 0.8rem;
+  }
 }
 
 .priceHeader {

@@ -218,9 +218,9 @@ const AddressForm = ({handleToggle, data}) => {
                         </div>
 
                         <div className={csx(styles.formCont)}>
-                            <label className="col-xs-5 form-lbl"></label>
+                            <label className="col-xs-5 d-none d-sm-block form-lbl"></label>
                             <div className={csx(styles.sdCheckbox, styles.defaultAddressCont, 'col-xs-7', styles.padLt0)}>
-                                <input type="checkbox" id={'checkboxDefault'} name="default_address" onChange={handleChange} value={formData.default_address}/>
+                                <input type="checkbox" id={'checkboxDefault'} name="default_address" onChange={handleChange} checked={formData.default_address}/>
                                 <label htmlFor={'checkboxDefault'}>
                                     Make this my default address
                                 </label>
@@ -228,8 +228,8 @@ const AddressForm = ({handleToggle, data}) => {
                         </div>
 
                         <div className={csx(styles.formCont)}>
-                            <label className="col-xs-5 form-lbl"></label>
-                            <button className={csx(styles.saveBtn, styles.rippleWhite, 'btn', 'col-xs-7')}
+                            <label className="col-xs-5 d-none d-sm-block form-lbl"></label>
+                            <button className={csx(styles.saveBtn, styles.rippleWhite, 'btn')}
                                     type="submit">
                                 <span>Save</span>
                             </button>
