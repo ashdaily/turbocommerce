@@ -1,4 +1,5 @@
 from pprint import pprint
+import json
 
 from django.urls import reverse
 
@@ -58,6 +59,34 @@ class TestCustomerLogin(TestCaseBase):
         self.assertEqual(r.status_code, 201)
 
         r = self.client.post(self.url, payload)
+        self.assertEqual(r.status_code, 200)
+
+        self.assertContains(r, "access")
+        self.assertContains(r, "refresh")
+
+
+class TestCustomerUpdatePassword(TestCaseBase):
+    fixtures = [
+        "core/tests/fixtures/users.json",
+    ]
+
+    def test_customer_can_update_password_and_can_login_with_new_password(self):
+        # change password
+        new_password = "greekyogurt123"
+        payload = {
+            "new_password": new_password,
+        }
+        r = self.client.put(
+            reverse("customer-update-password"),
+            payload,
+            **self.customer_bearer_token,
+            content_type="application/json"
+        )
+        self.assertEqual(r.status_code, 204)
+
+        # login with new password
+        payload = {"email": "ash@gmail.com", "password": new_password}
+        r = self.client.post(reverse("token_obtain_pair"), payload)
         self.assertEqual(r.status_code, 200)
 
         self.assertContains(r, "access")

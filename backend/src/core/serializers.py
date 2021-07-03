@@ -1,3 +1,4 @@
+from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from rest_framework import serializers
@@ -17,3 +18,15 @@ class UserSerializer(ModelSerializer):
             "user_type",
             "phone_number",
         )
+
+
+class CustomerUpdatePasswordSerializer(serializers.Serializer):
+    """
+    Serializer for password change endpoint.
+    """
+
+    new_password = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value
