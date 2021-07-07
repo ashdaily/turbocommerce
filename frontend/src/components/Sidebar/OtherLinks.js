@@ -29,7 +29,7 @@ const OtherLinks = () => {
 
     const renderParentLink = () => {
         return (
-            <a onClick={handleLinkClick} href={'#'} className={styles.tier1title}>
+            <a  href={'# '} className={styles.tier1title}>
                 MY ACCOUNT
             </a>
         )

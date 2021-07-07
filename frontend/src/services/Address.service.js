@@ -15,3 +15,7 @@ export async function serviceDeleteAddress(id) {
 export async function serviceEditAddress(id, params) {
     return await putRequest(`customer/customer-shipping-address/${id}/`, params);
 }
+
+export async function serviceGetAddressDetail(id) {
+    return getRequest(`customer/customer-shipping-address/${id}/`, {});
+}

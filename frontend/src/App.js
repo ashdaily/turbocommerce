@@ -21,6 +21,7 @@ import Topbar from "./components/Topbar/Topbar";
 import Address from "./pages/Address/Address";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import Checkout from "./pages/Checkout/Checkout";
+import EditAddress from "./pages/Address/EditAddress";
 
 function App() {
     const {updateStoreInfo, syncWishlist} = useContext(ShopContext);
@@ -49,6 +50,7 @@ function App() {
                         <Route exact path="/cart" component={Cart}/>
                         <Route exact path="/wishlist" component={Wishlist}/>
                         <PrivateRoute exact path="/addresses" component={Address}/>
+                        <PrivateRoute exact path="/addresses/:id" component={EditAddress}/>
                         <PrivateRoute exact path="/change/password" component={ChangePassword}/>
                         <Route
                             exact

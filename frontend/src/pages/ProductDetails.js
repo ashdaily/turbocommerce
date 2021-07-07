@@ -57,14 +57,15 @@ export default () => {
               thumbnailPosition="left"
               showPlayButton={false}
             />
-            <Row className="mt-5">
-              <Col md={12}>
-                <ProductCarousel productId={data.id} />
-              </Col>
-            </Row>
+
           </Col>
           <Col md={4}>
             <ProductDetailsContent data={data} />
+          </Col>
+        </Row>
+        <Row className="mt-5">
+          <Col md={12}>
+            <ProductCarousel productId={data.id} />
           </Col>
         </Row>
       </Col>

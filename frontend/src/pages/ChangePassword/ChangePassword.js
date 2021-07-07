@@ -4,6 +4,8 @@ import csx from 'classnames';
 import FormText from "../../components/FormText/FormText";
 import ToastUtils from "../../util/ToastUtils";
 import {serviceChangePassword} from "../../services/AppSettings.service";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
+import {logout} from "../../util/Auth";
 
 const requiredFields = ['password'];
 
@@ -14,7 +16,7 @@ const initialData = {
 const ChangePassword = () => {
     const [formData, setFormData] = useState(initialData);
     const [errorData, setErrors] = useState({});
-
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const handleChange = useCallback((e) => {
         const data = JSON.parse(JSON.stringify(formData));
@@ -38,23 +40,33 @@ const ChangePassword = () => {
         return errors;
     });
 
+    const handleDone = useCallback(() => {
+        serviceChangePassword({ new_password: formData.password }).then((res) => {
+            if(!res.error) {
+                ToastUtils.showInfo('Password Changed Successfully');
+                setFormData({password: ''});
+            } else {
+                ToastUtils.showErrors('Enter a strong password');
+            }
+            setShowConfirm(false);
+            logout();
+            window.location.reload();
+        });
+    }, [setShowConfirm, checkFormValidation, setFormData, formData]);
+
+    const handleClose = useCallback(() => {
+        setShowConfirm(false);
+    }, [setShowConfirm]);
+
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
         const errors = checkFormValidation();
         if (Object.keys(errors).length === 0) {
-            serviceChangePassword({ new_password: formData.password }).then((res) => {
-                if(!res.error) {
-                    ToastUtils.showInfo('Password Changed Successfully');
-                    setFormData({password: ''})
-                } else {
-                    ToastUtils.showInfo('Enter a strong password');
-                }
-            })
-
+            setShowConfirm(true);
         } else {
             setErrors(errors);
         }
-    }, [setErrors, checkFormValidation, setFormData, formData]);
+    }, [setErrors, checkFormValidation, handleDone, setShowConfirm]);
 
     return (
         <div className={csx(styles.checkoutShipping, 'container')}>
@@ -69,13 +81,14 @@ const ChangePassword = () => {
                                 isError={errorData.password}
                                 name={'password'}
                                 label={'New Password'}
+                                type={'password'}
                                 placeholder="Enter New Password"
                             />
                         </div>
 
                         <div className={csx(styles.formCont)}>
-                            <label className="col-xs-5 form-lbl"></label>
-                            <button className={csx(styles.saveBtn, styles.rippleWhite, 'btn', 'col-xs-7')}
+                            <label className="col-xs-5 d-none d-sm-block form-lbl"></label>
+                            <button className={csx(styles.saveBtn, styles.rippleWhite, 'btn')}
                                     type="submit">
                                 <span>Change Password</span>
                             </button>
@@ -83,6 +96,13 @@ const ChangePassword = () => {
                     </div>
                 </form>
             </div>
+            <ConfirmModal
+                title={'Are You Sure?'}
+                content={'Your password will change and you will be logged out.'}
+                handleDone={handleDone}
+                handleClose={handleClose}
+                visible={showConfirm}
+            />
         </div>
     )
 };

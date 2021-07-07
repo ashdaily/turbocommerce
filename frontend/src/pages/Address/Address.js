@@ -6,7 +6,7 @@ import AddressForm from "./AddressForm";
 import WaitingComponent from "../../components/WaitingComponent/WaitingComponent";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 
-const Address = () => {
+const Address = (props) => {
     const { actionGetAddresses, addresses, actionDeleteAddress, actionCreateAddress, is_address_fetching, actionUpdateAddress } = useContext(ShopContext);
     const [showForm, setShowForm] = useState(false);
     const [editData, setEditData] = useState(null);
@@ -32,10 +32,11 @@ const Address = () => {
     }, [editData, setShowForm, setEditData]);
 
 
-    const handleEditClick = useCallback((data) => {
-        setEditData(data);
-        setShowForm(true);
-    }, [setEditData]);
+    const handleEditClick = (data) => {
+        // setEditData(data);
+        // setShowForm(true);
+        props.history.push(`/addresses/${data.id}`)
+    };
 
     const handleDone = useCallback(() => {
         if (selectedAddId) {
