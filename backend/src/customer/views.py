@@ -92,7 +92,7 @@ class CustomerShippingAddressView(generics.CreateAPIView, generics.ListAPIView):
 
 
 class CustomerShippingAddressDetailView(
-    generics.DestroyAPIView, generics.UpdateAPIView
+    generics.RetrieveAPIView, generics.DestroyAPIView, generics.UpdateAPIView
 ):
     """
     PATH: /api/customer/customer-shipping-address/<pk>/

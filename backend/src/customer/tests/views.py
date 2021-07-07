@@ -197,7 +197,7 @@ class TestCustomerShippingAddressView(TestCaseBase):
 
     def test_should_create_get_delete_customer_shipping_address(self):
         # create customer shipping address
-        url1 = reverse("customer-shipping-address")
+        url = reverse("customer-shipping-address")
         payload = {
             "address": "XXX",
             "city": "XXX",
@@ -211,11 +211,12 @@ class TestCustomerShippingAddressView(TestCaseBase):
             "address_type": CustomerShippingAddress.ADDRESS_TYPE_HOME,
             "default_address": True,
         }
-        r1 = self.client.post(url1, data=payload, **self.customer_bearer_token)
+        r1 = self.client.post(url, data=payload, **self.customer_bearer_token)
         self.assertEqual(r1.status_code, 201)
 
-        # get the customer shipping address
-        r2 = self.client.get(url1, data=payload, **self.customer_bearer_token)
+        # get all customer shipping addresses
+        r2 = self.client.get(url, **self.customer_bearer_token)
+        address_id = r2.json()[0]["id"]
         self.assertEqual(
             r2.json(),
             [
@@ -229,7 +230,7 @@ class TestCustomerShippingAddressView(TestCaseBase):
                     "country_code_primary_phone_number": "XXX",
                     "customer": 1,
                     "default_address": True,
-                    "id": 1,
+                    "id": address_id,
                     "postal_code": "XXX",
                     "primary_phone_number": "XXX",
                     "province": "XXX",
@@ -237,8 +238,95 @@ class TestCustomerShippingAddressView(TestCaseBase):
             ],
         )
 
+        # get customer shipping address by id
+        url = reverse("customer-shipping-address-delete", kwargs={"id": address_id})
+        r3 = self.client.get(url, **self.customer_bearer_token)
+        self.assertEqual(
+            r3.json(),
+            {
+                "address": "XXX",
+                "address_type": "HOME",
+                "alternate_phone_number": "XXX",
+                "city": "XXX",
+                "country": "XXX",
+                "country_code_alternate_phone_number": "XXX",
+                "country_code_primary_phone_number": "XXX",
+                "customer": 1,
+                "default_address": True,
+                "id": address_id,
+                "postal_code": "XXX",
+                "primary_phone_number": "XXX",
+                "province": "XXX",
+            },
+        )
+
+        # put/patch the customer shipping address
+        payload = {
+            "customer": 1,
+            "address": "YYY",
+            "city": "YYY",
+            "province": "YYY",
+            "country": "YYY",
+            "postal_code": "YYY",
+            "country_code_primary_phone_number": "YYY",
+            "primary_phone_number": "YYY",
+            "country_code_alternate_phone_number": "YYY",
+            "alternate_phone_number": "YYY",
+            "address_type": CustomerShippingAddress.ADDRESS_TYPE_OFFICE,
+            "default_address": False,
+        }
+
+        r4 = self.client.put(
+            url,
+            data=payload,
+            **self.customer_bearer_token,
+            content_type="application/json",
+        )
+        self.assertEqual(
+            r4.json(),
+            {
+                "address": "YYY",
+                "address_type": "OFFICE",
+                "alternate_phone_number": "YYY",
+                "city": "YYY",
+                "country": "YYY",
+                "country_code_alternate_phone_number": "YYY",
+                "country_code_primary_phone_number": "YYY",
+                "customer": 1,
+                "default_address": False,
+                "id": address_id,
+                "postal_code": "YYY",
+                "primary_phone_number": "YYY",
+                "province": "YYY",
+            },
+        )
+
+        payload = {"country": "ZZZ"}
+        r5 = self.client.patch(
+            url,
+            data=payload,
+            **self.customer_bearer_token,
+            content_type="application/json",
+        )
+        self.assertEqual(
+            r5.json(),
+            {
+                "address": "YYY",
+                "address_type": "OFFICE",
+                "alternate_phone_number": "YYY",
+                "city": "YYY",
+                "country": "ZZZ",
+                "country_code_alternate_phone_number": "YYY",
+                "country_code_primary_phone_number": "YYY",
+                "customer": 1,
+                "default_address": False,
+                "id": address_id,
+                "postal_code": "YYY",
+                "primary_phone_number": "YYY",
+                "province": "YYY",
+            },
+        )
+
         # delete the customer shipping address
-        address_id = r1.json()["id"]
-        url2 = reverse("customer-shipping-address-delete", kwargs={"id": address_id})
-        r3 = self.client.delete(url2, data=payload, **self.customer_bearer_token)
-        self.assertEqual(r3.status_code, 204)
+        r6 = self.client.delete(url, data=payload, **self.customer_bearer_token)
+        self.assertEqual(r6.status_code, 204)
