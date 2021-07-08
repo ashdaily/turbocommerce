@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../Style.module.scss';
 import csx from 'classnames';
 
-const AddressTile = ({data, handleDelete, handleEditClick}) => {
+const AddressTile = ({data, handleDelete, handleEditClick, isEdit}) => {
     return (
         <div className={styles.addressTile}>
             <div className={csx(styles.location, (data.default_address ? styles.default : ''))}>
@@ -28,7 +28,7 @@ const AddressTile = ({data, handleDelete, handleEditClick}) => {
             {data.alternate_phone_number && (<div className={styles.contactCont}>
                 Alternative: <span data-name="mobile">{data.alternate_phone_number}</span>
             </div>)}
-            <div className={styles.controls}>
+            {isEdit && (<div className={styles.controls}>
                 <ul>
                     <li>
                         <button onClick={() => {handleDelete(data.id)}} className={styles.deleteAddress}>
@@ -41,9 +41,13 @@ const AddressTile = ({data, handleDelete, handleEditClick}) => {
                         </button>
                     </li>
                 </ul>
-            </div>
+            </div>)}
         </div>
     );
+};
+
+AddressTile.defaultProps = {
+    isEdit: true
 };
 
 export default AddressTile;

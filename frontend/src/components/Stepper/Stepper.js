@@ -21,45 +21,7 @@ const Stepper = ({steps, selected}) => {
                 })}
             </div>
             <div className="bs-stepper-content">
-                <form >
-                    <div id="test-l-1" className="content">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="exampleInputEmail1"
-                                placeholder="Enter email"
-                            />
-                        </div>
-                        <button
-                            className="btn btn-primary"
-                            onClick={() => this.stepper.next()}>
-                            Next
-                        </button>
-                    </div>
-                    <div id="test-l-2" className="content">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="exampleInputPassword1"
-                                placeholder="Password"
-                            />
-                        </div>
-                        <button
-                            className="btn btn-primary"
-                            onClick={() => this.stepper.next()}>
-                            Next
-                        </button>
-                    </div>
-                    <div id="test-l-3" className="content text-center">
-                        <button type="submit" className="btn btn-primary mt-5">
-                            Submit
-                        </button>
-                    </div>
-                </form>
+
             </div>
         </div>
     )
