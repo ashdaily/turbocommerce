@@ -2,9 +2,11 @@ import React from 'react';
 import styles from '../Style.module.scss';
 import csx from 'classnames';
 
-const AddressTile = ({data, handleDelete, handleEditClick, isEdit}) => {
+const AddressTile = ({data, handleDelete, onClick, handleEditClick, isEdit, isSelected}) => {
     return (
-        <div className={styles.addressTile}>
+        <div
+            onClick={(e) => { e.preventDefault(); onClick && onClick() }}
+            className={csx(styles.addressTile, (isSelected ? styles.addressTileSelected : {}))}>
             <div className={csx(styles.location, (data.default_address ? styles.default : ''))}>
                 <span>{data.address_type}</span>
                 {data.default_address && (<><span className={styles.defaultMention}>- Default</span>
@@ -47,7 +49,8 @@ const AddressTile = ({data, handleDelete, handleEditClick, isEdit}) => {
 };
 
 AddressTile.defaultProps = {
-    isEdit: true
+    isEdit: true,
+    isSelected: false
 };
 
 export default AddressTile;

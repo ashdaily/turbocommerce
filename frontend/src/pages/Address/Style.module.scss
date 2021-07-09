@@ -185,6 +185,14 @@
   &:hover {
     border-color: black;
   }
+
+  @media screen and (max-width: 767px) {
+    width: calc(50vw - 25px);
+    margin-right: 10px;
+  }
+}
+.addressTileSelected {
+  border-color: black;
 }
 
 .location {

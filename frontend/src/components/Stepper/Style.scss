@@ -1,3 +1,11 @@
+.bs-stepper {
+  width: 60%;
+  margin: auto;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
 .bs-stepper-header {
   display: -ms-flexbox;
   display: flex;
