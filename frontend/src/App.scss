@@ -254,3 +254,22 @@ body.navExpanded:after {
     }
   }
 }
+
+.btn-load-more {
+  background: $primaryBgColor;
+  border: 1px solid $sideBarBorderColor;
+  color: black;
+  margin: 0rem 1.5rem;
+  height: 100%;
+  padding: 8px 30px;
+  cursor: pointer;
+  &:hover, &:active, &:focus {
+    background: $secondaryBtnColor !important;
+    color: white;
+  }
+  &:disabled {
+    background: $secondaryBtnColor;
+    color: white;
+    border: 1px solid $sideBarBorderColor;
+  }
+}

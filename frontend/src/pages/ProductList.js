@@ -16,7 +16,13 @@ export default () => {
     const loadData = () => {
       axios.get(`/api/products/?page=${pageNumber}`).then((response) => {
         if (response.status === 200) {
-          setData(response.data);
+          let tempData = response.data;
+          if (data) {
+            const results = JSON.parse(JSON.stringify(data.results)).concat(tempData.results);
+            tempData.results = results;
+          }
+
+          setData(tempData);
         }
         setLoading(false);
       });
