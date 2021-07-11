@@ -42,6 +42,7 @@ before_install:
   - docker-compose run -d turbocommerce_db
   - sudo chown -R travis $HOME
   - docker-compose build turbocommerce_backend
+  - docker-compose run -d turbocommerce_backend
 
 script:
-  - docker-compose run turbocommerce_backend bash ./run_backend_tests.sh
+  - docker exec -it turbocommerce_backend bash -c "cd backend/src && python3 manage.py test --no-input --keepdb"
