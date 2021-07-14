@@ -25,6 +25,8 @@ describe('<Checkout />', () => {
     it('renders checkout components without any address', () => {
         const wrapper = mount(<Router><ShopContextProvider><Checkout/></ShopContextProvider></Router>);
         expect(wrapper.contains('Add New Address')).toBe(true);
+        expect(wrapper.contains('Proceed To Pay')).toBe(false);
+
     });
 
     it('renders checkout components with address', () => {
@@ -35,7 +37,7 @@ describe('<Checkout />', () => {
             </ShopContext.Provider>
         </Router>);
         expect(wrapper.contains(AddressTile)).toBe(true);
-
+        expect(wrapper.contains('Proceed To Pay')).toBe(true);
     });
 
 });
