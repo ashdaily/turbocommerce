@@ -4,6 +4,8 @@ import ShopContextProvider, {ShopContext} from "../../context/ShopContext";
 import {BrowserRouter as Router} from 'react-router-dom';
 import Address from "./Address";
 import AddressTile from "./component/AddressTile";
+import EditAddress from "./EditAddress";
+import WaitingComponent from "../../components/WaitingComponent/WaitingComponent";
 
 const address = [{
     address: "1st floor somewhere in chandigarh",
@@ -35,6 +37,17 @@ describe('<Address />', () => {
             </ShopContext.Provider>
         </Router>);
         expect(wrapper.contains(AddressTile)).toBe(true);
+
+    });
+
+    it('renders address page edit address', () => {
+        const wrapper = mount(<Router>
+            <ShopContext.Provider
+                value={{addresses: address,actionUpdateAddress: () => {}}}>
+                <EditAddress/>
+            </ShopContext.Provider>
+        </Router>);
+        expect(wrapper.contains(WaitingComponent)).toBe(true);
 
     });
 

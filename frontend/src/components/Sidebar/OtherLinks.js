@@ -53,6 +53,7 @@ const OtherLinks = () => {
                         <li className={styles.categoryNameLi}>
                             <Link to={`/addresses`}
                                   onClick={handleLinkClick}
+                                  id={'sidebarAddressLink'}
                                   >
                                 Address
                             </Link>
@@ -60,6 +61,7 @@ const OtherLinks = () => {
                         <li  className={styles.categoryNameLi}>
                             <Link to="/change/password"
                                   onClick={handleLinkClick}
+                                  id={'sidebarChangePassword'}
                             >
                                 Change Password
                             </Link>

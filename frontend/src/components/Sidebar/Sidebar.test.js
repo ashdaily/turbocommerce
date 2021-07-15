@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import Logo from "./Logo";
 import LoginSignup from "./LoginSignup";
 import Wishlist from "./Wishlist";
+import OtherLinks from "./OtherLinks";
 
 describe('<Sidebar />', () => {
     it('sidebar cart', () => {
@@ -42,5 +43,16 @@ describe('<Sidebar />', () => {
             </ShopContext.Provider>
         </Router>);
         expect(wrapper.find("a").text()).toEqual('Wishlist 20');
+    });
+
+    it('sidebar other links', () => {
+        const wrapper = mount(<Router>
+            <ShopContext.Provider value={{totalWishlistItems: 20}}>
+                <OtherLinks/>
+            </ShopContext.Provider>
+        </Router>);
+        expect(wrapper.find("a").at(0).text()).toEqual('MY ACCOUNT');
+        expect(wrapper.find("a#sidebarAddressLink").text()).toEqual('Address');
+        expect(wrapper.find("a#sidebarChangePassword").text()).toEqual('Change Password');
     });
 });
