@@ -6,6 +6,8 @@ import {serviceGetStoreInformation} from "../services/AppSettings.service";
 import ToastUtils from "../util/ToastUtils";
 import {isLoggedIn} from "../util/Auth";
 import {serviceGetWishlistData} from "../services/Wishlist.service";
+import { AddressReducer } from './AddressReducer';
+import {serviceDeleteAddress, serviceEditAddress, serviceGetAddress} from "../services/Address.service";
 
 export const ShopContext = createContext({
     cartItems: [],
@@ -53,6 +55,10 @@ const appSettingsInitialValue = {
     storeInfo: initialStoreInfo,
 };
 
+const addressInitialValue = {
+    addresses: [],
+    is_address_fetching: true,
+};
 
 const ShopContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(CartReducer, initialState);
@@ -61,6 +67,7 @@ const ShopContextProvider = ({children}) => {
         initialWishlistState
     );
     const [appSettingState, appSettingDispatch] = useReducer(AppSettingsReducer, appSettingsInitialValue);
+    const [addressState, addressDispatch] = useReducer(AddressReducer, addressInitialValue);
 
     const syncWishlist = () => {
         if (isLoggedIn) {
@@ -76,7 +83,7 @@ const ShopContextProvider = ({children}) => {
                 }
             });
         }
-    }
+    };
 
     const updateStoreInfo = (data) => {
         if (initialStoreInfo.title_tag !== '') {
@@ -133,6 +140,28 @@ const ShopContextProvider = ({children}) => {
         wishlistDispatch({type: "REMOVE_ITEM_FROM_WISHLIST", payload});
     };
 
+    const actionGetAddresses = () => {
+        addressDispatch({ type: 'ADDRESS_INIT' });
+        serviceGetAddress().then((res) => {
+            if (!res.error) {
+                addressDispatch({ type: 'ADDRESS_DONE', payload: res.data });
+            }
+        });
+    };
+
+    const actionCreateAddress = (address) => {
+        addressDispatch({ type: 'CREATE_ADDRESS', payload: address });
+    };
+
+    const actionDeleteAddress = (id) => {
+        serviceDeleteAddress(id );
+        addressDispatch({ type: 'DELETE_ADDRESS', payload: id });
+    };
+
+    const actionUpdateAddress = (data) => {
+        addressDispatch({type: 'UPDATE_ADDRESS', payload: data});
+    };
+
     const contextValues = {
         removeProduct,
         addProduct,
@@ -145,9 +174,14 @@ const ShopContextProvider = ({children}) => {
         updateStoreInfo,
         syncWishlist,
         changeCartQty,
+        actionGetAddresses,
+        actionCreateAddress,
+        actionDeleteAddress,
+        actionUpdateAddress,
         ...state,
         ...wishlistState,
         ...appSettingState,
+        ...addressState
     };
 
     return (

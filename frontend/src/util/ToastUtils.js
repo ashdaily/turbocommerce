@@ -8,6 +8,15 @@ class ToastUtils {
             hideProgressBar: true,
             closeOnClick: true,
         });
+    };
+
+    showErrors = (title, expiration = 1500) => {
+        toast.error(title, {
+            position: "bottom-right",
+            autoClose: expiration,
+            hideProgressBar: true,
+            closeOnClick: true,
+        });
     }
 }
 

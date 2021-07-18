@@ -1,0 +1,31 @@
+@import "../../variables";
+.addressTileCont {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mainCont {
+  padding: 0px 20px;
+  @media screen and (max-width: 767px) {
+    padding: 0px;
+  }
+}
+
+
+.newAddressCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    height: 43px;
+    margin-top: 50px;
+    outline: none;
+    background: white;
+    border: 1px solid $sideBarBorderColor;
+    padding: 0px 20px;
+    &:hover {
+      background: $sidebarTextColor;
+      color: white;
+    }
+  }
+}

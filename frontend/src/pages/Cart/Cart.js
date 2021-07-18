@@ -7,8 +7,9 @@ import CartItem from "./CartItem";
 import QuantityModal from "../../components/QuantityModal/QuantityModal";
 import EmptyCart from "./EmptyCart";
 import ProductCarousel from "../../components/ProductCarousel";
+import {isLoggedIn} from "../../util/Auth";
 
-const Cart = () => {
+const Cart = ({history}) => {
     const {changeCartQty, storeInfo, cartItems, total} = useContext(ShopContext);
     const [showQtyModal, setQtyModal] = useState(false);
     const [cartItem, setCartItem] = useState(null);
@@ -33,6 +34,14 @@ const Cart = () => {
     if (cartItems.length === 0) {
         return (<EmptyCart/>);
     }
+
+    const handleCheckoutClick = () => {
+        if (isLoggedIn) {
+            history.push(`/checkout/`);
+        } else {
+            history.push('/login');
+        }
+    };
 
     return (
         <div className={csx('container')}>
@@ -64,7 +73,7 @@ const Cart = () => {
                         <div> {storeInfo.default_currency} {total}</div>
                     </div>
                     <div>
-                        <Button variant="outline-secondary" className={csx(styles.orderBtn, 'mt-4')}>Place
+                        <Button onClick={handleCheckoutClick} variant="outline-secondary" className={csx(styles.orderBtn, 'mt-4')}>Place
                             Order</Button>
                     </div>
                 </div>

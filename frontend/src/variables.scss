@@ -20,7 +20,7 @@ $productCardHeight: calc(((100vw - 270px) / 6 - 2.2rem) * 4/3);
 
 @media screen and (max-width: 767px) {
   :root {
-    --productWidth: calc((100vw - 30px) / 2 - 2.2rem);
-    --productHeight: calc(((100vw - 30px) / 2 - 2.2rem) * 4/3);;
+    --productWidth: calc((100vw - 30px)  - 2rem);
+    --productHeight: calc(((100vw - 30px)  - 2rem) * 4/3);
   }
 }

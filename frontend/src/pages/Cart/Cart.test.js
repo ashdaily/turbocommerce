@@ -28,8 +28,6 @@ describe('<Cart />', () => {
     });
 
     it('renders cart components with cart items', () => {
-        // const contextValue = { a: '1' };
-        // jest.spyOn(ShopContext, 'useShopContext').mockImplementation(() => contextValue);
         const wrapper = mount(<Router>
             <ShopContext.Provider
                 value={{cartItems: cartItems, storeInfo: {default_currency: 'RS'}}}>
@@ -38,6 +36,13 @@ describe('<Cart />', () => {
         </Router>);
         // expect((wrapper)).toMatchSnapshot();
         expect(wrapper.contains(CartItem)).toBe(true);
+
+    });
+
+    it('renders empty cart component', () => {
+        const wrapper = mount(<Router><EmptyCart/></Router>);
+        // expect((wrapper)).toMatchSnapshot();
+        expect(wrapper.contains('Hey, No Product In Cart!')).toBe(true);
 
     });
 });

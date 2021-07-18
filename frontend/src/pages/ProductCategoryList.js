@@ -24,7 +24,7 @@ export default () => {
         if (childCategory)
             reqUrl += `&child_category_slug=${childCategory}`;
 
-        return `${reqUrl}&page=${pageNumber}`;
+        return `${reqUrl}&page_size=1&page=${pageNumber}`;
     },[grandParentCategory, parentCategory, pageNumber, childCategory]);
 
     useEffect(() => {
@@ -33,8 +33,12 @@ export default () => {
                 .get(generateRequestUrl())
                 .then((response) => {
                     if (response.status === 200) {
-                        let productData = response.data;
-                        setProductData(productData);
+                        let tempData = response.data;
+                        if (productData) {
+                            const results = JSON.parse(JSON.stringify(productData.results)).concat(tempData.results);
+                            tempData.results = results;
+                        }
+                        setProductData(tempData);
                     }
                 });
         };

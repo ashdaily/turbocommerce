@@ -7,10 +7,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from core.models import User
-from core.serializers import UserSerializer
+from core.serializers import UserSerializer, CustomerUpdatePasswordSerializer
 
 
-class CustomerDetailView(APIView, PaginationMixin):
+class CustomerDetailView(APIView):
     permission_classes = [IsAuthenticated]
     serializer = UserSerializer
     model = User
@@ -23,7 +23,24 @@ class CustomerDetailView(APIView, PaginationMixin):
         if serializer.is_valid():
             return Response(serializer.data)
 
-        return Response(serializer.errors)
+
+class CustomerUpdatePasswordView(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer = CustomerUpdatePasswordSerializer
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def put(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.serializer(data=request.data)
+
+        if serializer.is_valid():
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CustomerSignupView(APIView):

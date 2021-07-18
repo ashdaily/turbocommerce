@@ -96,9 +96,9 @@ class ProductSuggestionListView(APIView, PaginationMixin):
 
     def get(self, request, product_id, format=None):
         queryset = (
-            Product.objects.prefetch_related("product_variants")
+            Product.objects.product_suggestion(last_seen_product_id=product_id)
+            .prefetch_related("product_variants")
             .select_related("brand", "child_category")
-            .product_suggestion(last_seen_product_id=product_id)
         )
         page = self.paginate_queryset(queryset)
         if page is not None:
