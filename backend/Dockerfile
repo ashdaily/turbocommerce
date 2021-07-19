@@ -46,7 +46,7 @@ COPY backend/.env.${TARGET_ENV} $HOME
 
 ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 
-RUN pip3 install poetry && \
+RUN pip3 install --no-cache-dir poetry && \
 poetry config virtualenvs.create false && \
 poetry install --no-interaction --no-ansi && \
 groupadd -r django && useradd -r -g django django && \
