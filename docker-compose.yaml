@@ -6,15 +6,15 @@ services:
     image: turbocommerce_backend
     container_name: turbocommerce_backend
     build:
-        context: .
-        dockerfile: backend/Dockerfile
-    command: ["python3", "backend/src/manage.py", "runsslserver", "0.0.0.0:8000"]
+        context: ./backend
+        dockerfile: ./Dockerfile
+    command: ["python3", "manage.py", "runsslserver", "0.0.0.0:8000"]
     depends_on:
       - turbocommerce_db
     ports:
       - "8000:8000"
     volumes:
-      - .:/backend
+      - ./backend/src:/backend/src
     stdin_open: true
     tty: true
 

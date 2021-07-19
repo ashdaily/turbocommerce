@@ -32,23 +32,14 @@ rm /usr/bin/python3 && \
 ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python3 && \
 \
 # Copy build-relevant files/folders
-mkdir /backend
+mkdir /turbocommerce_backend
+ENV HOME=/turbocommerce_backend
+COPY ./src $HOME/src
+COPY ./.env.${TARGET_ENV} $HOME
 
 
-ENV HOME=/backend
-WORKDIR $HOME
-COPY backend/src $HOME/src
-COPY backend/poetry.lock $HOME
-COPY run_backend_tests.sh $HOME
-COPY backend/pyproject.toml $HOME
-
-COPY backend/.env.${TARGET_ENV} $HOME
-
-ENV PYTHONPATH=${PYTHONPATH}:${PWD}
-
+WORKDIR $HOME/src
 RUN pip3 install --no-cache-dir poetry && \
 poetry config virtualenvs.create false && \
 poetry install --no-interaction --no-ansi && \
-groupadd -r django && useradd -r -g django django && \
-chmod +x $HOME && \
-chown -R django $HOME
+chmod +x $HOME
