@@ -13,27 +13,28 @@ ENV TARGET_ENV=$TARGET_ENV
 # which python version to install
 ENV PYTHON_VERSION=3.9
 
-RUN apt update --yes
-RUN apt install --yes software-properties-common
-
+RUN apt update --yes && \
+apt install --yes software-properties-common && \
+\
 # for postgres to use
-RUN apt install --yes libpq-dev python${PYTHON_VERSION}-dev
-
+apt install --yes libpq-dev python${PYTHON_VERSION}-dev && \
+\
 # need to update ubuntu repository targets
-RUN sed -i -e 's|eoan|focal|g' /etc/apt/sources.list
-RUN apt update --yes
-RUN add-apt-repository ppa:deadsnakes/ppa
-
+sed -i -e 's|eoan|focal|g' /etc/apt/sources.list && \
+apt update --yes && \
+add-apt-repository ppa:deadsnakes/ppa && \
+\
 # install python3.9 and remove the symlink for python3.8
 # and create a symlink for python3.9 instead
-RUN apt install --yes python${PYTHON_VERSION}
-RUN apt install --yes python3-pip
-RUN rm /usr/bin/python3
-RUN ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python3
-
-
+apt install --yes python${PYTHON_VERSION} && \
+apt install --yes python3-pip && \
+rm /usr/bin/python3 && \
+ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python3 && \
+\
 # Copy build-relevant files/folders
-RUN mkdir /backend
+mkdir /backend
+
+
 ENV HOME=/backend
 WORKDIR $HOME
 COPY backend/src $HOME/src
@@ -45,9 +46,9 @@ COPY backend/.env.${TARGET_ENV} $HOME
 
 ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 
-RUN pip3 install poetry
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-interaction --no-ansi
-RUN groupadd -r django && useradd -r -g django django
-RUN chmod +x $HOME
-RUN chown -R django $HOME
+RUN pip3 install poetry && \
+poetry config virtualenvs.create false && \
+poetry install --no-interaction --no-ansi && \
+groupadd -r django && useradd -r -g django django && \
+chmod +x $HOME && \
+chown -R django $HOME
