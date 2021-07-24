@@ -8,13 +8,17 @@ services:
     build:
         context: ./backend
         dockerfile: ./Dockerfile
-    command: ["python3", "manage.py", "runsslserver", "0.0.0.0:8000"]
+    command: >
+      sh -c "chmod +x wait_for_it.sh
+            ./wait_for_it.sh turbocommerce_db:5432
+            python3 manage.py migrate
+            python3 manage.py runsslserver 0.0.0.0:8000"
     depends_on:
       - turbocommerce_db
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/src:/backend/src
+      - ./backend/src:/turbocommerce_backend/src
     stdin_open: true
     tty: true
 

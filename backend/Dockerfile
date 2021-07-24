@@ -36,10 +36,11 @@ mkdir /turbocommerce_backend
 ENV HOME=/turbocommerce_backend
 COPY ./src $HOME/src
 COPY ./.env.${TARGET_ENV} $HOME
-
-
+RUN chmod +x $HOME
 WORKDIR $HOME/src
-RUN pip3 install --no-cache-dir poetry && \
+
+# install pip packages
+RUN chmod +x $HOME && \
+pip3 install --no-cache-dir poetry && \
 poetry config virtualenvs.create false && \
-poetry install --no-interaction --no-ansi && \
-chmod +x $HOME
+poetry install --no-interaction --no-ansi
