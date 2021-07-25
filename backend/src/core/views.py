@@ -51,7 +51,6 @@ class CustomerUpdatePasswordView(APIView):
 class CustomerSignupView(APIView):
     """
     PATH: /api/core/customer/signup/
-
     """
 
     serializer = UserSerializer
