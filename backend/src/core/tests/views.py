@@ -48,7 +48,7 @@ class TestCustomerLogin(TestCaseBase):
     fixtures = [
         "core/tests/fixtures/users.json",
     ]
-    url = reverse("token_obtain_pair")
+    url = reverse("token-obtain-pair")
 
     def test_login_for_customer(self):
         payload = {
@@ -86,8 +86,39 @@ class TestCustomerUpdatePassword(TestCaseBase):
 
         # login with new password
         payload = {"email": "ash@gmail.com", "password": new_password}
-        r = self.client.post(reverse("token_obtain_pair"), payload)
+        r = self.client.post(reverse("token-obtain-pair"), payload)
         self.assertEqual(r.status_code, 200)
 
         self.assertContains(r, "access")
         self.assertContains(r, "refresh")
+
+
+class TestAdminLogin(TestCaseBase):
+    fixtures = [
+        "core/tests/fixtures/users.json",
+    ]
+    url = reverse("admin-login")
+
+    def test_admin_login_should_succeed_with_admin_credentials(self):
+        payload = {
+            "email": "admin@gmail.com",
+            "password": "admin123",
+            "user_type": User.ADMIN,
+        }
+        User.objects.create_user(**payload)
+
+        payload.pop("user_type")
+        r = self.client.post(self.url, payload)
+
+        self.assertEqual(r.status_code, 200)
+        self.assertContains(r, "access")
+        self.assertContains(r, "refresh")
+
+    def test_customer_trying_admin_login_should_fail(self):
+        payload = {
+            "email": "ash@gmail.com",
+            "password": "ash123",
+        }
+
+        r = self.client.post(self.url, payload)
+        self.assertEqual(r.status_code, 401)
