@@ -49,6 +49,11 @@ class CustomerUpdatePasswordView(APIView):
 
 
 class CustomerSignupView(APIView):
+    """
+    PATH: /api/core/customer/signup/
+
+    """
+
     serializer = UserSerializer
 
     def post(self, request, *args, **kwargs):
