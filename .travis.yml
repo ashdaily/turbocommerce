@@ -36,13 +36,8 @@ before_install:
   - chmod +x $HOME
   - chown -R travis $HOME
   - bash ./travis/make_env_file.sh
-  - curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-  - chmod +x ~/docker-compose
-  - sudo mv ~/docker-compose /usr/local/bin/docker-compose
   - docker-compose run -d turbocommerce_db
-  - sudo chown -R travis $HOME
-  - docker-compose build turbocommerce_backend
-  - docker-compose run -d --name turbocommerce_backend turbocommerce_backend
+  - docker-compose build turbocommerce
 
 script:
-  - docker run -it turbocommerce_backend bash -c "cd backend/src && python3 manage.py test --no-input --keepdb "
+  - docker run -it --rm --name turbocommerce_backend turbocommerce_backend bash -c "python3 manage.py test --no-input --keepdb "
