@@ -37,7 +37,7 @@ before_install:
   - chown -R travis $HOME
   - bash ./travis/make_env_file.sh
   - docker-compose run -d turbocommerce_db
-  - docker-compose build turbocommerce
+  - docker-compose build turbocommerce_backend
 
 script:
   - docker run -it --rm --name turbocommerce_backend turbocommerce_backend bash -c "python3 manage.py test --no-input --keepdb "
