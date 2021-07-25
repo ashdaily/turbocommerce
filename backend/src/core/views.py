@@ -5,9 +5,14 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenViewBase
 
 from core.models import User
-from core.serializers import UserSerializer, CustomerUpdatePasswordSerializer
+from core.serializers import (
+    AdminUserTokenObtainSerializer,
+    CustomerUpdatePasswordSerializer,
+    UserSerializer,
+)
 
 
 class CustomerDetailView(APIView):
@@ -60,3 +65,14 @@ class CustomerSignupView(APIView):
 
             return Response({}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AdminLoginView(TokenViewBase):
+    """
+    PATH: /api/core/admin/login/
+
+    Takes a set of admin user credentials and returns an access and refresh JSON web
+    token pair to prove the authentication of those credentials.
+    """
+
+    serializer_class = AdminUserTokenObtainSerializer

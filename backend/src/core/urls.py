@@ -5,6 +5,7 @@ from core import views as core_views
 
 
 urlpatterns = [
+    # customer
     path("customer/", core_views.CustomerDetailView.as_view(), name="customer-detail"),
     path(
         "customer/signup/",
@@ -17,11 +18,13 @@ urlpatterns = [
         name="customer-update-password",
     ),
     path(
-        "auth/token/", jwt_views.TokenObtainPairView.as_view(), name="token_obtain_pair"
+        "auth/token/", jwt_views.TokenObtainPairView.as_view(), name="token-obtain-pair"
     ),
     path(
         "auth/token/refresh/",
         jwt_views.TokenRefreshView.as_view(),
-        name="token_refresh",
+        name="token-refresh",
     ),
+    # admin
+    path("admin/login/", core_views.AdminLoginView.as_view(), name="admin-login"),
 ]
