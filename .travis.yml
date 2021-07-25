@@ -40,4 +40,4 @@ before_install:
   - docker-compose build turbocommerce_backend
 
 script:
-  - docker run -it --rm --name turbocommerce_backend turbocommerce_backend bash -c "python3 manage.py test --no-input --keepdb "
+  - docker run -it --rm --network turbocommerce_default --name turbocommerce_backend turbocommerce_backend python3 manage.py test --noinput --keepdb
