@@ -38,7 +38,7 @@ before_install:
   - bash ./travis/make_env_file.sh
   - mkdir postgres/
   - docker-compose run -d turbocommerce_db
-  - docker-compose build turbocommerce_backend
+  - sleep 15
 
 script:
-  - docker run -it --rm --network turbocommerce_default --name turbocommerce_backend turbocommerce_backend python3 manage.py test --noinput --keepdb
+  - docker-compose run turbocommerce_backend python3 manage.py test --noinput --keepdb
