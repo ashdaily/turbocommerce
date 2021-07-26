@@ -30,6 +30,10 @@ class CustomerDetailView(APIView):
 
 
 class CustomerUpdatePasswordView(APIView):
+    """
+    PATH: /api/core/customer/update-password/
+    """
+
     permission_classes = (IsAuthenticated,)
     serializer = CustomerUpdatePasswordSerializer
 
