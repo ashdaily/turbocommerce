@@ -36,6 +36,7 @@ before_install:
   - chmod +x $HOME
   - chown -R travis $HOME
   - bash ./travis/make_env_file.sh
+  - mkdir postgres/
   - docker-compose run -d turbocommerce_db
   - docker-compose build turbocommerce_backend
 
