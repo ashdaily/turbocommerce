@@ -1,7 +1,6 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './Style.module.scss';
 import {serviceGetAddressDetail} from "../../services/Address.service";
-import ToastUtils from "../../util/ToastUtils";
 import AddressForm from "./AddressForm";
 import {useParams} from "react-router-dom";
 import WaitingComponent from "../../components/WaitingComponent/WaitingComponent";
@@ -12,6 +11,7 @@ const EditAddress = (props) => {
     const [data, setEditData] = useState(null);
     const [isFetching, setFetching] = useState(true);
     const { id } = useParams();
+
     useEffect(() => {
        serviceGetAddressDetail(id).then((res) => {
            if (!res.error) {
@@ -21,7 +21,7 @@ const EditAddress = (props) => {
                props.history.push('/addresses');
            }
        })
-    },[]);
+    },[id, props.history]);
 
     const handleFormSubmit = (data) => {
         actionUpdateAddress(data);

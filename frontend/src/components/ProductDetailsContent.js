@@ -105,7 +105,7 @@ const ProductDetailsContent = ({data}) => {
   return (
       <Row className="product-details-content">
         <Col>
-          <h5>{data.product_name}</h5>
+          <h1 className={'product-name'}>{data.product_name}</h1>
           <div className="table-responsive">
             <Table size="lg">
               <tbody>

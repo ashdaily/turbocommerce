@@ -7,7 +7,7 @@ import ToastUtils from "../util/ToastUtils";
 import {isLoggedIn} from "../util/Auth";
 import {serviceGetWishlistData} from "../services/Wishlist.service";
 import { AddressReducer } from './AddressReducer';
-import {serviceDeleteAddress, serviceEditAddress, serviceGetAddress} from "../services/Address.service";
+import {serviceDeleteAddress, serviceGetAddress} from "../services/Address.service";
 
 export const ShopContext = createContext({
     cartItems: [],

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import csx from "classnames";
 import styles from "./Styles.module.scss";
 import {Link} from "react-router-dom";
-import {Badge} from "react-bootstrap";
 import useWindowDimensions from "../../util/WindowDimensions";
 import {checkIfMobile} from "../../util/Helpers";
 import EventEmitter from "../../util/EventsUtils";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Button, Card } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import "../css/login.scss";
 import axios from "../util/Axios";
@@ -41,7 +41,7 @@ export default () => {
   const form = (
       <Row className={'loginCont'}>
         <Col md={{span: 5}}>
-          <img style={{width: '100%'}} src={require('../assets/images/ic_signup.svg')}/>
+          <img alt={'signup'} style={{width: '100%'}} src={require('../assets/images/ic_signup.svg')}/>
         </Col>
         <Col md={{span: 6, offset: 1}}>
           <div className="loginBox">

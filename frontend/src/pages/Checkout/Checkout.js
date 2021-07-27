@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import Stepper from "../../components/Stepper/Stepper";
 import styles from "./Style.module.scss";
 import AddressTile from "../Address/component/AddressTile";
@@ -12,13 +12,17 @@ const stepper = [
 
 const Checkout = () => {
     const { actionGetAddresses, addresses  } = useContext(ShopContext);
-    const [selectedStep, setSelectedStep] = useState(0);
+    const [selectedStep] = useState(0);
     const [showAddressModal, setShowAddressModal] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
+    const mountRef = useRef(false);
 
     useEffect(() => {
-        actionGetAddresses();
-    }, []);
+        if (!mountRef.current) {
+            actionGetAddresses();
+            mountRef.current = true;
+        }
+    }, [actionGetAddresses]);
 
     useEffect(() => {
         if (selectedAddress === null) {
@@ -27,7 +31,7 @@ const Checkout = () => {
                 setSelectedAddress(addresses[defaultAddressIndex]);
             }
         }
-    }, [addresses]);
+    }, [addresses, selectedAddress]);
 
     const handleAddModalClose = useCallback(() => {
         setShowAddressModal(false);
@@ -37,9 +41,9 @@ const Checkout = () => {
         setSelectedAddress(address);
     }, [setSelectedAddress]);
 
-    const handleStepChange = useCallback((step) => {
-        setSelectedStep(step);
-    }, [setSelectedAddress]);
+    // const handleStepChange = useCallback((step) => {
+    //     setSelectedStep(step);
+    // }, [setSelectedAddress]);
 
   return (
     <div className={styles.mainCont}>

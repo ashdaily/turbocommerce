@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import styles from './Style.module.scss';
 import {ShopContext} from "../../context/ShopContext";
 import AddressTile from "./component/AddressTile";
@@ -12,10 +12,14 @@ const Address = (props) => {
     const [editData, setEditData] = useState(null);
     const [confirmVisible, setConfirmVisible] = useState(false);
     const [selectedAddId, setSelectedAddId] = useState(null);
+    const mountRef = useRef(false);
 
     useEffect(() => {
-        actionGetAddresses();
-    }, []);
+        if (!mountRef.current) {
+            actionGetAddresses();
+            mountRef.current = true;
+        }
+    }, [actionGetAddresses]);
 
     const handleNewAddress = useCallback(() => {
         setShowForm((e) => !e);
@@ -29,7 +33,7 @@ const Address = (props) => {
             actionCreateAddress(data);
         }
         setEditData(null);
-    }, [editData, setShowForm, setEditData]);
+    }, [setShowForm, setEditData, actionUpdateAddress, actionCreateAddress]);
 
 
     const handleEditClick = (data) => {
@@ -44,7 +48,7 @@ const Address = (props) => {
         }
         setConfirmVisible(false);
         setSelectedAddId(null);
-    }, [setConfirmVisible, setSelectedAddId, selectedAddId]);
+    }, [setConfirmVisible, setSelectedAddId, selectedAddId, actionDeleteAddress]);
 
     const handleClose = useCallback(() => {
        setConfirmVisible(false);

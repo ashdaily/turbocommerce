@@ -66,7 +66,7 @@ export default () => {
   const form = (
       <Row className={'loginCont'}>
         <Col md={{span: 5}}>
-          <img style={{width: '100%'}} src={require('../assets/images/ic_login.svg')}/>
+          <img alt={'login'} style={{width: '100%'}} src={require('../assets/images/ic_login.svg')}/>
         </Col>
         <Col md={{span: 6, offset: 1}}>
           <div className="loginBox">

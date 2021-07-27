@@ -38,7 +38,7 @@ const ChangePassword = () => {
             }
         });
         return errors;
-    });
+    }, [formData]);
 
     const handleDone = useCallback(() => {
         serviceChangePassword({ new_password: formData.password }).then((res) => {
@@ -52,7 +52,7 @@ const ChangePassword = () => {
             logout();
             window.location.reload();
         });
-    }, [setShowConfirm, checkFormValidation, setFormData, formData]);
+    }, [setShowConfirm, setFormData, formData]);
 
     const handleClose = useCallback(() => {
         setShowConfirm(false);
@@ -66,7 +66,7 @@ const ChangePassword = () => {
         } else {
             setErrors(errors);
         }
-    }, [setErrors, checkFormValidation, handleDone, setShowConfirm]);
+    }, [setErrors, checkFormValidation, setShowConfirm]);
 
     return (
         <div className={csx(styles.checkoutShipping, 'container')}>
