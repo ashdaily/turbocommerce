@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import LoggedIn from './pages/LoggedIn';
 import DashboardLayout from './layouts/dashboard';
 import ProductList from './pages/Products/ProductList.container';
+import ProductForm from './pages/Products/ProductForm.view';
 // import DashboardLayout from "./layouts/dashboard";
 
 // ----------------------------------------------------------------------
@@ -28,7 +29,8 @@ export default function Router() {
       element: is_authenticated ? <DashboardLayout /> : <Navigate to="/login" />,
       children: [
         { path: '/', element: <LoggedIn /> },
-        { path: '/products', element: <ProductList /> }
+        { path: '/products', element: <ProductList /> },
+        { path: '/products/create', element: <ProductForm /> }
       ]
     },
 

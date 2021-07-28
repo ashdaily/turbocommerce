@@ -5,6 +5,7 @@ import PageBox from '../../components/PageBox/PageBox.component';
 import styles from './style.module.css';
 import Constants from '../../config/constants';
 import DataTables from '../../components/Datatable.table';
+import FilterInput from '../../components/Filter/FilterInput';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -78,6 +79,8 @@ const ProductList = () => {
           </Button>
         </div>
         <div>
+          <br />
+          <FilterInput />
           <DataTables {...datatable} {...datatableFunctions} />
         </div>
       </PageBox>
