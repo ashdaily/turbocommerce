@@ -18,6 +18,6 @@ urlpatterns = [
     path(
         "customer-shipping-address/<int:id>/",
         views.CustomerShippingAddressDetailView.as_view(),
-        name="customer-shipping-address-delete",
+        name="customer-shipping-address-detail",
     ),
 ]
