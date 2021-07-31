@@ -239,7 +239,7 @@ class TestCustomerShippingAddressView(TestCaseBase):
         )
 
         # get customer shipping address by id
-        url = reverse("customer-shipping-address-delete", kwargs={"id": address_id})
+        url = reverse("customer-shipping-address-detail", kwargs={"id": address_id})
         r3 = self.client.get(url, **self.customer_bearer_token)
         self.assertEqual(
             r3.json(),
