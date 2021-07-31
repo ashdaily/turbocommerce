@@ -1,0 +1,16 @@
+.formControl {
+  display: flex;
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.formGroup {
+  margin-right: 15px;
+  margin-left: 15px;
+  padding: 8px 0px;
+  flex: 1;
+}
+
+.MuiInputLabel-formControl {
+  background: white;
+}

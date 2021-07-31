@@ -1,0 +1,57 @@
+.bottomSide {
+    flex: 1;
+}
+.bottomSide label {
+    margin-left: 10px;
+}
+.bottomCenter {
+    display: flex;
+    justify-content: center;
+    flex: 2;
+}
+.buttonCont {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.fieldCont {
+    width: 200px;
+}
+.formFlex {
+    display: flex;
+    align-items: center;
+}
+
+
+.mainContainer {
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.headingTuxi {
+    text-align: center;
+}
+
+.loginHeading {
+    /*margin-bottom: 10px;*/
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
+.signUpButton {
+    padding: 10px 30px !important;
+    border-radius: 5px !important;
+    background-image: linear-gradient(to left, #04AFB7 , #1BB380);
+    color: white !important;
+}
+.dialogCont {
+    width: calc(30vw);
+    min-width: 500px;
+    padding: 20px;
+}
+.formAction {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -57,7 +57,7 @@ const AddressForm = ({handleToggle, data}) => {
             }
         });
         return errors;
-    });
+    }, [formData]);
 
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
@@ -83,7 +83,7 @@ const AddressForm = ({handleToggle, data}) => {
         } else {
             setErrors(errors);
         }
-    }, [setErrors, checkFormValidation, formData, handleToggle]);
+    }, [setErrors, checkFormValidation, formData, handleToggle, data]);
 
     return (
         <div className={csx(styles.checkoutShipping, 'container')}>

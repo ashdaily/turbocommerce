@@ -10,6 +10,7 @@ import ProductDetailsContent from "../components/ProductDetailsContent";
 import ProductCarousel from "../components/ProductCarousel";
 import WaitingComponent from "../components/WaitingComponent/WaitingComponent";
 import ProductUtils from "../util/ProductUtils";
+import { updatePageTitle } from '../util/Helpers';
 
 export default () => {
   const { slug } = useParams();
@@ -29,6 +30,12 @@ export default () => {
     };
     loadData();
   }, [slug]);
+
+  useEffect(() => {
+    if (data) {
+      updatePageTitle(data.product_name)
+    }
+  }, [data]);
 
   if (isLoading) {
     return (

@@ -1,6 +1,3 @@
-/**
- * Created by charnjeetelectrovese@gmail.com on 11/13/2019.
- */
 const EventEmitter = {
     events: {},
     THROW_ERROR: 'THROW_ERROR',

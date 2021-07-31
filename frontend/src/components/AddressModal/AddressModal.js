@@ -1,5 +1,5 @@
 import React, {useCallback, useContext} from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import AddressForm from "../../pages/Address/AddressForm";
 import {ShopContext} from "../../context/ShopContext";
 
@@ -9,7 +9,7 @@ const AddressModal = ({handleClose, show}) => {
     const handleFormSubmit = useCallback((data) => {
         actionCreateAddress(data);
         handleClose();
-    }, [handleClose]);
+    }, [handleClose, actionCreateAddress]);
 
     return (
         <Modal

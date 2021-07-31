@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import ProductCard from "../components/ProductCard/ProductCard";
@@ -12,6 +12,7 @@ export default () => {
     const {grandParentCategory, parentCategory, childCategory} = useParams();
     const [productData, setProductData] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
+    const lastPageNumber = useRef(0);
 
     const generateRequestUrl = useCallback(() => {
         let reqUrl = `/api/products/by-category/`;
@@ -34,10 +35,11 @@ export default () => {
                 .then((response) => {
                     if (response.status === 200) {
                         let tempData = response.data;
-                        if (productData) {
+                        if (productData && lastPageNumber.current !== pageNumber) {
                             const results = JSON.parse(JSON.stringify(productData.results)).concat(tempData.results);
                             tempData.results = results;
                         }
+                        lastPageNumber.current = pageNumber;
                         setProductData(tempData);
                     }
                 });
