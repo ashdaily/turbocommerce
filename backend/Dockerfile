@@ -41,6 +41,6 @@ WORKDIR $HOME/src
 
 # install pip packages
 RUN chmod +x $HOME && \
-pip3 install --no-cache-dir poetry && \
+pip3 install --no-cache-dir poetry==1.1.5 && \
 poetry config virtualenvs.create false && \
 poetry install --no-interaction --no-ansi
