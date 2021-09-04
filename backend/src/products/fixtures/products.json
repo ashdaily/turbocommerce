@@ -1,0 +1,241 @@
+[
+    {
+        "model": "products.productgrandparentcategory",
+        "pk": 1,
+        "fields": {
+            "category_name": "Women",
+            "slug": "women",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productparentcategory",
+        "pk": 1,
+        "fields": {
+            "grand_parent_category": 1,
+            "category_name": "Formal",
+            "slug": "formal",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productchildcategory",
+        "pk": 1,
+        "fields": {
+            "parent_category": 1,
+            "category_name": "Pants",
+            "slug": "pants",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productbrand",
+        "pk": 1,
+        "fields": {
+            "brand_name" : "Abc inc",
+            "slug" : "abc-inc",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productbrand",
+        "pk": 2,
+        "fields": {
+            "brand_name" : "Def inc",
+            "slug" : "def-inc",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productmeasurement",
+        "pk": 1,
+        "fields": {
+            "measurement_name" : "LENGTH",
+            "measurement_value" : 45,
+            "measurement_unit" : "CENTIMETER"
+        }
+    },
+    {
+        "model": "products.productmeasurement",
+        "pk": 2,
+        "fields": {
+            "measurement_name" : "WAIST",
+            "measurement_value" : 45,
+            "measurement_unit" : "CENTIMETER"
+        }
+    },
+    {
+        "model": "products.productmeasurement",
+        "pk": 3,
+        "fields": {
+            "measurement_name" : "LENGTH",
+            "measurement_value" : 35,
+            "measurement_unit" : "CENTIMETER"
+        }
+    },
+    {
+        "model": "products.productmeasurement",
+        "pk": 4,
+        "fields": {
+            "measurement_name" : "WAIST",
+            "measurement_value" : 35,
+            "measurement_unit" : "CENTIMETER"
+        }
+    },
+    {
+        "model": "products.productsize",
+        "pk": 1,
+        "fields": {
+            "name" : "XL",
+            "measurement" : [1,2],
+            "comment" : "Fits a 6 feet tall woman",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productsize",
+        "pk": 2,
+        "fields": {
+            "name" : "M",
+            "measurement" : [1,2],
+            "comment" : "Fits a 5'8 feet tall woman",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.warehouse",
+        "pk": 1,
+        "fields": {
+            "warehouse_name" : "Shinjuku warehouse",
+            "address_street_line_1" : "1-59-45",
+            "address_street_line_2" : "Mary mansion",
+            "city" : "Tokyo",
+            "province": "Tokyo",
+            "country": "Japan",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "child_category" : 1,
+            "brand" : 1,
+            "product_name" : "Bizarre shirt",
+            "product_description" : "Torn clothes are the new cool",
+            "slug": "bizarre-shirt",
+            "returnable": true,
+            "country_of_origin": "Japan",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariant",
+        "pk": 1,
+        "fields": {
+            "product": 1,
+            "stock_keeping_unit" : 87987,
+            "size" : 1,
+            "discount" : 10,
+            "published" : true,
+            "price": 500,
+            "weight_in_grams": 344,
+            "color": "#FFFFFF",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariant",
+        "pk": 2,
+        "fields": {
+            "product": 1,
+            "stock_keeping_unit" : 87988,
+            "size" : 2,
+            "discount" : 1,
+            "published" : true,
+            "price": 5000,
+            "weight_in_grams": 344,
+            "color": "#000000",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariantimage",
+        "pk": 1,
+        "fields": {
+            "product_variant": 1,
+            "image" : "https://lorempixel/500/500",
+            "published" : true,
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariantimage",
+        "pk": 2,
+        "fields": {
+            "product_variant": 2,
+            "image" : "https://lorempixel/500/500",
+            "published" : true,
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariantspecification",
+        "pk": 1,
+        "fields": {
+            "product_variant": 1,
+            "specification_name" : "Made with",
+            "specification_value" : "Hand",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariantspecification",
+        "pk": 2,
+        "fields": {
+            "product_variant": 2,
+            "specification_name" : "Made with",
+            "specification_value" : "Machine",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariantinventory",
+        "pk": 1,
+        "fields": {
+            "product_variant": 1,
+            "trace_quantity" : true,
+            "quantity" : 5000,
+            "warehouse" : 1,
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "products.productvariantinventory",
+        "pk": 2,
+        "fields": {
+            "product_variant": 2,
+            "trace_quantity" : true,
+            "quantity" : 5000,
+            "warehouse" : 1,
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    }
+]

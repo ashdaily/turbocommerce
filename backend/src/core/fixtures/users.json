@@ -1,0 +1,31 @@
+[
+    {
+        "model": "core.user",
+        "pk": 1,
+        "fields": {
+            "email": "testcustomer@gmail.com",
+            "password": "pbkdf2_sha256$216000$YzlKGGQGWjda$IzxU7ubc1nju/rxAeJW/+5e4hIA5ET0nfK9vg721dp8=",
+            "user_type": "CUSTOMER"
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 2,
+        "fields": {
+            "email": "testadmin@gmail.com",
+            "password": "pbkdf2_sha256$216000$suMyKgeKP3oY$67v4Igrj0l08oGwrduC0xu2y1h/omGW2Ai7AwyAqrDY=",
+            "user_type": "ADMIN"
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 3,
+        "fields": {
+            "email": "admin@gmail.com",
+            "password": "pbkdf2_sha256$216000$9ydqXTN9OPoQ$3Nllhg1UO/24tzxc8IBjaOp3m0S6dpBxCIvTaB7+fPk=",
+            "user_type": "ADMIN",
+            "is_superuser": true,
+            "is_staff": true
+        }
+    }
+]

@@ -9,10 +9,7 @@ services:
         context: ./backend
         dockerfile: ./Dockerfile
     command: >
-      sh -c "chmod +x wait_for_it.sh
-            ./wait_for_it.sh turbocommerce_db:5432
-            python3 manage.py migrate
-            python3 manage.py runsslserver 0.0.0.0:8000"
+      sh -c "chmod +x start_server.sh && ./start_server.sh"
     depends_on:
       - turbocommerce_db
     ports:
