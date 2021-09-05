@@ -3,6 +3,7 @@
 ENV="\"$TARGET_ENV\" environment"
 
 cecho(){
+    # return colored echo
     RED="\033[0;31m"
     GREEN="\033[0;32m"
     YELLOW="\033[1;33m"
@@ -29,10 +30,10 @@ then
 
     # load dummy data
     cecho "YELLOW" "loading dummy data..."
-    python3 manage.py loaddata users products
+    python3 manage.py loaddata users products store
     cecho "GREEN" "loaded dummy data successfully :)"
 else
-  cecho "GREEN" "getting ready..."
+    cecho "GREEN" "getting ready..."
 fi
 
 cecho "GREEN" "starting django server..."

@@ -1,0 +1,14 @@
+[
+    {
+        "model": "store.storeinformation",
+        "pk": 1,
+        "fields": {
+            "store_name": "Turbocommerce",
+            "title_tag": "Shopping online",
+            "logo": "/fixtures/store/logo/logo.jpeg",
+            "default_currency": "USD",
+            "created": "2021-01-01T00:00:00.000Z",
+            "last_updated": "2021-01-01T00:00:00.000Z"
+        }
+    }
+]
