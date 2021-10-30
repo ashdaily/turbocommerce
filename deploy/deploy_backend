@@ -27,6 +27,7 @@ docker rmi $CURRENT_IMAGE_ID
 
 echo "spinning the new container ..."
 docker network create --driver bridge turbocommerce-network
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 935843735700.dkr.ecr.us-east-1.amazonaws.com
 docker run -dit --rm -p 80:8000 --network turbocommerce-network --name turbocommerce-container 935843735700.dkr.ecr.us-east-1.amazonaws.com/turbocommerce:$IMAGE_ID sh -c "chmod +x start_server.sh && ./start_server.sh"
 echo "Deploy is finished !!"
 ENDSSH
