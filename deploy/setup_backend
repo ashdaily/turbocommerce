@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# These steps need to be done just once on the instance
+
+sudo apt-get update
+sudo apt-get install -y docker
+sudo apt-get install -y awscli
+aws configure

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# build
+docker build -t turbocommerce_backend --build-arg TARGET_ENV=development ./backend
+
+# get latest build IMAGE_ID
+IMAGE_ID=$(docker images -q --format='{{.ID}}' | head -1)
+
+# tag image and push to ECR
+echo "Uploading to ECR, IMAGE_ID: $IMAGE_ID"
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 935843735700.dkr.ecr.us-east-1.amazonaws.com
+docker tag $IMAGE_ID 935843735700.dkr.ecr.us-east-1.amazonaws.com/turbocommerce:$IMAGE_ID
+docker push 935843735700.dkr.ecr.us-east-1.amazonaws.com/turbocommerce:$IMAGE_ID
+echo "Docker image upload finished !"
+
+cd ~/.ssh
+
+# ssh into AWS instance, stop container, remove the image used for container, spin a new container
+echo "SSH login"
+ssh -i ./turbocommerce-development.pem ubuntu@18.233.66.231 << ENDSSH
+echo "stopping the container..."
+docker stop turbocommerce-container
+
+echo "deleting the old docker image ..."
+CURRENT_IMAGE_ID=$(docker images -q --format='{{.ID}}' | head -1)
+docker rmi $CURRENT_IMAGE_ID
+
+echo "spinning the new container ..."
+docker network create --driver bridge turbocommerce-network
+docker run -dit --rm -p 80:8000 --network turbocommerce-network --name turbocommerce-container 935843735700.dkr.ecr.us-east-1.amazonaws.com/turbocommerce:$IMAGE_ID sh -c "chmod +x start_server.sh && ./start_server.sh"
+echo "Deploy is finished !!"
+ENDSSH

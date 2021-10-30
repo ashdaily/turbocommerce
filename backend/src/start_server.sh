@@ -15,6 +15,8 @@ cecho(){
 
 if [ "$TARGET_ENV" = "local" ];
 then
+    # local environment
+
     cecho "GREEN" "getting ready..."
 
     # wait for postgres to start before running server
@@ -32,9 +34,12 @@ then
     cecho "YELLOW" "loading dummy data..."
     python3 manage.py loaddata users products store
     cecho "GREEN" "loaded dummy data successfully :)"
-else
-    cecho "GREEN" "getting ready..."
-fi
 
-cecho "GREEN" "starting django server..."
-python3 manage.py runsslserver 0.0.0.0:8000
+    cecho "GREEN" "starting django server..."
+    # django sslserver shouldn't be used outside of local
+    python3 manage.py runsslserver 0.0.0.0:8000
+else
+    # non-local environment
+    cecho "GREEN" "getting ready..."
+    python3 manage.py runserver 0.0.0.0:8000
+fi

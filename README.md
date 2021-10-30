@@ -122,6 +122,17 @@ Here is how to create the `.env.local` file.
     - To login, `travis login --pro --github-token <your_github_token`, generate the github_token from [here](https://github.com/settings/tokens)
     - To add a new secret env, `travis encrypt --com SOMEVAR="secretvalue"`
 
+- Copy file from local to AWS EC2
+    - Example: `scp -i <.pem file path> <path to turbocommerce/deploy/deploy_backend>  ubuntu@18.233.66.231:/home/ubuntu/`
+
+---
+
+### How to deploy backend (development env) ?
+- `deploy deploy/deploy_backend`
+
+- Login to ecr or docker hub
+- `docker network create --driver bridge turbocommerce-network`
+- `docker run -dit --rm -p 80:8000 --network turbocommerce-network --name turbocommerce-container <ecr_repo_OR_dockerhub_repo_url>:<image_id> sh -c "chmod +x start_server.sh && ./start_server.sh"`
 ---
 
 ### Documentations
