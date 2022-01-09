@@ -7,3 +7,5 @@
 __pycache__
 src/db.sqlite3
 src/media/*
+src/media/*
+!src/media/fixtures/
