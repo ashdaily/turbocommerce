@@ -217,7 +217,7 @@ class ProductVariant(Timestamp):
         related_query_name="product_variant",
         on_delete=models.CASCADE,
     )
-    stock_keeping_unit = models.BigIntegerField(unique=True)
+    stock_keeping_unit = models.CharField(unique=True, max_length=50)
     size = models.ForeignKey(ProductSize, on_delete=models.SET_NULL, null=True)
     discount = models.IntegerField()
     published = models.BooleanField(default=False)
